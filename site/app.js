@@ -1,6 +1,6 @@
 import { icon } from './icons.js?v=mobile-polish-20261023';
 import { mountAgentConversion } from './agent-conversion.js?v=mobile-polish-20261023';
-import { mountRealSimWorkflow } from './real-sim-workflow.js?v=mobile-polish-20261023';
+import { mountRealSimWorkflow } from './real-sim-workflow.js?v=workflow-tabs-20261023';
 import { mountRenderingShowcase } from './rendering-showcase.js?v=mobile-polish-20261023';
 import { mountContactComparison } from './contact-comparison.js?v=mobile-polish-20261023';
 import { mountSimulationExplorer } from './simulation-explorer.js?v=mobile-polish-20261023';

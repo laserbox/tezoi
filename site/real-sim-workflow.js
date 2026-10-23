@@ -1,20 +1,10 @@
-import { icon } from './icons.js?v=mobile-polish-20261023';
 // Presentation stages, not a robot execution or policy-generation service.
 export function mountRealSimWorkflow(root, { onStageChange = () => {} } = {}) {
   if (!root) return null;
   const tabs = [...root.querySelectorAll('[data-workflow-stage]')];
   const panels = [...root.querySelectorAll('[data-workflow-panel]')];
   const tablist = root.querySelector('[data-workflow-tabs]');
-  const previous = root.querySelector('[data-workflow-prev]');
-  const next = root.querySelector('[data-workflow-next]');
-  const position = root.querySelector('[data-workflow-position]');
   const compact = window.matchMedia('(max-width: 800px)');
-  const labels = {
-    source: 'Ego · 真实第一视角视频',
-    agent: 'Agent · Ego 转仿真',
-    simulation: 'Simulation · 仿真交互',
-    validation: 'Robotics · 真机',
-  };
   let active = Math.max(0, tabs.findIndex(tab => tab.dataset.workflowStage === (root.dataset.activeStage || 'simulation')));
 
   function select(index, focus = false) {
@@ -32,14 +22,6 @@ export function mountRealSimWorkflow(root, { onStageChange = () => {} } = {}) {
       tab.tabIndex = i === active ? 0 : -1;
     });
     panels.forEach(panel => { panel.hidden = panel.dataset.workflowPanel !== to; });
-    previous.disabled = active === 0;
-    position.textContent = `${active + 1} / ${tabs.length}`;
-    next.innerHTML = active === tabs.length - 1
-      ? `<span>回到 Ego</span>${icon('replay')}`
-      : `<span>下一阶段</span>${icon('arrow-right')}`;
-    next.setAttribute('aria-label', active === tabs.length - 1
-      ? '回到 Ego · 真实第一视角视频'
-      : `进入 ${labels[tabs[active + 1].dataset.workflowStage]}`);
     if (focus) tabs[active].focus();
   }
 
@@ -57,8 +39,6 @@ export function mountRealSimWorkflow(root, { onStageChange = () => {} } = {}) {
       }
     });
   });
-  previous.addEventListener('click', () => select(active - 1));
-  next.addEventListener('click', () => select((active + 1) % tabs.length));
   const orient = () => tablist.setAttribute('aria-orientation', compact.matches ? 'horizontal' : 'vertical');
   compact.addEventListener('change', orient);
   orient();
