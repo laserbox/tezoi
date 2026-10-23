@@ -50,7 +50,8 @@ tabs.forEach((tab, i) => {
 const videos = {
   "gallery-go2-walk": {"src":"assets/gallery-go2-walk.mp4","title":"Go2 行走","description":"运动控制 / Unitree Go2 / 0:05","note":"行走策略驱动四足机器人连续运动，呈现步态协调与足端地面接触。"},
   "gallery-g1-dance": {"src":"assets/gallery-g1-dance.mp4","title":"G1 舞蹈","description":"运动控制 / Unitree G1 / Dual Dex3 / 0:20","note":"舞蹈策略驱动人形机器人执行 Shuffle 动作，呈现连续步伐、躯干与双臂的协同运动。"},
-  "gallery-labimus": {"src":"https://huggingface.co/datasets/shaotengliu/formind-labimus-weighing-results/resolve/23534b9a04f44cf1ba70bd51e7ef0c70aabf8d58/v9-coherent-attempt-03-8bdf422b-generated-full-01/videos/main-with-wrist.mp4","title":"双臂颗粒取样与称量","description":"实验室 / Dual UR5e / Robotiq 2F85 / 3:50","note":"双臂协同完成放舟去皮、颗粒取样、转移与称量收尾，并同步呈现双腕视角。定量取样精度未达目标。"},
+  "gallery-labimus-medicine": {"src":"assets/gallery-labimus-medicine.mp4","title":"双臂取药","description":"实验室 / Dual UR5e / Robotiq 2F85 / 2:43","note":"完成称量舟准备后，双臂协同持瓶与持勺，倾瓶取出颗粒并扶正药瓶。"},
+  "gallery-labimus-weighing": {"src":"assets/gallery-labimus-weighing.mp4","title":"双臂称量","description":"实验室 / Dual UR5e / Robotiq 2F85 / 1:08","note":"端稳药勺并将颗粒转移至称量舟，完成还勺、关闭天平门和稳定读数。原任务的目标剂量未达。"},
   "gallery-flexible-rj45": {"src":"assets/gallery-flexible-rj45.mp4","title":"柔性网线插拔","description":"工厂 / Franka / 0:25","note":"呈现一米柔性网线的抓取、插入锁止、重抓解锁与拔出，展示柔性线缆与连接器的接触操作。"},
   "gallery-rubber-ring": {"src":"assets/gallery-rubber-ring.mp4","title":"双臂橡胶圈装配","description":"工厂 / Dual UR5e / 0:20","note":"双臂通过摩擦夹持完成胶圈拾取、搬运、拉伸与入槽。部分装配条件仍未达标。"},
   "gallery-ram-insertion": {"src":"assets/gallery-ram-insertion-hd.mp4","title":"双臂内存条插装","description":"工厂 / Dual UR5e / 0:37","note":"双臂协同完成内存条拾取、DIMM 插槽对准与压入，呈现松爪撤离后的状态。任务效果与训练适用性尚待验证。"},
