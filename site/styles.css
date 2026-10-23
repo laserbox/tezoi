@@ -153,7 +153,6 @@ h4 { font-size: var(--type-group); font-weight: 400; letter-spacing: -.025em; li
 .embodied-card { display: flex; flex-direction: column; }
 .embodied-card > p { flex-grow: 1; }
 .embodied-card[hidden] { display: none; }
-.physical-demos-controls { display: flex; justify-content: flex-end; margin-bottom: 20px; }
 .embodied-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 28px; row-gap: 48px; }
 .embodied-film { display: block; position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; padding: 0; border: 0; border-radius: 12px; background: #e3e9eb; }
 .embodied-film video { display: block; width: 100%; height: 100%; object-fit: contain; }

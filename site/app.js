@@ -108,8 +108,8 @@ dialog.addEventListener('close', () => {
   previousFocus?.focus();
 });
 
-// Material and embodied studies move only while visible. Both pause controls
-// share one state; opening a large player also stops every preview.
+// Material and embodied studies move only while visible.
+// Opening a large player also stops every preview.
 const materialPreviews = $$('[data-material-preview]');
 const visiblePreviews = new Set();
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
