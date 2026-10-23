@@ -7,7 +7,7 @@
   <meta name="description" content="TEZOI，智能高精度具身仿真。融合场景重建、视觉保真与物理交互，构建面向具身智能研发与验证的仿真环境。">
   <title>TEZOI | Intelligent, high-fidelity embodied simulation</title>
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=workflow-tabs-20261023">
+  <link rel="stylesheet" href="styles.css?v=ego-video-20261023">
   <script src="site-shell.js?v=site-navigation-20261022" type="module"></script>
   <script src="app.js?v=workflow-tabs-20261023" type="module"></script>
 </head>
@@ -52,10 +52,13 @@
           <div class="workflow-main">
             <section class="workflow-panel" id="workflow-panel-source" data-workflow-panel="source" role="tabpanel" aria-labelledby="workflow-tab-source" hidden>
               <div class="workflow-pane-heading"><h4>Ego video</h4><p>从外部 Ego 视频中理解场景、对象与操作目标。</p></div>
-              <div class="workflow-media-placeholder">
-                <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="12" width="38" height="28" rx="5"/><circle cx="24" cy="26" r="8"/><path d="m16 12 3-5h10l3 5"/></svg>
-                <p>Ego 视频待接入</p><span>First-person video</span>
-              </div>
+              <figure class="workflow-ego-media">
+                <video controls muted playsinline preload="none" poster="assets/ego-img-6100-2x.jpg" width="1920" height="1080" aria-label="第一视角操作视频，2 倍速">
+                  <source src="assets/ego-img-6100-2x.mp4" type="video/mp4">
+                  您的浏览器不支持视频播放。<a href="assets/ego-img-6100-2x.mp4">下载 Ego 视频</a>。
+                </video>
+                <figcaption>第一视角操作视频 · 2 倍速</figcaption>
+              </figure>
               <div class="workflow-artifacts" aria-label="Ego 输入"><div><strong>Scene</strong><p>真实环境与空间关系</p></div><div><strong>Interaction</strong><p>对象、接触与操作过程</p></div><div><strong>Task</strong><p>任务目标与子任务顺序</p></div></div>
             </section>
             <section class="workflow-panel" id="workflow-panel-agent" data-workflow-panel="agent" role="tabpanel" aria-labelledby="workflow-tab-agent" hidden>
