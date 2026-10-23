@@ -1,8 +1,8 @@
 import { icon } from './icons.js?v=mobile-polish-20261023';
 import { mountAgentConversion } from './agent-conversion.js?v=mobile-polish-20261023';
-import { mountRealSimWorkflow } from './real-sim-workflow.js?v=workflow-tabs-20261023';
+import { mountRealSimWorkflow } from './real-sim-workflow.js?v=review-fixes-20261023';
 import { mountRenderingShowcase } from './rendering-showcase.js?v=mobile-polish-20261023';
-import { mountContactComparison } from './contact-comparison.js?v=mobile-polish-20261023';
+import { mountContactComparison } from './contact-comparison.js?v=review-fixes-20261023';
 import { mountSimulationExplorer } from './simulation-explorer.js?v=mobile-polish-20261023';
 
 const $ = (selector) => document.querySelector(selector);
@@ -88,6 +88,7 @@ $$('[data-video]').forEach((button) => button.addEventListener('click', () => {
   $('#video-note').textContent = video.note || '具身仿真演示。';
   player.src = video.src;
   dialog.showModal();
+  realSimWorkflow?.pause();
   contactComparison?.pause();
   simulationExplorer?.pause();
   document.body.classList.add('modal-open');

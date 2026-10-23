@@ -7,7 +7,7 @@ export function mountContactComparison(root) {
   const simulation = get('[data-compare-simulation]');
   const forces = get('[data-compare-forces]');
   const media = [simulation, forces];
-  const sources = media.map((video) => video.src);
+  const sources = media.map(video => video.src);
   const split = get('[data-compare-split]');
   const timeline = get('[data-compare-timeline]');
   const playButton = get('[data-compare-play]');
@@ -122,18 +122,28 @@ export function mountContactComparison(root) {
     failed = false;
     status.textContent = '正在加载对比画面…';
     loadPromise = (async () => {
-      // The private host can serve MP4s without byte-range seeking. Loading the
-      // unchanged files as local blobs gives both native players random access.
-      const blobs = await Promise.all(sources.map(async (source) => {
-        const response = await fetch(source, { credentials: 'same-origin' });
-        if (!response.ok) throw new Error('Comparison download unavailable');
+      // Probe only after a play request. Range-capable hosts stream natively;
+      // hosts without seeking support retain the on-demand Blob fallback.
+      const blobs = await Promise.all(sources.map(async source => {
+        const response = await fetch(source, { headers: { Range: 'bytes=0-0' }, credentials: 'same-origin' });
+        if (response.status === 206) {
+          await response.body?.cancel();
+          return null;
+        }
+        if (!response.ok) throw new Error('Comparison media unavailable');
         return response.blob();
       }));
-      objectUrls.forEach((url) => URL.revokeObjectURL(url));
-      objectUrls = blobs.map((blob) => URL.createObjectURL(blob));
+      objectUrls.forEach(url => URL.revokeObjectURL(url));
+      objectUrls = [];
+      const playbackSources = blobs.map((blob, i) => {
+        if (!blob) return sources[i];
+        const url = URL.createObjectURL(blob);
+        objectUrls.push(url);
+        return url;
+      });
       const metadata = media.map((video) => once(video, 'loadedmetadata'));
-      media.forEach((video, index) => {
-        video.src = objectUrls[index];
+      media.forEach((video, i) => {
+        video.src = playbackSources[i];
         video.preload = 'auto';
         video.load();
       });
@@ -225,8 +235,7 @@ export function mountContactComparison(root) {
   document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
   window.addEventListener('pagehide', pause);
   const observer = new IntersectionObserver(([entry]) => {
-    if (entry.isIntersecting) prepare().catch(showError);
-    else pause();
+    if (!entry.isIntersecting) pause();
   }, { threshold: .15 });
   observer.observe(root);
   return { pause };

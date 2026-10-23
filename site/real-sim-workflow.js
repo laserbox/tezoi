@@ -4,6 +4,9 @@ export function mountRealSimWorkflow(root, { onStageChange = () => {} } = {}) {
   const tabs = [...root.querySelectorAll('[data-workflow-stage]')];
   const panels = [...root.querySelectorAll('[data-workflow-panel]')];
   const tablist = root.querySelector('[data-workflow-tabs]');
+  const videos = [...root.querySelectorAll('video')];
+  const egoVideo = root.querySelector('[data-ego-video]');
+  const pause = () => videos.forEach(video => video.pause());
   const compact = window.matchMedia('(max-width: 800px)');
   let active = Math.max(0, tabs.findIndex(tab => tab.dataset.workflowStage === (root.dataset.activeStage || 'simulation')));
 
@@ -12,7 +15,7 @@ export function mountRealSimWorkflow(root, { onStageChange = () => {} } = {}) {
     const from = tabs[active].dataset.workflowStage;
     const to = tabs[index].dataset.workflowStage;
     if (active !== index) {
-      root.querySelectorAll('video').forEach(video => video.pause());
+      pause();
       onStageChange({ from, to });
     }
     active = index;
@@ -44,7 +47,17 @@ export function mountRealSimWorkflow(root, { onStageChange = () => {} } = {}) {
   orient();
   select(active);
 
+  // Native Ego controls share the same suspension rules as the custom players.
+  if (egoVideo) {
+    new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) egoVideo.pause();
+    }, { threshold: .05 }).observe(egoVideo);
+  }
+  document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
+  window.addEventListener('pagehide', pause);
+
   return {
+    pause,
     selectStage(stage) { select(tabs.findIndex(tab => tab.dataset.workflowStage === stage)); },
     get activeStage() { return tabs[active].dataset.workflowStage; },
   };

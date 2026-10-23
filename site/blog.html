@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f4f6f6">
-  <meta name="description" content="TEZOI Blog。技术观点与产品动态。">
+  <meta name="description" content="TEZOI 技术笔记：接触力三维回放与仿真场景的视觉构成。">
   <title>Blog | TEZOI</title>
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=workflow-tabs-20261023">
+  <link rel="stylesheet" href="styles.css?v=review-fixes-20261023">
   <script src="site-shell.js?v=site-navigation-20261022" type="module"></script>
 </head>
 <body class="interior-page" data-page="blog">
@@ -27,8 +27,12 @@
   <main class="page-main section-wrap" id="main">
     <section class="page-intro" aria-labelledby="page-title">
       <h1 id="page-title">Blog</h1>
-      <p>技术观点与产品动态。</p>
+      <p>记录仿真中的观察，以及演示背后的技术思路。</p>
     </section>
+    <div class="journal-list">
+      <article class="journal-entry"><div class="journal-meta"><time datetime="2026-10-23">2026.10.23</time><span>交互观察</span></div><details open><summary><h2>把接触力放回三维场景</h2><span class="journal-toggle" aria-hidden="true"></span></summary><div class="journal-body"><p>机器人在操作物体时，接触往往发生在画面中很小的区域。单看运动视频，难以分辨力作用在哪里，也难以从一个视角判断物体之间的关系。</p><p>Playground 将 M12 螺母操作的运动记录与接触力热点放在同一时间线上。视频支持普通画面与热点画面左右对比；三维回放支持转动视角、开关热点和定位接触区域。</p><p>热点展示的是仿真记录中的接触力，三维界面用于回看已有过程，并非在线运行的物理求解器。</p><a class="page-link" href="./#playground">打开交互回放</a></div></details></article>
+      <article class="journal-entry"><div class="journal-meta"><time datetime="2026-10-23">2026.10.23</time><span>场景呈现</span></div><details><summary><h2>从几何结构到可视场景</h2><span class="journal-toggle" aria-hidden="true"></span></summary><div class="journal-body"><p>一个仿真场景同时包含几何、材质和光照。将它们分阶段展示，可以更直观地观察结构如何形成，以及视觉信息如何逐步补全。</p><p>Visual Rendering 使用工厂、实验室与仓储三组原创场景，依次呈现点云、几何和完整渲染。可切换场景、定位阶段，也可以暂停观察细节。</p><p>这些画面用于演示场景的视觉构成，不代表从真实扫描数据自动重建的结果。</p><a class="page-link" href="./#visual-rendering">查看场景演示</a></div></details></article>
+    </div>
   </main>
 
   <footer class="site-footer section-wrap">
