@@ -7,7 +7,7 @@
   <meta name="description" content="TEZOI，智能高精度具身仿真。融合场景重建、视觉保真与物理交互，构建面向具身智能研发与验证的仿真环境。">
   <title>TEZOI | Intelligent, high-fidelity embodied simulation</title>
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=mobile-polish-20261023">
+  <link rel="stylesheet" href="styles.css?v=playback-footer-20261023">
   <script src="site-shell.js?v=site-navigation-20261022" type="module"></script>
   <script src="app.js?v=mobile-polish-20261023" type="module"></script>
 </head>
@@ -142,7 +142,7 @@
                   <p class="agent-animation-caption" data-agent-caption role="status">从 Ego 视频中识别对象、接触与操作顺序。</p>
                 </div>
                 <div class="agent-output-strip" aria-label="转换目标输出"><div data-agent-output="environment" data-state="pending"><strong>Environment</strong><span>仿真环境</span><i aria-hidden="true"></i></div><div data-agent-output="trajectory" data-state="pending"><strong>Trajectory</strong><span>动作轨迹</span><i aria-hidden="true"></i></div><div data-agent-output="policy" data-state="pending"><strong>Policy</strong><span>执行策略</span><i aria-hidden="true"></i></div></div>
-                <div class="agent-animation-controls"><button type="button" data-agent-play aria-label="播放转换演示" aria-pressed="false"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg> 播放</button><input type="range" data-agent-timeline min="0" max="1000" value="0" step="1" aria-label="转换流程演示进度"><output data-agent-time aria-live="off">00:00 / 00:20</output><button type="button" data-agent-replay aria-label="从头重播转换演示"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 8a6 6 0 1 1 0 5M4 3v5h5"/></svg> <span>重播</span></button></div>
+                <div class="agent-animation-controls playback-bar" role="group" aria-label="转换演示播放控制"><button type="button" data-agent-play aria-label="播放转换演示" aria-pressed="false"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg><span>播放</span></button><input type="range" data-agent-timeline min="0" max="1000" value="0" step="1" aria-label="转换流程演示进度"><output data-agent-time aria-live="off">00:00 / 00:20</output><button type="button" data-agent-replay aria-label="从头重播转换演示"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 8a6 6 0 1 1 0 5M4 3v5h5"/></svg> <span>重播</span></button></div>
                 <p class="agent-conversion-note">概念动画，非实际生成结果。Ego 视频与配套生成结果待接入。</p>
               </div>
             </section>
@@ -155,6 +155,7 @@
                 </div>
                 <div id="simulation-panel-video" data-simulation-panel="video" role="tabpanel" aria-labelledby="simulation-view-video">
                 <article class="contact-comparison" data-contact-comparison data-start="18" aria-labelledby="contact-compare-title">
+                  <div class="playback-surface">
                   <div class="compare-stage" style="--split:50%">
                     <video class="compare-video" data-compare-simulation muted playsinline preload="none" poster="assets/playground-m12-simulation-1080.jpg" src="assets/playground-m12-simulation-1080.mp4" aria-hidden="true" tabindex="-1"></video>
                     <video class="compare-video compare-force-video" data-compare-forces muted playsinline preload="none" poster="assets/playground-m12-forces-1080.jpg" src="assets/playground-m12-forces-1080.mp4" aria-hidden="true" tabindex="-1"></video>
@@ -162,17 +163,19 @@
                     <input class="compare-split" data-compare-split type="range" min="0" max="100" step="1" value="50" aria-label="左右对比位置" aria-valuetext="仿真画面 50%，接触力热点 50%" aria-describedby="compare-help">
                     <div class="compare-divider" aria-hidden="true"><span class="compare-knob"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10h14M6 7l-3 3 3 3M14 7l3 3-3 3"/></svg></span></div>
                   </div>
-                  <div class="compare-controls">
+                  <div class="compare-controls playback-bar" role="group" aria-label="视频对比播放控制">
                     <button class="compare-play" type="button" data-compare-play aria-label="播放对比"><span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span><span data-compare-play-label>播放对比</span></button>
                     <input class="compare-timeline" data-compare-timeline type="range" min="0" max="76.88" step="0.04" value="18" aria-label="对比播放进度" aria-valuetext="00:18，共 01:17" disabled>
                     <output class="compare-time" data-compare-time aria-live="off">00:18 / 01:17</output>
                     <button class="compare-restart" type="button" data-compare-restart aria-label="从头播放对比" disabled><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 8a6 6 0 1 1 0 5M4 3v5h5"/></svg><span>重新播放</span></button>
+                  </div>
                   </div>
                   <div class="compare-caption"><p id="compare-help">拖动分界线对比画面，拖动进度条查看细节。</p><p class="compare-status" data-compare-status role="status"></p></div>
                   <p class="compare-note">颜色表示接触力分布，并非压力或应力；夹持稳定性尚未达标。</p>
                 </article>
                 </div>
                 <section id="simulation-panel-scene" data-simulation-panel="scene" data-scene-viewer role="tabpanel" aria-labelledby="simulation-view-scene" hidden>
+                  <div class="playback-surface playback-surface--scene">
                   <div class="scene-stage">
                   <div class="scene-viewport" data-scene-viewport>
                     <button class="scene-contact-toggle" type="button" data-contact-toggle aria-pressed="false" disabled><span aria-hidden="true"></span>接触力热点</button>
@@ -190,10 +193,11 @@
                       <button type="button" data-contact-focus>聚焦接触 <span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 15 15 5M5 5h10v10"/></svg></span></button>
                   </div>
                   </div>
-                  <div class="scene-controls">
+                  <div class="scene-controls playback-bar playback-bar--scene" role="group" aria-label="三维轨迹播放控制">
                     <button class="compare-play" type="button" data-scene-play disabled aria-label="播放三维轨迹" aria-pressed="false"><span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span><span>播放轨迹</span></button>
                     <input class="compare-timeline" data-scene-timeline type="range" min="0" max="76.88" value="18" step="0.04" disabled aria-label="三维轨迹进度">
                     <output class="compare-time" data-scene-time>00:18 / 01:17</output>
+                  </div>
                   </div>
                   <p class="scene-help"><span class="scene-desktop-help">拖动旋转，滚轮缩放，右键平移。键盘可用 Shift + 方向键旋转，加减键缩放。</span><span class="scene-touch-help">触屏：单指旋转，双指缩放与平移。</span></p>
                   <p class="scene-note">热点以透视方式和固定色标显示接触力，不代表压力或应力。原始仿真轨迹的夹持稳定性尚未达标。</p>
