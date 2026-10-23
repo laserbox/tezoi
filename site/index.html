@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f6f6">
+  <meta name="description" content="TEZOI，智能高精度具身仿真。融合场景重建、视觉保真与物理交互，构建面向具身智能研发与验证的仿真环境。">
+  <title>TEZOI | Intelligent, high-fidelity embodied simulation</title>
+  <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=dynamic-agent-20261023">
+  <script src="site-shell.js?v=site-navigation-20261022" type="module"></script>
+  <script src="app.js?v=ego-source-stage-20261023" type="module"></script>
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="TEZOI 首页"><img class="brand-logo brand-logo-light" src="assets/tezoi-logo-white.png" alt="" width="927" height="261"><img class="brand-logo brand-logo-dark" src="assets/tezoi-logo-black.png" alt="" width="927" height="261"></a>
+    <nav id="primary-nav" aria-label="主导航">
+      <a href="./" data-site-page="home" aria-current="page">Home</a>
+      <a href="company.html" data-site-page="company">Company</a>
+      <a href="blog.html" data-site-page="blog">Blog</a>
+      <a href="research.html" data-site-page="research">Research</a>
+    </nav>
+    <a class="header-cta" href="./#gallery">查看演示 <span class="cta-arrow" aria-hidden="true">↗</span></a>
+    <button class="menu-button" type="button" aria-label="打开导航" aria-controls="primary-nav" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main id="main">
+    <section class="overview" id="overview" aria-labelledby="overview-title" data-chapter="1">
+      <div class="overview-stage">
+        <div class="overview-video" data-slot="overview-video" aria-label="具身仿真概念视觉"><img class="hero-image" src="assets/hero.webp" alt="机械臂使用滴管操作烧杯的实验室概念场景" width="1672" height="941" fetchpriority="high"><div class="hero-shade"></div></div>
+        <div class="hero-chapter"><h2 id="overview-title">Overall</h2></div>
+        <div class="hero-content"><h1>智能高精度<br>具身仿真。</h1><p>以高保真场景与精细物理交互，支持具身智能的开发与验证。</p><div class="hero-actions"><a class="hero-button" href="#physical-contact"><span class="button-play" aria-hidden="true">↓</span>探索物理交互</a><a class="hero-text-link" href="#gallery">浏览演示库 <span aria-hidden="true">↓</span></a></div></div>
+        <div class="hero-bottom"><span>Visual fidelity. Physical accuracy.</span><span class="hero-credit">概念视觉 / AI 生成</span></div>
+      </div>
+
+    </section>
+
+    <section class="playground chapter" id="playground" aria-labelledby="playground-title" data-chapter="2">
+      <div class="section-wrap">
+        <div class="chapter-marker"><div class="chapter-heading"><h2 id="playground-title">Playground</h2></div></div>
+        <div class="section-lead workflow-intro"><h3>从 Ego 到验证</h3><p>以 Agent 连接 Ego 视频与仿真，将场景、交互与目标转化为环境和策略，再回到真实场景验证。</p></div>
+        <div class="real-sim-workflow" data-real-sim-workflow data-active-stage="simulation">
+          <aside class="workflow-rail">
+            <div class="workflow-steps" data-workflow-tabs role="tablist" aria-label="从 Ego 到真实验证" aria-orientation="vertical">
+              <button class="workflow-step" type="button" role="tab" id="workflow-tab-source" aria-controls="workflow-panel-source" aria-selected="false" tabindex="-1" data-workflow-stage="source"><span class="workflow-number" aria-hidden="true">01</span><span><strong>Ego</strong><small>真实第一视角视频</small></span></button>
+              <button class="workflow-step" type="button" role="tab" id="workflow-tab-agent" aria-controls="workflow-panel-agent" aria-selected="false" tabindex="-1" data-workflow-stage="agent"><span class="workflow-number" aria-hidden="true">02</span><span><strong>Agent</strong><small>Ego 转仿真</small></span></button>
+              <button class="workflow-step" type="button" role="tab" id="workflow-tab-simulation" aria-controls="workflow-panel-simulation" aria-selected="true" data-workflow-stage="simulation"><span class="workflow-number" aria-hidden="true">03</span><span><strong>Simulation</strong><small>仿真交互</small></span></button>
+              <button class="workflow-step" type="button" role="tab" id="workflow-tab-validation" aria-controls="workflow-panel-validation" aria-selected="false" tabindex="-1" data-workflow-stage="validation"><span class="workflow-number" aria-hidden="true">04</span><span><strong>Robotics</strong><small>真机</small></span></button>
+            </div>
+          </aside>
+          <div class="workflow-main">
+            <section class="workflow-panel" id="workflow-panel-source" data-workflow-panel="source" role="tabpanel" aria-labelledby="workflow-tab-source" hidden>
+              <div class="workflow-pane-heading"><h4>Ego video</h4><p>从外部 Ego 视频中理解场景、对象与操作目标。</p></div>
+              <div class="workflow-media-placeholder">
+                <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="12" width="38" height="28" rx="5"/><circle cx="24" cy="26" r="8"/><path d="m16 12 3-5h10l3 5"/></svg>
+                <p>Ego 视频待接入</p><span>First-person video</span>
+              </div>
+              <div class="workflow-artifacts" aria-label="Ego 输入"><div><strong>Scene</strong><p>真实环境与空间关系</p></div><div><strong>Interaction</strong><p>对象、接触与操作过程</p></div><div><strong>Task</strong><p>任务目标与子任务顺序</p></div></div>
+            </section>
+            <section class="workflow-panel" id="workflow-panel-agent" data-workflow-panel="agent" role="tabpanel" aria-labelledby="workflow-tab-agent" hidden>
+              <div class="workflow-pane-heading"><h4>从 Ego 构建仿真</h4><p>理解视频中的操作，重建可交互环境，生成与任务对应的动作轨迹和策略。</p></div>
+              <div class="agent-conversion agent-animation" data-agent-conversion data-phase="ego" data-playing="false" aria-label="Ego 到仿真与策略的动态流程示意">
+                <div class="agent-animation-heading"><span>Ego → Agent → Simulation</span><span class="agent-illustration-label">流程示意</span></div>
+                <div class="agent-phase-tabs" role="tablist" aria-label="转换演示步骤">
+                  <button type="button" role="tab" id="agent-phase-ego" aria-controls="agent-animation-stage" aria-selected="true" data-agent-step="0"><span>01</span>Ego 解析</button>
+                  <button type="button" role="tab" id="agent-phase-environment" aria-controls="agent-animation-stage" aria-selected="false" tabindex="-1" data-agent-step="1"><span>02</span>环境重建</button>
+                  <button type="button" role="tab" id="agent-phase-trajectory" aria-controls="agent-animation-stage" aria-selected="false" tabindex="-1" data-agent-step="2"><span>03</span>轨迹生成</button>
+                  <button type="button" role="tab" id="agent-phase-policy" aria-controls="agent-animation-stage" aria-selected="false" tabindex="-1" data-agent-step="3"><span>04</span>Policy 生成</button>
+                </div>
+                <div class="agent-visual-stage" id="agent-animation-stage" data-agent-stage role="tabpanel" aria-labelledby="agent-phase-ego">
+                  <div class="agent-visual-grid">
+                    <div class="agent-ego-visual">
+                      <div class="agent-visual-label"><strong>Ego 视频</strong><span>输入示意</span></div>
+                      <div class="agent-ego-frame">
+                        <svg viewBox="0 0 240 180" aria-hidden="true">
+                          <rect width="240" height="180" fill="#dfe8e7"/>
+                          <path d="M0 58 122 28 240 61V180H0Z" fill="#ecf1f0"/>
+                          <path d="m0 97 122-36 118 39M0 136l122-39 118 40M36 180l86-152 82 152" fill="none" stroke="#d0ddda" stroke-width="1"/>
+                          <path d="m158 74 17 8v32l-17 9-17-9V82Z" fill="#90aaa7"/>
+                          <ellipse cx="158" cy="76" rx="17" ry="8" fill="#c8d8d5"/>
+                          <path d="m144 84 27 6m-27 3 27 6m-27 3 27 6" stroke="#6f8d88" stroke-width="2"/>
+                          <g data-agent-ego-hand>
+                            <path d="M-8 179 25 123q10-15 22-9l31 13-8 21-26-7-16 39" fill="#afc2bd" stroke="#7f9e95"/>
+                            <path d="m248 179-43-56q-11-14-24-6l-29 16 10 19 28-9 23 37" fill="#afc2bd" stroke="#7f9e95"/>
+                            <path d="m93 106 22 11v24l-22 11-22-11v-24Z" fill="#637f7c"/>
+                            <path d="m93 106 22 11-22 12-22-12Z" fill="#b6ceca"/>
+                            <ellipse cx="93" cy="117" rx="8" ry="4" fill="#e9f0ee"/>
+                          </g>
+                          <g data-agent-detection opacity="0" fill="none" stroke="#467c75" stroke-width="1.5">
+                            <rect x="66" y="99" width="55" height="58" rx="4" stroke-dasharray="5 4"/>
+                            <rect x="136" y="62" width="45" height="64" rx="4"/>
+                            <path d="m119 116 17-24"/>
+                            <circle cx="93" cy="117" r="3" fill="#467c75"/>
+                          </g>
+                          <path d="M12 29V12h17m182 0h17v17M12 151v17h17m182 0h17v-17" fill="none" stroke="#6b8983" stroke-width="1.5"/>
+                        </svg>
+                        <div class="agent-ego-progress" aria-hidden="true"><span></span></div>
+                      </div>
+                      <p>对象 · 接触 · 操作顺序</p>
+                    </div>
+                    <div class="agent-transfer" aria-hidden="true"><strong>Agent</strong><svg viewBox="0 0 80 20"><path d="M6 10h68m-6-5 6 5-6 5" fill="none" stroke="#9fb6b1"/><circle data-agent-packet cx="8" cy="10" r="3" fill="#477e73"/></svg></div>
+                    <div class="agent-sim-visual">
+                      <div class="agent-visual-label"><strong>Simulation</strong><span>输出示意</span></div>
+                      <div class="agent-sim-frame">
+                        <svg viewBox="0 0 420 300" aria-hidden="true">
+                          <ellipse cx="220" cy="251" rx="158" ry="27" fill="#cadad5" opacity=".3"/>
+                          <g data-agent-environment opacity="0" fill="none" stroke="#829f98" stroke-width="1.2" stroke-linejoin="round">
+                            <path d="m34 193 186-98 168 84-186 101Zm0 0v-13l186-98 168 84v13m-186 101v-13m-168-87 168 87 186-101"/>
+                            <path d="m80 169 168 86m-122-111 168 87m-121-111 167 87M76 215l186-98M118 236l186-98m-144 119 186-99" opacity=".42"/>
+                            <path d="m254 119 20 10v67l-20 11-20-11v-67Zm-20 10 20 11 20-11m-20 11v67"/>
+                          </g>
+                          <g data-agent-solids opacity="0" stroke-linejoin="round">
+                            <path d="m34 193 168 87v-13L34 180Z" fill="#b4c9c2"/>
+                            <path d="m202 280 186-101v-13L202 267Z" fill="#98b4a9"/>
+                            <path d="m34 180 186-98 168 84-186 101Z" fill="#e0eae5" stroke="#b1c9bc"/>
+                            <path d="m80 156 168 86m-122-111 168 87m-121-111 167 87M76 202l186-98M118 223l186-98m-144 119 186-99" stroke="#bfd3c7" fill="none"/>
+                            <path d="m254 173 29 15v17l-29 16-29-16v-17Z" fill="#6f8e85"/>
+                            <path d="m254 173 29 15-29 16-29-16Z" fill="#b6cbc1"/>
+                            <path d="M243 143v46c0 9 22 9 22 0v-46" fill="#8ca99e" stroke="#718f84"/>
+                            <ellipse cx="254" cy="143" rx="11" ry="6" fill="#d2e0d7" stroke="#718f84"/>
+                            <path d="m244 153 20 5m-20 3 20 5m-20 3 20 5m-20 3 20 5" stroke="#627f74" stroke-width="1.3"/>
+                          </g>
+                          <g fill="#5d968b">
+                            <circle data-agent-point cx="34" cy="180" r="2"/><circle data-agent-point cx="80" cy="156" r="2"/><circle data-agent-point cx="126" cy="131" r="2"/><circle data-agent-point cx="173" cy="107" r="2"/><circle data-agent-point cx="220" cy="82" r="2"/><circle data-agent-point cx="262" cy="103" r="2"/><circle data-agent-point cx="304" cy="124" r="2"/><circle data-agent-point cx="346" cy="145" r="2"/><circle data-agent-point cx="388" cy="166" r="2"/><circle data-agent-point cx="342" cy="191" r="2"/><circle data-agent-point cx="295" cy="216" r="2"/><circle data-agent-point cx="249" cy="242" r="2"/><circle data-agent-point cx="202" cy="267" r="2"/><circle data-agent-point cx="160" cy="245" r="2"/><circle data-agent-point cx="118" cy="223" r="2"/><circle data-agent-point cx="76" cy="202" r="2"/><circle data-agent-point cx="254" cy="119" r="2"/><circle data-agent-point cx="234" cy="129" r="2"/><circle data-agent-point cx="274" cy="129" r="2"/><circle data-agent-point cx="254" cy="140" r="2"/><circle data-agent-point cx="234" cy="196" r="2"/><circle data-agent-point cx="274" cy="196" r="2"/>
+                          </g>
+                          <path data-agent-trajectory d="M95 86C115 25 295 40 254 142" pathLength="1" fill="none" stroke="#498b80" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1" stroke-dashoffset="1" opacity="0"/>
+                          <g data-agent-tool opacity="0" stroke="#506d67" stroke-linejoin="round">
+                            <path d="M-7-49H7v25H-7Z" fill="#b9ccc5"/>
+                            <path d="M-27-25H27v12H-27Z" fill="#698a81"/>
+                            <path d="M-27-13h9v32h-9Zm45 0h9v32h-9Z" fill="#b1c6bc"/>
+                            <path d="m0 7 16 8v16L0 39l-16-8V15Z" fill="#66887c"/>
+                            <path d="m0 7 16 8L0 24l-16-9Z" fill="#c0d5c7"/>
+                            <ellipse cx="0" cy="15" rx="6" ry="3" fill="#e9f0ea"/>
+                          </g>
+                          <g data-agent-policy opacity="0" fill="none" stroke="#498b80" stroke-width="1.5"><ellipse cx="254" cy="182" rx="39" ry="20" stroke-dasharray="4 5"/><path d="m288 168 7 8-11 1"/></g>
+                        </svg>
+                        <div class="agent-policy-loop" aria-hidden="true"><span>观察</span><i>→</i><span>动作</span><i>→</i><span>反馈</span><i>↺</i></div>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="agent-animation-caption" data-agent-caption role="status">从 Ego 视频中识别对象、接触与操作顺序。</p>
+                </div>
+                <div class="agent-output-strip" aria-label="转换目标输出"><div data-agent-output="environment" data-state="pending"><strong>Environment</strong><span>仿真环境</span><i aria-hidden="true"></i></div><div data-agent-output="trajectory" data-state="pending"><strong>Trajectory</strong><span>动作轨迹</span><i aria-hidden="true"></i></div><div data-agent-output="policy" data-state="pending"><strong>Policy</strong><span>执行策略</span><i aria-hidden="true"></i></div></div>
+                <div class="agent-animation-controls"><button type="button" data-agent-play aria-label="播放转换演示" aria-pressed="false">▶ 播放</button><input type="range" data-agent-timeline min="0" max="1000" value="0" step="1" aria-label="转换流程演示进度"><output data-agent-time aria-live="off">00:00 / 00:20</output><button type="button" data-agent-replay aria-label="从头重播转换演示">↺ <span>重播</span></button></div>
+                <p class="agent-conversion-note">概念动画，非实际生成结果。Ego 视频与配套生成结果待接入。</p>
+              </div>
+            </section>
+            <section class="workflow-panel" id="workflow-panel-simulation" data-workflow-panel="simulation" role="tabpanel" aria-labelledby="workflow-tab-simulation">
+              <div class="simulation-explorer" data-simulation-explorer>
+                <div class="compare-heading section-lead"><div><h4 id="contact-compare-title">M12 螺母旋拧</h4><p class="project-meta">Franka</p></div><p>独立仿真示例</p></div>
+                <div class="simulation-view-tabs" role="tablist" aria-label="仿真展示方式">
+                  <button type="button" role="tab" id="simulation-view-video" aria-controls="simulation-panel-video" aria-selected="true" data-simulation-view="video">Video comparison</button>
+                  <button type="button" role="tab" id="simulation-view-scene" aria-controls="simulation-panel-scene" aria-selected="false" tabindex="-1" data-simulation-view="scene"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m10 2 7 4v8l-7 4-7-4V6Zm-7 4 7 4 7-4M10 10v8"/></svg>Interactive 3D</button>
+                </div>
+                <div id="simulation-panel-video" data-simulation-panel="video" role="tabpanel" aria-labelledby="simulation-view-video">
+                <article class="contact-comparison" data-contact-comparison data-start="18" aria-labelledby="contact-compare-title">
+                  <div class="compare-stage" style="--split:50%">
+                    <video class="compare-video" data-compare-simulation muted playsinline preload="none" poster="assets/playground-m12-simulation-1080.jpg" src="assets/playground-m12-simulation-1080.mp4" aria-hidden="true" tabindex="-1"></video>
+                    <video class="compare-video compare-force-video" data-compare-forces muted playsinline preload="none" poster="assets/playground-m12-forces-1080.jpg" src="assets/playground-m12-forces-1080.mp4" aria-hidden="true" tabindex="-1"></video>
+                    <span class="compare-view-label compare-simulation-label">Simulation</span><span class="compare-view-label compare-forces-label">Contact forces</span>
+                    <input class="compare-split" data-compare-split type="range" min="0" max="100" step="1" value="50" aria-label="左右对比位置" aria-valuetext="仿真画面 50%，接触力热点 50%" aria-describedby="compare-help">
+                    <div class="compare-divider" aria-hidden="true"><span class="compare-knob">↔</span></div>
+                  </div>
+                  <div class="compare-controls">
+                    <button class="compare-play" type="button" data-compare-play aria-label="播放对比"><span aria-hidden="true">▶</span><span data-compare-play-label>播放对比</span></button>
+                    <input class="compare-timeline" data-compare-timeline type="range" min="0" max="76.88" step="0.04" value="18" aria-label="对比播放进度" aria-valuetext="00:18，共 01:17" disabled>
+                    <output class="compare-time" data-compare-time aria-live="off">00:18 / 01:17</output>
+                    <button class="compare-restart" type="button" data-compare-restart aria-label="从头播放对比" disabled>↺<span>重新播放</span></button>
+                  </div>
+                  <div class="compare-caption"><p id="compare-help">拖动分界线对比画面，拖动进度条查看细节。</p><p class="compare-status" data-compare-status role="status"></p></div>
+                  <p class="compare-note">颜色表示接触力分布，并非压力或应力；夹持稳定性尚未达标。</p>
+                </article>
+                </div>
+                <section id="simulation-panel-scene" data-simulation-panel="scene" data-scene-viewer role="tabpanel" aria-labelledby="simulation-view-scene" hidden>
+                  <div class="scene-stage">
+                  <div class="scene-viewport" data-scene-viewport>
+                    <button class="scene-contact-toggle" type="button" data-contact-toggle aria-pressed="false" disabled><span aria-hidden="true"></span>接触力热点</button>
+                    <div class="scene-camera-controls">
+                      <button class="scene-zoom" type="button" data-scene-zoom-in disabled aria-label="放大三维场景">+</button>
+                      <button class="scene-zoom" type="button" data-scene-zoom-out disabled aria-label="缩小三维场景">−</button>
+                      <button class="scene-reset" type="button" data-scene-reset disabled aria-label="重置三维视角"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 8a6 6 0 1 1 0 5M4 3v5h5"/></svg><span>重置视角</span></button>
+                    </div>
+                    <div class="scene-loading"><p data-scene-status role="status">正在加载三维场景…</p><button type="button" data-scene-retry hidden>重新加载</button></div>
+                  </div>
+                  <div class="scene-contact-legend" data-contact-legend hidden>
+                      <div class="scene-contact-summary"><span>顶点力峰值</span><strong data-contact-peak>0 N</strong></div>
+                      <div class="scene-contact-gradient" aria-hidden="true"></div>
+                      <div class="scene-contact-scale"><span>0 N</span><span data-contact-cap></span></div>
+                      <button type="button" data-contact-focus>聚焦接触 <span aria-hidden="true">↗</span></button>
+                  </div>
+                  </div>
+                  <div class="scene-controls">
+                    <button class="compare-play" type="button" data-scene-play disabled aria-label="播放三维轨迹" aria-pressed="false"><span aria-hidden="true">▶</span><span>播放轨迹</span></button>
+                    <input class="compare-timeline" data-scene-timeline type="range" min="0" max="76.88" value="18" step="0.04" disabled aria-label="三维轨迹进度">
+                    <output class="compare-time" data-scene-time>00:18 / 01:17</output>
+                  </div>
+                  <p class="scene-help"><span class="scene-desktop-help">拖动旋转，滚轮缩放，右键平移。键盘可用 Shift + 方向键旋转，加减键缩放。</span><span class="scene-touch-help">触屏：单指旋转，双指缩放与平移。</span></p>
+                  <p class="scene-note">热点以透视方式和固定色标显示接触力，不代表压力或应力。原始仿真轨迹的夹持稳定性尚未达标。</p>
+                </section>
+              </div>
+            </section>
+            <section class="workflow-panel" id="workflow-panel-validation" data-workflow-panel="validation" role="tabpanel" aria-labelledby="workflow-tab-validation" hidden>
+              <div class="workflow-pane-heading"><h4>Policy validation</h4><p>将策略带回同一真实任务，对照 Ego 检查执行表现。</p></div>
+              <div class="workflow-media-placeholder workflow-validation-placeholder">
+                <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="12" width="38" height="28" rx="5"/><circle cx="24" cy="26" r="8"/><path d="m16 12 3-5h10l3 5"/></svg>
+                <p>真实场景验证视频待接入</p><span>Real-world execution</span>
+              </div>
+              <div class="workflow-artifacts" aria-label="真实场景验证维度"><div><strong>Task outcome</strong><p>任务是否实际完成</p></div><div><strong>Consistency</strong><p>动作与物理交互是否一致</p></div><div><strong>Robustness</strong><p>面对场景变化的执行表现</p></div></div>
+            </section>
+            <div class="workflow-navigation"><span class="workflow-position" data-workflow-position>3 / 4</span><div><button type="button" data-workflow-prev>← 上一阶段</button><button type="button" data-workflow-next aria-label="进入 Robotics · 真机">下一阶段 →</button></div></div>
+            <p class="workflow-disclosure">Agent 展示转换流程，M12 为独立仿真示例；Ego 与实机验证视频待接入。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="showcase section-wrap chapter" id="showcase" aria-labelledby="showcase-title" data-chapter="3">
+      <div class="chapter-marker"><div class="chapter-heading"><h2 id="showcase-title">Features</h2></div></div>
+      <section class="subchapter physics-subchapter" id="physical-contact" aria-labelledby="physics-title">
+        <div class="subchapter-heading section-lead"><h3 id="physics-title">Physical Interaction</h3><p>观察挤压、拧水与折叠中的形变、流动和接触响应。</p></div>
+        <div id="material-properties" hidden>
+        <div class="physics-explorer">
+          <div class="material-toolbar">
+            <h4>Material Properties</h4>
+            <div class="material-tabs" role="tablist" aria-label="物理材料类型">
+              <button type="button" role="tab" id="material-tab-rigid" aria-selected="true" aria-controls="material-panel-rigid" tabindex="0" data-material="rigid">Rigid bodies</button>
+              <button type="button" role="tab" id="material-tab-soft" aria-selected="false" aria-controls="material-panel-soft" tabindex="-1" data-material="soft">Soft bodies</button>
+              <button type="button" role="tab" id="material-tab-cables" aria-selected="false" aria-controls="material-panel-cables" tabindex="-1" data-material="cables">Cables</button>
+              <button type="button" role="tab" id="material-tab-fluid" aria-selected="false" aria-controls="material-panel-fluid" tabindex="-1" data-material="fluid">Fluids</button>
+              <button type="button" role="tab" id="material-tab-tactile" aria-selected="false" aria-controls="material-panel-tactile" tabindex="-1" data-material="tactile">Tactile</button>
+            </div>
+            <button type="button" class="motion-toggle" aria-pressed="false">暂停动态 <span aria-hidden="true">Ⅱ</span></button>
+          </div>
+          <section class="material-panel" id="material-panel-rigid" role="tabpanel" aria-labelledby="material-tab-rigid" data-material-panel="rigid">
+            <button type="button" class="material-film" data-slot="rigid" data-video="rigid" aria-label="放大播放刚体连锁接触">
+              <video data-material-preview muted loop playsinline preload="none" poster="assets/ipc-rigid-v2.webp" src="assets/ipc-rigid-v2.mp4" aria-hidden="true" tabindex="-1"></video>
+              <span class="material-expand" aria-hidden="true">↗</span>
+            </button>
+            <div class="material-description"><h5>连锁接触与动量传递</h5><p>一次倾倒触发连续碰撞，观察刚体间的动量传递。</p><span class="material-detail">Rigid contact / IPC</span><button type="button" class="film-link" data-video="rigid" aria-label="播放刚体连锁接触完整视频">播放完整演示 <span aria-hidden="true">↗</span></button></div>
+          </section>
+          <section class="material-panel" id="material-panel-soft" role="tabpanel" aria-labelledby="material-tab-soft" data-material-panel="soft" hidden>
+            <button type="button" class="material-film" data-slot="soft" data-video="soft" aria-label="放大播放柔性材料压缩与恢复">
+              <video data-material-preview muted loop playsinline preload="none" poster="assets/ipc-soft-v2.webp" src="assets/ipc-soft-v2.mp4" aria-hidden="true" tabindex="-1"></video>
+              <span class="material-expand" aria-hidden="true">↗</span>
+            </button>
+            <div class="material-description"><h5>弹性形变与卸载恢复</h5><p>接触载荷下的压缩与展开，以及卸载后的弹性恢复。</p><span class="material-detail">Elastic deformation / IPC</span><button type="button" class="film-link" data-video="soft" aria-label="播放柔性材料压缩与恢复完整视频">播放完整演示 <span aria-hidden="true">↗</span></button></div>
+          </section>
+          <section class="material-panel" id="material-panel-cables" role="tabpanel" aria-labelledby="material-tab-cables" data-material-panel="cables" hidden>
+            <button type="button" class="material-film" data-slot="cables" data-video="cables" aria-label="放大播放线束弯曲与接触">
+              <video data-material-preview muted loop playsinline preload="none" poster="assets/ipc-cables.webp" src="assets/ipc-cables.mp4" aria-hidden="true" tabindex="-1"></video>
+              <span class="material-expand" aria-hidden="true">↗</span>
+            </button>
+            <div class="material-description"><h5>线束弯曲与接触</h5><p>线束在重力与碰撞作用下弯曲下垂，与支撑结构形成接触。</p><span class="material-detail">Deformable contact / IPC</span><button type="button" class="film-link" data-video="cables" aria-label="播放线束弯曲与接触完整视频">播放完整演示 <span aria-hidden="true">↗</span></button></div>
+          </section>
+          <section class="material-panel" id="material-panel-fluid" role="tabpanel" aria-labelledby="material-tab-fluid" data-material-panel="fluid" hidden>
+            <button type="button" class="material-film" data-slot="fluid" data-video="fluid" aria-label="放大播放液体流动与固体接触">
+              <video data-material-preview muted loop playsinline preload="none" poster="assets/ipc-fluid.webp" src="assets/ipc-fluid.mp4" aria-hidden="true" tabindex="-1"></video>
+              <span class="material-expand" aria-hidden="true">↗</span>
+            </button>
+            <div class="material-description"><h5>液体流动与流固接触</h5><p>液体绕障流动，与容器和固体表面形成耦合响应。</p><span class="material-detail">Fluid–solid coupling</span><button type="button" class="film-link" data-video="fluid" aria-label="播放液体流动与固体接触完整视频">播放完整演示 <span aria-hidden="true">↗</span></button></div>
+          </section>
+          <section class="material-panel" id="material-panel-tactile" role="tabpanel" aria-labelledby="material-tab-tactile" data-material-panel="tactile" hidden>
+            <button type="button" class="material-film" data-slot="tactile" data-video="tactile" aria-label="放大播放凝胶触觉与接触力分布">
+              <video data-material-preview muted loop playsinline preload="none" poster="assets/ipc-tactile.webp" src="assets/ipc-tactile.mp4" aria-hidden="true" tabindex="-1"></video>
+              <span class="material-expand" aria-hidden="true">↗</span>
+            </button>
+            <div class="material-description"><h5>凝胶形变与接触力</h5><p>凝胶表面的压入形变，与对应的接触力分布同步变化。</p><span class="material-detail">Gel deformation / Contact force</span><button type="button" class="film-link" data-video="tactile" aria-label="播放凝胶触觉与接触力分布完整视频">播放完整演示 <span aria-hidden="true">↗</span></button></div>
+          </section>
+        </div>
+        <p class="material-note">基于物理计算的材料响应演示；参数尚未经实物标定。</p>
+        </div>
+        <section class="embodied-physics" id="embodied-contact" aria-labelledby="physics-title">
+          <div class="physical-demos-controls"><button type="button" class="motion-toggle" aria-pressed="false">暂停动态 <span aria-hidden="true">Ⅱ</span></button></div>
+          <div class="embodied-grid" id="embodied-studies">
+            <article class="embodied-card" aria-labelledby="embodied-shell-title">
+              <button type="button" class="embodied-film" data-video="haoxiang-shell" aria-label="播放PET水瓶挤压完整视频">
+                <video data-material-preview muted loop playsinline preload="none" src="assets/haoxiang-shell.mp4" poster="assets/haoxiang-shell.jpg" aria-hidden="true" tabindex="-1"></video>
+                <span class="material-expand" aria-hidden="true">↗</span>
+              </button>
+              <h4 id="embodied-shell-title">水瓶挤压</h4>
+              <p>夹持薄壳瓶体，观察瓶身形变与液体流出。</p>
+              <div class="card-meta"><span>Franka FR3</span><span>0:13</span></div>
+            </article>
+            <article class="embodied-card" aria-labelledby="embodied-porous-title">
+              <button type="button" class="embodied-film" data-video="haoxiang-porous" aria-label="播放海绵吸水与三次拧水完整视频">
+                <video data-material-preview muted loop playsinline preload="none" src="assets/haoxiang-porous.mp4" poster="assets/haoxiang-porous.jpg" aria-hidden="true" tabindex="-1"></video>
+                <span class="material-expand" aria-hidden="true">↗</span>
+              </button>
+              <h4 id="embodied-porous-title">海绵吸水与挤水</h4>
+              <p>海绵吸水后经三次挤压排水，随后回置。</p>
+              <div class="card-meta"><span>Franka FR3</span><span>0:39</span></div>
+            </article>
+            <article class="embodied-card" aria-labelledby="embodied-cloth-title">
+              <button type="button" class="embodied-film" data-video="haoxiang-cloth" aria-label="播放双臂床单对折完整视频">
+                <video data-material-preview muted loop playsinline preload="none" src="assets/haoxiang-cloth.mp4" poster="assets/haoxiang-cloth.jpg" aria-hidden="true" tabindex="-1"></video>
+                <span class="material-expand" aria-hidden="true">↗</span>
+              </button>
+              <h4 id="embodied-cloth-title">双臂床单对折</h4>
+              <p>双臂抓取、对折并释放床单，展示布料接触与摩擦。</p>
+              <div class="card-meta"><span>Dual Franka FR3</span><span>0:24</span></div>
+            </article>
+          </div>
+        </section>
+      </section>
+      <section class="subchapter" id="visual-rendering" aria-labelledby="visual-title">
+        <div class="subchapter-heading section-lead"><h3 id="visual-title">Visual Rendering</h3><p>从点云到几何，再到光照材质，观察同一场景的视觉层次。</p></div>
+        <article class="rendering-showcase" data-rendering-showcase>
+          <div class="rendering-stage" id="rendering-stage" role="tabpanel" aria-labelledby="render-scene-factory">
+            <video muted playsinline preload="none" poster="assets/visual-factory-v2.webp" aria-hidden="true" tabindex="-1"></video>
+            <div class="rendering-overlay"><span data-render-title>工业装配单元</span></div>
+            <button class="rendering-play" type="button" data-render-play aria-label="暂停演示" aria-pressed="true"><span aria-hidden="true">Ⅱ</span></button>
+          </div>
+          <div class="rendering-toolbar">
+            <div class="rendering-phases" role="toolbar" aria-label="场景呈现阶段">
+              <button type="button" data-render-phase="points" aria-pressed="true">Point cloud</button><span aria-hidden="true">→</span>
+              <button type="button" data-render-phase="geometry" aria-pressed="false">Geometry</button><span aria-hidden="true">→</span>
+              <button type="button" data-render-phase="rendered" aria-pressed="false">Rendered</button>
+            </div>
+            <button class="rendering-replay" type="button" aria-label="重新播放场景" data-render-replay>重新播放 <span aria-hidden="true">↺</span></button>
+          </div>
+          <div class="rendering-scenes" role="tablist" aria-label="原创三维场景">
+            <button type="button" role="tab" id="render-scene-factory" aria-selected="true" aria-controls="rendering-stage" data-render-scene="factory" data-render-title="工业装配单元" data-render-src="assets/visual-factory-v2.mp4" data-render-poster="assets/visual-factory-v2.webp"><span>工业装配单元</span><small>机械臂、输送线与装配工位</small><i aria-hidden="true"></i></button>
+            <button type="button" role="tab" id="render-scene-laboratory" aria-selected="false" aria-controls="rendering-stage" tabindex="-1" data-render-scene="laboratory" data-render-title="实验室" data-render-src="assets/visual-laboratory-v2.mp4" data-render-poster="assets/visual-laboratory-v2.webp"><span>实验室</span><small>实验台、仪器与液体容器</small><i aria-hidden="true"></i></button>
+            <button type="button" role="tab" id="render-scene-warehouse" aria-selected="false" aria-controls="rendering-stage" tabindex="-1" data-render-scene="warehouse" data-render-title="仓储空间" data-render-src="assets/visual-warehouse-v2.mp4" data-render-poster="assets/visual-warehouse-v2.webp"><span>仓储空间</span><small>货架、托盘与移动平台</small><i aria-hidden="true"></i></button>
+          </div>
+          <div class="rendering-caption"><p>三维建模场景，点云由模型表面采样生成。</p><p data-render-status role="status"></p></div>
+        </article>
+      </section>
+    </section>
+
+    <section class="gallery chapter section-wrap" id="gallery" aria-labelledby="gallery-title" data-chapter="4">
+      <div class="chapter-marker"><div class="chapter-heading"><h2 id="gallery-title">Gallery</h2></div></div>
+      <div class="section-lead"><h3>Simulation in action</h3><p>探索工业装配、实验操作、材料交互与运动控制中的仿真表现。</p></div>
+      <div class="gallery-tabs" role="tablist" aria-label="任务场景">
+        <button type="button" role="tab" id="tab-factory" aria-selected="true" aria-controls="panel-factory" data-scene="factory"><span class="gallery-tab-label">工厂</span> <span class="gallery-tab-count">06</span></button>
+        <button type="button" role="tab" id="tab-lab" aria-selected="false" aria-controls="panel-lab" tabindex="-1" data-scene="lab"><span class="gallery-tab-label">实验室</span> <span class="gallery-tab-count">02</span></button>
+        <button type="button" role="tab" id="tab-tactile" aria-selected="false" aria-controls="panel-tactile" tabindex="-1" data-scene="tactile"><span class="gallery-tab-label">触觉</span> <span class="gallery-tab-count">05</span></button>
+        <button type="button" role="tab" id="tab-soft" aria-selected="false" aria-controls="panel-soft" tabindex="-1" data-scene="soft"><span class="gallery-tab-label">软材料</span> <span class="gallery-tab-count">02</span></button>
+        <button type="button" role="tab" id="tab-cloth" aria-selected="false" aria-controls="panel-cloth" tabindex="-1" data-scene="cloth"><span class="gallery-tab-label">布料</span> <span class="gallery-tab-count">02</span></button>
+        <button type="button" role="tab" id="tab-motion" aria-selected="false" aria-controls="panel-motion" tabindex="-1" data-scene="motion"><span class="gallery-tab-label">运动控制</span> <span class="gallery-tab-count">02</span></button>
+      </div>
+      <div id="panel-factory" role="tabpanel" aria-labelledby="tab-factory" data-scene-panel="factory">
+        <div class="gallery-grid">
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="gallery-flexible-rj45" aria-label="播放柔性网线插入、解锁与拔出"><img src="assets/gallery-flexible-rj45.jpg" alt="Franka 机械臂操作柔性网线与连接器" loading="lazy" width="1280" height="720"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>柔性网线插拔</h4></div>
+            <p class="gallery-caption">抓取一米柔性网线，完成插接锁止、重抓解锁与拔出。</p><div class="card-meta"><span>Franka</span><span>0:25</span></div>
+          </article>
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="gallery-ram-insertion" aria-label="播放双臂内存条插装"><img src="assets/gallery-ram-insertion-hd.jpg" alt="双 UR5e 将内存条对准主板插槽并协同按压" loading="lazy" width="2560" height="1440"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>双臂内存条插装</h4></div>
+            <p class="gallery-caption">双臂协同拾取内存条、对准插槽并压入，随后松爪撤离。</p><p class="case-status">研究演示 · 任务效果待验证</p><div class="card-meta"><span>Dual UR5e</span><span>0:37</span></div>
+          </article>
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="gallery-m12-nut" aria-label="播放指尖拧紧 M12 螺母"><img src="assets/playground-m12-simulation-1080.jpg" alt="Franka 指尖在螺杆上操作 M12 螺母" loading="lazy" width="1920" height="1080"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>指尖拧紧 M12 螺母</h4></div>
+            <p class="gallery-caption">抓取并调整螺母，以指尖旋拧完成预紧与卸载。</p><p class="case-status">研究演示 · 夹持稳定性尚未达标</p><a class="gallery-alternate" href="#playground" data-workflow-target="simulation">接触力对比 <span aria-hidden="true">↗</span></a><div class="card-meta"><span>Franka</span><span>1:17</span></div>
+          </article>
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="gallery-bottle-packing" aria-label="播放水瓶装盒与托盘放置"><img src="assets/gallery-bottle-packing.jpg" alt="双 UR5e 在包装工位将水瓶装盒并折叠纸盒上盖" loading="lazy" width="2560" height="1440"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>水瓶装盒与托盘放置</h4></div>
+            <p class="gallery-caption">双臂协同完成水瓶入盒、盒盖折叠与托盘放置。</p><div class="card-meta"><span>Dual UR5e</span><span>0:40</span></div>
+          </article>
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="gallery-rubber-ring" aria-label="播放双臂橡胶圈装配研究演示"><img src="assets/gallery-rubber-ring.jpg" alt="两只 UR5e 夹爪拉伸橡胶圈，呈现拉伸与入槽过程" loading="lazy" width="1280" height="720"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>双臂橡胶圈装配</h4></div>
+            <p class="gallery-caption">双臂抓取、拉伸柔性胶圈，执行对准与入槽。</p><p class="case-status">研究演示 · 部分装配条件未达标</p><div class="card-meta"><span>Dual UR5e</span><span>0:20</span></div>
+          </article>
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="gallery-rj45-attempt" aria-label="播放 RJ45 连接器插接研究演示"><img src="assets/gallery-rj45-attempt-hd.jpg" alt="Franka 在连接器工装上进行刚性 RJ45 连接器插接尝试" loading="lazy" width="1920" height="1080"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>RJ45 连接器插接尝试</h4></div>
+            <p class="gallery-caption">抓取并定向刚性连接器，执行插入、释放与撤离。</p><p class="case-status">研究演示 · 插接精度未达标</p><div class="card-meta"><span>Franka</span><span>0:16</span></div>
+          </article>
+        </div>
+      </div>
+      <div id="panel-lab" role="tabpanel" aria-labelledby="tab-lab" data-scene-panel="lab" hidden>
+        <div class="gallery-grid gallery-pair-grid">
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="gallery-labimus" aria-label="播放双臂颗粒取样与称量"><img src="assets/gallery-labimus-hd.jpg" alt="双臂在实验室天平台面进行颗粒取样与称量，右侧展示双腕视角" loading="lazy" width="1920" height="1080"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>双臂颗粒取样与称量</h4></div>
+            <p class="gallery-caption">双臂协同取样、转移与称量，完成还勺和关门收尾。</p><p class="case-status">研究演示 · 定量取样精度未达目标</p>
+            <div class="card-meta"><span>Dual UR5e / Robotiq 2F85</span><span>3:50</span></div>
+          </article>
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="haoxiang-lab-liquid" aria-label="播放实验台液体操作总览演示"><img src="assets/haoxiang-lab-liquid.jpg" alt="机械臂依次取液、倾倒、搅拌并处理废液。" loading="lazy" width="720" height="540"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>实验室液体操作</h4></div>
+            <p class="gallery-caption">机械臂依次取液、倾倒、搅拌并处理废液。</p><div class="card-meta"><span>Franka FR3</span><span>0:36 · 4×</span></div>
+          </article>
+        </div>
+      </div>
+      <div id="panel-tactile" role="tabpanel" aria-labelledby="tab-tactile" data-scene-panel="tactile" hidden>
+        <div class="gallery-grid">
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="haoxiang-safe-grasp" aria-label="播放触觉闭环抓螺栓演示"><img src="assets/haoxiang-safe-grasp.jpg" alt="根据微滑反馈调整夹持力，提起并保持螺栓。" loading="lazy" width="720" height="350"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>微滑反馈抓取</h4></div>
+            <p class="gallery-caption">根据微滑反馈调整夹持力，提起并保持螺栓。</p><div class="card-meta"><span>Parallel gripper</span><span>0:13</span></div>
+          </article>
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="haoxiang-bolt-dashboard" aria-label="播放双模态触觉提螺栓演示"><img src="assets/haoxiang-bolt-dashboard.jpg" alt="螺栓抓取中的凝胶形变、触觉分布与三轴力同步可见。" loading="lazy" width="720" height="350"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>多模态触觉感知</h4></div>
+            <p class="gallery-caption">螺栓抓取中的凝胶形变、触觉分布与三轴力同步可见。</p><div class="card-meta"><span>Parallel gripper</span><span>0:09</span></div>
+          </article>
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="haoxiang-allegro-vbts" aria-label="播放Allegro触觉抓取演示"><img src="assets/haoxiang-allegro-vbts.jpg" alt="指端接触引起凝胶形变，触觉深度随之变化。" loading="lazy" width="720" height="374"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>Allegro 触觉抓取</h4></div>
+            <p class="gallery-caption">指端接触引起凝胶形变，触觉深度随之变化。</p><div class="card-meta"><span>Allegro Hand</span><span>0:07</span></div>
+          </article>
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="haoxiang-l20-grasp" aria-label="播放L20灵巧手抓取演示"><img src="assets/haoxiang-l20-grasp.jpg" alt="灵巧手抓取物体，结合指端接触、形变与触觉反馈。" loading="lazy" width="720" height="296"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>L20 灵巧手抓取</h4></div>
+            <p class="gallery-caption">灵巧手抓取物体，结合指端接触、形变与触觉反馈。</p><div class="card-meta"><span>LinkerHand L20</span><span>0:06</span></div>
+          </article>
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="haoxiang-pressure-glove" aria-label="播放L20四指力伺服点按演示"><img src="assets/haoxiang-pressure-glove.jpg" alt="四指依次点按，同步观察接触分布与力反馈。" loading="lazy" width="720" height="304"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>指尖力控制</h4></div>
+            <p class="gallery-caption">四指依次点按，同步观察接触分布与力反馈。</p><div class="card-meta"><span>LinkerHand L20</span><span>0:08</span></div>
+          </article>
+        </div>
+      </div>
+      <div id="panel-soft" role="tabpanel" aria-labelledby="tab-soft" data-scene-panel="soft" hidden>
+        <div class="gallery-grid gallery-pair-grid">
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="haoxiang-fr3-plastic-grasp" aria-label="播放FR3弹塑性试件抓取演示"><img src="assets/haoxiang-fr3-plastic-grasp.jpg" alt="对比轻捏后的弹性回弹与重捏后的塑性残余形变。" loading="lazy" width="720" height="540"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>弹性与塑性形变</h4></div>
+            <p class="gallery-caption">对比轻捏后的弹性回弹与重捏后的塑性残余形变。</p><div class="card-meta"><span>Franka FR3</span><span>0:17</span></div>
+          </article>
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="haoxiang-basket-bunny" aria-label="播放WujiHand软体兔抓取演示"><img src="assets/haoxiang-basket-bunny.jpg" alt="灵巧手从周转箱取出软体物体，观察包覆接触与形变。" loading="lazy" width="720" height="348"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>软体物体抓取</h4></div>
+            <p class="gallery-caption">灵巧手从周转箱取出软体物体，观察包覆接触与形变。</p><div class="card-meta"><span>WujiHand</span><span>1:03</span></div>
+          </article>
+        </div>
+      </div>
+      <div id="panel-cloth" role="tabpanel" aria-labelledby="tab-cloth" data-scene-panel="cloth" hidden>
+        <div class="gallery-grid gallery-pair-grid">
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="haoxiang-washroom-hang" aria-label="播放双WujiHand晾衣演示"><img src="assets/haoxiang-washroom-hang.jpg" alt="双手协同抓取衬衫、穿入衣架，随后悬挂并释放。" loading="lazy" width="720" height="406"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>双手衣物悬挂</h4></div>
+            <p class="gallery-caption">双手协同抓取衬衫、穿入衣架，随后悬挂并释放。</p><div class="card-meta"><span>Dual WujiHand</span><span>0:25</span></div>
+          </article>
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="haoxiang-go2-drape" aria-label="播放Go2机身布料接触演示"><img src="assets/haoxiang-go2-drape.jpg" alt="布料沿静止机器狗的背部与四肢接触、垂落。" loading="lazy" width="720" height="540"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>Go2 布料接触</h4></div>
+            <p class="gallery-caption">布料沿静止机器狗的背部与四肢接触、垂落。</p><div class="card-meta"><span>Unitree Go2 · Stationary</span><span>0:04</span></div>
+          </article>
+        </div>
+      </div>
+      <div id="panel-motion" role="tabpanel" aria-labelledby="tab-motion" data-scene-panel="motion" hidden>
+        <div class="gallery-grid gallery-motion-grid">
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="gallery-go2-walk" aria-label="播放 Go2 行走演示"><img src="assets/gallery-go2-walk.jpg" alt="Unitree Go2 四足机器人在仿真环境中行走" loading="lazy" width="720" height="540"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>Go2 行走</h4></div>
+            <p class="gallery-caption">四足机器人连续行走，协调步态与足端地面接触。</p><div class="card-meta"><span>Unitree Go2</span><span>0:05</span></div>
+          </article>
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="gallery-g1-dance" aria-label="播放 G1 舞蹈演示"><img src="assets/gallery-g1-dance.jpg" alt="Unitree G1 人形机器人在仿真环境中执行 Shuffle 舞蹈动作" loading="lazy" width="720" height="540"><span class="gallery-play" aria-hidden="true">▶</span></button>
+            <div class="gallery-card-copy"><h4>G1 舞蹈</h4></div>
+            <p class="gallery-caption">人形机器人执行 Shuffle 舞步，协调步伐、躯干与双臂。</p><div class="card-meta"><span>Unitree G1 / Dual Dex3</span><span>0:20</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="benchmark chapter" id="benchmark" aria-labelledby="benchmark-title" data-chapter="5" hidden>
+      <div class="section-wrap">
+        <div class="chapter-marker"><div class="chapter-heading"><h2 id="benchmark-title">Benchmark</h2></div></div>
+        <div class="benchmark-layout">
+          <div class="benchmark-intro"><h3 class="benchmark-statement">以真实为参照，<br>验证仿真精度。</h3><p class="chapter-description">围绕视觉一致性、物理响应与任务迁移，评估仿真表现。</p></div>
+          <div class="benchmark-methods" data-slot="benchmark" aria-label="评测维度说明"><article><h4>Visual fidelity</h4><p>对照真实场景，评估几何、材质与光照的一致性。</p></article><article><h4>Physical accuracy</h4><p>结合接触、运动与形变结果，检验物理交互的仿真精度。</p></article><article><h4>Sim-to-real transfer</h4><p>通过仿真数据训练与任务验证，评估对具身学习的支持。</p></article><span class="benchmark-status">评测结果待发布</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer section-wrap">
+    <div class="footer-main"><a class="footer-wordmark" href="./" aria-label="TEZOI 首页"><img src="assets/tezoi-logo-black.png" alt="" width="927" height="261" loading="lazy"></a><nav class="footer-navigation" aria-label="页脚导航"><a href="./" data-site-page="home" aria-current="page">Home</a><a href="company.html" data-site-page="company">Company</a><a href="blog.html" data-site-page="blog">Blog</a><a href="research.html" data-site-page="research">Research</a></nav></div>
+    <div class="footer-bottom"><span>© 2026 TEZOI</span><p>智能高精度具身仿真。</p><a href="./#gallery">查看演示库 ↗</a><a href="#overview">返回顶部 ↑</a></div>
+  </footer>
+  <dialog id="video-dialog" aria-labelledby="video-title">
+    <div class="dialog-heading"><div><h2 id="video-title">仿真演示</h2><p id="video-description"></p></div><button type="button" id="close-video" aria-label="关闭视频">×</button></div>
+    <video id="demo-player" controls playsinline preload="metadata"></video>
+    <p class="dialog-note" id="video-note">具身仿真演示。</p>
+  </dialog>
+</body>
+</html>
