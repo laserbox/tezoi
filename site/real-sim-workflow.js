@@ -1,3 +1,4 @@
+import { icon } from './icons.js?v=mobile-polish-20261023';
 // Presentation stages, not a robot execution or policy-generation service.
 export function mountRealSimWorkflow(root, { onStageChange = () => {} } = {}) {
   if (!root) return null;
@@ -33,7 +34,9 @@ export function mountRealSimWorkflow(root, { onStageChange = () => {} } = {}) {
     panels.forEach(panel => { panel.hidden = panel.dataset.workflowPanel !== to; });
     previous.disabled = active === 0;
     position.textContent = `${active + 1} / ${tabs.length}`;
-    next.textContent = active === tabs.length - 1 ? '回到 Ego ↺' : '下一阶段 →';
+    next.innerHTML = active === tabs.length - 1
+      ? `<span>回到 Ego</span>${icon('replay')}`
+      : `<span>下一阶段</span>${icon('arrow-right')}`;
     next.setAttribute('aria-label', active === tabs.length - 1
       ? '回到 Ego · 真实第一视角视频'
       : `进入 ${labels[tabs[active + 1].dataset.workflowStage]}`);

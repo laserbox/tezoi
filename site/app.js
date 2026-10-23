@@ -1,8 +1,9 @@
-import { mountAgentConversion } from './agent-conversion.js?v=dynamic-agent-20261023';
-import { mountRealSimWorkflow } from './real-sim-workflow.js?v=ego-source-stage-20261023';
-import { mountRenderingShowcase } from './rendering-showcase.js?v=original-scenes-20261021';
-import { mountContactComparison } from './contact-comparison.js?v=contact-compare-blob-20261021';
-import { mountSimulationExplorer } from './simulation-explorer.js?v=contact-3d-20261022';
+import { icon } from './icons.js?v=mobile-polish-20261023';
+import { mountAgentConversion } from './agent-conversion.js?v=mobile-polish-20261023';
+import { mountRealSimWorkflow } from './real-sim-workflow.js?v=mobile-polish-20261023';
+import { mountRenderingShowcase } from './rendering-showcase.js?v=mobile-polish-20261023';
+import { mountContactComparison } from './contact-comparison.js?v=mobile-polish-20261023';
+import { mountSimulationExplorer } from './simulation-explorer.js?v=mobile-polish-20261023';
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
@@ -117,7 +118,8 @@ let materialPaused = motionPreference.matches;
 function updateMaterialMotion() {
   motionToggles.forEach((toggle) => {
     toggle.setAttribute('aria-pressed', String(materialPaused));
-    toggle.innerHTML = materialPaused ? '播放动态 <span aria-hidden="true">▶</span>' : '暂停动态 <span aria-hidden="true">Ⅱ</span>';
+    toggle.setAttribute('aria-label', materialPaused ? '播放动态' : '暂停动态');
+    toggle.innerHTML = `<span class="motion-toggle-label">${materialPaused ? '播放动态' : '暂停动态'}</span>${icon(materialPaused ? 'play' : 'pause')}`;
   });
   for (const preview of materialPreviews) {
     if (!materialPaused && !document.hidden && !dialog.open && !preview.closest('[hidden]') && visiblePreviews.has(preview)) {

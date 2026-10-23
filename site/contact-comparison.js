@@ -1,3 +1,4 @@
+import { icon } from './icons.js?v=mobile-polish-20261023';
 // One camera and timeline, with a draggable reveal of the contact-force view.
 export function mountContactComparison(root) {
   if (!root) return null;
@@ -39,7 +40,7 @@ export function mountContactComparison(root) {
     const label = failed ? '重新加载' : desiredPlaying ? '暂停播放' : simulation.ended ? '重新播放' : '播放对比';
     playLabel.textContent = label;
     playButton.setAttribute('aria-label', label);
-    playButton.firstElementChild.textContent = desiredPlaying ? 'Ⅱ' : '▶';
+    playButton.firstElementChild.innerHTML = icon(desiredPlaying ? 'pause' : 'play');
   }
   function stopMedia() {
     media.forEach((video) => video.pause());

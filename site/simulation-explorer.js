@@ -1,6 +1,6 @@
 // Keep the video and the real 3D viewer in one Simulation stage.
 export function mountSimulationExplorer(root, {
-  loadViewer = element => import('./simulation-viewer.js?v=contact-3d-20261022').then(module => module.mountSceneViewer(element)),
+  loadViewer = element => import('./simulation-viewer.js?v=mobile-polish-20261023').then(module => module.mountSceneViewer(element)),
   onPause = () => {},
 } = {}) {
   if (!root) return null;

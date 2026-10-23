@@ -1,3 +1,4 @@
+import { icon } from './icons.js?v=mobile-polish-20261023';
 // Native video presentation of three original, locally rendered scenes.
 const PHASE_TIMES = [0.55, 4.0, 6.5];
 const phaseAt = (time) => time < 1.2 ? 0 : time < 4.3 ? 1 : 2;
@@ -50,7 +51,7 @@ export function mountRenderingShowcase(root) {
   const allowed = () => visible && !document.hidden && !dialog?.open;
   const updatePlay = () => {
     play.setAttribute('aria-label', failed ? '重新加载演示' : wantPlayback ? '暂停演示' : '播放演示');
-    play.innerHTML = `<span aria-hidden="true">${failed ? '↻' : wantPlayback ? 'Ⅱ' : '▶'}</span>`;
+    play.innerHTML = icon(failed ? 'replay' : wantPlayback ? 'pause' : 'play');
     play.setAttribute('aria-pressed', String(wantPlayback));
   };
   const showPhase = (index) => phases.forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));

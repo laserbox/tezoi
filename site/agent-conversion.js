@@ -1,3 +1,4 @@
+import { icon } from './icons.js?v=mobile-polish-20261023';
 // A scripted, illustrative animation. No video inference, physics or policy service.
 const DURATION = 20;
 const PHASES = ['ego', 'environment', 'trajectory', 'policy'];
@@ -24,7 +25,7 @@ export function mountAgentConversion(root) {
   const dialog = document.querySelector('#video-dialog');
   let progress = reduced.matches ? 1 : 0;
   let active = false, visible = false, visited = false, wantPlayback = false;
-  let frame = null, lastTime = null, lastPhase = -1;
+  let frame = null, lastTime = null, lastPhase = -1, lastPlaybackIcon;
   const canPlay = () => active && visible && !document.hidden && !dialog?.open && wantPlayback;
 
   function draw() {
@@ -35,9 +36,13 @@ export function mountAgentConversion(root) {
     root.dataset.phase = PHASES[phase];
     root.dataset.playing = String(canPlay());
     root.style.setProperty('--ego-progress', clamp(progress * 4));
-    play.setAttribute('aria-label', wantPlayback ? '暂停转换演示' : progress >= 1 ? '重播转换演示' : '播放转换演示');
-    play.setAttribute('aria-pressed', String(wantPlayback));
-    play.textContent = wantPlayback ? 'Ⅱ 暂停' : progress >= 1 ? '↺ 重播' : '▶ 播放';
+    const playbackIcon = wantPlayback ? 'pause' : progress >= 1 ? 'replay' : 'play';
+    if (playbackIcon !== lastPlaybackIcon) {
+      lastPlaybackIcon = playbackIcon;
+      play.setAttribute('aria-label', wantPlayback ? '暂停转换演示' : progress >= 1 ? '重播转换演示' : '播放转换演示');
+      play.setAttribute('aria-pressed', String(wantPlayback));
+      play.innerHTML = `${icon(playbackIcon)}<span>${wantPlayback ? '暂停' : progress >= 1 ? '重播' : '播放'}</span>`;
+    }
     timeline.value = Math.round(progress * 1000);
     timeline.setAttribute('aria-valuetext', `流程示意 ${Math.round(progress * DURATION)} 秒，共 ${DURATION} 秒`);
     find('time').textContent = `00:${String(Math.floor(progress * DURATION)).padStart(2, '0')} / 00:20`;
