@@ -48,6 +48,7 @@ tabs.forEach((tab, i) => {
 });
 
 const videos = {
+  "gallery-pigment-dilution": {"src":"assets/gallery-pigment-dilution.mp4","title":"色素稀释","description":"实验室 / UR5e / Robotiq 2F85 / 0:50","note":"夹爪挤压滴管胶头，展示不同预压力下的吸液、排液与色素浓度变化。液体采用简化模型，结果未经真机标定；此处播放完整仿真预览。"},
   "gallery-go2-walk": {"src":"assets/gallery-go2-walk.mp4","title":"Go2 行走","description":"运动控制 / Unitree Go2 / 0:05","note":"行走策略驱动四足机器人连续运动，呈现步态协调与足端地面接触。"},
   "gallery-g1-dance": {"src":"assets/gallery-g1-dance.mp4","title":"G1 舞蹈","description":"运动控制 / Unitree G1 / Dual Dex3 / 0:20","note":"舞蹈策略驱动人形机器人执行 Shuffle 动作，呈现连续步伐、躯干与双臂的协同运动。"},
   "gallery-labimus-medicine": {"src":"assets/gallery-labimus-medicine.mp4","title":"双臂取药","description":"实验室 / Dual UR5e / Robotiq 2F85 / 2:43","note":"完成称量舟准备后，双臂协同持瓶与持勺，倾瓶取出颗粒并扶正药瓶。"},
