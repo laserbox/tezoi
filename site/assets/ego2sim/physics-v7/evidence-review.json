@@ -1,0 +1,28 @@
+{
+  "coverage_pass": true,
+  "rejection_tests_pass": [
+    "coverage",
+    "lost_contact",
+    "forbidden_contact",
+    "slip",
+    "solver_cap"
+  ],
+  "native_steps": 175000,
+  "video_samples": 1051,
+  "body_attachment_welds": 0,
+  "free_task_bodies": [
+    "dropper",
+    "flask",
+    "mix"
+  ],
+  "hashes": {
+    "model.xml": "7bcbbe756a91b6bc81e8460159bdd52c21e330456ad2572e5d764d8a06b7593a",
+    "controller.py": "edd72b1a851dca70b494e137f77155191f2a9d18d7db35884c7d6e6fde3b9f35",
+    "native_audit.py": "4bd54e314f8a75c1b0af89f34a8293055640e0f2c7d9f0ab14af4e4f7a9b9b15",
+    "native-review.json": "19e89176625bbfbedc62ef0c706fc204ff03bc5cb98b36b2922ca2fdf3d2246c",
+    "native-trace.npz": "f3bd1e83afe802ff7b23317b35c41f9098124920c0186b08e5c480705ea82c6e",
+    "motion.json": "c8eec6b13ece2a8c3358c040099081678cdd3e931f821c01f88107d3de285d4d",
+    "audit.json": "7d7ceddbb0de99f26c3cc9528c3e89d5fd59eaca1f3128275a326331d372a7a1",
+    "plan.json": "e0861251278d749ed719cb9501c6fcffa55486fcb0f498277fd50fdef4881126"
+  }
+}

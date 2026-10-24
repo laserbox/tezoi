@@ -386,5 +386,13 @@
     "max_tcp_error_m": 0.003183637113992343,
     "p95_tcp_error_m": 0.002028100130087904
   },
-  "physics_scope": "Original nominal body/drive parameters; reduced finger convex collision model; not full physical qualification"
+  "physics_scope": "Original nominal body/drive parameters; reduced finger convex collision model; not full physical qualification",
+  "physics_v7": {
+    "task_scope": "pipette pickup transport return release; no liquid solve",
+    "task_passed": true,
+    "native_steps": 175000,
+    "physical_duration_seconds": 35,
+    "source_clock_unchanged": true,
+    "report": "physics-v7-review.html"
+  }
 }

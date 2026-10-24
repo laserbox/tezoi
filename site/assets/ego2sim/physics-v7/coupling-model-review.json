@@ -1,0 +1,17 @@
+{
+  "parent_sha256": "e8d8f4a56a8c8a8d3d6f2b27079f5cee95c6d91247524efc187e1a87bf48579b",
+  "sha256": "7bcbbe756a91b6bc81e8460159bdd52c21e330456ad2572e5d764d8a06b7593a",
+  "changes": {
+    "coupling_solref": [
+      "default .02 1",
+      ".003 1"
+    ],
+    "slider_limit_solref": [
+      "default .02 1",
+      ".002 1"
+    ]
+  },
+  "physical_joint_ranges_unchanged": true,
+  "force_limits_unchanged": true,
+  "nominal_solver_constraint_not_material_calibration": true
+}

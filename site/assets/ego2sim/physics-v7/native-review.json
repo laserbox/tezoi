@@ -1,0 +1,112 @@
+{
+  "gates": {
+    "native_coverage": true,
+    "initial_clearance": true,
+    "forbidden_contact": true,
+    "object_table_or_beaker_contact": true,
+    "hold_bilateral": true,
+    "hold_slip": true,
+    "beaker_arrival": true,
+    "return_alignment": true,
+    "returned_tip": true,
+    "release": true,
+    "stable_final": true,
+    "joint_limits": true,
+    "control_limits": true,
+    "actuator_limits": true,
+    "numerics": true,
+    "ik_accuracy": true
+  },
+  "task_passed": true,
+  "native_steps": 175000,
+  "dt": 0.0002,
+  "contact_coverage": "every native step",
+  "forbidden_force_N": {},
+  "unwanted_object_contacts_N": {},
+  "max_penetration_m": 0.00027075464140367014,
+  "hold_steps": 90001,
+  "bilateral_steps": 90001,
+  "bilateral_ratio": 1.0,
+  "hold_min_pad_force_N": [
+    1.0420968042035925,
+    1.0474979785775802
+  ],
+  "max_pad_force_N": [
+    1.2466923138425825,
+    1.3489713561055077
+  ],
+  "hold_max_slip_m": 0.004047454848635031,
+  "max_transport_tilt_deg": 1.2453084758463513,
+  "beaker_xy_error_m": 0.003816523366001898,
+  "beaker_min_tip_z_m": 0.18031191718512077,
+  "return_xy_error_m": 0.0032165011334118186,
+  "return_tilt_deg": 1.2002931022255774,
+  "final_tip": [
+    0.19682464839578,
+    -0.04962581773080242,
+    0.0015762341679663849
+  ],
+  "final_speed_m_s": 8.717379816180566e-06,
+  "final_angular_speed_rad_s": 0.005400519690350975,
+  "final_tip_drift_m": 2.5832645962753444e-06,
+  "final_pad_force_N": 0.0,
+  "flask_drift_m": 0.00014054237486615175,
+  "beaker_drift_m": 0.001355356517673709,
+  "joint_limit_violation": 2.888128472347695e-06,
+  "control_limit_violation": 0.0,
+  "peak_actuator_force": [
+    0.7051633196763305,
+    12.899685188080653,
+    8.105971755128905,
+    2.019440542429031,
+    2.9776968539249964,
+    0.1718500329072139,
+    2.115535621864929
+  ],
+  "joint_names": [
+    "joint_1",
+    "joint_2",
+    "joint_3",
+    "joint_4",
+    "joint_5",
+    "joint_6",
+    "slider_left",
+    "slider_right",
+    "bulb_left_compression",
+    "bulb_right_compression"
+  ],
+  "joint_min": [
+    0.3215643611115863,
+    -0.5017431263725005,
+    -1.5224887026124532,
+    -0.8801453277062643,
+    -1.982012622736702,
+    -1.2553602470757335,
+    0.0009225535414464623,
+    0.0009224640104182873,
+    -6.252454803238225e-10,
+    -2.888128472347695e-06
+  ],
+  "joint_max": [
+    2.219532589413374,
+    0.05863293630500967,
+    1.561364838580253,
+    0.6000279082702383,
+    1.5053934337154022,
+    0.7755779532072243,
+    0.032417516441121216,
+    0.032383367711837426,
+    0.0037703531317134333,
+    0.0037641454998310216
+  ],
+  "max_solver_iterations": 8,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ]
+}

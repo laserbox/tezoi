@@ -1,0 +1,26 @@
+{
+  "initial_pose_adaptation_m": [
+    -0.012004330725572054,
+    -0.008279866921371906,
+    -0.04591678070869903
+  ],
+  "initial_penetration_m": 0,
+  "contacts": [],
+  "collision_model": [
+    {
+      "name": "finger_left",
+      "source_prisms": 6978,
+      "clusters": 515,
+      "spatial_bin_m": 0.004,
+      "method": "convex hull union of original CAD surface prisms within spatial bins; approximation, not enlarged single hull"
+    },
+    {
+      "name": "finger_right",
+      "source_prisms": 7006,
+      "clusters": 498,
+      "spatial_bin_m": 0.004,
+      "method": "convex hull union of original CAD surface prisms within spatial bins; approximation, not enlarged single hull"
+    }
+  ],
+  "model_sha256": "9f7c35c27588fa981c735e2f30f3fc0adb7a4269b4fa5c5a0ea5fa3f4979b5c4"
+}

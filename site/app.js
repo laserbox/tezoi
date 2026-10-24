@@ -1,5 +1,5 @@
 import { icon } from './icons.js?v=mobile-polish-20261023';
-import { mountAgentConversion } from './agent-conversion.js?v=agent-motion6-20261024';
+import { mountAgentConversion } from './agent-conversion.js?v=agent-physics7-20261024';
 import { mountRealSimWorkflow } from './real-sim-workflow.js?v=review-fixes-20261023';
 import { mountRenderingShowcase } from './rendering-showcase.js?v=mobile-polish-20261023';
 import { mountContactComparison } from './contact-comparison.js?v=review-fixes-20261023';

@@ -1,0 +1,28 @@
+{
+  "initial_penetration_m": 0,
+  "robot_self_forces_N": {},
+  "transport_bilateral_ratio": 1.0,
+  "transport_max_slip_m": 0.0038771260804494776,
+  "lift_tip_max_z": 0.1810810224083451,
+  "final_tip": [
+    0.19682464839578,
+    -0.04962581773080242,
+    0.0015762341679663849
+  ],
+  "final_speed_max": 6.544678838200782e-06,
+  "final_pad_force_max": 0.0,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "duration": 34.99999999994511,
+  "wall_seconds": 149.27566528320312,
+  "model_sha256": "7bcbbe756a91b6bc81e8460159bdd52c21e330456ad2572e5d764d8a06b7593a",
+  "task_passed": true,
+  "native_audit": "native-review.json"
+}

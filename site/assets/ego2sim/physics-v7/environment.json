@@ -1,0 +1,16 @@
+{
+  "mujoco": "3.17.0",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "timestep": 0.0002,
+  "controller_hz": 500,
+  "render_sample_hz": 30,
+  "integrator": "implicitfast",
+  "solver": "Newton",
+  "iterations": 100,
+  "cone": "elliptic",
+  "impratio": 10,
+  "blender": "4.5.3",
+  "liquid_solver": false
+}
