@@ -1,0 +1,14 @@
+{
+  "geometry-v4": {
+    "median_tip_speed_m_s": 0.09452183444141908,
+    "p95_tip_speed_m_s": 0.7430253848348941,
+    "max_tip_speed_m_s": 1.6881993232172823,
+    "note": "Model correspondence by side label only; label swaps and camera/hand depth outliers remain. Not physical hand speed."
+  },
+  "geometry-v5": {
+    "median_tip_speed_m_s": 0.08733502989672713,
+    "p95_tip_speed_m_s": 0.7280998906012608,
+    "max_tip_speed_m_s": 1.6881993232172823,
+    "note": "Model correspondence by side label only; label swaps and camera/hand depth outliers remain. Not physical hand speed."
+  }
+}

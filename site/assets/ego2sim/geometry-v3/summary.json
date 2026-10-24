@@ -1,0 +1,170 @@
+{
+  "reference": {
+    "schema": "ego2sim.geometry/3",
+    "reference_frame": 0,
+    "K_source_estimated": [
+      [
+        847.9850725446428,
+        0.0,
+        480.0
+      ],
+      [
+        0.0,
+        695.2198018656148,
+        270.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "depth_preprocessing": "DA3 upper_bound_resize: 960x540 -> 280x154, independent dimension resize; no crop",
+    "T_world_camera": [
+      [
+        0.9996924094610543,
+        -0.014527537304097955,
+        -0.020100674760564013,
+        -4.320159850987337e-18
+      ],
+      [
+        0.0,
+        -0.8104804639445902,
+        0.5857656677923021,
+        4.84914031065219e-17
+      ],
+      [
+        -0.02480093679585376,
+        -0.5855854918148499,
+        -0.8102311678218803,
+        0.6994920444614564
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "world_axes": "X camera-right on table; Z plane normal toward camera; Y=Z cross X",
+    "depth_to_CAD_prior_scale": 0.8778114458969288,
+    "metric_calibrated": false,
+    "scale_source": "Joint silhouette fit to approved 90mm beaker and 140mm flask; CAD geometry fixed, depth scale estimated",
+    "plane_normal_camera": [
+      -0.02480093679585376,
+      -0.5855854918148499,
+      -0.8102311678218803
+    ],
+    "plane_offset_relative": 0.796859106509748,
+    "plane": {
+      "candidate_pixels": 24985,
+      "inlier_pixels": 22601,
+      "inlier_ratio": 0.9045827496497899,
+      "rms_relative": 0.004891742504983265,
+      "rms_cad_prior_mm": 4.294027561254825
+    },
+    "objects": {
+      "beaker": {
+        "T_world_object": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -0.028814956671397975
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.48803288203204664
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "mesh_scale": 1.0,
+        "dimensions_m": [
+          0.0646361391533969,
+          0.059999,
+          0.09000000624699118
+        ],
+        "mask_fit_iou_before": 0.6179401993355482,
+        "mask_fit_iou_after": 0.7870967741935484,
+        "yaw_observable": false,
+        "mesh_sha256": "1fffbb1434b42a313212e69f3cbfc9bd907c95d3b9224a9cd5a321eb7e239af0"
+      },
+      "flask": {
+        "T_world_object": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.14175574316614736
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.4582838874558667
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "mesh_scale": 1.0,
+        "dimensions_m": [
+          0.07877452,
+          0.07877438,
+          0.13999999600000024
+        ],
+        "mask_fit_iou_before": 0.48423423423423423,
+        "mask_fit_iou_after": 0.6379310344827587,
+        "yaw_observable": false,
+        "mesh_sha256": "cd76f46a1b4e14d1081a5a81ea9e7fed71de91f3deb5d381e0c0f08b1ad02745"
+      }
+    },
+    "checks": {
+      "backproject_reproject_max_px": 1.6076142173915287e-05,
+      "rotation_det": 0.9999999999999998,
+      "orthogonality_max": 4.440892098500626e-16
+    },
+    "limits": [
+      "Table plane is a robust monocular estimate, not a calibrated measurement.",
+      "Transparent glass depth is excluded from the plane and is not used as object surface truth.",
+      "Axial yaw is not identifiable from these silhouettes.",
+      "Initial asset registration is not a full dynamic object pose reconstruction.",
+      "This observation world is separate from the approved robot task world; no calibrated robot extrinsic is available."
+    ],
+    "inputs": {
+      "depth": "ed1e1676920069ea36accd96d45b93aa61b02b77eb065eb4c0ee39e9a2f77799",
+      "mask": "d12e96bf09ad8538f6cd1a6f44d58201aac3c6aaec8e5e2be3bdd4d7a0a1715c",
+      "source": "2472f2f55a542ca66789a2f92f0eec1f9c88cd6747c811b98cccd32ad9bf70c9"
+    }
+  },
+  "camera_accepted": 263,
+  "camera_total": 263,
+  "hand_detected_frames": 233,
+  "contact_candidate_hand_frames": 200,
+  "median_hand_reprojection_px": 7.585933824659565,
+  "no_physics": true,
+  "robot_config_unchanged": true,
+  "robot_motion_regenerated": false
+}

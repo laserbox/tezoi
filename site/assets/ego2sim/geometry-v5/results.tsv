@@ -1,0 +1,10 @@
+experiment	commit	metric	status	description
+0	v4	81/192;94.589mm;4.318mm	baseline	contact pass;extra workspace correction;TCP P95
+1	f51f72c	154/192	keep	bounded bone-preserving articulation
+2	f51f72c	183/263;0mm;2.391mm	discard	remove corridor alone; proxy count regresses
+3	42f04a4	236/236active;0mm;2.355mm	keep	remove corridor and independent target smoothing
+4	a647294	181/192	keep	strong surface objective with unchanged gates
+5	25bac19	185/192	keep	smooth bulb objective; full triangle validation
+6	d5a0cbe	216/216active;3.815mm;2.475mm	keep	source contact end drives release; true CAD max distance;TCP P95
+7	6e15506	185/192	discard	multistart and temporal root initialization did not improve validation
+8	28e11b1	150 contact frames;33.39mm TCP P95	discard	tighter wrist orientation worsened tracking vs retained 216/216 CAD checks and 2.475mm TCP P95

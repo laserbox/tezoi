@@ -1,0 +1,27 @@
+[
+  {
+    "id": "task",
+    "title": "任务理解与分解",
+    "file": "task.mp4"
+  },
+  {
+    "id": "scene",
+    "title": "场景与资产重建",
+    "file": "geometry.mp4"
+  },
+  {
+    "id": "motion",
+    "title": "人类动作与接触",
+    "file": "contact.mp4"
+  },
+  {
+    "id": "robot",
+    "title": "机器人动作重定向",
+    "file": "robot.mp4"
+  },
+  {
+    "id": "feedback",
+    "title": "验证与反馈闭环",
+    "file": "feedback.mp4"
+  }
+]

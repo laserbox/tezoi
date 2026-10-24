@@ -1,0 +1,124 @@
+{
+  "scope": "Local checks, not dataset-wide segmentation accuracy or ground-truth IoU",
+  "review_frames": [
+    0,
+    25,
+    49,
+    85,
+    103,
+    145,
+    175,
+    193,
+    205,
+    217,
+    241,
+    259
+  ],
+  "reflection_ROIs": [
+    {
+      "frame": 205,
+      "time_s": 34.166666666666664,
+      "reflection_only_roi_xyxy": [
+        525,
+        280,
+        585,
+        325
+      ],
+      "old_false_foreground_pixels": 1886,
+      "new_false_foreground_pixels": 0
+    },
+    {
+      "frame": 217,
+      "time_s": 36.166666666666664,
+      "reflection_only_roi_xyxy": [
+        530,
+        275,
+        585,
+        320
+      ],
+      "old_false_foreground_pixels": 1991,
+      "new_false_foreground_pixels": 0
+    }
+  ],
+  "mask_instances": {
+    "beaker": {
+      "min_pixels": 3260,
+      "max_pixels": 6267,
+      "nonempty_frames": 263
+    },
+    "flask": {
+      "min_pixels": 54,
+      "max_pixels": 6310,
+      "nonempty_frames": 263
+    },
+    "pipette": {
+      "min_pixels": 63,
+      "max_pixels": 4496,
+      "nonempty_frames": 263
+    },
+    "human": {
+      "min_pixels": 0,
+      "max_pixels": 67889,
+      "nonempty_frames": 238
+    }
+  },
+  "overlapping_instance_pixels": 0,
+  "processed_frames": 263,
+  "inference_hz": 6,
+  "baseline_inference_hz": 2,
+  "baseline_max_mask_age_s": 0.3333333333333333,
+  "new_mask_age_s": 0,
+  "model_score_is_not_measured_accuracy": true,
+  "transparent_and_occluded_boundaries_remain_estimates": true,
+  "evidence_hashes": {
+    "85": {
+      "source": "15d25fc4486384b30dec112bf9832c26d48cb3d02c53e30f18202de8704aa4f8",
+      "old_mask": "459df11e217619ac2188a01970b15959a44910210004a0def9957f912d196eac",
+      "new_mask": "40574052f7c82112b7fcb90a67d7b62245d6074e137f6e8ba6db3340a4f303cd"
+    },
+    "103": {
+      "source": "0fd71e2e113d8c30956eaf435dca9677ad14fa90e34921dbaa6b6045a2d58f11",
+      "old_mask": "a0537e271ddba74a07b37217ec911845b266a791c582fe80c5876b668f9d6bb2",
+      "new_mask": "ceb2b7d2c51e9d96d0a57f226544df56a53bdd4af1de6646359bb47473ee130b"
+    },
+    "193": {
+      "source": "c20c7aed539d24c3aac97e0c2020b8de956f034987efa03f92761f3c13beb764",
+      "old_mask": "6d012a9703f80daabcf0b336956e5ec2dcbc7c25812f30f9c102c2531957d210",
+      "new_mask": "3efac4827fb4b82cd364c7f4d8d750c5016ec695ee69b2d89fcbe6981ae42264"
+    },
+    "205": {
+      "source": "ab24bea63f83f9dabb2f8bc8de51ee84f706f315af1d97dc4afb2c2e3fd6f708",
+      "old_mask": "ccbe6e2bfb45c7b2ff076c3087b85ad490e7d3c5d50973916bcfd4c7aae5f8e4",
+      "new_mask": "e75843d1552b435ada1465149c39df0b239c9cf3a6ce8dcc6dcd91296bd4a553"
+    },
+    "217": {
+      "source": "ba50d241dee68877008a4c95c6989beebb693c3a4a323897271c283cc43d008c",
+      "old_mask": "8ced1521d89552b72a87bd338db63c77ee1090cd0b791ba473e05c39ea965f89",
+      "new_mask": "ece06ffa543cd34535417051bff0f3c7182a85111c4cfd6ecc24161d33b42642"
+    },
+    "241": {
+      "source": "75e5d25ef2fc6e9d8c0db410e4da84a16c3105783a9a9e63e252bc963e864abf",
+      "old_mask": "422b190e836d9e6bc49d43bd47111525203eefa945af0b3dba47768673ac29d3",
+      "new_mask": "c300f9cac00b5b2d80e288f9fdd600b697161cf1641326f4c60e853ffef049d4"
+    },
+    "259": {
+      "source": "a5af59ebe353c6da608f848bba1ea50d46fe2c766e47a16387c3b1ef21aa9662",
+      "old_mask": "f858218703b829ef195768183d92dc20e608bc07d25111ca52be8e14c767ba44",
+      "new_mask": "b2c3ba7049bb03bd12c055f24751da8187d15e9455a2c2ca56140386d5425f76"
+    }
+  },
+  "occlusion_review_frames": [
+    245,
+    246,
+    188,
+    247,
+    215,
+    187,
+    186,
+    19,
+    18,
+    26
+  ],
+  "time_slider_fix": "Capture requested value before pause updates UI; local server supports HTTP 206 byte ranges",
+  "browser_seek_verified_s": 34.17
+}

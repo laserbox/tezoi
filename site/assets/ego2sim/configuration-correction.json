@@ -1,0 +1,40 @@
+{
+  "authoritative_task": "work/chemistry_movie_hq_20261010/inputs02",
+  "latest_reference_render": "work/dropper_main_20261022",
+  "root": "IRMV_R2S2R_DIZHOU",
+  "construction_sha256": "792af5dc96cc7e156e1941ffc78161b479fb23952e4ba4d6e1e559e36f348245",
+  "robot_model": "RealMan RM65-B",
+  "gripper": "Xense original six-hole assembly",
+  "same_underlying_urdf_as_rejected_candidate": true,
+  "corrections": [
+    "Frozen body OBJ geometry and per-face material bindings replace independently recolored STL imports",
+    "Frozen initial arm pose and object layout replace newly chosen locations",
+    "Frozen D435i sensor intrinsics/extrinsics retained; original detail and virtual wrist distinguished from extra assembly inspection view",
+    "Only mix + flask/dropper/bulb task groups retained; rack, waste vessel, rod, tube and tray excluded",
+    "Original dropper-task asset dimensions used; uploaded alternate CAD package not mixed"
+  ],
+  "geometry_source_sha_verified": true,
+  "initial_FK_position_error_m": 1.1102230246251565e-16,
+  "physics_advanced": false,
+  "background": "Neutral display support, not original Gaussian office or reconstructed source background",
+  "retargeting_status": "Provisional source-timed kinematic candidate; bounds checked; collisions, speed limits, contact and liquid not validated",
+  "liquid_appearance": {
+    "source": "Previous render_scene.py palette, retained at user request",
+    "beaker_rgb": [
+      0.69,
+      0.82,
+      0.04
+    ],
+    "flask_rgb": [
+      0.015,
+      0.42,
+      0.64
+    ],
+    "roughness": 0.12,
+    "transmission": 0.65,
+    "ior": 1.45,
+    "physics_advanced": false,
+    "volume_measured": false,
+    "geometry_note": "Conservative interior display fills, adapted to frozen vessel dimensions; fixed volume, no fluid dynamics."
+  }
+}

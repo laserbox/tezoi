@@ -1,0 +1,99 @@
+{
+  "arithmetic_and_observation_integrity_passed": true,
+  "full_camera_calibration_passed": false,
+  "independent_LK_verified_samples": 4,
+  "independent_LK_tested_samples": 9,
+  "arithmetic": {
+    "backproject_reproject_max_px": 1.6076142173915287e-05,
+    "rotation_det": 0.9999999999999998,
+    "orthogonality_max": 4.440892098500626e-16
+  },
+  "bone_shape_max_change_m": 1.1102230246251565e-16,
+  "missing_hand_frames_preserved": 30,
+  "hand_root_median_reprojection_before_px": 32.42447440463166,
+  "hand_root_median_reprojection_after_px": 7.585933824659565,
+  "hand_quality_pass": 226,
+  "hand_instances": 239,
+  "independent_camera_feature_check": {
+    "method": "Shi-Tomasi + bidirectional LK seeded by PnP; points distinct from ORB fitting correspondences; tabletop-only tracks; empty sets remain unverified",
+    "frames": [
+      {
+        "frame": 30,
+        "lk_tracks": 97,
+        "median_px": 0.3789627161592519,
+        "p95_px": 1.2286152570934206
+      },
+      {
+        "frame": 60,
+        "lk_tracks": 100,
+        "median_px": 0.5134321566107963,
+        "p95_px": 1.413789438337155
+      },
+      {
+        "frame": 90,
+        "lk_tracks": 0,
+        "median_px": null,
+        "p95_px": null
+      },
+      {
+        "frame": 120,
+        "lk_tracks": 0,
+        "median_px": null,
+        "p95_px": null
+      },
+      {
+        "frame": 150,
+        "lk_tracks": 0,
+        "median_px": null,
+        "p95_px": null
+      },
+      {
+        "frame": 180,
+        "lk_tracks": 62,
+        "median_px": 0.49782870439304155,
+        "p95_px": 2.228636057287051
+      },
+      {
+        "frame": 210,
+        "lk_tracks": 1,
+        "median_px": 81.86000624915535,
+        "p95_px": 81.86000624915535
+      },
+      {
+        "frame": 240,
+        "lk_tracks": 1,
+        "median_px": 82.76682840861412,
+        "p95_px": 82.76682840861412
+      },
+      {
+        "frame": 262,
+        "lk_tracks": 60,
+        "median_px": 0.7401919509069377,
+        "p95_px": 5.614785554684645
+      }
+    ]
+  },
+  "robot_world_registration": {
+    "source_object_separation_m_CAD_prior": 0.1731455062118667,
+    "frozen_task_object_separation_m": 0.3061045217516044,
+    "minimum_two_anchor_rigid_residual_per_anchor_m": 0.06647950776986886,
+    "status": "not_calibrated; preserve original rig, do not silently scale or move it"
+  },
+  "limits": [
+    "All reprojection numbers are image-space diagnostics, not depth ground truth.",
+    "Human shape retains model estimates and metric CAD depth prior.",
+    "2D contact candidates are not mesh contacts, force estimates or physical acceptance."
+  ],
+  "hashes": {
+    "reference.json": "0a762794c3af59fd5fa018ef23701bbbfb40a5c28171018b396e4727e5a74ba9",
+    "cameras.json": "0962f6a554f12420001e537a39a8b9b095723724591d69502924ee07eb8bcbc3",
+    "hands-contact.json": "318aa6f29d967f4a613b30a480a2ec9f23aa92f7053df4be96a1f077b9aed4e1"
+  },
+  "table_depth_scale_correction": {
+    "scale_min": 0.8434036020880575,
+    "scale_max": 1.255979813697999,
+    "candidate_rms_median_before_m": 0.14617107696758094,
+    "candidate_rms_median_after_m": 0.026166833003642625,
+    "scope": "Table-candidate pixels, including residual clutter; no metric ground truth"
+  }
+}

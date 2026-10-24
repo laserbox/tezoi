@@ -1,0 +1,13 @@
+{
+  "revision": 5,
+  "stages_checked": 5,
+  "contact_comparison_seek_seconds": 15,
+  "robot_withdrawal_seek_seconds": 43,
+  "video_ready_state": 4,
+  "playback_toggle_checked": true,
+  "main_website_section_checked": true,
+  "report_remaining_failures": 7,
+  "console_errors": [],
+  "screenshot": "geometry-v5-website.png",
+  "physics_run": false
+}

@@ -1,5 +1,5 @@
 import { icon } from './icons.js?v=mobile-polish-20261023';
-import { mountAgentConversion } from './agent-conversion.js?v=mobile-polish-20261023';
+import { mountAgentConversion } from './agent-conversion.js?v=geometry5-20261024';
 import { mountRealSimWorkflow } from './real-sim-workflow.js?v=review-fixes-20261023';
 import { mountRenderingShowcase } from './rendering-showcase.js?v=mobile-polish-20261023';
 import { mountContactComparison } from './contact-comparison.js?v=review-fixes-20261023';
@@ -174,3 +174,5 @@ materialTabs.forEach((tab, i) => {
     }
   });
 });
+
+if(location.hash === '#ego2sim') { realSimWorkflow?.selectStage('agent'); agentConversion?.setActive(true); document.querySelector('#workflow-panel-agent')?.scrollIntoView(); }

@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-24",
+  "local_preview": "http://127.0.0.1:8768/demo.html",
+  "main_site_agent_section_checked": true,
+  "stages_checked": [
+    "task",
+    "geometry",
+    "alignment",
+    "mapping",
+    "contact",
+    "robot",
+    "feedback"
+  ],
+  "video_ready_state": 4,
+  "seek_15s_source_output_pass": true,
+  "play_source_time_s": 15.278089,
+  "play_robot_time_s": 15.277723,
+  "pause_and_seek_pass": true,
+  "browser_console_errors": [],
+  "v4_report_verified": true,
+  "screenshot": "geometry-v4-website.png",
+  "published": false,
+  "physics_run": false
+}

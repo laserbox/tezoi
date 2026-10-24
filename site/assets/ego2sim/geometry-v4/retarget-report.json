@@ -1,0 +1,58 @@
+{
+  "schema": "ego2sim.retarget/4",
+  "configuration_sha256": "792af5dc96cc7e156e1941ffc78161b479fb23952e4ba4d6e1e559e36f348245",
+  "physics_run": false,
+  "mesh_scale_changed": false,
+  "camera_mounts_changed": false,
+  "coordinate_alignment": "coordinate-alignment.json",
+  "observation_pose_source_sha256": "6e103e9a6b73695d3267d1af77320eed77ab874e0cd9bb1c0eebce8249710c6b",
+  "hand_contact_source_sha256": "dcd7d73bc27834075d3dd3c35f7c45c3a019a7dc6dc18d1d9c589ec581a86907",
+  "first_pipe_event_frame": 19,
+  "last_pipe_event_frame": 183,
+  "beaker_event_frame": 192,
+  "transition": "Source contact event endpoints; free-space sinusoidal clearance planner between objects, explicitly not recovered human motion",
+  "workspace_corridor_halfwidth_m": 0.01,
+  "max_workspace_correction_m": 0.0945887371071395,
+  "joint_speed_candidate_bound_rad_s": 4.0,
+  "max_grasp_center_error_m": 3.3419276122529244e-06,
+  "p95_grasp_center_error_m": 3.2225113217675795e-06,
+  "max_tcp_error_m": 0.004495019025464864,
+  "median_tcp_error_m": 0.0010030226182860288,
+  "p95_tcp_error_m": 0.004318156696233947,
+  "max_orientation_error_rad": 0.5891252282261044,
+  "joint_bounds_pass": true,
+  "max_joint_speed_rad_s": 3.999999999999478,
+  "max_target_smoothing_m": 0.029658731579201587,
+  "robot_contact_geometry_pass_frames": 197,
+  "robot_contact_total_frames": 263,
+  "gripper_patch_TCP": [
+    [
+      1.734723475976807e-18,
+      0.04442929935032129,
+      -0.0077970978915691165
+    ],
+    [
+      1.734723475976807e-18,
+      -0.04460029935032131,
+      -0.007797097891569144
+    ]
+  ],
+  "gripper_patch_local": [
+    [
+      0.0,
+      -0.0199147006496787,
+      0.04270290210843085
+    ],
+    [
+      0.0,
+      0.0199147006496787,
+      0.04270290210843085
+    ]
+  ],
+  "limits": [
+    "Kinematic candidate only. Objects replay recovered/adapted poses independently; grasp attachment is not simulated.",
+    "Pad clearance uses geometric proxies, not certified full-arm collision detection.",
+    "Estimated monocular camera/hand/object uncertainty propagates into robot targets.",
+    "No force allocation, liquid simulation, grasp success or physical feasibility claim."
+  ]
+}

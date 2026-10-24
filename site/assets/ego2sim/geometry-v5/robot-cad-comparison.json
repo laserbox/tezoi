@@ -1,0 +1,20 @@
+{
+  "same_active_intervals": true,
+  "same_meshes": true,
+  "unsigned_distances_only": true,
+  "physics_run": false,
+  "results": {
+    "geometry-v4": {
+      "active_frames": 216,
+      "within_8mm": 182,
+      "p95_mm": 13.43887006457737,
+      "max_mm": 25.254663611343844
+    },
+    "geometry-v5": {
+      "active_frames": 216,
+      "within_8mm": 216,
+      "p95_mm": 3.7971051626114574,
+      "max_mm": 3.8145081363143745
+    }
+  }
+}

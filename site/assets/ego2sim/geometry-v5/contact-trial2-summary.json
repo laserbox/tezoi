@@ -1,0 +1,19 @@
+{
+  "frames": 263,
+  "tip_observed_frames": 82,
+  "bulb_observed_frames": 262,
+  "pipette_bulb_median_reprojection_px": 0.10778734235634158,
+  "tip_median_reprojection_px": 1.1526138399033568,
+  "beaker_median_visible_fit_iou": 0.8131147540983606,
+  "contact_candidate_pairs": 192,
+  "contact_geometry_pass_pairs": 181,
+  "contact_mean_distance_before_m": 0.12329541024257505,
+  "contact_mean_distance_after_m": 0.005922220371117291,
+  "physics_run": false,
+  "force_allocation_run": false,
+  "calibrated_extrinsic": false,
+  "source_sha256": "0a762794c3af59fd5fa018ef23701bbbfb40a5c28171018b396e4727e5a74ba9",
+  "contact_strict_tip_pass_pairs": 156,
+  "articulated_pairs": 27,
+  "baseline_contact_pass_pairs": 81
+}

@@ -1,0 +1,101 @@
+{
+  "arithmetic_provenance_and_geometry_checks_passed": true,
+  "frames": 263,
+  "rotation_orthogonality_max": 4.440892098500626e-16,
+  "coordinate_mapping_max_error_m": 0.0,
+  "contact_anchor_triangle_max_error_m": 4.135580767528131e-15,
+  "nearest_surface_full_mesh_spotcheck_max_error_m": 3.7513395167998453e-17,
+  "nearest_surface_spotchecks": 22,
+  "hand_scale_min": 0.7999999999999998,
+  "hand_scale_max": 1.2000000000000006,
+  "hand_bone_ratio_max_error": 1.532107773982716e-14,
+  "joint_position_limits_pass": true,
+  "pose_accuracy_independently_verified": false,
+  "calibrated_extrinsic": false,
+  "physics_run": false,
+  "full_collision_certification": false,
+  "robot_kinematic_report": {
+    "schema": "ego2sim.retarget/5",
+    "configuration_sha256": "792af5dc96cc7e156e1941ffc78161b479fb23952e4ba4d6e1e559e36f348245",
+    "physics_run": false,
+    "mesh_scale_changed": false,
+    "camera_mounts_changed": false,
+    "coordinate_alignment": "coordinate-alignment.json",
+    "observation_pose_source_sha256": "6e103e9a6b73695d3267d1af77320eed77ab874e0cd9bb1c0eebce8249710c6b",
+    "hand_contact_source_sha256": "5ffa57fe094f785cc85d7f4fdb4f14e5d0cac3d94d0841f4ed14c0f8c5085cdc",
+    "first_pipe_event_frame": 19,
+    "last_pipe_event_frame": 183,
+    "beaker_event_frame": 192,
+    "last_beaker_event_frame": 242,
+    "transition": "Source contact event endpoints; free-space sinusoidal clearance planner between objects, explicitly not recovered human motion",
+    "workspace_corridor_halfwidth_m": null,
+    "max_workspace_correction_m": 0.0,
+    "joint_speed_candidate_bound_rad_s": 4.0,
+    "max_grasp_center_error_m": 7.774527850259174e-06,
+    "p95_grasp_center_error_m": 3.347520374748388e-06,
+    "max_tcp_error_m": 0.003183637113992343,
+    "median_tcp_error_m": 0.0011998289574782037,
+    "p95_tcp_error_m": 0.0024754604042279676,
+    "max_orientation_error_rad": 0.41319683452553263,
+    "joint_bounds_pass": true,
+    "max_joint_speed_rad_s": 2.5646487900012658,
+    "max_target_smoothing_m": 0.0,
+    "robot_contact_geometry_pass_frames": 216,
+    "robot_contact_total_frames": 263,
+    "gripper_patch_TCP": [
+      [
+        1.734723475976807e-18,
+        0.04442929935032129,
+        -0.0077970978915691165
+      ],
+      [
+        1.734723475976807e-18,
+        -0.04460029935032131,
+        -0.007797097891569144
+      ]
+    ],
+    "gripper_patch_local": [
+      [
+        0.0,
+        -0.0199147006496787,
+        0.04270290210843085
+      ],
+      [
+        0.0,
+        0.0199147006496787,
+        0.04270290210843085
+      ]
+    ],
+    "limits": [
+      "Kinematic candidate only. Objects replay recovered/adapted poses independently; grasp attachment is not simulated.",
+      "Pad clearance uses geometric proxies, not certified full-arm collision detection.",
+      "Estimated monocular camera/hand/object uncertainty propagates into robot targets.",
+      "No force allocation, liquid simulation, grasp success or physical feasibility claim."
+    ]
+  },
+  "metrics": {
+    "frames": 263,
+    "tip_observed_frames": 82,
+    "bulb_observed_frames": 262,
+    "pipette_bulb_median_reprojection_px": 0.10778734235634158,
+    "tip_median_reprojection_px": 1.1526138399033568,
+    "beaker_median_visible_fit_iou": 0.8131147540983606,
+    "contact_candidate_pairs": 192,
+    "contact_geometry_pass_pairs": 185,
+    "contact_mean_distance_before_m": 0.12329541024257505,
+    "contact_mean_distance_after_m": 0.005803547809906176,
+    "physics_run": false,
+    "force_allocation_run": false,
+    "calibrated_extrinsic": false,
+    "source_sha256": "0a762794c3af59fd5fa018ef23701bbbfb40a5c28171018b396e4727e5a74ba9",
+    "contact_strict_tip_pass_pairs": 160,
+    "articulated_pairs": 4,
+    "baseline_contact_pass_pairs": 81
+  },
+  "priors": {
+    "unheld_flask_tip_height_m": 0.045,
+    "unheld_flask_tip_height_sigma_m": 0.02,
+    "conditional_vessel_axis_sigma_m": 0.018,
+    "note": "Geometric stabilization priors, not measured insertion depth; active only under current-frame object/hand tests."
+  }
+}

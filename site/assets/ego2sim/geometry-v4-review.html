@@ -1,0 +1,63 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ego2Sim 动态几何与重定向 V4</title><style>body{font:16px/1.8 system-ui,sans-serif;background:#edf2ef;color:#24444b;max-width:1120px;margin:42px auto;padding:0 24px}h1{font-size:36px}table{border-collapse:collapse;background:white;width:100%}th,td{text-align:left;vertical-align:top;padding:16px;border-bottom:1px solid #d9e3dc}th{width:160px}a{color:#167b68}video{width:100%;background:#173b40}pre{overflow:auto;background:white;padding:20px}.note{background:#f0e5d2;padding:18px}</style><a href="../../demo.html">← 返回阶段 Demo</a><h1>从动态滴管，到三维接触与机器人回放</h1><p>2026-10-24 · V4 · 使用新的几何结果重新生成，物理求解保持关闭。</p><video controls poster="geometry-v4/media/robot.jpg" src="geometry-v4/media/robot.mp4"></video><h2>实际结果</h2><table><tr><th>动态滴管</th><td>胶头观测 262/263；独立可见管尖 82/263；其余为遮挡先验</td></tr><tr><th>拟合残差</th><td>胶头中位 0.108px；可见管尖中位 1.153px。不是独立准确率。</td></tr><tr><th>烧杯动态位姿</th><td>逐帧可见遮罩拟合 IoU 中位 0.813；使用直立先验，未恢复可靠绕轴旋转。</td></tr><tr><th>坐标关系</th><td>观测间距 173.15mm；原任务 306.10mm；刚体变换后烧杯残差 132.96mm，额外布局适配已显式保存。</td></tr><tr><th>可达通道适配</th><td>机器人滴管中心投影到原容器间 10mm 半宽通道，最大额外位移 94.59mm；逐帧保留修正前后轨迹。这是动作适配，不是视频原始轨迹或外参。</td></tr><tr><th>三维接触</th><td>81/192 对满足双指 12mm 与重投影门槛；平均指尖—表面距离 123.30→9.37mm。接触点是实际三角面位置，不是测量力。</td></tr><tr><th>手部边界</th><td>保持骨骼比例；整体尺度允许 0.8–1.2，当前 0.800–1.200。不是人体尺寸标定；缺失观测没有补成真值。</td></tr><tr><th>运动学</th><td>夹持中心数值拟合 P95 0.0032mm，最大 0.0033mm（不是实测执行精度）；TCP P95 4.32mm。关节位置限位通过，最大关节速度 4.00rad/s，未据此宣称可直接下发硬件。</td></tr><tr><th>机器人接触代理</th><td>197/263 帧通过指垫中心与胶头椭球／杯壁圆柱代理检查；不等于全 CAD 碰撞认证或物理夹持。</td></tr><tr><th>保留配置</th><td>RealMan RM65-B + Xense 原资产、初态及相机安装配置；黄绿色烧杯液体和蓝青色锥形瓶液体；模型未缩放。</td></tr><tr><th>本轮未做</th><td>物理求解、力分配、摩擦验证、完整碰撞认证、液体转移、真实相机—机器人外参标定。</td></tr></table><h2>坐标映射</h2><p>先用锥形瓶锚点、桌面法向和容器连线估计刚体注册；再按物体相对位置分配布局差额。两者分开记录；机器人工作通道投影又单独记录，不改变观测世界的原始恢复轨迹。没有把非刚性适配伪装成外参标定。</p><pre>{
+  &quot;T_robot_world&quot;: [
+    [
+      0.6657403206582845,
+      -0.7461835065517091,
+      -0.0,
+      0.44759131924955975
+    ],
+    [
+      0.7461835065517091,
+      0.6657403206582845,
+      0.0,
+      -0.46087386015505416
+    ],
+    [
+      0.0,
+      -0.0,
+      0.9999999999999999,
+      9.717021386046465e-05
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  &quot;method&quot;: &quot;Rigid table-frame alignment anchored at flask, table normal and vessel direction. Additional task-layout displacement is explicit and separate.&quot;,
+  &quot;calibrated_extrinsic&quot;: false,
+  &quot;source_separation_m&quot;: 0.1731455062118667,
+  &quot;robot_separation_m&quot;: 0.3061045217516044,
+  &quot;rigid_beaker_anchor_residual_m&quot;: 0.13295901553939468,
+  &quot;task_layout_displacement_robot_m&quot;: [
+    -0.10424595352817959,
+    -0.08252806181054795,
+    0.0
+  ],
+  &quot;mapping_formula&quot;: &quot;p_robot = R*p_world + t + w(p_world)*layout_displacement; w = clipped projection onto source flask-to-beaker baseline&quot;,
+  &quot;asset_scale_changed&quot;: false,
+  &quot;camera_mounts_changed&quot;: false
+}</pre><h2>必须保留的估计边界</h2><p class="note">遮挡段采用固定 CAD 长度、条件容器轴线，以及无手持时 45mm 管尖高度／20mm 标准差的稳定先验。该插入深度不是观测真值。手部允许有限整体尺度与旋转优化；管轴转角不可观测。低投影残差不能证明正确深度。相机独立 LK 抽查仍只有上一轮 4/9 帧得到足够支持。</p><p>物体按照估计且适配后的位姿回放，机器人按 IK 独立运动；未模拟抓持附着。换物阶段包含显式自由空间规划，不是恢复的人手轨迹。EgoCPT 仅提供设计参考，没有运行它的力分配或 RL。</p><h2>可检查文件</h2><p><a href="geometry-v4/dynamic-poses.json">动态位姿</a> · <a href="geometry-v4/pose-observations.json">逐帧观测</a> · <a href="geometry-v4/coordinate-alignment.json">坐标矩阵</a> · <a href="geometry-v4/hands-contact-3d.json">三维接触</a> · <a href="geometry-v4/retarget-report.json">重定向检查</a> · <a href="geometry-v4/validation.json">完整验证记录</a> · <a href="geometry-v4/frame-audit.csv">逐帧审计 CSV</a></p><h2>验证</h2><pre>{
+  &quot;arithmetic_provenance_and_geometry_checks_passed&quot;: true,
+  &quot;frames&quot;: 263,
+  &quot;rotation_orthogonality_max&quot;: 4.440892098500626e-16,
+  &quot;coordinate_mapping_max_error_m&quot;: 5.551115123125783e-17,
+  &quot;contact_anchor_triangle_max_error_m&quot;: 1.5265566588595902e-15,
+  &quot;nearest_surface_full_mesh_spotcheck_max_error_m&quot;: 5.898059818321144e-17,
+  &quot;nearest_surface_spotchecks&quot;: 22,
+  &quot;hand_scale_min&quot;: 0.7999999999999998,
+  &quot;hand_scale_max&quot;: 1.2000000000000002,
+  &quot;hand_bone_ratio_max_error&quot;: 1.1546319456101628e-14,
+  &quot;joint_position_limits_pass&quot;: true,
+  &quot;pose_accuracy_independently_verified&quot;: false,
+  &quot;calibrated_extrinsic&quot;: false,
+  &quot;physics_run&quot;: false,
+  &quot;full_collision_certification&quot;: false,
+  &quot;priors&quot;: {
+    &quot;unheld_flask_tip_height_m&quot;: 0.045,
+    &quot;unheld_flask_tip_height_sigma_m&quot;: 0.02,
+    &quot;conditional_vessel_axis_sigma_m&quot;: 0.018,
+    &quot;note&quot;: &quot;Geometric stabilization priors, not measured insertion depth; active only under current-frame object/hand tests.&quot;
+  }
+}</pre><p>网站已更新本地文件；未发布线上。旧版几何报告仍保留，当前结果以 V4 为准。</p></html>

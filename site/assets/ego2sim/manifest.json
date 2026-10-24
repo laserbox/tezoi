@@ -1,0 +1,281 @@
+{
+  "schema": "ego2sim.dropper-demo/5",
+  "physics_advanced": false,
+  "asset_groups": [
+    "beaker",
+    "flask_with_pipette"
+  ],
+  "movable_subparts": [
+    "pipette"
+  ],
+  "source_duration_s": 43.886667,
+  "sample_hz": 6,
+  "model_hand_frames": 233,
+  "total_frames": 263,
+  "robot": "RealMan RM65-B",
+  "gripper": "Xense supplied six-hole parallel gripper",
+  "camera": "Frozen task D435i external and physical wrist; original detail/virtual wrist separately labelled",
+  "retargeting": "V5: fixed V4 observation poses; articulated 3D contact; explicit task layout mapping retained; extra workspace projection and target smoothing removed; bounded IK and source-event release. No physics.",
+  "max_tcp_error_m": 0.003183637113992343,
+  "p95_tcp_error_m": 0.002028100130087904,
+  "joint_bounds_pass": true,
+  "max_joint_speed_rad_s": 2.5646487900012658,
+  "collision_checked": false,
+  "contact_verified": false,
+  "fluid_solved": false,
+  "task_success_verified": false,
+  "phases": [
+    {
+      "start": 0,
+      "end": 3.1667,
+      "caption": "识别烧杯与锥形瓶—滴管组合"
+    },
+    {
+      "start": 3.1667,
+      "end": 8.5,
+      "caption": "捏住胶头，在锥形瓶中操作"
+    },
+    {
+      "start": 8.5,
+      "end": 13,
+      "caption": "提起并转移滴管"
+    },
+    {
+      "start": 13,
+      "end": 27,
+      "caption": "保持滴管朝下，呈现滴加意图"
+    },
+    {
+      "start": 27,
+      "end": 32,
+      "caption": "将滴管放回锥形瓶，松手并移向烧杯"
+    },
+    {
+      "start": 32,
+      "end": 40.5,
+      "caption": "拿起、移动并放回烧杯"
+    },
+    {
+      "start": 40.5,
+      "end": 43.8867,
+      "caption": "松开烧杯，退出操作区"
+    }
+  ],
+  "steps": [
+    "understand",
+    "segment",
+    "estimate_depth",
+    "import_CAD",
+    "recover_hands",
+    "retarget_IK",
+    "preflight",
+    "future_physics_feedback"
+  ],
+  "configuration_source": "runs/dropper-demo-20261023/corrected-config/construction.json",
+  "configuration_sha256": "792af5dc96cc7e156e1941ffc78161b479fb23952e4ba4d6e1e559e36f348245",
+  "configuration_locked": true,
+  "initial_pose_fk_max_error_m": 1.1102230246251565e-16,
+  "initial_arm_q": [
+    2.219532242432601,
+    -0.45487003684740435,
+    1.561364838580253,
+    0.6000279082702383,
+    1.5053934337154022,
+    0.7755779532072243
+  ],
+  "asset_source": "Frozen dropper task meshes; uploaded lab_reference_models.zip preserved as alternative, not mixed",
+  "render_background": "Neutral display support; original Gaussian office is excluded, not reconstructed",
+  "stage_demos": [
+    {
+      "id": "task",
+      "title": "任务理解与分解",
+      "file": "task.mp4"
+    },
+    {
+      "id": "scene",
+      "title": "场景与资产重建",
+      "file": "scene.mp4"
+    },
+    {
+      "id": "motion",
+      "title": "人类动作与接触",
+      "file": "motion.mp4"
+    },
+    {
+      "id": "robot",
+      "title": "机器人动作重定向",
+      "file": "robot.mp4"
+    },
+    {
+      "id": "feedback",
+      "title": "验证与反馈闭环",
+      "file": "feedback.mp4"
+    }
+  ],
+  "liquid_appearance": {
+    "source": "Previous render_scene.py palette, retained at user request",
+    "beaker_rgb": [
+      0.69,
+      0.82,
+      0.04
+    ],
+    "flask_rgb": [
+      0.015,
+      0.42,
+      0.64
+    ],
+    "roughness": 0.12,
+    "transmission": 0.65,
+    "ior": 1.45,
+    "physics_advanced": false,
+    "volume_measured": false,
+    "geometry_note": "Conservative interior display fills, adapted to frozen vessel dimensions; fixed volume, no fluid dynamics."
+  },
+  "perception_revision": {
+    "version": 2,
+    "inference_hz": 6,
+    "mask_frames": 263,
+    "depth_hz": 2,
+    "comparison_video": "segmentation-comparison.mp4",
+    "checks": "perception-accuracy-check.json",
+    "robot_motion_regenerated": false
+  },
+  "geometry_revision": "5",
+  "dynamic_geometry": {
+    "frames": 263,
+    "tip_observed_frames": 82,
+    "bulb_observed_frames": 262,
+    "pipette_bulb_median_reprojection_px": 0.10778734235634158,
+    "tip_median_reprojection_px": 1.1526138399033568,
+    "beaker_median_visible_fit_iou": 0.8131147540983606,
+    "contact_candidate_pairs": 192,
+    "contact_geometry_pass_pairs": 185,
+    "contact_mean_distance_before_m": 0.12329541024257505,
+    "contact_mean_distance_after_m": 0.005803547809906176,
+    "physics_run": false,
+    "force_allocation_run": false,
+    "calibrated_extrinsic": false,
+    "source_sha256": "0a762794c3af59fd5fa018ef23701bbbfb40a5c28171018b396e4727e5a74ba9",
+    "contact_strict_tip_pass_pairs": 160,
+    "articulated_pairs": 4,
+    "baseline_contact_pass_pairs": 81
+  },
+  "retarget_v4": {
+    "schema": "ego2sim.retarget/4",
+    "configuration_sha256": "792af5dc96cc7e156e1941ffc78161b479fb23952e4ba4d6e1e559e36f348245",
+    "physics_run": false,
+    "mesh_scale_changed": false,
+    "camera_mounts_changed": false,
+    "coordinate_alignment": "coordinate-alignment.json",
+    "observation_pose_source_sha256": "6e103e9a6b73695d3267d1af77320eed77ab874e0cd9bb1c0eebce8249710c6b",
+    "hand_contact_source_sha256": "dcd7d73bc27834075d3dd3c35f7c45c3a019a7dc6dc18d1d9c589ec581a86907",
+    "first_pipe_event_frame": 19,
+    "last_pipe_event_frame": 183,
+    "beaker_event_frame": 192,
+    "transition": "Source contact event endpoints; free-space sinusoidal clearance planner between objects, explicitly not recovered human motion",
+    "workspace_corridor_halfwidth_m": 0.01,
+    "max_workspace_correction_m": 0.0945887371071395,
+    "joint_speed_candidate_bound_rad_s": 4.0,
+    "max_grasp_center_error_m": 3.3419276122529244e-06,
+    "p95_grasp_center_error_m": 3.2225113217675795e-06,
+    "max_tcp_error_m": 0.004495019025464864,
+    "median_tcp_error_m": 0.0010030226182860288,
+    "p95_tcp_error_m": 0.004318156696233947,
+    "max_orientation_error_rad": 0.5891252282261044,
+    "joint_bounds_pass": true,
+    "max_joint_speed_rad_s": 3.999999999999478,
+    "max_target_smoothing_m": 0.029658731579201587,
+    "robot_contact_geometry_pass_frames": 197,
+    "robot_contact_total_frames": 263,
+    "gripper_patch_TCP": [
+      [
+        1.734723475976807e-18,
+        0.04442929935032129,
+        -0.0077970978915691165
+      ],
+      [
+        1.734723475976807e-18,
+        -0.04460029935032131,
+        -0.007797097891569144
+      ]
+    ],
+    "gripper_patch_local": [
+      [
+        0.0,
+        -0.0199147006496787,
+        0.04270290210843085
+      ],
+      [
+        0.0,
+        0.0199147006496787,
+        0.04270290210843085
+      ]
+    ],
+    "limits": [
+      "Kinematic candidate only. Objects replay recovered/adapted poses independently; grasp attachment is not simulated.",
+      "Pad clearance uses geometric proxies, not certified full-arm collision detection.",
+      "Estimated monocular camera/hand/object uncertainty propagates into robot targets.",
+      "No force allocation, liquid simulation, grasp success or physical feasibility claim."
+    ]
+  },
+  "retarget_v5": {
+    "schema": "ego2sim.retarget/5",
+    "configuration_sha256": "792af5dc96cc7e156e1941ffc78161b479fb23952e4ba4d6e1e559e36f348245",
+    "physics_run": false,
+    "mesh_scale_changed": false,
+    "camera_mounts_changed": false,
+    "coordinate_alignment": "coordinate-alignment.json",
+    "observation_pose_source_sha256": "6e103e9a6b73695d3267d1af77320eed77ab874e0cd9bb1c0eebce8249710c6b",
+    "hand_contact_source_sha256": "5ffa57fe094f785cc85d7f4fdb4f14e5d0cac3d94d0841f4ed14c0f8c5085cdc",
+    "first_pipe_event_frame": 19,
+    "last_pipe_event_frame": 183,
+    "beaker_event_frame": 192,
+    "last_beaker_event_frame": 242,
+    "transition": "Source contact event endpoints; free-space sinusoidal clearance planner between objects, explicitly not recovered human motion",
+    "workspace_corridor_halfwidth_m": null,
+    "max_workspace_correction_m": 0.0,
+    "joint_speed_candidate_bound_rad_s": 4.0,
+    "max_grasp_center_error_m": 7.774527850259174e-06,
+    "p95_grasp_center_error_m": 3.347520374748388e-06,
+    "max_tcp_error_m": 0.003183637113992343,
+    "median_tcp_error_m": 0.0011998289574782037,
+    "p95_tcp_error_m": 0.0024754604042279676,
+    "max_orientation_error_rad": 0.41319683452553263,
+    "joint_bounds_pass": true,
+    "max_joint_speed_rad_s": 2.5646487900012658,
+    "max_target_smoothing_m": 0.0,
+    "robot_contact_geometry_pass_frames": 216,
+    "robot_contact_total_frames": 263,
+    "gripper_patch_TCP": [
+      [
+        1.734723475976807e-18,
+        0.04442929935032129,
+        -0.0077970978915691165
+      ],
+      [
+        1.734723475976807e-18,
+        -0.04460029935032131,
+        -0.007797097891569144
+      ]
+    ],
+    "gripper_patch_local": [
+      [
+        0.0,
+        -0.0199147006496787,
+        0.04270290210843085
+      ],
+      [
+        0.0,
+        0.0199147006496787,
+        0.04270290210843085
+      ]
+    ],
+    "limits": [
+      "Kinematic candidate only. Objects replay recovered/adapted poses independently; grasp attachment is not simulated.",
+      "Pad clearance uses geometric proxies, not certified full-arm collision detection.",
+      "Estimated monocular camera/hand/object uncertainty propagates into robot targets.",
+      "No force allocation, liquid simulation, grasp success or physical feasibility claim."
+    ]
+  },
+  "segment_review": "geometry-v5/segment-review.json"
+}

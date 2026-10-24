@@ -1,0 +1,41 @@
+{
+  "T_robot_world": [
+    [
+      0.6657403206582845,
+      -0.7461835065517091,
+      -0.0,
+      0.44759131924955975
+    ],
+    [
+      0.7461835065517091,
+      0.6657403206582845,
+      0.0,
+      -0.46087386015505416
+    ],
+    [
+      0.0,
+      -0.0,
+      0.9999999999999999,
+      9.717021386046465e-05
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "method": "Rigid table-frame alignment anchored at flask, table normal and vessel direction. Additional task-layout displacement is explicit and separate.",
+  "calibrated_extrinsic": false,
+  "source_separation_m": 0.1731455062118667,
+  "robot_separation_m": 0.3061045217516044,
+  "rigid_beaker_anchor_residual_m": 0.13295901553939468,
+  "task_layout_displacement_robot_m": [
+    -0.10424595352817959,
+    -0.08252806181054795,
+    0.0
+  ],
+  "mapping_formula": "p_robot = R*p_world + t + w(p_world)*layout_displacement; w = clipped projection onto source flask-to-beaker baseline",
+  "asset_scale_changed": false,
+  "camera_mounts_changed": false
+}

@@ -1,0 +1,191 @@
+[
+  {
+    "name": "alignment",
+    "width": 1280,
+    "height": 720,
+    "duration": 43.833333,
+    "frames": 1315,
+    "sha256": "809f10e72a241553170836dd9d86c3ef99d17157fb9e9106f501b66998faa759",
+    "full_decode_pass": true
+  },
+  {
+    "name": "assets",
+    "width": 1280,
+    "height": 960,
+    "duration": 18.0,
+    "frames": 540,
+    "sha256": "1108fa8e0b7497ad118c86b8d66784a3f291c1d99da5495749e25049a8f30ddb",
+    "full_decode_pass": true
+  },
+  {
+    "name": "clean",
+    "width": 1280,
+    "height": 720,
+    "duration": 43.833333,
+    "frames": 1315,
+    "sha256": "dd06230ebd0942eb35b3716a8eebe80c1ed7476d2dfd50c2ee4003fc9d88ab91",
+    "full_decode_pass": true
+  },
+  {
+    "name": "contact-comparison",
+    "width": 1280,
+    "height": 720,
+    "duration": 43.833333,
+    "frames": 1315,
+    "sha256": "65e106e7cbd61c8c643a396e8a594ae3901bf5783b7216f994b54688e345b28e",
+    "full_decode_pass": true
+  },
+  {
+    "name": "contact",
+    "width": 1280,
+    "height": 720,
+    "duration": 43.833333,
+    "frames": 1315,
+    "sha256": "c4fea0740cb998c67baad44f13d610b53210aed71f42be7163acc0b030f4efd2",
+    "full_decode_pass": true
+  },
+  {
+    "name": "depth",
+    "width": 1280,
+    "height": 720,
+    "duration": 43.833333,
+    "frames": 1315,
+    "sha256": "8022161d01447810ffa908788ac4f002c2546caf1b621a385dcf7ac379b1fada",
+    "full_decode_pass": true
+  },
+  {
+    "name": "feedback",
+    "width": 1280,
+    "height": 720,
+    "duration": 43.833333,
+    "frames": 1315,
+    "sha256": "27cb30946e8f2a2fcc4a7aba96e0b3a8e9f7002fe75592feacf31cf525af7069",
+    "full_decode_pass": true
+  },
+  {
+    "name": "geometry",
+    "width": 1280,
+    "height": 720,
+    "duration": 43.833333,
+    "frames": 1315,
+    "sha256": "be65034b94e5f25d2d0a9069a5fd64a8ca74fdd08e0eadaddf549ef702d48842",
+    "full_decode_pass": true
+  },
+  {
+    "name": "hands",
+    "width": 1280,
+    "height": 720,
+    "duration": 43.833333,
+    "frames": 1315,
+    "sha256": "ab7e1bd26e1ccc4c727de610423b50888185736beb2b5e953e6f2b1d549409a9",
+    "full_decode_pass": true
+  },
+  {
+    "name": "human",
+    "width": 1280,
+    "height": 960,
+    "duration": 43.833333,
+    "frames": 1315,
+    "sha256": "aaf0ef7921d91e1a378562d2fe487831868a354feb66b4e45c8249e1e0733262",
+    "full_decode_pass": true
+  },
+  {
+    "name": "mapping",
+    "width": 1280,
+    "height": 720,
+    "duration": 43.833333,
+    "frames": 1315,
+    "sha256": "b16cb76107f3362b0064858e1c482762cce389825bae4b11366f5633b9e76786",
+    "full_decode_pass": true
+  },
+  {
+    "name": "motion",
+    "width": 1280,
+    "height": 480,
+    "duration": 43.833333,
+    "frames": 1315,
+    "sha256": "9cd437ff72d2ce809b3d32b268137bc732b923aef5666c8db1e9181685c4aaeb",
+    "full_decode_pass": true
+  },
+  {
+    "name": "overview",
+    "width": 1280,
+    "height": 720,
+    "duration": 30.0,
+    "frames": 900,
+    "sha256": "4527235f89bede02da75a2e5ecf51eaf7956401791e511cbc53b86e5c9023f2b",
+    "full_decode_pass": true
+  },
+  {
+    "name": "robot-detail",
+    "width": 1280,
+    "height": 960,
+    "duration": 43.833333,
+    "frames": 1315,
+    "sha256": "43c38a6ecd73412b23f3028f3c9410febab025beaa5a37072e475bf419befb97",
+    "full_decode_pass": true
+  },
+  {
+    "name": "robot-external",
+    "width": 1280,
+    "height": 960,
+    "duration": 43.833333,
+    "frames": 1315,
+    "sha256": "b0ed7a1790b14c28fe2ed70e047b1190229285a4e2460abe64677c5ae9e71238",
+    "full_decode_pass": true
+  },
+  {
+    "name": "robot",
+    "width": 1280,
+    "height": 960,
+    "duration": 43.833333,
+    "frames": 1315,
+    "sha256": "0f70a9f8406a48ac109c7d8d04153e483383ddb303a45323f5a34c59531bbbbb",
+    "full_decode_pass": true
+  },
+  {
+    "name": "scene",
+    "width": 1280,
+    "height": 720,
+    "duration": 43.833333,
+    "frames": 1315,
+    "sha256": "750263a2703cd6cd62477d1aa841539f45409df62448f4a677cdf1f6f577e557",
+    "full_decode_pass": true
+  },
+  {
+    "name": "segmentation-comparison",
+    "width": 1280,
+    "height": 720,
+    "duration": 43.833333,
+    "frames": 1315,
+    "sha256": "2bc4fd878f2494aab55ce09cd4f6f626836006fb09852316c80193c38dd022f9",
+    "full_decode_pass": true
+  },
+  {
+    "name": "segmentation",
+    "width": 1280,
+    "height": 720,
+    "duration": 43.833333,
+    "frames": 1315,
+    "sha256": "fa2c6db192a71bb15dcb1fe154cce9e6649b24a0aabed11cb218e3127ddb5573",
+    "full_decode_pass": true
+  },
+  {
+    "name": "source",
+    "width": 1280,
+    "height": 720,
+    "duration": 43.910533,
+    "frames": 1316,
+    "sha256": "872a74c7130637d8f582d4a32ea6548b2f12ce377e9158ca2894731739520dbe",
+    "full_decode_pass": true
+  },
+  {
+    "name": "task",
+    "width": 1280,
+    "height": 720,
+    "duration": 43.833333,
+    "frames": 1315,
+    "sha256": "9ea985d1122ad6ba0da680f7ced60f7732a928d3e0aa734505d5912b7c445016",
+    "full_decode_pass": true
+  }
+]

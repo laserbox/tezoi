@@ -1,137 +1,57 @@
-import { icon } from './icons.js?v=mobile-polish-20261023';
-// A scripted, illustrative animation. No video inference, physics or policy service.
-const DURATION = 20;
-const PHASES = ['ego', 'environment', 'trajectory', 'policy'];
-const CAPTIONS = [
-  '从 Ego 视频中识别对象、接触与操作顺序。',
-  '从空间线索重建几何、材质与可交互环境。',
-  '将操作映射到机器人，组织末端动作轨迹。',
-  '以观察、动作和反馈组成面向任务的执行策略。',
+// Real, precomputed demo artifacts. No inference or physical simulation is run in the browser.
+const MEDIA='assets/ego2sim/';
+const CORRECTION_PENDING=false;
+const stages=[
+ {purpose:'VIDEO → OBJECT EVENTS → TASK GRAPH',title:'让任务分解连接实际观测。',description:'同一视频时间轴上展示操作意图、胶头与管尖观测状态，再用人手—物体接触候选确定机器人换物时机。字幕描述任务意图；液量和任务成功仍未测量。',layers:[['task','任务字幕与观测']],left:'source',leftLabel:'INPUT / 第一视角',rightLabel:'OUTPUT / 任务分解',evidence:'视频观察 + 接触事件',logs:[['保留原视频时间轴','43.89 s'],['识别两组任务资产','2 groups'],['接触事件连接机器人换物','source linked']],artifact:'任务图与源帧事件',note:'滴加意图不等于液体转移成功'},
+ {purpose:'DEPTH → WORLD → DYNAMIC MESH POSE',title:'把静态重建补成动态资产轨迹。',description:'SAM3 分割与 DA3 深度经过桌面注册，进入统一观测世界。固定原滴管 CAD 尺寸，逐帧拟合胶头、可见管尖和烧杯位姿；遮挡管尖使用管长与容器几何先验，轴向转角仍不可观测。视频到机器人的刚体矩阵与额外布局适配分别保存。',layers:[['geometry','点云与统一坐标'],['alignment','动态滴管与 Mesh'],['mapping','视频到机器人坐标'],['segmentation','精细分割'],['segmentation-comparison','分割前后'],['depth','相对深度'],['clean','去手与遮挡'],['assets','原任务资产']],left:'source',leftLabel:'INPUT / 原始观测',rightLabel:'OUTPUT / 动态几何与配准',evidence:'实际点云 + 动态 CAD 拟合',logs:[['反投影与桌面注册','88 clouds'],['逐帧滴管和烧杯变换','263 poses'],['区分观测与遮挡先验','82 visible tips']],artifact:'动态位姿、坐标矩阵、点云和场景',note:'估计注册与布局适配；不是实测外参标定'},
+ {purpose:'3D HAND → ARTICULATION → TRIANGLE CONTACT',title:'逐段修复捏合姿态，保留观测边界。',description:'固定动态滴管、相机和原始候选，逐段优化拇指与食指关节，保持骨段长度。相同的 12 mm／12 px 门槛下，接触候选由 81/192 提高到 185/192；更严格的逐指投影检查则从 60/192 提高到 160/192。未通过项保留时间、距离和原因，不能当作物理抓持成功。',layers:[['contact','三维接触与距离'],['contact-comparison','逐段修复前后'],['human','三维手到任务世界'],['hands','原始视频骨架']],left:'source',leftLabel:'INPUT / 人类示范',rightLabel:'OUTPUT / 三维手与接触候选',evidence:'保骨长关节优化 + 实际 Mesh 表面',logs:[['固定原始候选与门槛','192 pairs'],['三维接触几何门槛','185 pass'],['严格逐指投影检查','160 pass']],artifact:'逐段审计、三维手与三角面锚点',note:'几何候选不等于接触力、穿透认证或抓持成功'},
+ {purpose:'SOURCE POSE → CONTACT-CENTER IK → RELEASE',title:'减少适配，让夹爪跟随物体接触中心。',description:'保留原任务配置和显式容器布局映射，撤销额外的 94.59 mm 工作通道投影，以及最大 29.66 mm 的独立目标平滑。使用动态物体接触中心驱动有界 IK，并在源视频烧杯接触结束后张爪撤离。216/216 个接触目标帧通过真实 CAD 指垫采样点—物体表面 8 mm 距离检查；完整碰撞和动力学仍未求解。',layers:[['robot','新机器人重定向'],['mapping','坐标与布局适配'],['robot-detail','滴管与夹爪近景'],['robot-external','原固定相机'],['human','三维人手对照']],left:'source',leftLabel:'INPUT / 人类示范',rightLabel:'OUTPUT / RealMan RM65-B + Xense',evidence:'原始目标驱动；无额外通道投影',logs:[['额外工作通道修正','0 mm'],['实际 CAD 表面距离 P95','3.80 mm'],['末端 TCP P95 残差','2.48 mm']],artifact:'全段新视频、关节轨迹、可编辑 Blender',note:'布局适配仍保留；未实测外参、未模拟附着或液体'},
+ {purpose:'SEGMENT REVIEW → FIX → VERIFY → REPLAY',title:'把每段修改和未通过项都留下。',description:'逐段对比旧版与新版手部接触，独立检查真实 CAD 指垫采样点距离、坐标回算、骨段长度和关节限制。报告保留失败帧与单目不确定性。新的机器人和各阶段视频由本轮结果生成，物理反馈仍未接入。',layers:[['feedback','实际检查与反馈'],['contact-comparison','接触修复前后'],['contact','剩余接触检查'],['robot','新候选回放']],left:'robot',leftLabel:'REFERENCE / 新运动学候选',rightLabel:'OUTPUT / 检查记录',evidence:'逐段几何复核；物理未运行',logs:[['原始候选与阈值','unchanged'],['真实 CAD 接触距离','checked'],['完整碰撞、力与液体','not run']],artifact:'逐段报告、CSV 与实验记录',note:'没有把运动学或表面距离写成物理成功'}
 ];
-const clamp = value => Math.max(0, Math.min(1, value));
-const smooth = value => { const t = clamp(value); return t * t * (3 - 2 * t); };
-
-export function mountAgentConversion(root) {
-  if (!root) return null;
-  const find = name => root.querySelector(`[data-agent-${name}]`);
-  const play = find('play'), replay = find('replay'), timeline = find('timeline');
-  const steps = [...root.querySelectorAll('[data-agent-step]')];
-  const outputs = [...root.querySelectorAll('[data-agent-output]')];
-  const points = [...root.querySelectorAll('[data-agent-point]')].map((point, i) => ({
-    point, dx: ((i * 97 + 31) % 360 + 30) - Number(point.getAttribute('cx')),
-    dy: ((i * 53 + 17) % 240 + 20) - Number(point.getAttribute('cy')),
-  }));
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const dialog = document.querySelector('#video-dialog');
-  let progress = reduced.matches ? 1 : 0;
-  let active = false, visible = false, visited = false, wantPlayback = false;
-  let frame = null, lastTime = null, lastPhase = -1, lastPlaybackIcon;
-  const canPlay = () => active && visible && !document.hidden && !dialog?.open && wantPlayback;
-
-  function draw() {
-    const phase = Math.min(3, Math.floor(progress * 4));
-    const environment = smooth((progress - .25) / .2);
-    const trajectory = clamp((progress - .5) / .22);
-    const policy = clamp((progress - .75) / .2);
-    root.dataset.phase = PHASES[phase];
-    root.dataset.playing = String(canPlay());
-    root.style.setProperty('--ego-progress', clamp(progress * 4));
-    const playbackIcon = wantPlayback ? 'pause' : progress >= 1 ? 'replay' : 'play';
-    if (playbackIcon !== lastPlaybackIcon) {
-      lastPlaybackIcon = playbackIcon;
-      play.setAttribute('aria-label', wantPlayback ? '暂停转换演示' : progress >= 1 ? '重播转换演示' : '播放转换演示');
-      play.setAttribute('aria-pressed', String(wantPlayback));
-      play.innerHTML = `${icon(playbackIcon)}<span>${wantPlayback ? '暂停' : progress >= 1 ? '重播' : '播放'}</span>`;
-    }
-    timeline.value = Math.round(progress * 1000);
-    timeline.setAttribute('aria-valuetext', `流程示意 ${Math.round(progress * DURATION)} 秒，共 ${DURATION} 秒`);
-    find('time').textContent = `00:${String(Math.floor(progress * DURATION)).padStart(2, '0')} / 00:20`;
-    if (phase !== lastPhase) {
-      lastPhase = phase;
-      find('caption').textContent = CAPTIONS[phase];
-      steps.forEach((step, i) => {
-        step.setAttribute('aria-selected', String(i === phase));
-        step.tabIndex = i === phase ? 0 : -1;
-      });
-      find('stage').setAttribute('aria-labelledby', steps[phase].id);
-    }
-    outputs.forEach((output, i) => {
-      const value = [environment, trajectory, policy][i];
-      output.dataset.state = value >= .99 ? 'ready' : value > 0 ? 'building' : 'pending';
-      output.style.setProperty('--output-progress', value);
-    });
-    find('ego-hand').setAttribute('transform', `translate(${Math.sin(progress * Math.PI * 6) * 5} ${-Math.sin(clamp(progress * 4) * Math.PI) * 14})`);
-    find('detection').setAttribute('opacity', smooth(progress * 8));
-    find('environment').setAttribute('opacity', environment > 0 ? '1' : '0');
-    find('solids').setAttribute('opacity', clamp((environment - .45) / .5));
-    points.forEach(({ point, dx, dy }) => {
-      point.setAttribute('transform', `translate(${dx * (1 - environment)} ${dy * (1 - environment)})`);
-      point.setAttribute('opacity', progress >= .25 ? 1 - environment * .65 : 0);
-    });
-    find('trajectory').setAttribute('opacity', progress >= .5 ? '1' : '0');
-    find('trajectory').style.strokeDashoffset = 1 - trajectory;
-    const t = smooth(trajectory), u = 1 - t;
-    const x = u ** 3 * 95 + 3 * u ** 2 * t * 115 + 3 * u * t ** 2 * 295 + t ** 3 * 254;
-    const y = u ** 3 * 86 + 3 * u ** 2 * t * 25 + 3 * u * t ** 2 * 40 + t ** 3 * 142;
-    find('tool').setAttribute('opacity', progress >= .5 ? '1' : '0');
-    find('tool').setAttribute('transform', `translate(${x} ${y}) rotate(${policy > 0 ? Math.sin(policy * Math.PI * 4) * 9 : -12 * (1 - t)})`);
-    find('policy').setAttribute('opacity', smooth(policy * 3));
-    root.dataset.policyBeat = String(Math.floor(policy * 9) % 3);
-    find('packet').setAttribute('cx', 8 + (progress * 12 % 1) * 64);
-  }
-
-  function tick(time) {
-    frame = null;
-    if (!canPlay()) { lastTime = null; draw(); return; }
-    if (lastTime !== null) progress = clamp(progress + Math.min(Math.max(time - lastTime, 0), 120) / (DURATION * 1000));
-    lastTime = time;
-    if (progress >= 1) wantPlayback = false;
-    draw();
-    if (canPlay()) frame = window.requestAnimationFrame(tick);
-    else lastTime = null;
-  }
-  function sync() {
-    if (frame !== null) window.cancelAnimationFrame(frame);
-    frame = null; lastTime = null;
-    draw();
-    if (canPlay()) frame = window.requestAnimationFrame(tick);
-  }
-  function selectPhase(index, focus = false) {
-    progress = (index + .95) / 4;
-    wantPlayback = false;
-    sync();
-    if (focus) steps[index].focus();
-  }
-  play.addEventListener('click', () => {
-    if (progress >= 1) progress = 0;
-    wantPlayback = !wantPlayback;
-    sync();
-  });
-  replay.addEventListener('click', () => { progress = 0; wantPlayback = true; sync(); });
-  timeline.addEventListener('input', () => { progress = clamp(Number(timeline.value) / 1000); wantPlayback = false; sync(); });
-  steps.forEach((step, i) => {
-    step.addEventListener('click', () => selectPhase(i));
-    step.addEventListener('keydown', event => {
-      let index;
-      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') index = (i + 1) % 4;
-      if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') index = (i + 3) % 4;
-      if (event.key === 'Home') index = 0;
-      if (event.key === 'End') index = 3;
-      if (index !== undefined) { event.preventDefault(); selectPhase(index, true); }
-    });
-  });
-  new IntersectionObserver(entries => { visible = entries.some(entry => entry.isIntersecting); sync(); }, { threshold: .15 }).observe(root);
-  document.addEventListener('visibilitychange', sync);
-  if (dialog) new MutationObserver(sync).observe(dialog, { attributes: true, attributeFilter: ['open'] });
-  reduced.addEventListener('change', () => { if (reduced.matches) wantPlayback = false; sync(); });
-  draw();
-  return {
-    setActive(value) {
-      if (active === value) return;
-      active = value;
-      if (active && !visited) { visited = true; wantPlayback = !reduced.matches; }
-      if (!active) wantPlayback = false;
-      sync();
-    },
-  };
+const fallbackPhases=[{start:0,end:1.8,caption:'识别烧杯与锥形瓶—滴管组合'},{start:1.8,end:7,caption:'右手捏住滴管胶头，在锥形瓶内操作'},{start:7,end:11,caption:'提起滴管，移到烧杯上方'},{start:11,end:24,caption:'保持滴管朝下，向烧杯滴加'},{start:24,end:29.5,caption:'将滴管放回锥形瓶并松手'},{start:29.5,end:40.5,caption:'拿起烧杯，轻晃后放回桌面'},{start:40.5,end:43.8867,caption:'松开烧杯，手退出操作区'}];
+export function mountAgentConversion(root){
+ if(!root)return null;
+ const $=n=>root.querySelector(`[data-ego-${n}]`),source=$('source'),output=$('output'),tabs=[...root.querySelectorAll('[data-ego-step]')];
+ let stage=0,layer='task',active=false,want=false,time=0,phases=fallbackPhases,manifest=null,frame=null;
+ const short=['识别','捏取','转移','滴加','放回','操作烧杯','退出'];
+ const setText=(n,t)=>$(n).textContent=t;
+ function media(video,name){if(CORRECTION_PENDING&&['robot','human','assets'].includes(name))name='configuration';if(video.dataset.media===name)return;video.pause();video.dataset.media=name;video.loop=name==='assets';if(name==='configuration'){video.poster=MEDIA+'configuration-overview.png';video.removeAttribute('src');video.load();return;}video.poster=MEDIA+name+'.jpg?v=geometry5';video.src=MEDIA+name+'.mp4?v=geometry5';video.load();}
+ function seekVideo(video,t){const duration=video.duration;if(!Number.isFinite(duration))return;const target=video.dataset.media==='assets'?t%duration:Math.min(t,duration-.05);if(Math.abs(video.currentTime-target)>.15)video.currentTime=Math.max(0,target);}
+ function update(){
+  const i=Math.max(0,phases.findIndex(p=>time>=p.start&&time<p.end)),p=phases[i];
+  setText('caption',p.caption);setText('phase-index',String(i+1).padStart(2,'0')+' / 07');setText('phase-window',`${p.start.toFixed(1)}–${p.end.toFixed(1)} s`);setText('time',`${time.toFixed(1).padStart(4,'0')} / 43.9 s`);$('scrub').value=time;
+  root.querySelectorAll('[data-phase]').forEach((b,j)=>b.setAttribute('aria-current',String(i===j)));
+  if(stage===4){setText('caption','检查证据 → Coding Agent 修改 → 重新生成；物理反馈后续接入');setText('phase-index','FEEDBACK');setText('phase-window','生成记录回顾');}
+  $('play').textContent=want?'暂停':'播放';$('play').setAttribute('aria-label',want?'暂停同步演示':'播放同步演示');
+ }
+ function play(){if(!active||document.hidden)return;seekVideo(source,time);seekVideo(output,time);source.play().catch(()=>{want=false;update()});output.play().catch(()=>{});}
+ function pause(){source.pause();output.pause();want=false;update();}
+ function jump(t){time=Math.min(43.8,Math.max(0,t));seekVideo(source,time);seekVideo(output,time);update();}
+ function layers(){
+  $('layers').replaceChildren();for(const [id,label] of stages[stage].layers){const b=document.createElement('button');b.type='button';b.textContent=label;b.setAttribute('aria-pressed',String(id===layer));b.addEventListener('click',()=>{layer=id;media(output,id);layers();if(want)play()});$('layers').append(b)}
+ }
+ function select(i,focus=false){
+  const playing=want;source.pause();output.pause();stage=i;const s=stages[i];layer=s.layers[0][0];media(source,s.left);media(output,layer);layers();
+  for(const key of ['purpose','title','description','leftLabel','rightLabel','evidence','artifact']){const name=key.replace(/[A-Z]/g,c=>'-'+c.toLowerCase());setText(name,s[key])}setText('artifact-note',s.note);
+  tabs.forEach((b,j)=>{b.setAttribute('aria-selected',String(i===j));b.tabIndex=i===j?0:-1});$('stage');root.querySelector('#ego-stage').setAttribute('aria-labelledby',tabs[i].id);
+  $('properties').hidden=i!==1;$('phases').hidden=i===4;$('scrub').setAttribute('aria-label',i===4?'反馈演示时间':'原视频时间');$('download').href=MEDIA+['task','geometry','contact','robot','feedback'][i]+'.mp4';root.querySelectorAll('[data-demo-stage]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.demoStage)===i))); $('feedback').hidden=i!==4;
+  $('agent-log').innerHTML=s.logs.map(([a,b],j)=>`<div class="ego-log-row"><i>${(i===4&&j===2)||b==='partial'?'○':'✓'}</i><span>${a}</span><em>${b}</em></div>`).join('');
+  if(focus)tabs[i].focus();update();if(playing)play();
+ }
+ for(const [i,p] of phases.entries()){const b=document.createElement('button');b.type='button';b.dataset.phase=i;b.textContent=`${String(i+1).padStart(2,'0')} ${short[i]}`;b.addEventListener('click',()=>jump(p.start));$('phases').append(b)}
+ root.querySelectorAll('[data-demo-stage]').forEach(b=>b.addEventListener('click',()=>{select(Number(b.dataset.demoStage));jump(0);root.querySelector('#ego-stage').scrollIntoView({behavior:'smooth',block:'start'})}));
+ tabs.forEach((b,i)=>{b.addEventListener('click',()=>select(i));b.addEventListener('keydown',e=>{let j;if(e.key==='ArrowRight')j=(i+1)%5;if(e.key==='ArrowLeft')j=(i+4)%5;if(e.key==='Home')j=0;if(e.key==='End')j=4;if(j!==undefined){e.preventDefault();select(j,true)}})});
+ $('play').addEventListener('click',()=>{if(want)pause();else{if(time>43.6)jump(0);want=true;play();update()}});
+ $('scrub').addEventListener('input',e=>{const target=Number(e.target.value);pause();jump(target)});
+ $('fullscreen').addEventListener('click',()=>{const v=root.querySelector('.ego-viewer');if(v.requestFullscreen)v.requestFullscreen();else output.webkitEnterFullscreen?.()});
+ for(const v of [source,output]){v.addEventListener('loadedmetadata',()=>{seekVideo(v,time);if(want&&active)v.play().catch(()=>{})});v.addEventListener('error',()=>{setText('method','媒体尚未加载，请检查本地文件或网络连接。')})}
+ source.addEventListener('ended',()=>{time=43.8;pause()});
+ function tick(){if(want&&active&&!source.paused){time=source.currentTime;seekVideo(output,time);update()}frame=requestAnimationFrame(tick)}tick();
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)pause()});
+ new IntersectionObserver(es=>{if(!es.some(e=>e.isIntersecting))pause()},{threshold:.05}).observe(root);
+ const checks={geometry:'已经生成动态滴管／烧杯位姿、刚体配准矩阵与显式布局适配。保留单目、遮挡、轴向转角和透明物体的不确定性；不是实测外参。',ik:'正在读取本轮运动学检查。',review:'三维接触锚点已绑定实际 Mesh 三角面，保留候选拒绝。坐标回算、骨段长度、关节限位及输入哈希均有检查记录。完整碰撞与接触力仍未验证。',physics:'本轮没有运行物理求解。力分配、摩擦、附着、胶头变形、液体转移和完整任务成功均未验证。'};
+ root.querySelectorAll('[data-ego-check]').forEach(b=>b.addEventListener('click',()=>{root.querySelectorAll('[data-ego-check]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));setText('check-detail',checks[b.dataset.egoCheck])}));
+ fetch(MEDIA+'manifest.json').then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(m=>{manifest=m;phases=m.phases;checks.ik=`${m.total_frames} 个运动学样本；关节位置限制${m.joint_bounds_pass?'通过':'未通过'}。最大 TCP 位置残差 ${(m.max_tcp_error_m*1000).toFixed(2)} mm，最大关节速度 ${m.max_joint_speed_rad_s.toFixed(2)} rad/s。碰撞与动力学未验证。`;update()}).catch(()=>{});
+ select(0);
+ return{setActive(v){active=v;if(!v)pause()},pause};
 }
