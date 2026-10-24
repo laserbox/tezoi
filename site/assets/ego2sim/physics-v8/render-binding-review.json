@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "frames": 1051,
+  "native_time_binding": true,
+  "all_pipe_positions_match": true,
+  "all_liquid_volumes_match": true,
+  "airborne_volume_matches": true,
+  "rejected_corruptions": [
+    "changed_pose",
+    "changed_liquid",
+    "removed_drops"
+  ],
+  "hashes": {
+    "motion.json": "82c7b1ac31757ac70953749ead82407c2bb7f5ff85ff7f7c67138f4e460373a3",
+    "liquid-motion.json": "61be421cd90c53fa3f725c951579475de374ff5e96cd96321ce108f0949cef8b",
+    "native-trace.npz": "a4eb8e98400e321a17f8fafa3adbf05be509838a0c3d052b689bbbbf12bc2015",
+    "liquid-native-trace.npz": "48ae4af447a54237277bdf71bebe4fe69ee5a0ed466e0b02122fde45fc1351ae"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "samples": 1051,
+  "peak_joint_velocity_rad_s": 1.8727714865732443,
+  "peak_joint_acceleration_rad_s2": 2.25408250116835,
+  "largest_frame_joint_change_rad": 0.06364535034873528,
+  "nominal_fps": 30,
+  "actual_sample_dt_range_s": [
+    0.03199999999992542,
+    0.03400000000007175
+  ],
+  "interpretation": "Diagnostics of actual sampled motion, not an additional acceptance gate or a same-clock baseline comparison"
+}

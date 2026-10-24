@@ -394,5 +394,13 @@
     "physical_duration_seconds": 35,
     "source_clock_unchanged": true,
     "report": "physics-v7-review.html"
+  },
+  "physics_v8": {
+    "task_passed": true,
+    "liquid_model": "reduced-order isothermal air + viscous column + ballistic droplets; not CFD",
+    "received_ml": 0.16154588631210326,
+    "legacy_tip_proxy_passed": false,
+    "native_steps": 175000,
+    "report": "physics-v8-review.html"
   }
 }

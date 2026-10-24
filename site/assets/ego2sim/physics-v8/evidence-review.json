@@ -1,0 +1,35 @@
+{
+  "coverage_pass": true,
+  "legacy_tip_proxy_passed": false,
+  "contact_metric_revision": "V8 compliance-aware grasp: <=5mm cumulative force-weighted interface slip per finger, <=5mm bulb-center motion, <=5deg relative rotation; absolute arrival and return gates unchanged. Not a claim that the V7 tip-frame gate passed.",
+  "rejection_tests_pass": [
+    "coverage",
+    "lost_contact",
+    "forbidden_contact",
+    "misreported_tip_proxy",
+    "solver_cap",
+    "patch_slip",
+    "grasp_center",
+    "rotation"
+  ],
+  "native_steps": 175000,
+  "video_samples": 1051,
+  "body_attachment_welds": 0,
+  "free_task_bodies": [
+    "dropper",
+    "flask",
+    "mix"
+  ],
+  "hashes": {
+    "model.xml": "fa4f3e6a86a5c5e968e6ed79133935e7193b74f1ca6335430888b6765876dd3a",
+    "controller.py": "3016721b77f34c73ba07c29884fbe7cb00696f1ee664e43718801f2488ebc04f",
+    "native_audit.py": "b71cf6b31a58c2283fc18c438959c9e60632fc855aceb7e8ab8e17d2bf865118",
+    "native-review.json": "1718af96590e120d19a7b82b9cf323d0eeb19d2587d92feb93979db3b0deed6d",
+    "native-trace.npz": "a4eb8e98400e321a17f8fafa3adbf05be509838a0c3d052b689bbbbf12bc2015",
+    "contact-native-trace.npz": "70c426d9a5498b1361d1b4b78d574529e713820159cfdc74d370c3e43490b270",
+    "lean_audit.py": "8465ea8d23ceb826fe9201fb022e8a8f8aea021bdaf57ebd404adf34b9291a06",
+    "motion.json": "82c7b1ac31757ac70953749ead82407c2bb7f5ff85ff7f7c67138f4e460373a3",
+    "audit.json": "91bbf00a2a3c8f1fa639afd082aff1d894d74091e0a82f5b30c7363b94664a3f",
+    "plan.json": "52db10d3db2c4690ae54e633d54b75edd1bf18807733481f66f8c059a407d9ed"
+  }
+}

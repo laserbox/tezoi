@@ -1,0 +1,15 @@
+{
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "platform": "Linux-6.14.0-24-generic-x86_64-with-glibc2.39",
+  "mujoco": "3.17.0",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "dt": 0.0002,
+  "native_steps": 175000,
+  "liquid_unit_tests": 7,
+  "contact_rejection_tests": 8,
+  "liquid_rejection_tests": 5,
+  "render_binding_rejection_tests": 3,
+  "rendering": "Blender 4.5.3 Cycles OptiX 24 samples 1280x960",
+  "limitations": "Nominal engineering model, simulation-state feedback, not CFD or physical calibration"
+}
