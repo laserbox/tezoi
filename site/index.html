@@ -9,8 +9,8 @@
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=review-fixes-20261023">
   <script src="site-shell.js?v=site-navigation-20261022" type="module"></script>
-  <script src="app.js?v=agent-compact-20261024" type="module"></script>
-  <link rel="stylesheet" href="ego2sim.css?v=agent-compact-20261024">
+  <script src="app.js?v=agent-subdemos-20261024" type="module"></script>
+  <link rel="stylesheet" href="ego2sim.css?v=agent-subdemos-20261024">
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">跳到正文</a>
@@ -67,6 +67,7 @@
 <div class="ego-lab ego-compact" data-agent-conversion data-ego-compact aria-label="滴管任务 Ego2Sim 转换演示">
   <div class="ego-tabs" role="tablist" aria-label="Ego2Sim 转换阶段"><button role="tab" id="ego-tab-0" aria-selected="true" aria-controls="ego-stage" data-ego-step="0" tabindex="0"><span>01</span>任务理解</button><button role="tab" id="ego-tab-1" aria-selected="false" aria-controls="ego-stage" data-ego-step="1" tabindex="-1"><span>02</span>场景重建</button><button role="tab" id="ego-tab-2" aria-selected="false" aria-controls="ego-stage" data-ego-step="2" tabindex="-1"><span>03</span>三维接触</button><button role="tab" id="ego-tab-3" aria-selected="false" aria-controls="ego-stage" data-ego-step="3" tabindex="-1"><span>04</span>动作重定向</button><button role="tab" id="ego-tab-4" aria-selected="false" aria-controls="ego-stage" data-ego-step="4" tabindex="-1"><span>05</span>验证反馈</button></div>
   <div id="ego-stage" role="tabpanel" aria-labelledby="ego-tab-0">
+    <div class="ego-subviews" role="group" aria-label="本阶段 Demo" data-ego-layers></div>
     <div class="ego-viewer">
       <figure><div class="ego-view-label"><span data-ego-left-label>第一视角视频</span></div><video data-ego-source playsinline muted preload="metadata" poster="assets/ego2sim/source.jpg" src="assets/ego2sim/source.mp4" aria-label="原始滴管视频"></video></figure>
       <figure><div class="ego-view-label"><span data-ego-right-label>任务理解</span></div><video data-ego-output playsinline muted preload="metadata" poster="assets/ego2sim/task.jpg" src="assets/ego2sim/task.mp4" aria-label="当前阶段处理结果"></video></figure>

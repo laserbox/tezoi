@@ -35,8 +35,13 @@ export function mountAgentConversion(root){
  function play(){if(!active||document.hidden)return;seekVideo(source,time);seekVideo(output,time);source.play().catch(()=>{want=false;update()});output.play().catch(()=>{});}
  function pause(){source.pause();output.pause();want=false;update();}
  function jump(t){time=Math.min(43.8,Math.max(0,t));seekVideo(source,time);seekVideo(output,time);update();}
+ function layerLabel(){
+  const label=stages[stage].layers.find(([id])=>id===layer)?.[1];
+  if(compact)setText('right-label',label);
+  output.setAttribute('aria-label',label+'演示');
+ }
  function layers(){
-  if(!$('layers'))return;$('layers').replaceChildren();for(const [id,label] of stages[stage].layers){const b=document.createElement('button');b.type='button';b.textContent=label;b.setAttribute('aria-pressed',String(id===layer));b.addEventListener('click',()=>{layer=id;media(output,id);layers();if(want)play()});$('layers').append(b)}
+  if(!$('layers'))return;$('layers').replaceChildren();for(const [id,label] of stages[stage].layers){const b=document.createElement('button');b.type='button';b.textContent=label;b.setAttribute('aria-pressed',String(id===layer));b.addEventListener('click',()=>{layer=id;media(output,id);layers();layerLabel();if(want)play()});$('layers').append(b)}
  }
  function select(i,focus=false){
   const playing=want;source.pause();output.pause();stage=i;const s=stages[i];layer=compact&&i===3?'robot-detail':s.layers[0][0];media(source,s.left);media(output,layer);layers();
@@ -45,6 +50,7 @@ export function mountAgentConversion(root){
   if($('properties'))$('properties').hidden=i!==1;if($('phases'))$('phases').hidden=i===4;$('scrub').setAttribute('aria-label',i===4?'反馈演示时间':'原视频时间');if($('download'))$('download').href=MEDIA+['task','geometry','contact','robot','feedback'][i]+'.mp4';root.querySelectorAll('[data-demo-stage]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.demoStage)===i))); if($('feedback'))$('feedback').hidden=i!==4;
   if($('agent-log'))$('agent-log').innerHTML=s.logs.map(([a,b],j)=>`<div class="ego-log-row"><i>${(i===4&&j===2)||b==='partial'?'○':'✓'}</i><span>${a}</span><em>${b}</em></div>`).join('');
   if(compact){setText('description',compactDescriptions[i]);setText('left-label',i===4?'机器人动作候选':'第一视角视频');setText('right-label',['任务理解','场景重建','三维接触','机器人重定向','检查与反馈'][i]);}
+  layerLabel();
   if(focus)tabs[i].focus();update();if(playing)play();
  }
  for(const [i,p] of phases.entries()){const b=document.createElement('button');b.type='button';b.dataset.phase=i;b.textContent=`${String(i+1).padStart(2,'0')} ${short[i]}`;b.addEventListener('click',()=>jump(p.start));$('phases')?.append(b)}

@@ -4,7 +4,7 @@
 
 .ego-demo-gallery{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin:25px 0 30px}.ego-demo-gallery button{text-align:left;padding:0 0 13px;border:1px solid #c9d9d2;border-radius:12px;background:#f5f8f5;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;color:#2b4449}.ego-demo-gallery button[aria-pressed=true]{border-color:#528270;background:#e5efe8}.ego-demo-gallery img{width:100%;aspect-ratio:16/9;object-fit:contain;background:#23363c}.ego-demo-gallery span,.ego-demo-gallery strong,.ego-demo-gallery em{margin:0 12px}.ego-demo-gallery .ego-demo-number{font-size:9px;letter-spacing:.08em;margin-top:12px;color:#648b7c}.ego-demo-gallery strong{font-size:13px;line-height:1.5;font-weight:500;margin-top:5px}.ego-demo-gallery span:not(.ego-demo-number){font-size:10px;color:#6b8484;margin-top:5px}.ego-demo-gallery em{font-size:10px;color:#427a63;font-style:normal;margin-top:14px}.ego-stage-download{display:flex;gap:25px;padding:18px 0;font-size:12px;color:#436e63}.ego-stage-download a{border-bottom:1px solid #aec7bc}#ego-stage{scroll-margin-top:24px}@media(max-width:850px){.ego-demo-gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:560px){.ego-demo-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.ego-demo-gallery strong{font-size:12px}.ego-stage-download{flex-wrap:wrap}}
 
-/* Main-page summary; the standalone demo retains the full evidence workspace. */
+/* Five main stages with directly accessible sub-demos; detailed evidence stays in the standalone view. */
 #workflow-panel-agent{scroll-margin-top:125px}
 .ego-compact{container-type:inline-size;max-width:none}
 .ego-compact .ego-tabs{margin:0 0 24px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));overflow:visible;gap:10px}
@@ -18,3 +18,7 @@
 .ego-compact-footer a{color:#326b5e;text-decoration:none;border-bottom:1px solid #abc5bb;padding-bottom:3px}
 @container(max-width:650px){.ego-compact .ego-tabs button{font-size:12px}.ego-compact .ego-tabs{gap:5px}.ego-compact .ego-view-label{font-size:11px}.ego-compact-description{font-size:14px}}
 @media(max-width:560px){.ego-compact .ego-viewer{grid-template-columns:1fr 1fr}.ego-compact .ego-viewer figure:first-child{display:block}.ego-compact .ego-view-label{padding:9px;font-size:10px}.ego-compact-footer{font-size:10px}.ego-compact .ego-caption p{font-size:12px}}
+
+.ego-compact .ego-subviews{gap:8px;margin:0 0 18px}
+.ego-compact .ego-subviews button{font-size:12px;padding:8px 13px;line-height:1.5;cursor:pointer}
+.ego-compact .ego-subviews button:hover{border-color:#678b83}
