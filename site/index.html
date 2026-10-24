@@ -9,8 +9,8 @@
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=review-fixes-20261023">
   <script src="site-shell.js?v=site-navigation-20261022" type="module"></script>
-  <script src="app.js?v=agent-v5-20261024" type="module"></script>
-  <link rel="stylesheet" href="ego2sim.css?v=agent-v5-20261024">
+  <script src="app.js?v=agent-compact-20261024" type="module"></script>
+  <link rel="stylesheet" href="ego2sim.css?v=agent-compact-20261024">
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">跳到正文</a>
@@ -63,32 +63,19 @@
               <div class="workflow-artifacts" aria-label="Ego 输入"><div><strong>Scene</strong><p>真实环境与空间关系</p></div><div><strong>Interaction</strong><p>对象、接触与操作过程</p></div><div><strong>Task</strong><p>任务目标与子任务顺序</p></div></div>
             </section>
             <section class="workflow-panel" id="workflow-panel-agent" data-workflow-panel="agent" role="tabpanel" aria-labelledby="workflow-tab-agent" hidden>
-              <div class="workflow-pane-heading"><h4>从 Ego 构建仿真</h4><p>从真实滴管示范出发，查看任务分解、场景重建、三维接触与机器人重定向。</p></div>
-<div class="ego-lab" data-agent-conversion aria-label="滴管任务 Ego2Sim 处理结果">
-  <div class="ego-heading"><div><p class="ego-kicker">EGO2SIM · LAB TRANSFER</p><h3>一段示范，逐步成为机器人场景。</h3><p class="ego-intro">沿着同一段视频，查看 Agent 如何理解操作、重建两组资产、恢复手部动作，再映射到 RealMan。</p></div><span class="ego-state"><i></i>转换演示 · 未运行物理求解</span></div>
-<div class="ego-demo-gallery" aria-label="五个阶段的独立视频演示"><button type="button" data-demo-stage="0" aria-label="查看阶段 1：任务理解与分解"><img src="assets/ego2sim/task.jpg?v=geometry5" loading="lazy" alt="任务理解与分解视频预览"><span class="ego-demo-number">01 / DEMO</span><strong>任务理解与分解</strong><span>时间字幕 · 7 个操作阶段</span><em>查看演示 ↗</em></button><button type="button" data-demo-stage="1" aria-label="查看阶段 2：场景与资产重建"><img src="assets/ego2sim/geometry.jpg?v=geometry5" loading="lazy" alt="场景与资产重建视频预览"><span class="ego-demo-number">02 / DEMO</span><strong>场景与资产重建</strong><span>深度 → 点云 → 桌面 → Mesh</span><em>查看演示 ↗</em></button><button type="button" data-demo-stage="2" aria-label="查看阶段 3：人类动作与接触"><img src="assets/ego2sim/contact.jpg?v=geometry5" loading="lazy" alt="人类动作与接触视频预览"><span class="ego-demo-number">03 / DEMO</span><strong>人类动作与接触</strong><span>重投影优化 · 接触证据</span><em>查看演示 ↗</em></button><button type="button" data-demo-stage="3" aria-label="查看阶段 4：机器人动作重定向"><img src="assets/ego2sim/robot.jpg?v=geometry5" loading="lazy" alt="机器人动作重定向视频预览"><span class="ego-demo-number">04 / DEMO</span><strong>机器人动作重定向</strong><span>RealMan RM65-B + Xense</span><em>查看演示 ↗</em></button><button type="button" data-demo-stage="4" aria-label="查看阶段 5：验证与反馈闭环"><img src="assets/ego2sim/feedback.jpg?v=geometry5" loading="lazy" alt="验证与反馈闭环视频预览"><span class="ego-demo-number">05 / DEMO</span><strong>验证与反馈闭环</strong><span>检查 → 修改 → 再生成</span><em>查看演示 ↗</em></button></div>
-  <div class="ego-tabs" role="tablist" aria-label="Ego2Sim 转换阶段">
-    <button role="tab" id="ego-tab-0" aria-selected="true" aria-controls="ego-stage" data-ego-step="0"><span>01</span>任务理解</button>
-    <button role="tab" id="ego-tab-1" aria-selected="false" aria-controls="ego-stage" data-ego-step="1" tabindex="-1"><span>02</span>场景与资产</button>
-    <button role="tab" id="ego-tab-2" aria-selected="false" aria-controls="ego-stage" data-ego-step="2" tabindex="-1"><span>03</span>动作与接触</button>
-    <button role="tab" id="ego-tab-3" aria-selected="false" aria-controls="ego-stage" data-ego-step="3" tabindex="-1"><span>04</span>机器人重定向</button>
-    <button role="tab" id="ego-tab-4" aria-selected="false" aria-controls="ego-stage" data-ego-step="4" tabindex="-1"><span>05</span>验证与反馈</button>
-  </div>
+              <div class="workflow-pane-heading"><h4>从 Ego 构建仿真</h4><p>一段人类示范，如何成为机器人的场景与动作。</p></div>
+<div class="ego-lab ego-compact" data-agent-conversion data-ego-compact aria-label="滴管任务 Ego2Sim 转换演示">
+  <div class="ego-tabs" role="tablist" aria-label="Ego2Sim 转换阶段"><button role="tab" id="ego-tab-0" aria-selected="true" aria-controls="ego-stage" data-ego-step="0" tabindex="0"><span>01</span>任务理解</button><button role="tab" id="ego-tab-1" aria-selected="false" aria-controls="ego-stage" data-ego-step="1" tabindex="-1"><span>02</span>场景重建</button><button role="tab" id="ego-tab-2" aria-selected="false" aria-controls="ego-stage" data-ego-step="2" tabindex="-1"><span>03</span>三维接触</button><button role="tab" id="ego-tab-3" aria-selected="false" aria-controls="ego-stage" data-ego-step="3" tabindex="-1"><span>04</span>动作重定向</button><button role="tab" id="ego-tab-4" aria-selected="false" aria-controls="ego-stage" data-ego-step="4" tabindex="-1"><span>05</span>验证反馈</button></div>
   <div id="ego-stage" role="tabpanel" aria-labelledby="ego-tab-0">
-   <div class="ego-subviews" aria-label="处理结果图层" data-ego-layers></div>
-   <div class="ego-viewer">
-    <figure><div class="ego-view-label"><span data-ego-left-label>INPUT / 第一视角</span><b>IMG_6100</b></div><video data-ego-source playsinline muted preload="metadata" poster="assets/ego2sim/source.jpg" src="assets/ego2sim/source.mp4" aria-label="原始滴管视频"></video></figure>
-    <figure><div class="ego-view-label"><span data-ego-right-label>OUTPUT / 任务分解</span><b data-ego-evidence>视频观察</b></div><video data-ego-output playsinline muted preload="metadata" poster="assets/ego2sim/task.jpg" src="assets/ego2sim/task.mp4" aria-label="当前阶段处理结果"></video></figure>
-    <div class="ego-caption"><span data-ego-phase-index>01 / 07</span><p data-ego-caption>识别烧杯与锥形瓶—滴管组合</p><span data-ego-phase-window>00.0–01.8 s</span></div>
-   </div>
-   <div class="ego-controls"><button type="button" data-ego-play aria-label="播放同步演示">播放</button><input type="range" data-ego-scrub min="0" max="43.83" step="0.01" value="0" aria-label="原视频时间"><output data-ego-time>00.0 / 43.9 s</output><button type="button" data-ego-fullscreen aria-label="全屏查看处理结果">放大 ↗</button></div>
-   <div class="ego-body"><div class="ego-description"><p class="ego-kicker" data-ego-purpose>OBSERVATION → TASK GRAPH</p><h4 data-ego-title>先理解做什么，再决定如何做。</h4><p data-ego-description>把操作拆成有时间边界的动作阶段，明确操作对象、手部角色和完成条件。滴加意图可由视频识别，液量与接触力仍需后续验证。</p><div class="ego-phase-list" data-ego-phases aria-label="操作阶段导航"></div></div>
-    <aside class="ego-agent"><div class="ego-agent-heading"><span class="ego-agent-dot"></span><strong>Coding Agent</strong><span>本次生成记录</span></div><div data-ego-agent-log></div><div class="ego-artifact"><span>输出</span><strong data-ego-artifact>带时间戳的任务图</strong><span data-ego-artifact-note>7 个操作阶段 · 保留原视频时间</span></div></aside>
-   </div>
-   <div class="ego-properties" data-ego-properties hidden><div><span class="ego-kicker">ASSET A</span><h4>烧杯</h4><p>原滴管配置：高 90 mm · 直径约 60 mm</p><p>原任务玻璃模型，沿用上一版黄绿色液体；液量未标定。</p></div><div><span class="ego-kicker">ASSET B</span><h4>锥形瓶 + 滴管</h4><p>原滴管配置：瓶高 140 mm · 管长 160 mm</p><p>滴管作为组合内的可动部件；胶头材料属性待实测。</p></div><p class="ego-property-source">原任务尺寸，沿用上一版蓝青色液体；液量未标定。单目深度是相对估计，遮挡补全不是隐藏区域真值。</p></div>
-   <div class="ego-feedback" data-ego-feedback hidden><div class="ego-loop" aria-label="验证反馈闭环"><button data-ego-check="geometry">场景与约束</button><span>→</span><button data-ego-check="ik">运动学预检</button><span>→</span><button data-ego-check="review">检查与修改</button><span>↺</span><button class="ego-future" data-ego-check="physics">物理验证 · 后续接入</button></div><p data-ego-check-detail>本轮检查资产范围、轨迹端点和关节限制。物理接触、液体转移和任务成功尚未求解。</p></div>
+    <div class="ego-viewer">
+      <figure><div class="ego-view-label"><span data-ego-left-label>第一视角视频</span></div><video data-ego-source playsinline muted preload="metadata" poster="assets/ego2sim/source.jpg" src="assets/ego2sim/source.mp4" aria-label="原始滴管视频"></video></figure>
+      <figure><div class="ego-view-label"><span data-ego-right-label>任务理解</span></div><video data-ego-output playsinline muted preload="metadata" poster="assets/ego2sim/task.jpg" src="assets/ego2sim/task.mp4" aria-label="当前阶段处理结果"></video></figure>
+      <div class="ego-caption"><p data-ego-caption>识别烧杯与锥形瓶—滴管组合</p></div>
+    </div>
+    <div class="ego-controls"><button type="button" data-ego-play aria-label="播放同步演示">播放</button><input data-ego-scrub type="range" min="0" max="43.8" step="0.01" value="0" aria-label="原视频时间"><output data-ego-time>00.0 / 43.9 s</output><button type="button" data-ego-fullscreen aria-label="全屏查看处理结果">放大 ↗</button></div>
+    <p class="ego-compact-description" data-ego-description></p>
   </div>
-  <div class="ego-stage-download"><a href="assets/ego2sim/geometry-v5-review.html" target="_blank" rel="noopener">点云、坐标与接触检查 ↗</a><a data-ego-download href="assets/ego2sim/task.mp4" download>下载本阶段 demo ↗</a><a href="assets/ego2sim/architecture.svg" target="_blank" rel="noopener">查看完整架构图 ↗</a></div><div class="ego-footnote"><span data-ego-method>5 个独立阶段 demo · 原滴管配置 · 运动学转换展示</span><div><a href="assets/ego2sim/overview.mp4" download>下载转换总览 ↗</a><a href="assets/ego2sim/configuration-review.html" target="_blank" rel="noopener">装配来源核对 ↗</a><a href="assets/ego2sim/geometry-v5-review.html" target="_blank" rel="noopener">查看生成报告 ↗</a></div></div>
+  <div class="ego-compact-footer"><span>转换演示 · 未运行物理求解</span><a href="demo.html" target="_blank" rel="noopener">查看完整过程与报告 ↗</a></div>
 </div>
             </section>
             <section class="workflow-panel" id="workflow-panel-simulation" data-workflow-panel="simulation" role="tabpanel" aria-labelledby="workflow-tab-simulation">

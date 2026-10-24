@@ -1,5 +1,12 @@
 // Real, precomputed demo artifacts. No inference or physical simulation is run in the browser.
 const MEDIA='assets/ego2sim/';
+const compactDescriptions=[
+ '识别捏取、转移、滴加与放回，把示范拆解为任务步骤。',
+ '从分割与深度恢复桌面、物体和尺度，重建可编辑场景。',
+ '恢复三维手部动作，定位手指与滴管、烧杯的接触关系。',
+ '将人手动作映射到 RealMan + Xense，呈现滴管到夹爪的对齐。',
+ '检查接触与轨迹偏差，修改后重新生成；物理验证后续接入。'
+];
 const CORRECTION_PENDING=false;
 const stages=[
  {purpose:'VIDEO → OBJECT EVENTS → TASK GRAPH',title:'让任务分解连接实际观测。',description:'同一视频时间轴上展示操作意图、胶头与管尖观测状态，再用人手—物体接触候选确定机器人换物时机。字幕描述任务意图；液量和任务成功仍未测量。',layers:[['task','任务字幕与观测']],left:'source',leftLabel:'INPUT / 第一视角',rightLabel:'OUTPUT / 任务分解',evidence:'视频观察 + 接触事件',logs:[['保留原视频时间轴','43.89 s'],['识别两组任务资产','2 groups'],['接触事件连接机器人换物','source linked']],artifact:'任务图与源帧事件',note:'滴加意图不等于液体转移成功'},
@@ -12,9 +19,10 @@ const fallbackPhases=[{start:0,end:1.8,caption:'识别烧杯与锥形瓶—滴�
 export function mountAgentConversion(root){
  if(!root)return null;
  const $=n=>root.querySelector(`[data-ego-${n}]`),source=$('source'),output=$('output'),tabs=[...root.querySelectorAll('[data-ego-step]')];
+ const compact=root.hasAttribute('data-ego-compact');
  let stage=0,layer='task',active=false,want=false,time=0,phases=fallbackPhases,manifest=null,frame=null;
  const short=['识别','捏取','转移','滴加','放回','操作烧杯','退出'];
- const setText=(n,t)=>$(n).textContent=t;
+ const setText=(n,t)=>{const el=$(n);if(el)el.textContent=t};
  function media(video,name){if(CORRECTION_PENDING&&['robot','human','assets'].includes(name))name='configuration';if(video.dataset.media===name)return;video.pause();video.dataset.media=name;video.loop=name==='assets';if(name==='configuration'){video.poster=MEDIA+'configuration-overview.png';video.removeAttribute('src');video.load();return;}video.poster=MEDIA+name+'.jpg?v=geometry5';video.src=MEDIA+name+'.mp4?v=geometry5';video.load();}
  function seekVideo(video,t){const duration=video.duration;if(!Number.isFinite(duration))return;const target=video.dataset.media==='assets'?t%duration:Math.min(t,duration-.05);if(Math.abs(video.currentTime-target)>.15)video.currentTime=Math.max(0,target);}
  function update(){
@@ -28,17 +36,18 @@ export function mountAgentConversion(root){
  function pause(){source.pause();output.pause();want=false;update();}
  function jump(t){time=Math.min(43.8,Math.max(0,t));seekVideo(source,time);seekVideo(output,time);update();}
  function layers(){
-  $('layers').replaceChildren();for(const [id,label] of stages[stage].layers){const b=document.createElement('button');b.type='button';b.textContent=label;b.setAttribute('aria-pressed',String(id===layer));b.addEventListener('click',()=>{layer=id;media(output,id);layers();if(want)play()});$('layers').append(b)}
+  if(!$('layers'))return;$('layers').replaceChildren();for(const [id,label] of stages[stage].layers){const b=document.createElement('button');b.type='button';b.textContent=label;b.setAttribute('aria-pressed',String(id===layer));b.addEventListener('click',()=>{layer=id;media(output,id);layers();if(want)play()});$('layers').append(b)}
  }
  function select(i,focus=false){
-  const playing=want;source.pause();output.pause();stage=i;const s=stages[i];layer=s.layers[0][0];media(source,s.left);media(output,layer);layers();
+  const playing=want;source.pause();output.pause();stage=i;const s=stages[i];layer=compact&&i===3?'robot-detail':s.layers[0][0];media(source,s.left);media(output,layer);layers();
   for(const key of ['purpose','title','description','leftLabel','rightLabel','evidence','artifact']){const name=key.replace(/[A-Z]/g,c=>'-'+c.toLowerCase());setText(name,s[key])}setText('artifact-note',s.note);
   tabs.forEach((b,j)=>{b.setAttribute('aria-selected',String(i===j));b.tabIndex=i===j?0:-1});$('stage');root.querySelector('#ego-stage').setAttribute('aria-labelledby',tabs[i].id);
-  $('properties').hidden=i!==1;$('phases').hidden=i===4;$('scrub').setAttribute('aria-label',i===4?'反馈演示时间':'原视频时间');$('download').href=MEDIA+['task','geometry','contact','robot','feedback'][i]+'.mp4';root.querySelectorAll('[data-demo-stage]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.demoStage)===i))); $('feedback').hidden=i!==4;
-  $('agent-log').innerHTML=s.logs.map(([a,b],j)=>`<div class="ego-log-row"><i>${(i===4&&j===2)||b==='partial'?'○':'✓'}</i><span>${a}</span><em>${b}</em></div>`).join('');
+  if($('properties'))$('properties').hidden=i!==1;if($('phases'))$('phases').hidden=i===4;$('scrub').setAttribute('aria-label',i===4?'反馈演示时间':'原视频时间');if($('download'))$('download').href=MEDIA+['task','geometry','contact','robot','feedback'][i]+'.mp4';root.querySelectorAll('[data-demo-stage]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.demoStage)===i))); if($('feedback'))$('feedback').hidden=i!==4;
+  if($('agent-log'))$('agent-log').innerHTML=s.logs.map(([a,b],j)=>`<div class="ego-log-row"><i>${(i===4&&j===2)||b==='partial'?'○':'✓'}</i><span>${a}</span><em>${b}</em></div>`).join('');
+  if(compact){setText('description',compactDescriptions[i]);setText('left-label',i===4?'机器人动作候选':'第一视角视频');setText('right-label',['任务理解','场景重建','三维接触','机器人重定向','检查与反馈'][i]);}
   if(focus)tabs[i].focus();update();if(playing)play();
  }
- for(const [i,p] of phases.entries()){const b=document.createElement('button');b.type='button';b.dataset.phase=i;b.textContent=`${String(i+1).padStart(2,'0')} ${short[i]}`;b.addEventListener('click',()=>jump(p.start));$('phases').append(b)}
+ for(const [i,p] of phases.entries()){const b=document.createElement('button');b.type='button';b.dataset.phase=i;b.textContent=`${String(i+1).padStart(2,'0')} ${short[i]}`;b.addEventListener('click',()=>jump(p.start));$('phases')?.append(b)}
  root.querySelectorAll('[data-demo-stage]').forEach(b=>b.addEventListener('click',()=>{select(Number(b.dataset.demoStage));jump(0);root.querySelector('#ego-stage').scrollIntoView({behavior:'smooth',block:'start'})}));
  tabs.forEach((b,i)=>{b.addEventListener('click',()=>select(i));b.addEventListener('keydown',e=>{let j;if(e.key==='ArrowRight')j=(i+1)%5;if(e.key==='ArrowLeft')j=(i+4)%5;if(e.key==='Home')j=0;if(e.key==='End')j=4;if(j!==undefined){e.preventDefault();select(j,true)}})});
  $('play').addEventListener('click',()=>{if(want)pause();else{if(time>43.6)jump(0);want=true;play();update()}});
