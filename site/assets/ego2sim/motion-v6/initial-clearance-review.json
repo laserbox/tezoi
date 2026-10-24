@@ -1,0 +1,13 @@
+{
+  "initial_penetration_m": 0.0020452111620748482,
+  "translation_m": [
+    -0.0008303993030486878,
+    -0.0016957394606719103,
+    -0.004989351095759214
+  ],
+  "translation_norm_m": 0.005334671468585229,
+  "corrected_penetration_m": 0.0017515510223607578,
+  "within_5mm_norm": false,
+  "converged": true,
+  "purpose": "Pre-solve initialization diagnostic only; no in-flight reset or applied correction yet"
+}

@@ -1,0 +1,50 @@
+{
+  "schema": "ego2sim.physics/6",
+  "engine": "MuJoCo 3.17.0",
+  "physics_run": true,
+  "liquid_solve": false,
+  "trajectory_sha256": "2ab46c9713bdef98da20d0b043dce4cce404c68488f72c5eb23ef5526758ae66",
+  "model_sha256": "e8ab1af86b3c887c30b8d36e28e97f34c64838a38eed6492a49750076389ef88",
+  "native_steps": 219000,
+  "simulated_seconds": 43.7999999999246,
+  "solver_dt_s": 0.0002,
+  "control_hz": 500,
+  "audit_sample_hz": 30,
+  "wall_seconds": 89.61289811134338,
+  "initialization": "source frame zero + original robot configuration; single continuous rollout; no resets",
+  "object_pose_forcing_after_initialization": false,
+  "grasp_weld": false,
+  "gravity_compensation": "arm bias torque through actuator control offset, plus reference velocity feed-forward; total actuator output retains original force caps; no qfrc_applied",
+  "collision_approximation": [
+    {
+      "body": "finger_left",
+      "model": "single convex hull of original CAD; conservative coarse collision approximation",
+      "sha256": "5aff9e0794bbbd7e774d7cd03a5c26a635d4812fe93d2652bde68f827aada0ca"
+    },
+    {
+      "body": "finger_right",
+      "model": "single convex hull of original CAD; conservative coarse collision approximation",
+      "sha256": "0205303167a7c68bd030df9f3035b46417c80eb3716e314a20c073de80e6f276"
+    }
+  ],
+  "nominal_materials_not_calibrated": true,
+  "numerical_warnings": [],
+  "max_sampled_joint_tracking_error_rad": 0.1140809424680671,
+  "max_sampled_penetration_mm": 2.1093178010372817,
+  "max_pipette_position_error_mm": 359.55884188630847,
+  "max_beaker_position_error_mm": 85.39792510956137,
+  "sampled_contact_force_peaks_N": {
+    "dropper/flask": 1033.6193125246355,
+    "flask/table": 1.7877416205192505,
+    "mix/table": 3.309013205434263,
+    "finger_left/finger_right": 26.99625902889266,
+    "base_link/link_2": 573.9809889668065,
+    "finger_left/mix": 2.2912455655037154
+  },
+  "task_success": false,
+  "limitations": [
+    "Reduced collision trial: finger CAD convex hulls; remaining selected bodies use original collision pieces.",
+    "Contact force and penetration peaks are sampled at 30 Hz, not every solver step.",
+    "No liquid transfer, deformable glass, calibrated friction or hardware-ready claim."
+  ]
+}

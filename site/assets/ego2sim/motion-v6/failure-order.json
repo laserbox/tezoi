@@ -1,0 +1,13 @@
+{
+  "first_sampled_contact_above_0_05N_s": {
+    "dropper/flask": 0.0020000000000000005,
+    "flask/table": 0.033999999999999905,
+    "mix/table": 0.033999999999999905,
+    "finger_left/finger_right": 2.8999999999997135,
+    "base_link/link_2": 31.667999999952873,
+    "finger_left/mix": 32.39999999995117
+  },
+  "initial_pose_has_penetration": true,
+  "physical_success": false,
+  "forces_are_nominal_model_results_not_measured": true
+}

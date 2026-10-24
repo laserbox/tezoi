@@ -1,0 +1,17 @@
+{
+  "before_m": 0.0020452111620748482,
+  "candidate": {
+    "translation_m": [
+      -0.006,
+      -0.005,
+      0.0
+    ],
+    "norm_m": 0.0078102496759066544,
+    "penetration_m": 0.0010467350127170338
+  },
+  "valid": false,
+  "initialization_only": true,
+  "max_translation_budget_m": 0.008,
+  "source_observation_unchanged": true,
+  "tested_candidates": 197
+}

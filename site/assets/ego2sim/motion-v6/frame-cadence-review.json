@@ -1,0 +1,24 @@
+{
+  "geometry-v5": {
+    "window_s": [
+      10,
+      18
+    ],
+    "frames": 240,
+    "near_still_transitions_MAD_lt_0_15": 192,
+    "transition_count": 239,
+    "median_gray_change": 0.007291666666666667,
+    "p95_gray_change": 11.53125
+  },
+  "geometry-v6": {
+    "window_s": [
+      10,
+      18
+    ],
+    "frames": 240,
+    "near_still_transitions_MAD_lt_0_15": 0,
+    "transition_count": 239,
+    "median_gray_change": 3.6428819444444445,
+    "p95_gray_change": 11.2578125
+  }
+}

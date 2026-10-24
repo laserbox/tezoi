@@ -1,6 +1,6 @@
 {
-  "schema": "ego2sim.dropper-demo/5",
-  "physics_advanced": false,
+  "schema": "ego2sim.dropper-demo/6",
+  "physics_advanced": true,
   "asset_groups": [
     "beaker",
     "flask_with_pipette"
@@ -15,11 +15,9 @@
   "robot": "RealMan RM65-B",
   "gripper": "Xense supplied six-hole parallel gripper",
   "camera": "Frozen task D435i external and physical wrist; original detail/virtual wrist separately labelled",
-  "retargeting": "V5: fixed V4 observation poses; articulated 3D contact; explicit task layout mapping retained; extra workspace projection and target smoothing removed; bounded IK and source-event release. No physics.",
-  "max_tcp_error_m": 0.003183637113992343,
-  "p95_tcp_error_m": 0.002028100130087904,
+  "retargeting": "V6: bounded joint smoothing, continuous opening/closing, 30 Hz interpolated rendering. Separate MuJoCo free-object contact rollout; task not passed.",
   "joint_bounds_pass": true,
-  "max_joint_speed_rad_s": 2.5646487900012658,
+  "max_joint_speed_rad_s": 3.347133650669236,
   "collision_checked": false,
   "contact_verified": false,
   "fluid_solved": false,
@@ -69,7 +67,7 @@
     "recover_hands",
     "retarget_IK",
     "preflight",
-    "future_physics_feedback"
+    "basic_contact_rollout_and_failure_review"
   ],
   "configuration_source": "runs/dropper-demo-20261023/corrected-config/construction.json",
   "configuration_sha256": "792af5dc96cc7e156e1941ffc78161b479fb23952e4ba4d6e1e559e36f348245",
@@ -108,8 +106,8 @@
     },
     {
       "id": "feedback",
-      "title": "验证与反馈闭环",
-      "file": "feedback.mp4"
+      "title": "基础接触试跑与失败反馈",
+      "file": "physics.mp4"
     }
   ],
   "liquid_appearance": {
@@ -277,5 +275,116 @@
       "No force allocation, liquid simulation, grasp success or physical feasibility claim."
     ]
   },
-  "segment_review": "geometry-v5/segment-review.json"
+  "segment_review": "geometry-v5/segment-review.json",
+  "motion_v6": {
+    "schema": "ego2sim.motion/6",
+    "source_sha256": "e13b3dcf389753e449575b98f087477e000d5f3435e1ebbd1baf582822770d98",
+    "actual_render_hz_before": 6,
+    "actual_render_hz_after": 30,
+    "trials": [
+      {
+        "lambda_": 0.001,
+        "max_contact_deviation_mm": 0.5061643341879024,
+        "max_deviation_mm": 0.5061643341879024,
+        "accepted": true
+      },
+      {
+        "lambda_": 0.003,
+        "max_contact_deviation_mm": 1.4520632597823973,
+        "max_deviation_mm": 1.4520632597823973,
+        "accepted": true
+      },
+      {
+        "lambda_": 0.006,
+        "max_contact_deviation_mm": 2.7277067918296827,
+        "max_deviation_mm": 2.7277067918296827,
+        "accepted": true
+      },
+      {
+        "lambda_": 0.01,
+        "max_contact_deviation_mm": 4.211292328235505,
+        "max_deviation_mm": 4.211292328235505,
+        "accepted": false
+      },
+      {
+        "lambda_": 0.03,
+        "max_contact_deviation_mm": 9.604114757022039,
+        "max_deviation_mm": 9.604114757022039,
+        "accepted": false
+      },
+      {
+        "lambda_": 0.1,
+        "max_contact_deviation_mm": 18.68065682712109,
+        "max_deviation_mm": 18.68065682712109,
+        "accepted": false
+      },
+      {
+        "lambda_": 0.3,
+        "max_contact_deviation_mm": 27.688778847192584,
+        "max_deviation_mm": 27.688778847192584,
+        "accepted": false
+      },
+      {
+        "lambda_": 1,
+        "max_contact_deviation_mm": 35.875071747433026,
+        "max_deviation_mm": 35.875071747433026,
+        "accepted": false
+      },
+      {
+        "lambda_": 3,
+        "max_contact_deviation_mm": 40.871715402057745,
+        "max_deviation_mm": 40.871715402057745,
+        "accepted": false
+      }
+    ],
+    "before_at_6hz": {
+      "peak_velocity": 2.5646487900012658,
+      "rms_acceleration": 2.536069189972506,
+      "peak_acceleration": 28.697769382682978,
+      "rms_jerk": 25.238030063618265,
+      "peak_jerk": 264.2586028340048
+    },
+    "after_at_6hz": {
+      "peak_velocity": 2.5496630825457753,
+      "rms_acceleration": 2.3189675162353756,
+      "peak_acceleration": 26.064754917339496,
+      "rms_jerk": 22.437443370600786,
+      "peak_jerk": 234.97587332323948
+    },
+    "after_at_30hz": {
+      "peak_velocity": 3.347133650669236,
+      "rms_acceleration": 3.764836486124142,
+      "peak_acceleration": 61.056932365992324,
+      "rms_jerk": 82.06596988682595,
+      "peak_jerk": 986.0977767242257
+    },
+    "dense_contact_frames": 1072,
+    "dense_contact_within_8mm": 1072,
+    "dense_contact_max_mm": 6.9497074505714425,
+    "dense_contact_p95_mm": 4.359922541089304,
+    "joint_bounds_pass": true,
+    "physics_run": false,
+    "source_event_times_s": [
+      3.1666666666666665,
+      30.5,
+      32.0,
+      40.333333333333336
+    ],
+    "limits": [
+      "Joint regularization changes the motion candidate; source estimates are preserved separately.",
+      "30 Hz poses are interpolated from 6 Hz estimates, not new observations.",
+      "This replay is kinematic; physical rollout is a separate artifact."
+    ]
+  },
+  "physics_v6": {
+    "report": "motion-v6/physics-review.json",
+    "run": true,
+    "scope": "Reduced contact trial; initialization penetration and grasp errors remain; no liquid solve",
+    "task_passed": false
+  },
+  "legacy_v5_tcp_error_m": {
+    "max_tcp_error_m": 0.003183637113992343,
+    "p95_tcp_error_m": 0.002028100130087904
+  },
+  "physics_scope": "Original nominal body/drive parameters; reduced finger convex collision model; not full physical qualification"
 }

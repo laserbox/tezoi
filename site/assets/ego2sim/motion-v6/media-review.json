@@ -1,0 +1,42 @@
+[
+  {
+    "name": "robot",
+    "sha256": "990786cc897bd1d3c584d4f96cf53b607c30c05a4ca354258163ae77249fa61e",
+    "width": 1280,
+    "height": 960,
+    "frames": 1315,
+    "fps": 30,
+    "seconds": 43.833333,
+    "decode_pass": true
+  },
+  {
+    "name": "robot-detail",
+    "sha256": "bb2ce93199303910e926d588f54203f9187ff88721e4a0bd203a15da31ec475c",
+    "width": 1280,
+    "height": 960,
+    "frames": 1315,
+    "fps": 30,
+    "seconds": 43.833333,
+    "decode_pass": true
+  },
+  {
+    "name": "robot-external",
+    "sha256": "6a4a54e0ba2a285647674340843ac4c40b0653a10a4b9270ad66906b12607b32",
+    "width": 1280,
+    "height": 960,
+    "frames": 1315,
+    "fps": 30,
+    "seconds": 43.833333,
+    "decode_pass": true
+  },
+  {
+    "name": "physics",
+    "sha256": "d2aec99602510da3c81fceefb99aa09d7390231d7c49cf8592f60b435856b029",
+    "width": 1280,
+    "height": 960,
+    "frames": 1315,
+    "fps": 30,
+    "seconds": 43.833333,
+    "decode_pass": true
+  }
+]
