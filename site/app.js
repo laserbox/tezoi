@@ -48,6 +48,7 @@ tabs.forEach((tab, i) => {
 });
 
 const videos = {
+  "gallery-soft-bag": {"src":"assets/gallery-soft-bag.mp4","title":"软袋开袋、加液与夹封","description":"实验室 / Dual UR5e / Allegro v4 / 2:15 / 原速","note":"双手打开软袋，协同托杯倾倒 225 mL 液体，放回杯体后机械夹封并撤手。完整原速三视角脚本仿真；液体采用简化模型，不模拟晃荡或飞溅，夹封尚未经气密或泄漏验证。"},
   "gallery-pigment-dilution": {"src":"assets/gallery-pigment-dilution.mp4","title":"色素稀释","description":"实验室 / UR5e / Robotiq 2F85 / 0:50","note":"夹爪挤压滴管胶头，展示不同预压力下的吸液、排液与色素浓度变化。液体采用简化模型，结果未经真机标定；此处播放完整仿真预览。"},
   "gallery-go2-walk": {"src":"assets/gallery-go2-walk.mp4","title":"Go2 行走","description":"运动控制 / Unitree Go2 / 0:05","note":"行走策略驱动四足机器人连续运动，呈现步态协调与足端地面接触。"},
   "gallery-g1-dance": {"src":"assets/gallery-g1-dance.mp4","title":"G1 舞蹈","description":"运动控制 / Unitree G1 / Dual Dex3 / 0:20","note":"舞蹈策略驱动人形机器人执行 Shuffle 动作，呈现连续步伐、躯干与双臂的协同运动。"},
