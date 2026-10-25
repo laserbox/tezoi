@@ -411,5 +411,13 @@
     "native_steps": 175000,
     "initial_arm_posture_replanned": true,
     "report": "physics-v9-review.html"
+  },
+  "physics_v10": {
+    "task_passed": true,
+    "original_tip_gate_passed": true,
+    "tip_relative_mm": 4.327466468752956,
+    "received_ml": 0.16149346758777192,
+    "native_steps": 175000,
+    "report": "physics-v10-review.html"
   }
 }

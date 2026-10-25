@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "baseline": "ready01",
+  "object_local_grasp_offset_m": [
+    0.0,
+    0.0,
+    -0.012
+  ],
+  "max_event_tool_tip_difference_m": 6.2238474531200624e-15,
+  "max_planned_tool_tip_difference_m": 6.955629013561602e-05,
+  "max_planned_axis_rotation_difference_deg": 6.30362676691019e-11,
+  "scope": "Planned tool pose reconstructed from robot FK and object-local grasp; event target equivalence, not actual physical trajectory equality or source-video accuracy.",
+  "hashes": {
+    "plan.json": "aa406d7ad6d0cc83af1aa70f94043d065cf91af0f0ad80522abc49d32adda204",
+    "grasp-adaptation.json": "37617775519a862ae1f634fa496d266a70362037feef65642ac202f8105d6b5e",
+    "motion.json": "5321c9e19feeb210c998bf8e551a7ec39ecb818c570f26782fe187413f791a5c",
+    "model.xml": "fa4f3e6a86a5c5e968e6ed79133935e7193b74f1ca6335430888b6765876dd3a"
+  }
+}

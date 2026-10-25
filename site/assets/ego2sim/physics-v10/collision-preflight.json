@@ -1,0 +1,13 @@
+{
+  "samples": 5101,
+  "rate_hz": 150,
+  "forbidden_contacts": [],
+  "forbidden_count": 0,
+  "max_forbidden_penetration_m": 0.0,
+  "peak_planned_joint_speed_rad_s": 0.9308643701893308,
+  "peak_planned_joint_acceleration_rad_s2": 2.599350997137642,
+  "passed": true,
+  "scope": "Static full-arm robot/environment sweep; pipe and containers held at initial pose. Dynamic object contact and force audited separately in full native rollout.",
+  "plan_sha256": "aa406d7ad6d0cc83af1aa70f94043d065cf91af0f0ad80522abc49d32adda204",
+  "model_sha256": "fa4f3e6a86a5c5e968e6ed79133935e7193b74f1ca6335430888b6765876dd3a"
+}

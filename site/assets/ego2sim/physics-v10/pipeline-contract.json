@@ -1,0 +1,117 @@
+{
+  "schema": "ego2sim.pipeline-contract/1",
+  "passed": true,
+  "transform_count": 528,
+  "inverse_roundtrip_error": 2.220446049250313e-16,
+  "xyzw_to_wxyz_rotation_error": 4.440892098500626e-16,
+  "negative_transform_cases_rejected": 3,
+  "compiled_model_matches_authored_mass_and_baseline": true,
+  "masses_kg": {
+    "base_link": 1.862,
+    "link_1": 1.51,
+    "link_2": 1.653,
+    "link_3": 0.726,
+    "link_4": 0.671,
+    "link_5": 0.647,
+    "link_6": 0.104,
+    "tool_adapter_link": 0.095,
+    "gripper_mount_plate": 0.1367263357210507,
+    "gripper_base_link": 0.52,
+    "finger_left": 0.07,
+    "finger_right": 0.07,
+    "wrist_d435i_link": 0.075,
+    "flask": 0.12,
+    "mix": 0.1,
+    "dropper": 0.009,
+    "bulb_left": 0.0020000000000000005,
+    "bulb_right": 0.0020000000000000005
+  },
+  "model_sha256": "fa4f3e6a86a5c5e968e6ed79133935e7193b74f1ca6335430888b6765876dd3a",
+  "grasp_constraints_added": 0,
+  "source_hashes": {
+    "geometry-v3/validation.json": "54c93eda612befc89a7c86027cff8fec288bfb8b1da5650056f5c68d75de2fe7",
+    "geometry-v3/reference.json": "0a762794c3af59fd5fa018ef23701bbbfb40a5c28171018b396e4727e5a74ba9",
+    "geometry-v5/coordinate-alignment.json": "910e1dd7da878c7507ee80667ae0cfc0ca770cde93e1caf0fdcfdb3319ce4199",
+    "geometry-v5/dynamic-poses.json": "6e103e9a6b73695d3267d1af77320eed77ab874e0cd9bb1c0eebce8249710c6b",
+    "geometry-v5/hands-contact-3d.json": "5ffa57fe094f785cc85d7f4fdb4f14e5d0cac3d94d0841f4ed14c0f8c5085cdc",
+    "corrected-config/construction.json": "792af5dc96cc7e156e1941ffc78161b479fb23952e4ba4d6e1e559e36f348245"
+  },
+  "source_geometry_rejected_pairs": [
+    {
+      "frame": 58,
+      "side": "Left",
+      "object": "pipette",
+      "distance_m": [
+        0.1347662510006653,
+        0.12220321845549345
+      ]
+    },
+    {
+      "frame": 91,
+      "side": "Left",
+      "object": "pipette",
+      "distance_m": [
+        0.014092864010606592,
+        0.008320098751834903
+      ]
+    },
+    {
+      "frame": 105,
+      "side": "Left",
+      "object": "pipette",
+      "distance_m": [
+        0.014472458173638427,
+        0.010801057927968259
+      ]
+    },
+    {
+      "frame": 106,
+      "side": "Left",
+      "object": "pipette",
+      "distance_m": [
+        0.014420832452939984,
+        0.006659569352641831
+      ]
+    },
+    {
+      "frame": 111,
+      "side": "Left",
+      "object": "pipette",
+      "distance_m": [
+        0.01526321661762875,
+        0.006426228078253951
+      ]
+    },
+    {
+      "frame": 113,
+      "side": "Left",
+      "object": "pipette",
+      "distance_m": [
+        0.014231878600857508,
+        0.008215643860604749
+      ]
+    },
+    {
+      "frame": 154,
+      "side": "Right",
+      "object": "pipette",
+      "distance_m": [
+        0.01465813800570755,
+        0.003779263894865217
+      ]
+    }
+  ],
+  "independent_camera_verified_samples": 4,
+  "independent_camera_tested_samples": 9,
+  "source_hand_contacts_are_force_verified": false,
+  "source_metric_scale_calibrated": false,
+  "robot_extrinsic_calibrated": false,
+  "layout_adaptation_m": 0.13295901553939468,
+  "depth_scale_is_CAD_prior": true,
+  "limitations": [
+    "This audit checks contracts, not independent camera or hand accuracy.",
+    "Known CAD scale and task-layout adaptation remain explicit; transparent glass depth and hidden tube tip are not ground truth.",
+    "Only the native robot trial establishes forces. Rejected source human contact pairs remain rejected.",
+    "Pneumatic/column/ballistic liquid is reduced-order, not CFD."
+  ]
+}

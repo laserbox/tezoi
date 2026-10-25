@@ -1,0 +1,43 @@
+{
+  "samples": 1051,
+  "elbow_sign_changes": 0,
+  "joint_min_deg": [
+    18.016805509119433,
+    -23.463880239114406,
+    -99.40265293170799,
+    -47.09339364200348,
+    -107.85898488516798,
+    -71.36154641767145
+  ],
+  "joint_max_deg": [
+    89.75118872990598,
+    4.2278062580627305,
+    -41.10059710156499,
+    -13.394977347230483,
+    -59.89601334757697,
+    13.290279956693098
+  ],
+  "joint_travel_deg": [
+    198.48131719716372,
+    119.46792395144342,
+    222.82864333947296,
+    129.22230035395253,
+    210.89428577133285,
+    227.51198965074
+  ],
+  "joint_net_change_deg": [
+    -1.5311068522921853,
+    2.4671256724965382,
+    2.0990213081636053,
+    1.1787259091880493,
+    -1.3331249060038428,
+    -5.270600272014466
+  ],
+  "sum_joint_travel_deg": 1108.406460264105,
+  "peak_joint_velocity_rad_s": 0.931510231985066,
+  "peak_joint_acceleration_rad_s2": 1.97452623541099,
+  "max_frame_joint_delta_rad": 0.03167134788741843,
+  "tcp_rotation_path_deg": 31.749025676325115,
+  "tool_rotation_path_deg": 39.63109688382429,
+  "interpretation": "Same initial object state and unchanged robot, geometry, physics and liquid model. Grasp-frame angle may change the pregrasp arm home; any such adaptation is explicit, not a same-initial-posture performance comparison."
+}

@@ -1,0 +1,36 @@
+{
+  "coverage_pass": true,
+  "legacy_tip_proxy_passed": true,
+  "contact_metric_revision": "V10 requires original 5mm tip-relative displacement AND all V8 contact, center, rotation and task gates.",
+  "rejection_tests_pass": [
+    "coverage",
+    "lost_contact",
+    "forbidden_contact",
+    "misreported_tip_proxy",
+    "solver_cap",
+    "legacy_failure_cannot_be_accepted",
+    "patch_slip",
+    "grasp_center",
+    "rotation"
+  ],
+  "native_steps": 175000,
+  "video_samples": 1051,
+  "body_attachment_welds": 0,
+  "free_task_bodies": [
+    "dropper",
+    "flask",
+    "mix"
+  ],
+  "hashes": {
+    "model.xml": "fa4f3e6a86a5c5e968e6ed79133935e7193b74f1ca6335430888b6765876dd3a",
+    "controller.py": "d4511efad2341f7160e6d782e56627bf1ccf8f32d210e598f6589a16d246a2fe",
+    "native_audit.py": "688453668894c53d5d36954a51c5ece6937846b52df8a53375aac0b19e71b088",
+    "native-review.json": "ed8ace24c08aad27a3358c1d42167203767f13395e5747bb5a4e1dfe93b82d71",
+    "native-trace.npz": "2fde8c37b1b2a92f4c3e7f14fe2e842f88f2522ce7e361d3d89e3a4e2f1b3ebc",
+    "contact-native-trace.npz": "1e8e024b8f71ef14d7fcd99d3c206bc84531b4bab34e6ec35a9f807cd63f9c9e",
+    "lean_audit.py": "8465ea8d23ceb826fe9201fb022e8a8f8aea021bdaf57ebd404adf34b9291a06",
+    "motion.json": "5321c9e19feeb210c998bf8e551a7ec39ecb818c570f26782fe187413f791a5c",
+    "audit.json": "95318f50cba0ba9770558fd6340d05f1c22ab972af09ab144fe7a16f98a042ef",
+    "plan.json": "aa406d7ad6d0cc83af1aa70f94043d065cf91af0f0ad80522abc49d32adda204"
+  }
+}

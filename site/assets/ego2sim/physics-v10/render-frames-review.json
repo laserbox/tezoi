@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "checks": "All 3153 raster frames decode, have expected dimensions and nonblank variance, and bind to actual native/liquid files. Visual inspection is separately recorded.",
+  "views": [
+    {
+      "mode": "robot",
+      "frames": 1051,
+      "dimensions": [
+        1280,
+        960
+      ],
+      "min_image_std": 50.764073608281116,
+      "largest_adjacent_pixel_change": 0.5955815972222223,
+      "largest_change_frame": 427,
+      "renderer_sha256": "a4eb62fa4ce94f1444319390fc5f894e9ad0691f3ac6e2fcfbf4b02961de0c3e"
+    },
+    {
+      "mode": "robot-detail",
+      "frames": 1051,
+      "dimensions": [
+        1280,
+        960
+      ],
+      "min_image_std": 64.20897846952339,
+      "largest_adjacent_pixel_change": 3.1316015625,
+      "largest_change_frame": 746,
+      "renderer_sha256": "a4eb62fa4ce94f1444319390fc5f894e9ad0691f3ac6e2fcfbf4b02961de0c3e"
+    },
+    {
+      "mode": "robot-external",
+      "frames": 1051,
+      "dimensions": [
+        1280,
+        960
+      ],
+      "min_image_std": 57.4216528464454,
+      "largest_adjacent_pixel_change": 1.143046875,
+      "largest_change_frame": 596,
+      "renderer_sha256": "a4eb62fa4ce94f1444319390fc5f894e9ad0691f3ac6e2fcfbf4b02961de0c3e"
+    }
+  ]
+}

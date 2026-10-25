@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "native_steps": 175000,
+  "render_frames": 1051,
+  "rejected_corruptions": [
+    "missing_step",
+    "created_volume",
+    "negative_liquid",
+    "spilled_liquid",
+    "false_arrival"
+  ],
+  "hashes": {
+    "liquid_model.py": "d868f2977de4198d018aa88a7f28f60c9d51edc4b53f5d247840c5c7a8ec15ce",
+    "liquid_world.py": "f6f64b3006c28d0f3bbf6f4343e37240d78dcdd35cbeb96bee72882cfb350262",
+    "liquid-motion.json": "682918ca17180e2935341bee76c1a56778a700d7647fc7b69cc625d0d83f1953",
+    "liquid-native-trace.npz": "d4f51fd03cf5e345fb17ac2f7558ef1c5f7241bb9dc9b10ef7e5f6dbc906de59",
+    "liquid-review.json": "c62a6b359e1861fa47da03c2d2d7e5fbf69b2d4636fedffd97d4b0dbd59840d2"
+  }
+}

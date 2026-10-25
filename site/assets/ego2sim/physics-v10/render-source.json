@@ -1,0 +1,7 @@
+{
+  "template_path": "/home/andy/projects/ego2sim/runs/dropper-demo-20261023/geometry-v5/render-robot/robot-corrected.blend",
+  "template_sha256": "a1b50e45b6f95d48d0eccdcbb6f854811cf8997c992fd12eea6be97959938d85",
+  "renderer_sha256": "a4eb62fa4ce94f1444319390fc5f894e9ad0691f3ac6e2fcfbf4b02961de0c3e",
+  "body_trajectory_smoothing": false,
+  "presentation_camera_smoothing_only": true
+}

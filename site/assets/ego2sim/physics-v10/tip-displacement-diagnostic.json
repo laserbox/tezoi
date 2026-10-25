@@ -1,0 +1,169 @@
+{
+  "candidate": "lower02",
+  "threshold_m": 0.005,
+  "phases": [
+    {
+      "phase": "extract",
+      "interval_s": [
+        8,
+        10
+      ],
+      "native_peak_time_s": 9.999800000003372,
+      "native_tip_relative_max_mm": 2.393082717849527,
+      "center_drift_max_mm": 0.545566625463233,
+      "relative_rotation_max_deg": 0.6530662374664434,
+      "sampled_translation_vector_mm": [
+        0.05913487955250263,
+        0.007743342060170469,
+        0.5423073302073533
+      ],
+      "sampled_rotation_lever_vector_mm": [
+        1.2393249348880042,
+        0.9482191120140291,
+        1.2262614309451594
+      ],
+      "sampled_decomposition_time_s": 10.000000000003372
+    },
+    {
+      "phase": "upright",
+      "interval_s": [
+        10,
+        13
+      ],
+      "native_peak_time_s": 12.104399999998467,
+      "native_tip_relative_max_mm": 3.5674414099956717,
+      "center_drift_max_mm": 0.6256365773820052,
+      "relative_rotation_max_deg": 1.0234241434397637,
+      "sampled_translation_vector_mm": [
+        0.030405347873727062,
+        -0.0032976057120981056,
+        0.6173986285424315
+      ],
+      "sampled_rotation_lever_vector_mm": [
+        1.9653350845635318,
+        1.5043256868130173,
+        1.9302393781948088
+      ],
+      "sampled_decomposition_time_s": 12.099999999998477
+    },
+    {
+      "phase": "approach_beaker",
+      "interval_s": [
+        13,
+        16
+      ],
+      "native_peak_time_s": 13.00019999999638,
+      "native_tip_relative_max_mm": 3.4890598861119733,
+      "center_drift_max_mm": 0.7408804980960125,
+      "relative_rotation_max_deg": 0.9919689521706951,
+      "sampled_translation_vector_mm": [
+        0.02429878343448988,
+        -0.0031536564385334287,
+        0.6251566101127676
+      ],
+      "sampled_rotation_lever_vector_mm": [
+        1.950051462945018,
+        1.3493341459669537,
+        1.9171724014065294
+      ],
+      "sampled_decomposition_time_s": 12.99999999999638
+    },
+    {
+      "phase": "dispense",
+      "interval_s": [
+        16,
+        18
+      ],
+      "native_peak_time_s": 16.65999999998785,
+      "native_tip_relative_max_mm": 3.290095729200385,
+      "center_drift_max_mm": 0.7200718598359003,
+      "relative_rotation_max_deg": 0.9042586453303292,
+      "sampled_translation_vector_mm": [
+        0.00030231304640193635,
+        -0.00013024880662971844,
+        0.707318547647176
+      ],
+      "sampled_rotation_lever_vector_mm": [
+        1.899833861117815,
+        0.7440914599629318,
+        1.8735142781390706
+      ],
+      "sampled_decomposition_time_s": 16.66799999998783
+    },
+    {
+      "phase": "leave_beaker",
+      "interval_s": [
+        18,
+        21
+      ],
+      "native_peak_time_s": 18.000199999984726,
+      "native_tip_relative_max_mm": 3.2364480401646927,
+      "center_drift_max_mm": 0.7485422368691207,
+      "relative_rotation_max_deg": 0.8956648127445425,
+      "sampled_translation_vector_mm": [
+        -0.00960056026461098,
+        -0.000658077380922287,
+        0.674790102824202
+      ],
+      "sampled_rotation_lever_vector_mm": [
+        1.8964084599454136,
+        0.660392710820378,
+        1.8706707882137412
+      ],
+      "sampled_decomposition_time_s": 17.999999999984727
+    },
+    {
+      "phase": "tilt_return",
+      "interval_s": [
+        21,
+        24
+      ],
+      "native_peak_time_s": 23.999999999970743,
+      "native_tip_relative_max_mm": 3.8775603724654735,
+      "center_drift_max_mm": 0.7286920928737541,
+      "relative_rotation_max_deg": 1.1275690982790736,
+      "sampled_translation_vector_mm": [
+        -0.057210531113682794,
+        0.008628532477572207,
+        0.6509273243972824
+      ],
+      "sampled_rotation_lever_vector_mm": [
+        2.4096373709098935,
+        0.6132451236060269,
+        2.3681512703713623
+      ],
+      "sampled_decomposition_time_s": 23.999999999970743
+    },
+    {
+      "phase": "insert_return",
+      "interval_s": [
+        24,
+        26
+      ],
+      "native_peak_time_s": 24.822199999968827,
+      "native_tip_relative_max_mm": 4.327466468752956,
+      "center_drift_max_mm": 0.6534906978191564,
+      "relative_rotation_max_deg": 1.2561576462021558,
+      "sampled_translation_vector_mm": [
+        -0.0007776197644138172,
+        -0.002060902689660261,
+        0.6492316955329785
+      ],
+      "sampled_rotation_lever_vector_mm": [
+        2.6011885574758904,
+        0.3918796688057615,
+        2.553647453080508
+      ],
+      "sampled_decomposition_time_s": 24.8339999999688
+    }
+  ],
+  "decomposition_roundtrip_max_m": 2.5018537765542006e-17,
+  "limits": "Native peak is every 0.2ms; vector decomposition uses nearest actual 30Hz sample and its own first >=8s baseline. Compliant rotation and center shift are observations, not proven causes.",
+  "hashes": {
+    "motion.json": "5321c9e19feeb210c998bf8e551a7ec39ecb818c570f26782fe187413f791a5c",
+    "native-trace.npz": "2fde8c37b1b2a92f4c3e7f14fe2e842f88f2522ce7e361d3d89e3a4e2f1b3ebc",
+    "contact-native-trace.npz": "1e8e024b8f71ef14d7fcd99d3c206bc84531b4bab34e6ec35a9f807cd63f9c9e",
+    "model.xml": "fa4f3e6a86a5c5e968e6ed79133935e7193b74f1ca6335430888b6765876dd3a",
+    "controller.py": "d4511efad2341f7160e6d782e56627bf1ccf8f32d210e598f6589a16d246a2fe"
+  }
+}

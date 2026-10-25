@@ -1,0 +1,15 @@
+{
+  "series": [
+    {
+      "candidate": "ready01",
+      "peak_mm": 11.054731975242525,
+      "sha256": "425a191b6fa62458c301b2c171d9a13a52035874871d46daf8a1dc1f06d95631"
+    },
+    {
+      "candidate": "lower02",
+      "peak_mm": 4.327466468752956,
+      "sha256": "2fde8c37b1b2a92f4c3e7f14fe2e842f88f2522ce7e361d3d89e3a4e2f1b3ebc"
+    }
+  ],
+  "method": "Every native point included in per-pixel min/max envelope; not temporal resampling for acceptance."
+}

@@ -1,0 +1,8 @@
+{
+  "object_local_offset_m": [
+    0,
+    0,
+    -0.012
+  ],
+  "scope": "Grasp target only; native object geometry, initial pose and render transforms unchanged."
+}

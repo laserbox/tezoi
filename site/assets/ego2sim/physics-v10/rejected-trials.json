@@ -1,0 +1,72 @@
+[
+  {
+    "candidate": "align40",
+    "tip_relative_mm": 11.234213719055761,
+    "passed": false,
+    "failed_gates": [
+      "hold_slip"
+    ]
+  },
+  {
+    "candidate": "align60",
+    "tip_relative_mm": 10.818639550055158,
+    "passed": false,
+    "failed_gates": [
+      "hold_slip"
+    ]
+  },
+  {
+    "candidate": "axis01",
+    "tip_relative_mm": 67.7937509322825,
+    "passed": false,
+    "failed_gates": [
+      "return_alignment",
+      "joint_limits",
+      "actual_contact_slip",
+      "bounded_compliant_rotation",
+      "hold_slip"
+    ]
+  },
+  {
+    "candidate": "bounded01",
+    "tip_relative_mm": 16.225800164154904,
+    "passed": false,
+    "failed_gates": [
+      "hold_bilateral",
+      "return_alignment",
+      "actual_contact_slip",
+      "grasp_center_stability",
+      "bounded_compliant_rotation",
+      "hold_slip"
+    ]
+  },
+  {
+    "candidate": "lower01",
+    "tip_relative_mm": 5.156103117301687,
+    "passed": false,
+    "failed_gates": [
+      "hold_slip"
+    ]
+  },
+  {
+    "candidate": "lower03",
+    "tip_relative_mm": 9.207460913487155,
+    "passed": false,
+    "failed_gates": [
+      "hold_slip"
+    ]
+  },
+  {
+    "candidate": "position01",
+    "tip_relative_mm": 77.87932858720829,
+    "passed": false,
+    "failed_gates": [
+      "hold_bilateral",
+      "return_alignment",
+      "actual_contact_slip",
+      "grasp_center_stability",
+      "bounded_compliant_rotation",
+      "hold_slip"
+    ]
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "candidate": "lower02",
+  "reviewed_full_timeline_views": [
+    "robot",
+    "robot-detail",
+    "robot-external"
+  ],
+  "timeline_sampling": "36 frames per view at 1-second intervals spanning complete 35 seconds",
+  "high_resolution_detail_frames": [
+    0,
+    240,
+    497,
+    780,
+    990
+  ],
+  "browser_overview_playback": {
+    "duration_s": 35.033333,
+    "ended": true,
+    "error": null
+  },
+  "all_raster_frames_check": true,
+  "findings": [
+    "No opening elbow flip in overview; smoothness independently checked from actual states.",
+    "Bulb stays in jaw contact through lift and dispense; droplets visibly enter yellow-green beaker.",
+    "Return occurs along tilted axis; jaws release and retreat; free pipe leans inside cyan-blue flask.",
+    "Original fixed camera retains partial coverage and misses portions of raised arm/tool; it is supplementary, not full-scene or calibrated camera validation.",
+    "Detail camera is presentation-only; native body geometry and trajectory are not smoothed."
+  ],
+  "hashes": {
+    "robot-timeline.jpg": "b90162c5563172835e0f9e9e9d5fd0cc2c9be217cbebec22ba1064f2df3ccfe7",
+    "robot-detail-timeline.jpg": "5f624f348b846a07cce7d52a835dd34044e64f787dab033c77f6109d7f09c577",
+    "robot-external-timeline.jpg": "417681fce496aae8f12f0f5edf821d705693094923e5934145b82755281cf7f2",
+    "initial-detail.jpg": "19a3f078399510cc428ebebececbfa36390c50400aa6957c9cc61102ea150da4",
+    "grasp-detail.jpg": "b7876fdd9a43654d9a7707e50749dcb7bd47ceba1f180f0786d1818e34cb3d9d",
+    "dispense-detail.jpg": "837aaed7eaeac0fba5d8e4189029fe32ebb45debbd4c08974ea379a026811fbb",
+    "return-detail.jpg": "e5196f770231c1895ebf00efbb4689c2a68139dc89284b71f72e830a1a09636a",
+    "free-lean-detail.jpg": "5868e5f2778337e3edeccea453fac825e9ab49a31b027ee8113abc96d86eb607"
+  }
+}
