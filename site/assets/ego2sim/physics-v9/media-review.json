@@ -1,0 +1,67 @@
+[
+  {
+    "name": "robot",
+    "frames": 1051,
+    "fps": 30,
+    "sha256": "de3f1137a3ab5b6c1abf8eaec64d9f62ca9d9aa667a3cd02639430a86c02369a",
+    "full_decode_pass": true,
+    "source_motion_sha256": "daa8e0f626fc0d741b7777a4db1c2f7e8711f3e51be5c94f73dabaa7281e00a2",
+    "source_liquid_sha256": "3e311750891bb6612ec4687e81437e92cec24700f0af23b2a218beb9ffa059b8",
+    "cycles_samples": 24,
+    "width": 1280,
+    "height": 960,
+    "duration": 35.033333
+  },
+  {
+    "name": "robot-detail",
+    "frames": 1051,
+    "fps": 30,
+    "sha256": "4a2a43e335c2c3914441f2b1f796d68a73e31fcd7475f08c874539fa2d76d5ab",
+    "full_decode_pass": true,
+    "source_motion_sha256": "daa8e0f626fc0d741b7777a4db1c2f7e8711f3e51be5c94f73dabaa7281e00a2",
+    "source_liquid_sha256": "3e311750891bb6612ec4687e81437e92cec24700f0af23b2a218beb9ffa059b8",
+    "cycles_samples": 24,
+    "width": 1280,
+    "height": 960,
+    "duration": 35.033333
+  },
+  {
+    "name": "robot-external",
+    "frames": 1051,
+    "fps": 30,
+    "sha256": "59567b0701205dbbf40b7bc78a8af1f982cd6d5e6e7060d74101f38d9d7064e1",
+    "full_decode_pass": true,
+    "source_motion_sha256": "daa8e0f626fc0d741b7777a4db1c2f7e8711f3e51be5c94f73dabaa7281e00a2",
+    "source_liquid_sha256": "3e311750891bb6612ec4687e81437e92cec24700f0af23b2a218beb9ffa059b8",
+    "cycles_samples": 24,
+    "width": 1280,
+    "height": 960,
+    "duration": 35.033333
+  },
+  {
+    "name": "physics",
+    "frames": 1051,
+    "fps": 30,
+    "sha256": "93d9354dabb97471d9e20c9affa8fcf13bf93ff066d8e35f8740888e0ff66369",
+    "full_decode_pass": true,
+    "source_motion_sha256": "daa8e0f626fc0d741b7777a4db1c2f7e8711f3e51be5c94f73dabaa7281e00a2",
+    "source_liquid_sha256": "3e311750891bb6612ec4687e81437e92cec24700f0af23b2a218beb9ffa059b8",
+    "cycles_samples": 24,
+    "width": 1280,
+    "height": 960,
+    "duration": 35.033333
+  },
+  {
+    "name": "liquid",
+    "frames": 1051,
+    "fps": 30,
+    "sha256": "36961f98c3331b56d0dfcae08bbc669d14df1575efd277a3d7e5a2502b8ea1d4",
+    "full_decode_pass": true,
+    "source_motion_sha256": "daa8e0f626fc0d741b7777a4db1c2f7e8711f3e51be5c94f73dabaa7281e00a2",
+    "source_liquid_sha256": "3e311750891bb6612ec4687e81437e92cec24700f0af23b2a218beb9ffa059b8",
+    "cycles_samples": 24,
+    "width": 1280,
+    "height": 960,
+    "duration": 35.033333
+  }
+]

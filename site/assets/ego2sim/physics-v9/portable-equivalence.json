@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "checks": {
+    "body_pos": true,
+    "body_quat": true,
+    "body_mass": true,
+    "body_inertia": true,
+    "geom_pos": true,
+    "geom_quat": true,
+    "geom_size": true,
+    "geom_friction": true,
+    "geom_condim": true,
+    "jnt_range": true,
+    "jnt_stiffness": true,
+    "dof_damping": true,
+    "actuator_gainprm": true,
+    "actuator_biasprm": true,
+    "actuator_forcerange": true,
+    "eq_data": true,
+    "mesh_vert": true,
+    "mesh_face": true
+  }
+}

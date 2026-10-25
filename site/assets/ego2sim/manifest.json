@@ -402,5 +402,14 @@
     "legacy_tip_proxy_passed": false,
     "native_steps": 175000,
     "report": "physics-v8-review.html"
+  },
+  "physics_v9": {
+    "task_passed": true,
+    "liquid_model": "reduced-order isothermal air + viscous column + ballistic droplets; not CFD",
+    "received_ml": 0.16154329621098887,
+    "legacy_tip_proxy_passed": false,
+    "native_steps": 175000,
+    "initial_arm_posture_replanned": true,
+    "report": "physics-v9-review.html"
   }
 }

@@ -1,0 +1,43 @@
+{
+  "samples": 1051,
+  "elbow_sign_changes": 0,
+  "joint_min_deg": [
+    17.52990126355381,
+    -26.16068809096457,
+    -97.61861103697424,
+    -47.66066091871844,
+    -111.98628920583765,
+    -73.14644670481054
+  ],
+  "joint_max_deg": [
+    88.95834885527616,
+    2.30740190422811,
+    -31.883778194778248,
+    -12.285909561955368,
+    -61.944165459746706,
+    10.63141691080407
+  ],
+  "joint_travel_deg": [
+    201.79192720276842,
+    121.15070489703626,
+    246.11981986660382,
+    134.89982595766534,
+    214.0465901964009,
+    221.182584628602
+  ],
+  "joint_net_change_deg": [
+    -1.5721124723095297,
+    2.2491016922466405,
+    2.372074919357867,
+    1.1680366861154183,
+    -1.401233304143205,
+    -5.276005746248723
+  ],
+  "sum_joint_travel_deg": 1139.1914527490774,
+  "peak_joint_velocity_rad_s": 0.9282414397915182,
+  "peak_joint_acceleration_rad_s2": 2.2542384266535813,
+  "max_frame_joint_delta_rad": 0.031560208952838065,
+  "tcp_rotation_path_deg": 36.505194164863234,
+  "tool_rotation_path_deg": 57.72753021663664,
+  "interpretation": "The robot starts from a newly planned collision-checked pregrasp home. Opening improvement is NOT a same-initial-posture planner comparison. Robot, object initial pose, physics, liquid model, assets and cameras unchanged."
+}

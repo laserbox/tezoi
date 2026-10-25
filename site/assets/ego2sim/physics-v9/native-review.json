@@ -1,0 +1,148 @@
+{
+  "schema": "natural-lean-v8",
+  "bottom_support_min_N": 0.12417522491488438,
+  "wall_support_min_N": 0.018489156149049182,
+  "final_tilt_range_deg": [
+    12.411451914843642,
+    12.42203415804177
+  ],
+  "return_target": [
+    0.21808911256910138,
+    -0.03183819336762346,
+    0.0018083631629657864
+  ],
+  "return_axis_target": [
+    -0.15065389315546532,
+    -0.14980739325252557,
+    0.9771699695569774
+  ],
+  "fluid_solved": true,
+  "gates": {
+    "native_coverage": true,
+    "initial_clearance": true,
+    "forbidden_contact": true,
+    "object_table_or_beaker_contact": true,
+    "hold_bilateral": true,
+    "beaker_arrival": true,
+    "return_alignment": true,
+    "returned_tip": true,
+    "natural_supported_lean": true,
+    "release": true,
+    "stable_final": true,
+    "joint_limits": true,
+    "control_limits": true,
+    "actuator_limits": true,
+    "numerics": true,
+    "ik_accuracy": true,
+    "actual_contact_slip": true,
+    "grasp_center_stability": true,
+    "bounded_compliant_rotation": true,
+    "liquid_transfer": true
+  },
+  "task_passed": true,
+  "native_steps": 175000,
+  "dt": 0.0002,
+  "contact_coverage": "every native step",
+  "forbidden_force_N": {},
+  "unwanted_object_contacts_N": {},
+  "max_penetration_m": 0.00022207956793682726,
+  "hold_steps": 90001,
+  "bilateral_steps": 90001,
+  "bilateral_ratio": 1.0,
+  "hold_min_pad_force_N": [
+    0.733153809946943,
+    0.7890419688624569
+  ],
+  "max_pad_force_N": [
+    1.3376451098227962,
+    1.4166109097277753
+  ],
+  "hold_max_slip_m": 0.011054731975242526,
+  "max_transport_tilt_deg": 12.834693733411894,
+  "beaker_xy_error_m": 0.00037868639474396835,
+  "beaker_min_tip_z_m": 0.1774455005836119,
+  "return_xy_error_m": 0.0010130619769910974,
+  "return_tilt_deg": 0.25961137126777734,
+  "final_tip": [
+    0.21804045411938974,
+    -0.031199077193327443,
+    0.0018118775059847987
+  ],
+  "final_speed_m_s": 3.4342700131954044e-05,
+  "final_angular_speed_rad_s": 0.00866454948316726,
+  "final_tip_drift_m": 2.6536868900097683e-05,
+  "final_pad_force_N": 0.0,
+  "flask_drift_m": 0.0001507536638274773,
+  "beaker_drift_m": 0.00142944105746917,
+  "joint_limit_violation": 4.555187462468859e-06,
+  "control_limit_violation": 0.0,
+  "peak_actuator_force": [
+    0.46091049869727385,
+    9.711828683356345,
+    6.997767571439795,
+    1.777132329067058,
+    1.9057747349692278,
+    0.10152901326300423,
+    2.203068372200498
+  ],
+  "joint_names": [
+    "joint_1",
+    "joint_2",
+    "joint_3",
+    "joint_4",
+    "joint_5",
+    "joint_6",
+    "slider_left",
+    "slider_right",
+    "bulb_left_compression",
+    "bulb_right_compression"
+  ],
+  "joint_min": [
+    0.3059542459283997,
+    -0.4565905863726428,
+    -1.7037700164064318,
+    -0.8318465211936789,
+    -1.954538954337892,
+    -1.2766464952140115,
+    0.0009993493463394956,
+    0.0010000064166492005,
+    -4.555187462468859e-06,
+    -2.703784835396202e-07
+  ],
+  "joint_max": [
+    1.5526169673193448,
+    0.040301619294208245,
+    -0.5564536293075009,
+    -0.21442784715184884,
+    -1.0811296367755732,
+    0.1855532341086393,
+    0.03234965858811814,
+    0.03231770959399993,
+    0.0038514751705747887,
+    0.0038755899204454456
+  ],
+  "max_solver_iterations": 9,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "legacy_tip_frame_gate": {
+    "passed": false,
+    "threshold_m": 0.005,
+    "measured_m": 0.011054731975242526,
+    "interpretation": "tip displacement relative to gripper includes amplified bulb rotation; old gate preserved as an explicit unmet diagnostic if false"
+  },
+  "contact_metric_revision": "V8 compliance-aware grasp: <=5mm cumulative force-weighted interface slip per finger, <=5mm bulb-center motion, <=5deg relative rotation; absolute arrival and return gates unchanged. Not a claim that the V7 tip-frame gate passed.",
+  "patch_slip_m": [
+    0.0020191762246112473,
+    0.0020635841432158075
+  ],
+  "grasp_center_max_drift_m": 0.0014369784260328056,
+  "grasp_rotation_max_deg": 3.3937930649425336,
+  "fluid_model": "reduced-order isothermal air + viscous column + ballistic droplets; not CFD"
+}

@@ -1,0 +1,21 @@
+{
+  "candidate": "ready01",
+  "robot_full_browser_playback": {
+    "duration_s": 35.033333,
+    "ended": true,
+    "error": null
+  },
+  "contactsheet": "full-motion-contactsheet.jpg",
+  "viewed_raw_frames": [
+    "opening-preview.jpg",
+    "dispense-preview.jpg",
+    "release-detail-preview.jpg"
+  ],
+  "notes": [
+    "Opening starts from planned pregrasp pose; no large elbow flip visible.",
+    "Full 35-frame one-second contact sheet inspected.",
+    "Native sampled joint evidence independently confirms reduced opening rotation.",
+    "Release closeup shows leaning pipette and withdrawn fingers."
+  ],
+  "motion_sha256": "daa8e0f626fc0d741b7777a4db1c2f7e8711f3e51be5c94f73dabaa7281e00a2"
+}

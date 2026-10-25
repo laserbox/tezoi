@@ -1,0 +1,12 @@
+{
+  "hashes": {
+    "controller.py": "8c5a37412cc85c430bdf2ed8786d03d6b47d8e2f986c1d169e0f8b081f0f1b69",
+    "compare_rotation.py": "d8c29f37228bb9d2612584e1795596d1893b22b562d93192cd43eb93b0c72787",
+    "preflight_collision.py": "ab696225e26ba661d268b092988b911627b4e0a67bbc6370878cf9eb99ca2f43",
+    "initial-posture.json": "e6b37d96d7d8d54a35641640e8dc427ec91c20f7b8ab9772305df1c2c911897c",
+    "branch-preflight.json": "d6daeb982341187a3614bf27f66de4d525d59f9a2eeea5d25a2b6749f60cfeb5",
+    "collision-preflight.json": "b0a95d8ca6b7226f6b799361b802ee133c62309117bf5755cf1574f0830e18c7",
+    "rotation-comparison.json": "f770248896427bdf7a13d103245bcfbe00f0b6261934cbe12b25b5994d1f4e5e"
+  },
+  "preflight_plan_identical_to_native_plan": true
+}

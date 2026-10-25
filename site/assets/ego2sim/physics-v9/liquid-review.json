@@ -1,0 +1,33 @@
+{
+  "model": "reduced-order isothermal air + viscous column + ballistic droplets; not CFD",
+  "gates": {
+    "no_unresolved_boundary_hit": true,
+    "volume_conservation": true,
+    "aspirated": true,
+    "received": true,
+    "no_spill": true,
+    "nonnegative_reservoirs": true,
+    "drop_arrival": true
+  },
+  "passed": true,
+  "steps": 175000,
+  "boundary_failures": 0,
+  "minimum_mouth_clearance_m": 0.02627319633267861,
+  "initial_volume_ml": 143.53622674986406,
+  "max_volume_error_ml": 3.2526065174565133e-13,
+  "max_pipe_ml": 0.8074726656820542,
+  "received_ml": 0.16154329621098887,
+  "spill_ml": 0.0,
+  "emitted_ml": 0.18044184676429464,
+  "max_gauge_pressure_pa": 639.5327828911395,
+  "max_bulb_pressure_force_n": 0.07105919809901551,
+  "max_payload_g": 0.8074726656820542,
+  "max_jet_reaction_n": 9.525381781697044e-05,
+  "max_drop_impact_force_n": 0.279570305004762,
+  "limitations": [
+    "water-like assumed viscosity/density/surface tension",
+    "hydrostatic cylindrical low-level reservoirs from original CAD",
+    "no resolved sloshing, wetting, splash or chemistry",
+    "ballistic drops evaluated against reservoir surface and table; noncentral vessel-wall paths need separate validation"
+  ]
+}
