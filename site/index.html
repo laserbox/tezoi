@@ -7,7 +7,7 @@
   <meta name="description" content="TEZOI，智能高精度具身仿真。融合场景重建、视觉保真与物理交互，构建面向具身智能研发与验证的仿真环境。">
   <title>TEZOI | Intelligent, high-fidelity embodied simulation</title>
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=review-fixes-20261023">
+  <link rel="stylesheet" href="styles.css?v=gallery-primary-scenes-20261025">
   <script src="site-shell.js?v=site-navigation-20261022" type="module"></script>
   <script src="app.js?v=gallery-soft-bag-20261024" type="module"></script>
   <link rel="stylesheet" href="ego2sim.css?v=agent-physics10-20261025">
@@ -269,10 +269,12 @@
       <div class="gallery-tabs" role="tablist" aria-label="任务场景">
         <button type="button" role="tab" id="tab-factory" aria-selected="true" aria-controls="panel-factory" data-scene="factory"><span class="gallery-tab-label">工厂</span> <span class="gallery-tab-count">06</span></button>
         <button type="button" role="tab" id="tab-lab" aria-selected="false" aria-controls="panel-lab" tabindex="-1" data-scene="lab"><span class="gallery-tab-label">实验室</span> <span class="gallery-tab-count">05</span></button>
+        <!-- 暂停这四类 Gallery 标签；恢复时同时取消下方对应面板的注释。
         <button type="button" role="tab" id="tab-tactile" aria-selected="false" aria-controls="panel-tactile" tabindex="-1" data-scene="tactile"><span class="gallery-tab-label">触觉</span> <span class="gallery-tab-count">05</span></button>
         <button type="button" role="tab" id="tab-soft" aria-selected="false" aria-controls="panel-soft" tabindex="-1" data-scene="soft"><span class="gallery-tab-label">软材料</span> <span class="gallery-tab-count">02</span></button>
         <button type="button" role="tab" id="tab-cloth" aria-selected="false" aria-controls="panel-cloth" tabindex="-1" data-scene="cloth"><span class="gallery-tab-label">布料</span> <span class="gallery-tab-count">02</span></button>
         <button type="button" role="tab" id="tab-motion" aria-selected="false" aria-controls="panel-motion" tabindex="-1" data-scene="motion"><span class="gallery-tab-label">运动控制</span> <span class="gallery-tab-count">02</span></button>
+        -->
       </div>
       <div id="panel-factory" role="tabpanel" aria-labelledby="tab-factory" data-scene-panel="factory">
         <div class="gallery-grid">
@@ -341,6 +343,7 @@
           </article>
         </div>
       </div>
+      <!-- 暂停触觉、软材料、布料、运动控制；保留卡片源码与素材，方便恢复。
       <div id="panel-tactile" role="tabpanel" aria-labelledby="tab-tactile" data-scene-panel="tactile" hidden>
         <div class="gallery-grid">
           <article class="gallery-card">
@@ -412,6 +415,7 @@
           </article>
         </div>
       </div>
+      -->
     </section>
 
     <section class="benchmark chapter" id="benchmark" aria-labelledby="benchmark-title" data-chapter="5" hidden>
