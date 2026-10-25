@@ -77,7 +77,7 @@ const videos = {
   "haoxiang-basket-bunny": {"src":"assets/haoxiang-basket-bunny.mp4","title":"软体物体抓取","description":"软材料 / WujiHand / 1:03","note":"灵巧手从周转箱抓取软体物体，呈现包覆接触、材料形变与提起过程。"},
   "haoxiang-washroom-hang": {"src":"assets/haoxiang-washroom-hang.mp4","title":"双手衣物悬挂","description":"布料 / Dual WujiHand / 0:25","note":"双手协同完成衬衫抓取、衣架穿入、悬挂与释放。"},
   "haoxiang-go2-drape": {"src":"assets/haoxiang-go2-drape.mp4","title":"Go2 布料接触","description":"布料 / Unitree Go2 / Stationary / 0:04","note":"呈现布料在静止机器狗背部与四肢表面的接触和垂落。"},
-  "haoxiang-lab-liquid": {"src":"assets/haoxiang-lab-liquid.mp4","title":"实验室液体操作","description":"实验室 / Franka FR3 / 0:36 / 4× playback","note":"呈现实验台中的取液、倾倒、搅拌与废液处理流程，以 4 倍速播放。"},
+  "gallery-matterix-liquid": {"src":"assets/gallery-matterix-liquid.mp4","title":"实验室液体操作","description":"实验室 / Franka Panda · Robotiq 2F85 / 0:46 / 1× playback","note":"完整呈现两次抓杯、倾倒与放回，液体由琥珀色转为浅浑浊色。颜色为未标定的局部光学近似。"},
 };
 const dialog = $('#video-dialog');
 const player = $('#demo-player');
