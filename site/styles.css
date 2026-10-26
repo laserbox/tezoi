@@ -668,6 +668,7 @@ body.modal-open { overflow: hidden; }
 .scene-stage { position: relative; }
 .scene-viewport { position: relative; width: 100%; overflow: hidden; aspect-ratio: 16/9; border-radius: 12px; background: #e3ebed; isolation: isolate; }
 .scene-viewport canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+.scene-viewport.usedv6-scene-viewport { aspect-ratio: 991/736; }
 .scene-viewport canvas:active { cursor: grabbing; }
 .scene-viewport canvas:focus-visible { outline: 3px solid #416c70; outline-offset: -4px; }
 .scene-view-label { position: absolute; z-index: 2; top: 17px; left: 18px; color: #49606a; font-size: 12px; pointer-events: none; }

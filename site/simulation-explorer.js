@@ -1,13 +1,15 @@
-// Keep the video and the real 3D viewer in one Simulation stage.
+// Keep the comparison and its real 3D viewer in one stage.
 export function mountSimulationExplorer(root, {
-  loadViewer = element => import('./simulation-viewer.js?v=mobile-polish-20261023').then(module => module.mountSceneViewer(element)),
+  loadViewer = element => import('./simulation-viewer.js?v=usedv6-3d-20261026').then(module => module.mountSceneViewer(element)),
   onPause = () => {},
+  comparisonLabel = '视频对比',
 } = {}) {
   if (!root) return null;
   const tabs = [...root.querySelectorAll('[data-simulation-view]')];
   const panels = [...root.querySelectorAll('[data-simulation-panel]')];
-  const status = root.querySelector('[data-scene-status]');
-  const retry = root.querySelector('[data-scene-retry]');
+  const viewerRoot = root.querySelector('[data-scene-viewer]');
+  const status = viewerRoot.querySelector('[data-scene-status]');
+  const retry = viewerRoot.querySelector('[data-scene-retry]');
   let selected = 'video';
   let stageActive = true;
   let inView = true;
@@ -32,11 +34,11 @@ export function mountSimulationExplorer(root, {
     retry.hidden = true;
     pending = (async () => {
       try {
-        viewer = await loadViewer(root.querySelector('[data-scene-viewer]'));
+        viewer = await loadViewer(viewerRoot);
         status.hidden = true;
         syncVisibility();
       } catch {
-        status.textContent = '三维场景暂时无法加载，可重试或查看视频对比。';
+        status.textContent = `三维场景暂时无法加载，可重试或查看${comparisonLabel}。`;
         retry.hidden = false;
       } finally {
         pending = null;
