@@ -387,6 +387,31 @@ body.modal-open { overflow: hidden; }
 @media (max-width: 370px) {
   .hero-actions { gap: 10px; }
 }
+.scene-comparison-stage { position: relative; overflow: hidden; isolation: isolate; aspect-ratio: var(--scene-aspect, 991/736); border-radius: 12px; background: #dae2e1; --split: 50%; }
+.scene-comparison-image { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; user-select: none; }
+.scene-comparison-real { clip-path: inset(0 calc(100% - var(--split)) 0 0); }
+.scene-comparison-label { position: absolute; z-index: 2; top: 22px; padding: 8px 13px; border: 1px solid #ffffff4d; border-radius: 99px; background: #203033b8; color: #fff; backdrop-filter: blur(12px); font-size: 12px; letter-spacing: .06em; white-space: nowrap; pointer-events: none; }
+.scene-comparison-label-real { left: 24px; }
+.scene-comparison-label-sim { right: 24px; }
+.scene-comparison-split { position: absolute; z-index: 4; inset: 0; width: 100%; height: 100%; margin: 0; appearance: none; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
+.scene-comparison-split::-webkit-slider-thumb { appearance: none; width: 1px; height: 44px; }
+.scene-comparison-split::-moz-range-thumb { width: 1px; height: 44px; border: 0; }
+.scene-comparison-divider { position: absolute; z-index: 3; inset-block: 0; left: var(--split); width: 1px; background: #fffc; transform: translateX(-50%); pointer-events: none; }
+.scene-comparison-handle { position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: 50px; height: 50px; border: 1px solid #ffffff80; border-radius: 50%; background: #263334db; color: #fff; backdrop-filter: blur(12px); box-shadow: 0 3px 22px #19273126; transform: translate(-50%, -50%); }
+.scene-comparison-split:focus-visible ~ .scene-comparison-divider .scene-comparison-handle { outline: 3px solid #fff; outline-offset: 4px; }
+.scene-comparison-feedback { position: absolute; z-index: 5; top: 50%; left: 50%; width: max-content; max-width: calc(100% - 36px); padding: 14px 18px; border-radius: 12px; background: #203033e8; color: #fff; text-align: center; font-size: var(--type-meta); line-height: 1.7; transform: translate(-50%, -50%); pointer-events: none; }
+.scene-comparison-feedback button { display: block; min-height: 44px; margin: 10px auto 0; padding: 8px 18px; border: 1px solid #ffffff80; border-radius: 8px; background: #fff; color: #203033; pointer-events: auto; }
+.scene-comparison[data-state="loading"] .scene-comparison-divider, .scene-comparison[data-state="error"] .scene-comparison-divider { visibility: hidden; }
+.scene-comparison-caption { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; margin-top: 17px; color: var(--muted); font-size: var(--type-meta); line-height: 1.8; }
+.scene-comparison-caption p { margin: 0; }
+.scene-comparison-links { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+.scene-comparison-links a { text-underline-offset: 4px; }
+@media (max-width: 640px) {
+  .scene-comparison-label { top: 12px; padding: 6px 9px; font-size: 10px; }
+  .scene-comparison-label-real { left: 12px; }
+  .scene-comparison-label-sim { right: 12px; }
+  .scene-comparison-handle { width: 44px; height: 44px; }
+}
 .rendering-stage { position: relative; overflow: hidden; aspect-ratio: 16/9; border-radius: 12px; background: #17282e; }
 .rendering-stage video { width: 100%; height: 100%; display: block; object-fit: contain; }
 .rendering-overlay { position: absolute; top: 22px; left: 24px; right: 24px; display: flex; justify-content: space-between; align-items: center; gap: 20px; color: #f2f7f6; pointer-events: none; }

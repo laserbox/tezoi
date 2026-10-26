@@ -1,7 +1,7 @@
 import { icon } from './icons.js?v=mobile-polish-20261023';
 import { mountAgentConversion } from './agent-conversion.js?v=agent-physics10-20261025';
 import { mountRealSimWorkflow } from './real-sim-workflow.js?v=review-fixes-20261023';
-import { mountRenderingShowcase } from './rendering-showcase.js?v=mobile-polish-20261023';
+import { mountSceneComparison } from './scene-comparison.js?v=usedv6-comparison-20261026';
 import { mountContactComparison } from './contact-comparison.js?v=review-fixes-20261023';
 import { mountSimulationExplorer } from './simulation-explorer.js?v=mobile-polish-20261023';
 
@@ -19,7 +19,7 @@ $$('[data-workflow-target]').forEach(link => link.addEventListener('click', () =
   realSimWorkflow?.selectStage(link.dataset.workflowTarget);
   if (link.dataset.workflowTarget === 'simulation') simulationExplorer?.selectView('video');
 }));
-mountRenderingShowcase($('[data-rendering-showcase]'));
+mountSceneComparison($('[data-scene-comparison]'));
 
 const tabs = $$('[data-scene]');
 function selectScene(tab) {
