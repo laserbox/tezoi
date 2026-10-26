@@ -7,9 +7,9 @@
   <meta name="description" content="TEZOI，智能高精度具身仿真。融合场景重建、视觉保真与物理交互，构建面向具身智能研发与验证的仿真环境。">
   <title>TEZOI | Intelligent, high-fidelity embodied simulation</title>
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=usedv6-comparison-20261026">
+  <link rel="stylesheet" href="styles.css?v=usedv6-3d-20261026">
   <script src="site-shell.js?v=site-navigation-20261022" type="module"></script>
-  <script src="app.js?v=usedv6-comparison-20261026" type="module"></script>
+  <script src="app.js?v=usedv6-3d-20261026" type="module"></script>
   <link rel="stylesheet" href="ego2sim.css?v=agent-physics10-20261025">
 </head>
 <body data-page="home">
@@ -238,19 +238,40 @@
         </section>
       </section>
       <section class="subchapter" id="visual-rendering" aria-labelledby="visual-title">
-        <div class="subchapter-heading section-lead"><h3 id="visual-title">Visual Rendering</h3><p>拖动分界线，对比真实照片与同一实验室的 Real2Sim 场景。</p></div>
-        <article class="scene-comparison" data-scene-comparison data-state="loading" aria-label="实验室真实照片与 Real2Sim 场景对比">
-          <div class="scene-comparison-stage" data-scene-stage aria-busy="true">
-            <img class="scene-comparison-image" data-scene-sim src="assets/visual-usedv6-render.png" alt="同一视角下的实验室仿真场景，保留岛台、水槽、柜体、晾架和排风臂" width="991" height="736" loading="lazy" decoding="async">
-            <img class="scene-comparison-image scene-comparison-real" data-scene-real src="assets/visual-usedv6-real.png" alt="用户提供的实验室原图：中央水槽岛台、灰色柜体、黑色晾架和红白排风臂" width="991" height="736" loading="lazy" decoding="async">
-            <span class="scene-comparison-label scene-comparison-label-real" data-scene-real-label>Real</span>
-            <span class="scene-comparison-label scene-comparison-label-sim" data-scene-sim-label>Real2Sim</span>
-            <input class="scene-comparison-split" data-scene-split type="range" min="0" max="100" step="1" value="50" aria-label="真实照片显示比例" aria-describedby="scene-comparison-help" disabled>
-            <div class="scene-comparison-divider" aria-hidden="true"><span class="scene-comparison-handle"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4m8-8 4 4-4 4M4 12h16"/></svg></span></div>
-            <div class="scene-comparison-feedback" data-scene-feedback><p data-scene-status role="status">正在加载对比画面…</p><button type="button" data-scene-retry hidden>重新加载</button></div>
+        <div class="subchapter-heading section-lead"><h3 id="visual-title">Visual Rendering</h3><p>对比真实照片与 Real2Sim 场景，自由探索同一实验室的三维空间。</p></div>
+        <div class="simulation-explorer usedv6-explorer" data-usedv6-explorer>
+          <div class="simulation-view-tabs" role="tablist" aria-label="实验室展示方式">
+            <button type="button" role="tab" id="usedv6-view-image" aria-controls="usedv6-panel-image" aria-selected="true" data-simulation-view="video">Image comparison</button>
+            <button type="button" role="tab" id="usedv6-view-scene" aria-controls="usedv6-panel-scene" aria-selected="false" tabindex="-1" data-simulation-view="scene"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m10 2 7 4v8l-7 4-7-4V6Zm-7 4 7 4 7-4M10 10v8"/></svg>Interactive 3D</button>
           </div>
-          <div class="scene-comparison-caption"><p id="scene-comparison-help">左右拖动比较，也可聚焦后用方向键调整。</p><div class="scene-comparison-links"><a href="assets/visual-usedv6-real.png" target="_blank" rel="noopener">查看原图</a><a href="assets/visual-usedv6-render.png" target="_blank" rel="noopener">查看仿真渲染</a></div></div>
-        </article>
+          <div id="usedv6-panel-image" data-simulation-panel="video" role="tabpanel" aria-labelledby="usedv6-view-image">
+            <article class="scene-comparison" data-scene-comparison data-state="loading" aria-label="实验室真实照片与 Real2Sim 场景对比">
+              <div class="scene-comparison-stage" data-scene-stage aria-busy="true">
+                <img class="scene-comparison-image" data-scene-sim src="assets/visual-usedv6-render.png" alt="同一视角下的实验室仿真场景，保留岛台、水槽、柜体、晾架和排风臂" width="991" height="736" loading="lazy" decoding="async">
+                <img class="scene-comparison-image scene-comparison-real" data-scene-real src="assets/visual-usedv6-real.png" alt="用户提供的实验室原图：中央水槽岛台、灰色柜体、黑色晾架和红白排风臂" width="991" height="736" loading="lazy" decoding="async">
+                <span class="scene-comparison-label scene-comparison-label-real" data-scene-real-label>Real</span>
+                <span class="scene-comparison-label scene-comparison-label-sim" data-scene-sim-label>Real2Sim</span>
+                <input class="scene-comparison-split" data-scene-split type="range" min="0" max="100" step="1" value="50" aria-label="真实照片显示比例" aria-describedby="scene-comparison-help" disabled>
+                <div class="scene-comparison-divider" aria-hidden="true"><span class="scene-comparison-handle"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4m8-8 4 4-4 4M4 12h16"/></svg></span></div>
+                <div class="scene-comparison-feedback" data-scene-feedback><p data-scene-status role="status">正在加载对比画面…</p><button type="button" data-scene-retry hidden>重新加载</button></div>
+              </div>
+              <div class="scene-comparison-caption"><p id="scene-comparison-help">左右拖动比较，也可聚焦后用方向键调整。</p><div class="scene-comparison-links"><a href="assets/visual-usedv6-real.png" target="_blank" rel="noopener">查看原图</a><a href="assets/visual-usedv6-render.png" target="_blank" rel="noopener">查看仿真渲染</a></div></div>
+            </article>
+          </div>
+          <section id="usedv6-panel-scene" data-simulation-panel="scene" data-scene-viewer data-scene-manifest="assets/usedv6-scene.json" role="tabpanel" aria-labelledby="usedv6-view-scene" hidden>
+            <div class="scene-stage">
+              <div class="scene-viewport usedv6-scene-viewport" data-scene-viewport>
+                <div class="scene-camera-controls">
+                  <button class="scene-zoom" type="button" data-scene-zoom-in disabled aria-label="放大实验室三维场景"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg></button>
+                  <button class="scene-zoom" type="button" data-scene-zoom-out disabled aria-label="缩小实验室三维场景"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10h12"/></svg></button>
+                  <button class="scene-reset" type="button" data-scene-reset disabled aria-label="重置实验室三维视角"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 8a6 6 0 1 1 0 5M4 3v5h5"/></svg><span>重置视角</span></button>
+                </div>
+                <div class="scene-loading"><p data-scene-status role="status">正在加载三维场景…</p><button type="button" data-scene-retry hidden>重新加载</button></div>
+              </div>
+            </div>
+            <p class="scene-help" id="usedv6-scene-help"><span class="scene-desktop-help">拖动旋转，滚轮缩放，右键平移。方向键可平移，Shift + 方向键可旋转，加减键可缩放。</span><span class="scene-touch-help">触屏：单指旋转，双指缩放与平移。</span></p>
+          </section>
+        </div>
       </section>
     </section>
 

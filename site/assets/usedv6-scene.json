@@ -1,0 +1,53 @@
+{
+  "schema": "tezoi-room-scene/v1",
+  "model": "usedv6-scene.glb",
+  "coordinateSystem": "Z-up",
+  "units": "metres",
+  "bounds": {
+    "min": [
+      -4.828000068664551,
+      -5.328000068664551,
+      -0.10500000417232513
+    ],
+    "max": [
+      4.75,
+      5.0,
+      3.919999837875366
+    ]
+  },
+  "camera": {
+    "position": [
+      6.1916611019632475,
+      -6.241325156424361,
+      2.8138628429862074
+    ],
+    "target": [
+      0.16755037228556446,
+      -0.44181252180207053,
+      1.1
+    ],
+    "fov": 32.30177007108505,
+    "near": 0.05,
+    "far": 100
+  },
+  "controls": {
+    "minDistance": 0.3,
+    "maxDistance": 25
+  },
+  "modelSha256": "38d733249d2c5696f093a269efa43adcf79abbbba9e0f060c6a75a1d6508ba4d",
+  "nativeMeshCount": 790,
+  "nativeCurveCount": 25,
+  "sourceObjectCounts": {
+    "meshes": 790,
+    "curves": 25
+  },
+  "exportedObjectCounts": {
+    "meshes": 753,
+    "curves": 25,
+    "total": 778
+  },
+  "excludedHiddenRenderObjects": 37,
+  "exportedObjectCount": 778,
+  "static": true,
+  "animations": false
+}
