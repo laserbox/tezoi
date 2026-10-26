@@ -15,6 +15,7 @@ export function mountSimulationExplorer(root, {
   let inView = true;
   let viewer;
   let pending;
+  let generation=0;
 
   function pause() {
     onPause();
@@ -32,19 +33,25 @@ export function mountSimulationExplorer(root, {
     status.textContent = '正在加载三维场景…';
     status.hidden = false;
     retry.hidden = true;
-    pending = (async () => {
+    const attempt=++generation;let finished=false;
+    const request = (async () => {
       try {
-        viewer = await loadViewer(viewerRoot);
+        const candidate = await loadViewer(viewerRoot);
+        if(attempt!==generation){candidate?.dispose?.();return;}
+        viewer = candidate;
         status.hidden = true;
         syncVisibility();
       } catch {
+        if(attempt!==generation)return;
         status.textContent = `三维场景暂时无法加载，可重试或查看${comparisonLabel}。`;
         retry.hidden = false;
       } finally {
-        pending = null;
+        finished=true;
+        if(attempt===generation)pending = null;
       }
     })();
-    return pending;
+    if(!finished&&attempt===generation)pending=request;
+    return request;
   }
   function select(view, focus = false) {
     if (!tabs.some(tab => tab.dataset.simulationView === view)) return;
@@ -72,6 +79,15 @@ export function mountSimulationExplorer(root, {
     });
   });
   retry.addEventListener('click', () => void ensureViewer());
+  viewerRoot.addEventListener('scene-viewer-error',()=>{
+    generation++;
+    viewer?.dispose?.();
+    viewer=undefined;
+    pending=null;
+    status.hidden=false;
+    status.textContent=`三维场景暂时无法加载，可重试或查看${comparisonLabel}。`;
+    retry.hidden=false;
+  });
   document.addEventListener('visibilitychange', syncVisibility);
   if (typeof IntersectionObserver !== 'undefined') {
     const observer = new IntersectionObserver(([entry]) => {

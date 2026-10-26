@@ -3,7 +3,7 @@ import { mountAgentConversion } from './agent-conversion.js?v=agent-physics10-20
 import { mountRealSimWorkflow } from './real-sim-workflow.js?v=review-fixes-20261023';
 import { mountSceneComparison } from './scene-comparison.js?v=usedv6-comparison-20261026';
 import { mountContactComparison } from './contact-comparison.js?v=review-fixes-20261023';
-import { mountSimulationExplorer } from './simulation-explorer.js?v=usedv6-3d-20261026';
+import { mountSimulationExplorer } from './simulation-explorer.js?v=usedv6-baked-20261026';
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
@@ -22,7 +22,7 @@ $$('[data-workflow-target]').forEach(link => link.addEventListener('click', () =
 mountSceneComparison($('[data-scene-comparison]'));
 mountSimulationExplorer($('[data-usedv6-explorer]'), {
   comparisonLabel: '照片对比',
-  loadViewer: root => import('./simulation-viewer.js?v=usedv6-3d-20261026').then(module => module.mountStaticSceneViewer(root)),
+  loadViewer: root => import('./laboratory-viewer.js?v=usedv6-baked-20261026').then(module => module.mountLaboratorySceneViewer(root)),
 });
 
 const tabs = $$('[data-scene]');
