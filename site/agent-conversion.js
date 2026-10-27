@@ -15,15 +15,14 @@ const fallbackPhases=[{start:0,end:1.8,caption:'识别烧杯与锥形瓶—滴�
 // Homepage ownership is deliberately smaller than the detailed report's history.
 const compactViews = [
  {main:['task','任务字幕与观测'], evidence:[], description:'识别操作意图，把捏取、转移、滴加与放回连接到实际观测。'},
- {main:['mapping','场景重建与坐标配准'], evidence:[['segmentation-comparison','精细分割与对比'],['depth','相对深度'],['clean','去手与遮挡'],['assets','原任务资产']], description:'重建桌面与动态物体，展示观测场景到机器人布局的坐标关系。'},
+ {main:['mapping','场景重建与坐标配准'], evidence:[], description:'重建桌面与动态物体，展示观测场景到机器人布局的坐标关系。'},
  {main:['contact','三维接触与距离'], evidence:[['human','三维手部回放'],['hands','原始视频骨架'],['contact-comparison','接触拟合前后对照']], description:'恢复手部姿态与接触距离，为机器人动作提供几何约束。'},
  {main:['robot','机器人完整动作'], evidence:[], description:'完整回放 RealMan + Xense 抓取滴管、吸液、滴加与自然放回。'},
  {main:['physics','接触力与验收'], evidence:[['liquid','液体转移与守恒'],['robot-detail','抓持近景']], description:'核对同一次仿真执行的接触、滑移、释放与液体守恒。'}
 ];
 const compactClocks = {
  observation:{limit:43.83,label:'示教回放'},
- simulation:{limit:35,label:'仿真回放'},
- assets:{limit:18,label:'资产预览 · 独立循环'}
+ simulation:{limit:35,label:'仿真回放'}
 };
 
 export function mountAgentConversion(root) {
@@ -36,12 +35,13 @@ function mountCompactAgent(root) {
  const source = $('source'), output = $('output'), scrub = $('scrub');
  const tabs = [...root.querySelectorAll('[data-ego-step]')];
  const viewer = root.querySelector('.ego-viewer');
- const positions = {observation:0,simulation:0,assets:0};
+ const positions = {observation:0,simulation:0};
+ const previews = [...root.querySelectorAll('[data-ego-preview]')];
  const failures = new Set();
  let stage = 0, layer = 'task', clock = 'observation', time = 0;
  let active = false, want = false, comparison = false, frame = null, revision = 0;
- const clockFor = () => layer === 'assets' ? 'assets' : stage < 3 ? 'observation' : 'simulation';
- const canCompare = () => stage < 3 && layer !== 'assets';
+ const clockFor = () => stage < 3 ? 'observation' : 'simulation';
+ const canCompare = () => stage < 3;
  const setText = (name, value) => { if ($(name)) $(name).textContent = value; };
 
  function seekVideo(video, value, force = false) {
@@ -61,18 +61,18 @@ function mountCompactAgent(root) {
   scrub.setAttribute('aria-valuetext', `${time.toFixed(1)} 秒，共 ${settings.limit.toFixed(1)} 秒`);
   setText('time', `${time.toFixed(1).padStart(4,'0')} / ${settings.limit.toFixed(1)} s`);
   setText('clock', settings.label);
-  setText('caption', clock === 'assets' ? '原任务资产预览 · 液体仅作外观'
-   : ((clock === 'simulation' ? physicalPhases : fallbackPhases).find(p => time >= p.start && time < p.end)
+  setText('caption', ((clock === 'simulation' ? physicalPhases : fallbackPhases).find(p => time >= p.start && time < p.end)
      || (clock === 'simulation' ? physicalPhases : fallbackPhases).at(-1)).caption);
   $('play').textContent = want ? '暂停' : '播放';
   $('play').setAttribute('aria-label', want ? '暂停演示' : '播放演示');
  }
- function pause() {
+ function pause(exceptPreview = null) {
   remember();
   want = false;
   revision++;
   source.pause();
   output.pause();
+  previews.forEach(video => { if (video !== exceptPreview) video.pause(); });
   if (frame !== null) cancelAnimationFrame(frame);
   frame = null;
   update();
@@ -100,13 +100,14 @@ function mountCompactAgent(root) {
    positions[clock] = time;
    if (comparison) seekVideo(source, time);
    update();
-   if (clock !== 'assets' && time >= compactClocks[clock].limit) { pause(); return; }
+   if (time >= compactClocks[clock].limit) { pause(); return; }
   }
   frame = requestAnimationFrame(tick);
  }
  function play() {
   if (!active || document.hidden || failures.size) return;
-  if (clock !== 'assets' && time >= compactClocks[clock].limit - .05) jump(0);
+  previews.forEach(video => video.pause());
+  if (time >= compactClocks[clock].limit - .05) jump(0);
   want = true;
   const token = ++revision;
   seekVideo(output, time, true);
@@ -163,7 +164,7 @@ function mountCompactAgent(root) {
   const label = [view.main, ...view.evidence].find(([name]) => name === id)[1];
   setText('result-title', label);
   setText('right-label', label);
-  setText('artifact-note', id === 'assets' ? '原任务 CAD 预览；液体仅作外观，未运行物理求解。' : stages[stage].note);
+  setText('artifact-note', stages[stage].note);
   output.setAttribute('aria-label', `${label}演示`);
   $('back').hidden = id === view.main[0];
   root.querySelectorAll('[data-ego-evidence]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.egoEvidence === id)));
@@ -180,6 +181,14 @@ function mountCompactAgent(root) {
   $('stage').setAttribute('aria-labelledby', tabs[stage].id);
   $('evidence-panel').open = false;
   $('evidence-panel').hidden = view.evidence.length === 0;
+  $('reconstruction').hidden = stage !== 1;
+  if (stage === 1) for (const video of previews) {
+   if (!video.hasAttribute('src')) {
+    const name = video.dataset.egoPreview;
+    video.poster = `${MEDIA}${name}.jpg?v=physics10`;
+    video.src = `${MEDIA}${name}.mp4?v=physics10`;
+   }
+  }
   $('layers').replaceChildren();
   for (const [id, label] of view.evidence) {
    const button = document.createElement('button');
@@ -231,7 +240,23 @@ function mountCompactAgent(root) {
    pause(); failures.add(video); showFailures();
   });
  }
- output.addEventListener('ended', () => { if (clock !== 'assets') { time = compactClocks[clock].limit; pause(); } });
+ output.addEventListener('ended', () => { time = compactClocks[clock].limit; pause(); });
+ for (const video of previews) {
+  const card = video.closest('figure');
+  const error = card.querySelector('[data-ego-preview-error]');
+  const retry = card.querySelector('[data-ego-preview-retry]');
+  video.addEventListener('play', () => {
+   if (!active || document.hidden || stage !== 1) video.pause();
+   else pause(video);
+  });
+  video.addEventListener('error', () => { error.hidden = false; retry.hidden = false; });
+  video.addEventListener('loadeddata', () => { error.hidden = true; retry.hidden = true; });
+  retry.addEventListener('click', () => {
+   video.load();
+   video.play().catch(() => {});
+   video.focus({preventScroll:true});
+  });
+ }
  document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
  new IntersectionObserver(entries => { if (!entries.some(entry => entry.isIntersecting)) pause(); }, {threshold:.05}).observe(root);
  select(0);
