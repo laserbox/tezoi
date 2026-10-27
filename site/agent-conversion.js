@@ -1,12 +1,5 @@
 // Real, precomputed demo artifacts. No inference or physical simulation is run in the browser.
 const MEDIA='assets/ego2sim/';
-const compactDescriptions=[
- '识别捏取、转移、滴加与放回，把示范拆解为任务步骤。',
- '从分割与深度恢复桌面、物体和尺度，重建可编辑场景。',
- '恢复三维手部动作，定位手指与滴管、烧杯的接触关系。',
- 'RealMan + Xense 夹起滴管、吸液并滴加，再沿管轴放回，让滴管自由斜靠。各视角来自同一次连续求解。',
- '逐步检查持握接触、自然斜靠与液体守恒。液体采用气压驱动的简化模型，保留柔性转动与模型边界。'
-];
 const CORRECTION_PENDING=false;
 const stages=[
  {purpose:'VIDEO → OBJECT EVENTS → TASK GRAPH',title:'让任务分解连接实际观测。',description:'同一视频时间轴上展示操作意图、胶头与管尖观测状态，再用人手—物体接触候选确定机器人换物时机。字幕描述任务意图；液量和任务成功仍未测量。',layers:[['task','任务字幕与观测']],left:'source',leftLabel:'INPUT / 第一视角',rightLabel:'OUTPUT / 任务分解',evidence:'视频观察 + 接触事件',logs:[['保留原视频时间轴','43.89 s'],['识别两组任务资产','2 groups'],['接触事件连接机器人换物','source linked']],artifact:'任务图与源帧事件',note:'滴加意图不等于液体转移成功'},
@@ -18,10 +11,236 @@ const stages=[
 const physicalMedia=new Set(['robot','robot-detail','robot-external','physics','liquid']);
 const physicalPhases=[{start:0,end:6,caption:'从安全预抓取位接近，保持同一肘部构型'},{start:6,end:8,caption:'压缩胶头，再保留持握预紧并吸液'},{start:8,end:13,caption:'沿管轴抽出，离开瓶口后调整姿态'},{start:13,end:18,caption:'移至烧杯上方，压缩胶头滴加'},{start:18,end:26,caption:'返回并沿倾斜管轴放入锥形瓶'},{start:26,end:27,caption:'松开夹爪，自由释放'},{start:27,end:35.04,caption:'重力与瓶底、瓶颈接触形成稳定斜靠'}];
 const fallbackPhases=[{start:0,end:1.8,caption:'识别烧杯与锥形瓶—滴管组合'},{start:1.8,end:7,caption:'右手捏住滴管胶头，在锥形瓶内操作'},{start:7,end:11,caption:'提起滴管，移到烧杯上方'},{start:11,end:24,caption:'保持滴管朝下，向烧杯滴加'},{start:24,end:29.5,caption:'将滴管放回锥形瓶并松手'},{start:29.5,end:40.5,caption:'拿起烧杯，轻晃后放回桌面'},{start:40.5,end:43.8867,caption:'松开烧杯，手退出操作区'}];
-export function mountAgentConversion(root){
+
+// Homepage ownership is deliberately smaller than the detailed report's history.
+const compactViews = [
+ {main:['task','任务字幕与观测'], evidence:[], description:'识别操作意图，把捏取、转移、滴加与放回连接到实际观测。'},
+ {main:['mapping','场景重建与坐标配准'], evidence:[['segmentation-comparison','精细分割与对比'],['depth','相对深度'],['clean','去手与遮挡'],['assets','原任务资产']], description:'重建桌面与动态物体，展示观测场景到机器人布局的坐标关系。'},
+ {main:['contact','三维接触与距离'], evidence:[['human','三维手部回放'],['hands','原始视频骨架'],['contact-comparison','接触拟合前后对照']], description:'恢复手部姿态与接触距离，为机器人动作提供几何约束。'},
+ {main:['robot','机器人完整动作'], evidence:[], description:'完整回放 RealMan + Xense 抓取滴管、吸液、滴加与自然放回。'},
+ {main:['physics','接触力与验收'], evidence:[['liquid','液体转移与守恒'],['robot-detail','抓持近景']], description:'核对同一次仿真执行的接触、滑移、释放与液体守恒。'}
+];
+const compactClocks = {
+ observation:{limit:43.83,label:'示教回放'},
+ simulation:{limit:35,label:'仿真回放'},
+ assets:{limit:18,label:'资产预览 · 独立循环'}
+};
+
+export function mountAgentConversion(root) {
+ if (!root) return null;
+ return root.hasAttribute('data-ego-compact') ? mountCompactAgent(root) : mountDetailedAgent(root);
+}
+
+function mountCompactAgent(root) {
+ const $ = name => root.querySelector(`[data-ego-${name}]`);
+ const source = $('source'), output = $('output'), scrub = $('scrub');
+ const tabs = [...root.querySelectorAll('[data-ego-step]')];
+ const viewer = root.querySelector('.ego-viewer');
+ const positions = {observation:0,simulation:0,assets:0};
+ const failures = new Set();
+ let stage = 0, layer = 'task', clock = 'observation', time = 0;
+ let active = false, want = false, comparison = false, frame = null, revision = 0;
+ const clockFor = () => layer === 'assets' ? 'assets' : stage < 3 ? 'observation' : 'simulation';
+ const canCompare = () => stage < 3 && layer !== 'assets';
+ const setText = (name, value) => { if ($(name)) $(name).textContent = value; };
+
+ function seekVideo(video, value, force = false) {
+  if (!video.hasAttribute('src') || !Number.isFinite(video.duration)) return;
+  const target = Math.max(0, Math.min(value, video.duration - .02));
+  if (force || Math.abs(video.currentTime - target) > .12) video.currentTime = target;
+ }
+ function remember() {
+  if (want && output.readyState >= 2) time = Math.min(compactClocks[clock].limit, output.currentTime);
+  positions[clock] = time;
+ }
+ function update() {
+  const settings = compactClocks[clock];
+  scrub.max = settings.limit;
+  scrub.value = time;
+  scrub.setAttribute('aria-label', `${settings.label}时间`);
+  scrub.setAttribute('aria-valuetext', `${time.toFixed(1)} 秒，共 ${settings.limit.toFixed(1)} 秒`);
+  setText('time', `${time.toFixed(1).padStart(4,'0')} / ${settings.limit.toFixed(1)} s`);
+  setText('clock', settings.label);
+  setText('caption', clock === 'assets' ? '原任务资产预览 · 液体仅作外观'
+   : ((clock === 'simulation' ? physicalPhases : fallbackPhases).find(p => time >= p.start && time < p.end)
+     || (clock === 'simulation' ? physicalPhases : fallbackPhases).at(-1)).caption);
+  $('play').textContent = want ? '暂停' : '播放';
+  $('play').setAttribute('aria-label', want ? '暂停演示' : '播放演示');
+ }
+ function pause() {
+  remember();
+  want = false;
+  revision++;
+  source.pause();
+  output.pause();
+  if (frame !== null) cancelAnimationFrame(frame);
+  frame = null;
+  update();
+ }
+ function showFailures() {
+  $('method').hidden = failures.size === 0;
+  $('retry').hidden = failures.size === 0;
+  setText('method', failures.size ? '视频加载失败，请重试。' : '');
+ }
+ function startVideo(video, token) {
+  const pending = video.play();
+  pending?.catch(error => {
+   // A later selection/pause owns the state; stale play rejections cannot change it.
+   if (token !== revision || !want || error.name === 'AbortError') return;
+   pause();
+   failures.add(video);
+   showFailures();
+  });
+ }
+ function tick() {
+  frame = null;
+  if (!want || !active) return;
+  if (!output.paused && !output.seeking) {
+   time = Math.min(compactClocks[clock].limit, output.currentTime);
+   positions[clock] = time;
+   if (comparison) seekVideo(source, time);
+   update();
+   if (clock !== 'assets' && time >= compactClocks[clock].limit) { pause(); return; }
+  }
+  frame = requestAnimationFrame(tick);
+ }
+ function play() {
+  if (!active || document.hidden || failures.size) return;
+  if (clock !== 'assets' && time >= compactClocks[clock].limit - .05) jump(0);
+  want = true;
+  const token = ++revision;
+  seekVideo(output, time, true);
+  startVideo(output, token);
+  if (comparison) { seekVideo(source, time, true); startVideo(source, token); }
+  if (frame === null) frame = requestAnimationFrame(tick);
+  update();
+ }
+ function jump(value) {
+  time = Math.min(compactClocks[clock].limit, Math.max(0, value));
+  positions[clock] = time;
+  seekVideo(output, time, true);
+  if (comparison) seekVideo(source, time, true);
+  update();
+ }
+ function load(video, name, force = false) {
+  if (!force && video.dataset.media === name) return;
+  video.pause();
+  video.dataset.media = name;
+  video.loop = name === 'assets';
+  video.poster = `${MEDIA}${name}.jpg?v=physics10`;
+  video.style.aspectRatio = ['assets','human','robot','robot-detail','liquid','physics'].includes(name) ? '4 / 3' : '16 / 9';
+  video.src = `${MEDIA}${name}.mp4?v=physics10`;
+  video.load();
+ }
+ function syncComparison() {
+  comparison = comparison && canCompare();
+  $('source-figure').hidden = !comparison;
+  viewer.classList.toggle('is-comparing', comparison);
+  $('compare').hidden = !canCompare();
+  $('compare').setAttribute('aria-pressed', String(comparison));
+  $('compare').textContent = comparison ? '收起原视频对照' : '对照原视频';
+  if (comparison) load(source, 'source');
+  else if (source.hasAttribute('src')) {
+   source.pause();
+   source.removeAttribute('src');
+   source.removeAttribute('poster');
+   delete source.dataset.media;
+   source.load();
+  }
+ }
+ function choose(id) {
+  pause();
+  layer = id;
+  clock = clockFor();
+  time = positions[clock];
+  failures.delete(source);
+  if (output.dataset.media !== id) failures.delete(output);
+  showFailures();
+  comparison = false;
+  syncComparison();
+  load(output, id);
+  const view = compactViews[stage];
+  const label = [view.main, ...view.evidence].find(([name]) => name === id)[1];
+  setText('result-title', label);
+  setText('right-label', label);
+  setText('artifact-note', id === 'assets' ? '原任务 CAD 预览；液体仅作外观，未运行物理求解。' : stages[stage].note);
+  output.setAttribute('aria-label', `${label}演示`);
+  $('back').hidden = id === view.main[0];
+  root.querySelectorAll('[data-ego-evidence]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.egoEvidence === id)));
+  update();
+ }
+ function select(index, focus = false) {
+  pause();
+  stage = index;
+  const view = compactViews[stage];
+  tabs.forEach((button, i) => {
+   button.setAttribute('aria-selected', String(i === stage));
+   button.tabIndex = i === stage ? 0 : -1;
+  });
+  $('stage').setAttribute('aria-labelledby', tabs[stage].id);
+  $('evidence-panel').open = false;
+  $('evidence-panel').hidden = view.evidence.length === 0;
+  $('layers').replaceChildren();
+  for (const [id, label] of view.evidence) {
+   const button = document.createElement('button');
+   button.type = 'button';
+   button.dataset.egoEvidence = id;
+   button.textContent = label;
+   button.addEventListener('click', () => choose(id));
+   $('layers').append(button);
+  }
+  setText('description', view.description);
+  choose(view.main[0]);
+  if (focus) {
+   tabs[stage].focus({preventScroll:true});
+   tabs[stage].scrollIntoView({block:'nearest',inline:'nearest'});
+  }
+ }
+ tabs.forEach((button, index) => {
+  button.addEventListener('click', () => select(index));
+  button.addEventListener('keydown', event => {
+   const next = {ArrowRight:(index+1)%5,ArrowLeft:(index+4)%5,Home:0,End:4}[event.key];
+   if (next !== undefined) { event.preventDefault(); select(next, true); }
+  });
+ });
+ $('play').addEventListener('click', () => want ? pause() : play());
+ scrub.addEventListener('input', () => { const value = Number(scrub.value); pause(); jump(value); });
+ $('back').addEventListener('click', () => { choose(compactViews[stage].main[0]); $('play').focus({preventScroll:true}); });
+ $('compare').addEventListener('click', () => {
+  pause(); comparison = !comparison; failures.delete(source); showFailures(); syncComparison(); seekVideo(source,time,true);
+ });
+ $('fullscreen').addEventListener('click', () => {
+  if (viewer.requestFullscreen) viewer.requestFullscreen()?.catch(() => {});
+  else output.webkitEnterFullscreen?.();
+ });
+ $('retry').addEventListener('click', () => {
+  for (const video of failures) load(video, video.dataset.media, true);
+ });
+ for (const video of [source, output]) {
+  video.addEventListener('loadedmetadata', () => {
+   if (video === source && !comparison) return;
+   video.style.aspectRatio = `${video.videoWidth} / ${video.videoHeight}`;
+   seekVideo(video, time, true);
+  });
+  video.addEventListener('loadeddata', () => {
+   if (video === source && !comparison) return;
+   failures.delete(video); showFailures();
+  });
+  video.addEventListener('error', () => {
+   if ((video === source && !comparison) || !video.hasAttribute('src')) return;
+   pause(); failures.add(video); showFailures();
+  });
+ }
+ output.addEventListener('ended', () => { if (clock !== 'assets') { time = compactClocks[clock].limit; pause(); } });
+ document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
+ new IntersectionObserver(entries => { if (!entries.some(entry => entry.isIntersecting)) pause(); }, {threshold:.05}).observe(root);
+ select(0);
+ return {setActive(value) { active = value; if (!value) pause(); }, pause};
+}
+
+function mountDetailedAgent(root){
  if(!root)return null;
  const $=n=>root.querySelector(`[data-ego-${n}]`),source=$('source'),output=$('output'),tabs=[...root.querySelectorAll('[data-ego-step]')];
- const compact=root.hasAttribute('data-ego-compact');
  let stage=0,layer='task',active=false,want=false,time=0,phases=fallbackPhases,sourcePhases=fallbackPhases,limit=43.8,manifest=null,frame=null;
  const native=()=>stage>=3&&physicalMedia.has(layer);
  const short=['识别','捏取','转移','滴加','放回','操作烧杯','退出'];
@@ -40,7 +259,7 @@ export function mountAgentConversion(root){
  function jump(t){time=Math.min(limit,Math.max(0,t));seekVideo(source,time);seekVideo(output,time);update();}
  function layerLabel(){
   const label=stages[stage].layers.find(([id])=>id===layer)?.[1];
-  setText('right-label',compact?label:'OUTPUT / '+label);
+  setText('right-label','OUTPUT / '+label);
   if($('download'))$('download').href=MEDIA+layer+'.mp4';
   output.setAttribute('aria-label',label+'演示');
  }
@@ -48,12 +267,11 @@ export function mountAgentConversion(root){
   if(!$('layers'))return;$('layers').replaceChildren();for(const [id,label] of stages[stage].layers){const b=document.createElement('button');b.type='button';b.textContent=label;b.setAttribute('aria-pressed',String(id===layer));b.addEventListener('click',()=>{layer=id;media(output,id);configureTimeline();layers();layerLabel();if(want)play()});$('layers').append(b)}
  }
  function select(i,focus=false){
-  const playing=want;source.pause();output.pause();stage=i;const s=stages[i];layer=compact&&i===3?'robot-detail':s.layers[0][0];media(source,s.left);source.setAttribute('aria-label',i===4?'机器人动作候选':'原始滴管视频');media(output,layer);layers();
+  const playing=want;source.pause();output.pause();stage=i;const s=stages[i];layer=s.layers[0][0];media(source,s.left);source.setAttribute('aria-label',i===4?'机器人动作候选':'原始滴管视频');media(output,layer);layers();
   for(const key of ['purpose','title','description','leftLabel','rightLabel','evidence','artifact']){const name=key.replace(/[A-Z]/g,c=>'-'+c.toLowerCase());setText(name,s[key])}setText('artifact-note',s.note);
   tabs.forEach((b,j)=>{b.setAttribute('aria-selected',String(i===j));b.tabIndex=i===j?0:-1});$('stage');root.querySelector('#ego-stage').setAttribute('aria-labelledby',tabs[i].id);
   if($('properties'))$('properties').hidden=i!==1;if($('phases'))$('phases').hidden=false;$('scrub').setAttribute('aria-label',i===4?'反馈演示时间':'原视频时间');if($('download'))$('download').href=MEDIA+['task','mapping','contact','robot','physics'][i]+'.mp4';root.querySelectorAll('[data-demo-stage]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.demoStage)===i))); if($('feedback'))$('feedback').hidden=i!==4;
   if($('agent-log'))$('agent-log').innerHTML=s.logs.map(([a,b],j)=>`<div class="ego-log-row"><i>${(i===4&&j===2)||b==='partial'?'○':'✓'}</i><span>${a}</span><em>${b}</em></div>`).join('');
-  if(compact){setText('description',compactDescriptions[i]);setText('left-label',i===4?'机器人动作候选':'第一视角视频');setText('right-label',['任务理解','场景重建','三维接触','机器人重定向','基础物理与反馈'][i]);}
   configureTimeline();layerLabel();
   if(focus)tabs[i].focus();update();if(playing)play();
  }

@@ -4,21 +4,50 @@
 
 .ego-demo-gallery{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin:25px 0 30px}.ego-demo-gallery button{text-align:left;padding:0 0 13px;border:1px solid #c9d9d2;border-radius:12px;background:#f5f8f5;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;color:#2b4449}.ego-demo-gallery button[aria-pressed=true]{border-color:#528270;background:#e5efe8}.ego-demo-gallery img{width:100%;aspect-ratio:16/9;object-fit:contain;background:#23363c}.ego-demo-gallery span,.ego-demo-gallery strong,.ego-demo-gallery em{margin:0 12px}.ego-demo-gallery .ego-demo-number{font-size:9px;letter-spacing:.08em;margin-top:12px;color:#648b7c}.ego-demo-gallery strong{font-size:13px;line-height:1.5;font-weight:500;margin-top:5px}.ego-demo-gallery span:not(.ego-demo-number){font-size:10px;color:#6b8484;margin-top:5px}.ego-demo-gallery em{font-size:10px;color:#427a63;font-style:normal;margin-top:14px}.ego-stage-download{display:flex;gap:25px;padding:18px 0;font-size:12px;color:#436e63}.ego-stage-download a{border-bottom:1px solid #aec7bc}#ego-stage{scroll-margin-top:24px}@media(max-width:850px){.ego-demo-gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:560px){.ego-demo-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.ego-demo-gallery strong{font-size:12px}.ego-stage-download{flex-wrap:wrap}}
 
-/* Five main stages with directly accessible sub-demos; detailed evidence stays in the standalone view. */
-#workflow-panel-agent{scroll-margin-top:125px}
-.ego-compact{container-type:inline-size;max-width:none}
-.ego-compact .ego-tabs{margin:0 0 24px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));overflow:visible;gap:10px}
-.ego-compact .ego-tabs button{padding:14px 0;margin:0;font-size:14px;white-space:normal;text-align:left;line-height:1.5}
-.ego-compact .ego-tabs button span{display:block;margin-bottom:5px}
-.ego-compact .ego-view-label{font-size:12px;padding:12px 16px}
-.ego-compact .ego-caption{padding:13px 18px;min-height:52px}
-.ego-compact .ego-caption p{margin:0;font-size:14px}
-.ego-compact-description{font-size:15px;line-height:1.8;margin:20px 0;color:#526d73;max-width:740px}
-.ego-compact-footer{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:16px 0 0;border-top:1px solid var(--eg-line);font-size:12px;color:#69817d}
-.ego-compact-footer a{color:#326b5e;text-decoration:none;border-bottom:1px solid #abc5bb;padding-bottom:3px}
-@container(max-width:650px){.ego-compact .ego-tabs button{font-size:12px}.ego-compact .ego-tabs{gap:5px}.ego-compact .ego-view-label{font-size:11px}.ego-compact-description{font-size:14px}}
-@media(max-width:560px){.ego-compact .ego-viewer{grid-template-columns:1fr 1fr}.ego-compact .ego-viewer figure:first-child{display:block}.ego-compact .ego-view-label{padding:9px;font-size:10px}.ego-compact-footer{font-size:10px}.ego-compact .ego-caption p{font-size:12px}}
-
-.ego-compact .ego-subviews{gap:8px;margin:0 0 18px}
-.ego-compact .ego-subviews button{font-size:12px;padding:8px 13px;line-height:1.5;cursor:pointer}
-.ego-compact .ego-subviews button:hover{border-color:#678b83}
+/* Homepage stage results; standalone report styles above keep their existing layout. */
+#workflow-panel-agent { scroll-margin-top:125px; }
+.ego-compact { max-width:none; }
+.ego-compact [hidden] { display:none!important; }
+.ego-compact .ego-tabs { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:16px; margin:0 0 24px; overflow:visible; }
+.ego-compact .ego-tabs button { padding:14px 0; margin:0; font-size:14px; text-align:left; line-height:1.5; }
+.ego-compact .ego-tabs button span { display:block; margin-bottom:5px; }
+.ego-result-heading { display:flex; justify-content:space-between; align-items:flex-start; gap:24px; margin-bottom:12px; }
+.ego-result-heading h5 { margin:0 0 8px; font-size:clamp(20px,2.2vw,28px); font-weight:400; line-height:1.4; }
+.ego-result-heading p { margin:0; max-width:760px; color:var(--eg-muted); font-size:14px; line-height:1.8; }
+.ego-clock { flex-shrink:0; padding:5px 9px; border:1px solid var(--eg-line); border-radius:5px; font-size:11px; color:var(--eg-muted); }
+.ego-result-actions { display:flex; align-items:center; gap:16px; min-height:34px; margin:0 0 10px; }
+.ego-result-actions:has(button:not([hidden])) { min-height:34px; }
+.ego-result-actions:not(:has(button:not([hidden]))) { display:none; }
+.ego-result-actions button,.ego-media-status button { border:0; background:transparent; padding:6px 0; color:#326b5e; font-size:12px; cursor:pointer; text-decoration:underline; text-underline-offset:4px; }
+.ego-compact .ego-viewer { grid-template-columns:minmax(0,1fr); }
+.ego-compact .ego-viewer video { display:block; width:100%; height:auto; aspect-ratio:16/9; max-height:min(70vh,720px); object-fit:contain; }
+.ego-compact .ego-viewer.is-comparing { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.ego-compact .is-comparing video { aspect-ratio:4/3!important; }
+.ego-compact .ego-view-label { font-size:12px; padding:11px 16px; }
+.ego-compact .ego-caption { padding:13px 18px; min-height:48px; }
+.ego-compact .ego-caption p { margin:0; font-size:14px; }
+.ego-result-note { font-size:12px; color:var(--eg-muted); line-height:1.7; margin:14px 0 18px; }
+.ego-media-status { display:flex; align-items:center; gap:14px; color:#865127; font-size:12px; }
+.ego-media-status p { margin:12px 0 0; }
+.ego-evidence { border-top:1px solid var(--eg-line); margin:0 0 20px; padding:15px 0 0; }
+.ego-evidence summary { width:fit-content; color:#436e63; font-size:13px; cursor:pointer; }
+.ego-compact .ego-subviews { margin:14px 0 0; gap:8px; }
+.ego-compact .ego-subviews button { font-size:12px; padding:9px 13px; line-height:1.5; cursor:pointer; }
+.ego-compact .ego-subviews button:hover { border-color:#678b83; }
+.ego-compact-footer { display:flex; justify-content:space-between; align-items:center; gap:15px; padding:16px 0 0; border-top:1px solid var(--eg-line); font-size:12px; color:#69817d; }
+.ego-compact-footer a { color:#326b5e; text-decoration:none; border-bottom:1px solid #abc5bb; padding-bottom:3px; white-space:nowrap; }
+.ego-compact summary:focus-visible { outline:2px solid #507d71; outline-offset:4px; }
+@media(max-width:650px) {
+ .ego-compact .ego-tabs { display:flex; gap:16px; overflow-x:auto; margin-bottom:20px; }
+ .ego-compact .ego-tabs button { flex:0 0 88px; font-size:13px; }
+ .ego-result-heading { flex-direction:column; gap:10px; }
+ .ego-result-heading p { font-size:13px; }
+ .ego-clock { font-size:10px; }
+ .ego-compact .ego-viewer.is-comparing { grid-template-columns:minmax(0,1fr); }
+ .ego-compact .ego-viewer figure:first-child:not([hidden]) { display:block; }
+ .ego-compact .ego-view-label { padding:9px 12px; font-size:11px; }
+ .ego-compact .ego-caption p { font-size:12px; }
+ .ego-compact-footer { align-items:flex-start; flex-direction:column; font-size:11px; gap:10px; }
+ .ego-compact .ego-controls { gap:8px; }
+ .ego-compact .ego-controls button:first-child { min-width:38px; }
+}
