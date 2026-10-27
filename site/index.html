@@ -9,8 +9,8 @@
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=usedv6-baked-20261026">
   <script src="site-shell.js?v=site-navigation-20261022" type="module"></script>
-  <script src="app.js?v=agent-segmentation-20261027" type="module"></script>
-  <link rel="stylesheet" href="ego2sim.css?v=agent-physics10-20261025">
+  <script src="app.js?v=agent-layout-20261027" type="module"></script>
+  <link rel="stylesheet" href="ego2sim.css?v=agent-layout-20261027">
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">跳到正文</a>
@@ -65,16 +65,31 @@
             <section class="workflow-panel" id="workflow-panel-agent" data-workflow-panel="agent" role="tabpanel" aria-labelledby="workflow-tab-agent" hidden>
               <div class="workflow-pane-heading"><h4>从 Ego 构建仿真</h4><p>一段人类示范，如何成为机器人的场景与动作。</p></div>
 <div class="ego-lab ego-compact" data-agent-conversion data-ego-compact aria-label="滴管任务 Ego2Sim 转换演示">
-  <div class="ego-tabs" role="tablist" aria-label="Ego2Sim 转换阶段"><button role="tab" id="ego-tab-0" aria-selected="true" aria-controls="ego-stage" data-ego-step="0" tabindex="0"><span>01</span>任务理解</button><button role="tab" id="ego-tab-1" aria-selected="false" aria-controls="ego-stage" data-ego-step="1" tabindex="-1"><span>02</span>场景重建</button><button role="tab" id="ego-tab-2" aria-selected="false" aria-controls="ego-stage" data-ego-step="2" tabindex="-1"><span>03</span>三维接触</button><button role="tab" id="ego-tab-3" aria-selected="false" aria-controls="ego-stage" data-ego-step="3" tabindex="-1"><span>04</span>动作重定向</button><button role="tab" id="ego-tab-4" aria-selected="false" aria-controls="ego-stage" data-ego-step="4" tabindex="-1"><span>05</span>验证反馈</button></div>
-  <div id="ego-stage" role="tabpanel" aria-labelledby="ego-tab-0">
-    <div class="ego-subviews" role="group" aria-label="本阶段 Demo" data-ego-layers></div>
+  <div class="ego-tabs" role="tablist" aria-label="Ego2Sim 转换阶段">
+    <button type="button" role="tab" id="ego-tab-0" aria-selected="true" aria-controls="ego-stage" data-ego-step="0" tabindex="0"><span>01</span>任务理解</button>
+    <button type="button" role="tab" id="ego-tab-1" aria-selected="false" aria-controls="ego-stage" data-ego-step="1" tabindex="-1"><span>02</span>场景重建</button>
+    <button type="button" role="tab" id="ego-tab-2" aria-selected="false" aria-controls="ego-stage" data-ego-step="2" tabindex="-1"><span>03</span>三维接触</button>
+    <button type="button" role="tab" id="ego-tab-3" aria-selected="false" aria-controls="ego-stage" data-ego-step="3" tabindex="-1"><span>04</span>动作重定向</button>
+    <button type="button" role="tab" id="ego-tab-4" aria-selected="false" aria-controls="ego-stage" data-ego-step="4" tabindex="-1"><span>05</span>验证反馈</button>
+  </div>
+  <div id="ego-stage" data-ego-stage role="tabpanel" aria-labelledby="ego-tab-0">
+    <div class="ego-result-heading">
+      <div><h5 data-ego-result-title>任务字幕与观测</h5><p data-ego-description>识别操作意图，把捏取、转移、滴加与放回连接到实际观测。</p></div>
+      <span class="ego-clock" data-ego-clock>示教回放</span>
+    </div>
+    <div class="ego-result-actions">
+      <button type="button" data-ego-back hidden>← 返回主结果</button>
+      <button type="button" data-ego-compare aria-pressed="false">对照原视频</button>
+    </div>
     <div class="ego-viewer">
-      <figure><div class="ego-view-label"><span data-ego-left-label>第一视角视频</span></div><video data-ego-source playsinline muted preload="metadata" poster="assets/ego2sim/source.jpg" src="assets/ego2sim/source.mp4" aria-label="原始滴管视频"></video></figure>
-      <figure><div class="ego-view-label"><span data-ego-right-label>任务理解</span></div><video data-ego-output playsinline muted preload="metadata" poster="assets/ego2sim/task.jpg" src="assets/ego2sim/task.mp4" aria-label="当前阶段处理结果"></video></figure>
+      <figure data-ego-source-figure hidden><div class="ego-view-label"><span>原始示范视频</span></div><video data-ego-source playsinline muted preload="none" aria-label="原始滴管示范视频"></video></figure>
+      <figure><div class="ego-view-label"><span data-ego-right-label>任务字幕与观测</span></div><video data-ego-output playsinline muted preload="metadata" poster="assets/ego2sim/task.jpg?v=physics10" aria-label="任务字幕与观测演示"></video></figure>
       <div class="ego-caption"><p data-ego-caption>识别烧杯与锥形瓶—滴管组合</p></div>
     </div>
-    <div class="ego-controls"><button type="button" data-ego-play aria-label="播放同步演示">播放</button><input data-ego-scrub type="range" min="0" max="43.8" step="0.01" value="0" aria-label="原视频时间"><output data-ego-time>00.0 / 43.9 s</output><button type="button" data-ego-fullscreen aria-label="全屏查看处理结果">放大 ↗</button></div>
-    <p class="ego-compact-description" data-ego-description></p>
+    <div class="ego-controls"><button type="button" data-ego-play aria-label="播放演示">播放</button><input data-ego-scrub type="range" min="0" max="43.83" step="0.01" value="0" aria-label="示教回放时间"><output data-ego-time>00.0 / 43.8 s</output><button type="button" data-ego-fullscreen aria-label="全屏查看处理结果">放大 ↗</button></div>
+    <div class="ego-media-status"><p data-ego-method role="status" hidden></p><button type="button" data-ego-retry hidden>重试加载</button></div>
+    <p class="ego-result-note" data-ego-artifact-note>滴加意图不等于液体转移成功</p>
+    <details class="ego-evidence" data-ego-evidence-panel hidden><summary>查看处理过程与证据</summary><div class="ego-subviews" role="group" aria-label="本阶段辅助证据" data-ego-layers></div></details>
   </div>
   <div class="ego-compact-footer"><span>滴管吸液 · 滴加 · 自然放回 · 简化物理求解</span><a href="demo.html" target="_blank" rel="noopener">查看完整过程与报告 ↗</a></div>
 </div>
