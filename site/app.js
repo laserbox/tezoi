@@ -63,7 +63,7 @@ const videos = {
   "gallery-ram-insertion": {"src":"assets/gallery-ram-insertion-hd.mp4","title":"双臂内存条插装","description":"工厂 / Dual UR5e / 0:37","note":"双臂协同完成内存条拾取、DIMM 插槽对准与压入，呈现松爪撤离后的状态。任务效果与训练适用性尚待验证。"},
   "gallery-m12-nut": {"src":"assets/playground-m12-simulation-1080.mp4","title":"指尖拧紧 M12 螺母","description":"工厂 / Franka / 1:17","note":"呈现螺母抓取、转运、再抓取调整、指尖旋拧与预紧卸载。夹持稳定性尚未达标。"},
   "gallery-bottle-packing": {"src":"assets/gallery-bottle-packing.mp4","title":"水瓶装盒与托盘放置","description":"工厂 / Dual UR5e / 0:40","note":"双臂协同完成水瓶入盒、四片盒盖折叠、搬运与托盘放置。接触计算采用简化末端模型，完整机械臂用于运动展示。"},
-  "gallery-rj45-attempt": {"src":"assets/gallery-rj45-attempt-hd.mp4","title":"RJ45 连接器插接尝试","description":"工厂 / Franka / 0:16","note":"呈现刚性连接器的抓取、抬升、定向、转移与插接过程。该研究演示尚未达到插接精度要求。"},
+  "gallery-g1-box": {"src":"assets/gallery-g1-box.mp4","title":"G1 人形机器人搬箱","description":"工厂 / G1 · Revo / 0:43","note":"G1 双手从货架取箱，行走搬运后放入蓝色箱筐。保留同源仿真接触力与指尖变形可视化；触觉未经硬件标定，热图为每 2 秒快照并显示采样时间与年龄。抓取对齐片段加速 2.5 倍，抬起与放下 2 倍，行走原速。工厂背景为 Blender Cycles 渲染场景。"},
   "rigid": {"src":"assets/ipc-rigid-v2.mp4","title":"连锁接触与动量传递","description":"刚体接触与动量传递","note":"通过连续碰撞呈现刚体接触、运动传递与稳定过程。"},
   "soft": {"src":"assets/ipc-soft-v2.mp4","title":"弹性形变与卸载恢复","description":"弹性形变与卸载恢复","note":"呈现柔性材料在受压与卸载过程中的形变与恢复。材料参数为仿真示例，尚未经实物标定。"},
   "cables": {"src":"assets/ipc-cables.mp4","title":"线束弯曲与接触","description":"柔性线束动力学","note":"呈现多根线束在重力与接触作用下的弯曲、垂落与支撑。材料参数为仿真示例，尚未经实物标定。"},
