@@ -9,8 +9,8 @@
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=usedv6-baked-20261026">
   <script src="site-shell.js?v=site-navigation-20261022" type="module"></script>
-  <script src="app.js?v=agent-reconstruction-20261027" type="module"></script>
-  <link rel="stylesheet" href="ego2sim.css?v=agent-reconstruction-20261027">
+  <script src="app.js?v=agent-grid-20261028" type="module"></script>
+  <link rel="stylesheet" href="ego2sim.css?v=agent-grid-20261028">
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">跳到正文</a>
@@ -77,6 +77,15 @@
       <div><h5 data-ego-result-title>任务字幕与观测</h5><p data-ego-description>识别操作意图，把捏取、转移、滴加与放回连接到实际观测。</p></div>
       <span class="ego-clock" data-ego-clock>示教回放</span>
     </div>
+    <section class="ego-reconstruction" data-ego-reconstruction aria-label="场景重建过程视频" hidden>
+      <div class="ego-reconstruction-grid">
+        <figure class="ego-preview-card"><video data-ego-preview="segmentation-comparison" controls playsinline muted preload="none" aria-label="精细分割与前后对比视频"></video><figcaption><h6>精细分割与对比</h6><p>查看分割修正前后，以及手部和物体的局部细节。</p></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试分割视频</button></figure>
+        <figure class="ego-preview-card"><video data-ego-preview="depth" controls playsinline muted preload="none" aria-label="相对深度估计视频"></video><figcaption><h6>相对深度</h6><p>估计桌面与物体的空间关系；颜色表示相对深度。</p></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试深度视频</button></figure>
+        <figure class="ego-preview-card"><video data-ego-preview="clean" controls playsinline muted preload="none" aria-label="去手与遮挡处理视频"></video><figcaption><h6>去手与遮挡</h6><p>查看前景去除结果，标记仍不可见的遮挡区域。</p></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试遮挡处理视频</button></figure>
+        <figure class="ego-preview-card"><video data-ego-preview="assets" controls playsinline muted loop preload="none" aria-label="三维场景与资产预览视频"></video><figcaption><h6>三维场景与资产</h6><p>烧杯、锥形瓶与滴管的原任务 CAD。独立循环预览，液体仅作外观。</p></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试三维资产视频</button></figure>
+      </div>
+    </section>
+    <div data-ego-main-player>
     <div class="ego-result-actions">
       <button type="button" data-ego-back hidden>← 返回主结果</button>
       <button type="button" data-ego-compare aria-pressed="false">对照原视频</button>
@@ -89,15 +98,7 @@
     <div class="ego-controls"><button type="button" data-ego-play aria-label="播放演示">播放</button><input data-ego-scrub type="range" min="0" max="43.83" step="0.01" value="0" aria-label="示教回放时间"><output data-ego-time>00.0 / 43.8 s</output><button type="button" data-ego-fullscreen aria-label="全屏查看处理结果">放大 ↗</button></div>
     <div class="ego-media-status"><p data-ego-method role="status" hidden></p><button type="button" data-ego-retry hidden>重试加载</button></div>
     <p class="ego-result-note" data-ego-artifact-note>滴加意图不等于液体转移成功</p>
-    <section class="ego-reconstruction" data-ego-reconstruction aria-label="场景重建过程视频" hidden>
-      <div class="ego-reconstruction-heading"><h5>重建过程</h5><p>从分割、深度和遮挡处理，到可编辑的三维资产。各视频可单独播放和放大查看。</p></div>
-      <div class="ego-reconstruction-grid">
-        <figure class="ego-preview-card"><video data-ego-preview="segmentation-comparison" controls playsinline muted preload="none" aria-label="精细分割与前后对比视频"></video><figcaption><h6>精细分割与对比</h6><p>查看分割修正前后，以及手部和物体的局部细节。</p></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试分割视频</button></figure>
-        <figure class="ego-preview-card"><video data-ego-preview="depth" controls playsinline muted preload="none" aria-label="相对深度估计视频"></video><figcaption><h6>相对深度</h6><p>估计桌面与物体的空间关系；颜色表示相对深度。</p></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试深度视频</button></figure>
-        <figure class="ego-preview-card"><video data-ego-preview="clean" controls playsinline muted preload="none" aria-label="去手与遮挡处理视频"></video><figcaption><h6>去手与遮挡</h6><p>查看前景去除结果，标记仍不可见的遮挡区域。</p></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试遮挡处理视频</button></figure>
-        <figure class="ego-preview-card"><video data-ego-preview="assets" controls playsinline muted loop preload="none" aria-label="三维场景与资产预览视频"></video><figcaption><h6>三维场景与资产</h6><p>烧杯、锥形瓶与滴管的原任务 CAD。独立循环预览，液体仅作外观。</p></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试三维资产视频</button></figure>
-      </div>
-    </section>
+    </div>
     <details class="ego-evidence" data-ego-evidence-panel hidden><summary>查看处理过程与证据</summary><div class="ego-subviews" role="group" aria-label="本阶段辅助证据" data-ego-layers></div></details>
   </div>
   <div class="ego-compact-footer"><span>滴管吸液 · 滴加 · 自然放回 · 简化物理求解</span><a href="demo.html" target="_blank" rel="noopener">查看完整过程与报告 ↗</a></div>

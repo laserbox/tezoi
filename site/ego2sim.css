@@ -37,9 +37,7 @@
 .ego-compact-footer { display:flex; justify-content:space-between; align-items:center; gap:15px; padding:16px 0 0; border-top:1px solid var(--eg-line); font-size:12px; color:#69817d; }
 .ego-compact-footer a { color:#326b5e; text-decoration:none; border-bottom:1px solid #abc5bb; padding-bottom:3px; white-space:nowrap; }
 .ego-compact summary:focus-visible { outline:2px solid #507d71; outline-offset:4px; }
-.ego-reconstruction { border-top:1px solid var(--eg-line); margin:22px 0 28px; padding-top:22px; }
-.ego-reconstruction-heading h5 { margin:0 0 8px; font-size:21px; font-weight:400; }
-.ego-reconstruction-heading p { margin:0 0 20px; color:var(--eg-muted); font-size:13px; line-height:1.8; }
+.ego-reconstruction { margin:0 0 24px; }
 .ego-reconstruction-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
 .ego-preview-card { margin:0; min-width:0; overflow:hidden; border:1px solid var(--eg-line); border-radius:12px; background:#eef3f2; }
 .ego-preview-card video { display:block; width:100%; aspect-ratio:16/9; object-fit:contain; background:#22343b; }
