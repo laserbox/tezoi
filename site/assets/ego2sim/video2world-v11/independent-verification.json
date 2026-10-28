@@ -1,0 +1,66 @@
+{
+  "schema": "ego2sim.contact-independent-verification/11",
+  "hashes_verified": true,
+  "pair_count": 192,
+  "baseline_geometry": 185,
+  "baseline_strict": 160,
+  "geometry_pass": 189,
+  "strict_pass": 187,
+  "changed_pairs": 27,
+  "missing_observations_preserved": true,
+  "strict_controls_unchanged": true,
+  "bone_lengths_preserved": true,
+  "temporal_edges_checked": 155,
+  "temporal_violations": [],
+  "max_canonical_edge_before_m": 0.14841153146732755,
+  "max_canonical_edge_after_m": 0.14841153146732755,
+  "failures": [
+    {
+      "frame": 58,
+      "time_s": 9.666666666666666,
+      "hand": 0,
+      "side": "Left",
+      "object": "pipette",
+      "distance_mm": 134.76625100066533,
+      "tip_reprojection_px": 6.235661313343348
+    },
+    {
+      "frame": 78,
+      "time_s": 13.0,
+      "hand": 0,
+      "side": "Left",
+      "object": "pipette",
+      "distance_mm": 8.221709573320691,
+      "tip_reprojection_px": 18.16208599206177
+    },
+    {
+      "frame": 111,
+      "time_s": 18.5,
+      "hand": 0,
+      "side": "Left",
+      "object": "pipette",
+      "distance_mm": 15.263216617628752,
+      "tip_reprojection_px": 8.33867098132955
+    },
+    {
+      "frame": 154,
+      "time_s": 25.666666666666668,
+      "hand": 0,
+      "side": "Right",
+      "object": "pipette",
+      "distance_mm": 14.658138005707544,
+      "tip_reprojection_px": 2.5128186157823036
+    },
+    {
+      "frame": 168,
+      "time_s": 28.0,
+      "hand": 0,
+      "side": "Left",
+      "object": "pipette",
+      "distance_mm": 11.874339533961662,
+      "tip_reprojection_px": 14.058609322857684
+    }
+  ],
+  "full_pipeline_pass": false,
+  "physics_recomputed": false
+}

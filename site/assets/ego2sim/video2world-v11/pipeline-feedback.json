@@ -1,0 +1,133 @@
+{
+  "schema": "ego2sim.video2world-feedback/11",
+  "inspired_by": "https://arxiv.org/html/2610.18822v1",
+  "official_implementation": false,
+  "modules": [
+    {
+      "name": "SAM 3.1",
+      "status": "未运行该版本",
+      "actual": "SAM3 image + 点/框提示；263 个分割样本",
+      "next_evaluation": "用视频跟踪对照测试遮挡连续性；3.1 的多物体效率优势不等于本任务精度已提高。",
+      "reference": "https://github.com/facebookresearch/sam3/blob/main/RELEASE_SAM3p1.md",
+      "evidence": "segment_accuracy_v2.py"
+    },
+    {
+      "name": "SAM 3D",
+      "status": "未运行",
+      "actual": "用户提供的烧杯、锥形瓶与滴管 CAD",
+      "next_evaluation": "本任务保留已知尺寸和瓶口结构；未知物体再评估生成 Mesh。",
+      "reference": "https://github.com/facebookresearch/sam-3d-objects",
+      "evidence": "build_geometry_v3.py"
+    },
+    {
+      "name": "MoGe-3",
+      "status": "未运行",
+      "actual": "DA3-SMALL 相对深度 + 桌面尺度先验",
+      "next_evaluation": "作为深度、点云和内参的交叉检查；需 Linux/CUDA，官方当前不支持 macOS。",
+      "reference": "https://github.com/microsoft/MoGe",
+      "evidence": "vision.py"
+    },
+    {
+      "name": "HaWoR",
+      "status": "未运行",
+      "actual": "MediaPipe 21 点 + 有界三维关节拟合",
+      "next_evaluation": "优先评估世界坐标手部与相机运动、MANO 表面；官方要求单独获取 MANO 模型。",
+      "reference": "https://github.com/ThunderVVV/HaWoR",
+      "evidence": "geometry-v5/hands-contact-3d.json"
+    },
+    {
+      "name": "Fpose + SpaTracker",
+      "status": "未运行",
+      "actual": "SAM3/RGB 观测 + 固定 CAD + 位姿拟合",
+      "next_evaluation": "优先评估遮挡后的身份和位姿连续性；透明管尖仍需置信度与几何约束。",
+      "reference": "https://arxiv.org/html/2610.18822v1",
+      "evidence": "build_geometry_v4.py"
+    },
+    {
+      "name": "HACO",
+      "status": "未运行",
+      "actual": "实际 CAD 三角面距离 + 时序几何候选",
+      "next_evaluation": "在 MANO 表面上补接触概率，再与观测和持续时间联合判断；概率不等于接触力。",
+      "reference": "https://arxiv.org/html/2610.18822v1",
+      "evidence": "geometry-v5/hands-contact-3d.json"
+    }
+  ],
+  "geometry_sha256": "498f675742e30096d52f18844c6cb76823785b5fc743ad1da75fd67a9489323f",
+  "feedback": [
+    {
+      "frame": 58,
+      "time_s": 9.666666666666666,
+      "hand": 0,
+      "side": "Left",
+      "object": "pipette",
+      "distance_mm": 134.76625100066533,
+      "tip_reprojection_px": 6.235661313343348,
+      "repair_stage": "hand_identity_and_depth",
+      "status": "unresolved"
+    },
+    {
+      "frame": 78,
+      "time_s": 13.0,
+      "hand": 0,
+      "side": "Left",
+      "object": "pipette",
+      "distance_mm": 8.221709573320691,
+      "tip_reprojection_px": 18.16208599206177,
+      "repair_stage": "image_tracking_and_articulation",
+      "status": "unresolved"
+    },
+    {
+      "frame": 111,
+      "time_s": 18.5,
+      "hand": 0,
+      "side": "Left",
+      "object": "pipette",
+      "distance_mm": 15.263216617628752,
+      "tip_reprojection_px": 8.33867098132955,
+      "repair_stage": "object_pose_and_local_contact",
+      "status": "unresolved"
+    },
+    {
+      "frame": 154,
+      "time_s": 25.666666666666668,
+      "hand": 0,
+      "side": "Right",
+      "object": "pipette",
+      "distance_mm": 14.658138005707544,
+      "tip_reprojection_px": 2.5128186157823036,
+      "repair_stage": "object_pose_and_local_contact",
+      "status": "unresolved"
+    },
+    {
+      "frame": 168,
+      "time_s": 28.0,
+      "hand": 0,
+      "side": "Left",
+      "object": "pipette",
+      "distance_mm": 11.874339533961662,
+      "tip_reprojection_px": 14.058609322857684,
+      "repair_stage": "image_tracking_and_articulation",
+      "status": "unresolved"
+    }
+  ],
+  "source_clock_hz": 6,
+  "render_clock_hz": 30,
+  "missing_frames_filled": false,
+  "source_calibration_verified": false,
+  "remaining_ambiguity": "Frame199 has two Left/beaker observations; neither is merged or used for temporal identity association.",
+  "native_baseline": {
+    "version": "V10",
+    "candidate": "lower02",
+    "task": "35 s replanned pipette cycle; source beaker pickup/shake not transferred",
+    "passed_original_gates": true,
+    "new_geometry_dependency_verified": false
+  },
+  "invalidated_downstream": [
+    "new_geometry_to_retarget",
+    "new_geometry_to_native",
+    "new_geometry_to_native_render"
+  ],
+  "next_action": "Review five failed source contacts, validate camera/scale, regenerate dependent retarget, rerun native gates, then render matching native state.",
+  "full_pipeline_pass": false,
+  "routing_tests": 7
+}
