@@ -15,7 +15,7 @@ const fallbackPhases=[{start:0,end:1.8,caption:'识别烧杯与锥形瓶—滴�
 // Homepage ownership is deliberately smaller than the detailed report's history.
 const compactViews = [
  {main:['task','任务字幕与观测'], evidence:[], description:'识别操作意图，把捏取、转移、滴加与放回连接到实际观测。'},
- {main:['mapping','场景重建与坐标配准'], evidence:[], description:'重建桌面与动态物体，展示观测场景到机器人布局的坐标关系。'},
+ {main:null, title:'场景重建', evidence:[], description:'分割、相对深度、遮挡处理与三维场景，四段视频可独立播放和放大查看。'},
  {main:['contact','三维接触与距离'], evidence:[['human','三维手部回放'],['hands','原始视频骨架'],['contact-comparison','接触拟合前后对照']], description:'恢复手部姿态与接触距离，为机器人动作提供几何约束。'},
  {main:['robot','机器人完整动作'], evidence:[], description:'完整回放 RealMan + Xense 抓取滴管、吸液、滴加与自然放回。'},
  {main:['physics','接触力与验收'], evidence:[['liquid','液体转移与守恒'],['robot-detail','抓持近景']], description:'核对同一次仿真执行的接触、滑移、释放与液体守恒。'}
@@ -41,7 +41,7 @@ function mountCompactAgent(root) {
  let stage = 0, layer = 'task', clock = 'observation', time = 0;
  let active = false, want = false, comparison = false, frame = null, revision = 0;
  const clockFor = () => stage < 3 ? 'observation' : 'simulation';
- const canCompare = () => stage < 3;
+ const canCompare = () => Boolean(compactViews[stage].main) && stage < 3;
  const setText = (name, value) => { if ($(name)) $(name).textContent = value; };
 
  function seekVideo(video, value, force = false) {
@@ -105,7 +105,7 @@ function mountCompactAgent(root) {
   frame = requestAnimationFrame(tick);
  }
  function play() {
-  if (!active || document.hidden || failures.size) return;
+  if (!compactViews[stage].main || !active || document.hidden || failures.size) return;
   previews.forEach(video => video.pause());
   if (time >= compactClocks[clock].limit - .05) jump(0);
   want = true;
@@ -117,11 +117,19 @@ function mountCompactAgent(root) {
   update();
  }
  function jump(value) {
+  if (!compactViews[stage].main) return;
   time = Math.min(compactClocks[clock].limit, Math.max(0, value));
   positions[clock] = time;
   seekVideo(output, time, true);
   if (comparison) seekVideo(source, time, true);
   update();
+ }
+ function clearMedia(video) {
+  video.pause();
+  video.removeAttribute('src');
+  video.removeAttribute('poster');
+  delete video.dataset.media;
+  video.load();
  }
  function load(video, name, force = false) {
   if (!force && video.dataset.media === name) return;
@@ -141,15 +149,11 @@ function mountCompactAgent(root) {
   $('compare').setAttribute('aria-pressed', String(comparison));
   $('compare').textContent = comparison ? '收起原视频对照' : '对照原视频';
   if (comparison) load(source, 'source');
-  else if (source.hasAttribute('src')) {
-   source.pause();
-   source.removeAttribute('src');
-   source.removeAttribute('poster');
-   delete source.dataset.media;
-   source.load();
-  }
+  else if (source.hasAttribute('src')) clearMedia(source);
  }
  function choose(id) {
+  const view = compactViews[stage];
+  if (!view.main) return;
   pause();
   layer = id;
   clock = clockFor();
@@ -160,7 +164,6 @@ function mountCompactAgent(root) {
   comparison = false;
   syncComparison();
   load(output, id);
-  const view = compactViews[stage];
   const label = [view.main, ...view.evidence].find(([name]) => name === id)[1];
   setText('result-title', label);
   setText('right-label', label);
@@ -182,6 +185,8 @@ function mountCompactAgent(root) {
   $('evidence-panel').open = false;
   $('evidence-panel').hidden = view.evidence.length === 0;
   $('reconstruction').hidden = stage !== 1;
+  $('main-player').hidden = !view.main;
+  $('clock').hidden = !view.main;
   if (stage === 1) for (const video of previews) {
    if (!video.hasAttribute('src')) {
     const name = video.dataset.egoPreview;
@@ -199,7 +204,19 @@ function mountCompactAgent(root) {
    $('layers').append(button);
   }
   setText('description', view.description);
-  choose(view.main[0]);
+  if (view.main) choose(view.main[0]);
+  else {
+   layer = null;
+   clock = 'observation';
+   time = positions[clock];
+   comparison = false;
+   syncComparison();
+   clearMedia(output);
+   failures.clear();
+   showFailures();
+   setText('result-title', view.title);
+   update();
+  }
   if (focus) {
    tabs[stage].focus({preventScroll:true});
    tabs[stage].scrollIntoView({block:'nearest',inline:'nearest'});
@@ -214,11 +231,16 @@ function mountCompactAgent(root) {
  });
  $('play').addEventListener('click', () => want ? pause() : play());
  scrub.addEventListener('input', () => { const value = Number(scrub.value); pause(); jump(value); });
- $('back').addEventListener('click', () => { choose(compactViews[stage].main[0]); $('play').focus({preventScroll:true}); });
+ $('back').addEventListener('click', () => {
+  const main = compactViews[stage].main;
+  if (main) { choose(main[0]); $('play').focus({preventScroll:true}); }
+ });
  $('compare').addEventListener('click', () => {
+  if (!canCompare()) return;
   pause(); comparison = !comparison; failures.delete(source); showFailures(); syncComparison(); seekVideo(source,time,true);
  });
  $('fullscreen').addEventListener('click', () => {
+  if (!compactViews[stage].main) return;
   if (viewer.requestFullscreen) viewer.requestFullscreen()?.catch(() => {});
   else output.webkitEnterFullscreen?.();
  });
@@ -240,7 +262,9 @@ function mountCompactAgent(root) {
    pause(); failures.add(video); showFailures();
   });
  }
- output.addEventListener('ended', () => { time = compactClocks[clock].limit; pause(); });
+ output.addEventListener('ended', () => {
+  if (compactViews[stage].main) { time = compactClocks[clock].limit; pause(); }
+ });
  for (const video of previews) {
   const card = video.closest('figure');
   const error = card.querySelector('[data-ego-preview-error]');
