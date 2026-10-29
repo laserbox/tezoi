@@ -24,6 +24,21 @@ const compactClocks = {
  observation:{limit:43.83,label:'示教回放'},
  simulation:{limit:35,label:'仿真回放'}
 };
+const compactStageInfo = [
+ {input:'第一视角操作示范',result:'按时间排列的操作意图与对象事件。',limit:'字幕描述操作意图，尚不能据此确认液体转移成功。'},
+ {input:'视频帧、分割与相对深度',result:'分割、深度、遮挡处理及原任务三维资产。',limit:'坐标注册与布局适配为估计结果；遮挡区域仍有不确定性。'},
+ {input:'重建场景、手部姿态与物体表面',result:'手与物体的接触候选及对应的几何检查。',limit:'几何候选不等于物理抓持成功；接触优化与机器人执行分开展示。'},
+ {input:'场景、本体与规划动作',result:'机器人抓取、吸液、滴加与自然放回的仿真回放。',limit:'液体与反馈采用简化仿真模型，尚未完成真机验证。'},
+ {input:'同一次仿真的动作、接触与液体记录',result:'接触、滑移、释放和液体守恒的检查结果。',limit:'简化液体模型的检查结果，不能替代完整 CFD 或真机验证。'}
+];
+const evidenceDescriptions = {
+ contact:'查看优化前的三维接触距离与候选。',
+ human:'观察重建手部姿态与任务物体的空间关系。',
+ hands:'对照原始视频中的手部骨架观测。',
+ 'contact-comparison':'对照接触拟合修复前后的几何结果。',
+ liquid:'查看简化模型中的液体转移与守恒记录。',
+ 'robot-detail':'从近景观察夹爪、胶头与滴管的持握。'
+};
 
 export function mountAgentConversion(root) {
  if (!root) return null;
@@ -37,9 +52,18 @@ function mountCompactAgent(root) {
  const viewer = root.querySelector('.ego-viewer');
  const positions = {observation:0,simulation:0};
  const previews = [...root.querySelectorAll('[data-ego-preview]')];
+ let evidenceVideos = [];
+ const allPreviews = () => [...previews, ...evidenceVideos];
+ const previewVisibility = new WeakMap();
+ const previewObserver = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+   previewVisibility.set(entry.target, entry.isIntersecting);
+   if (!entry.isIntersecting) entry.target.pause();
+  }
+ }, {threshold:.05});
  const failures = new Set();
  let stage = 0, layer = 'task', clock = 'observation', time = 0;
- let active = false, want = false, comparison = false, frame = null, revision = 0;
+ let active = false, inView = true, want = false, comparison = false, frame = null, revision = 0;
  const clockFor = () => stage < 3 ? 'observation' : 'simulation';
  const canCompare = () => Boolean(compactViews[stage].main) && stage < 3;
  const setText = (name, value) => { if ($(name)) $(name).textContent = value; };
@@ -72,7 +96,7 @@ function mountCompactAgent(root) {
   revision++;
   source.pause();
   output.pause();
-  previews.forEach(video => { if (video !== exceptPreview) video.pause(); });
+  allPreviews().forEach(video => { if (video !== exceptPreview) video.pause(); });
   if (frame !== null) cancelAnimationFrame(frame);
   frame = null;
   update();
@@ -105,8 +129,8 @@ function mountCompactAgent(root) {
   frame = requestAnimationFrame(tick);
  }
  function play() {
-  if (!compactViews[stage].main || !active || document.hidden || failures.size) return;
-  previews.forEach(video => video.pause());
+  if (!compactViews[stage].main || !active || !inView || document.hidden || document.querySelector('dialog[open]') || failures.size) return;
+  allPreviews().forEach(video => video.pause());
   if (time >= compactClocks[clock].limit - .05) jump(0);
   want = true;
   const token = ++revision;
@@ -167,11 +191,65 @@ function mountCompactAgent(root) {
   const label = [view.main, ...view.evidence].find(([name]) => name === id)[1];
   setText('result-title', label);
   setText('right-label', label);
-  setText('artifact-note', stages[stage].note);
   output.setAttribute('aria-label', `${label}演示`);
-  $('back').hidden = id === view.main[0];
-  root.querySelectorAll('[data-ego-evidence]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.egoEvidence === id)));
   update();
+ }
+ function previewAllowed(video, ownerStage, evidence) {
+  return active && inView && !document.hidden && !document.querySelector('dialog[open]')
+   && stage === ownerStage && root.contains(video) && previewVisibility.get(video) !== false
+   && (!evidence || $('evidence-panel').open);
+ }
+ function bindPreview(video, ownerStage, evidence = false) {
+  const card = video.closest('figure');
+  const error = card.querySelector('[data-ego-preview-error]');
+  const retry = card.querySelector('[data-ego-preview-retry]');
+  const current = () => root.contains(video) && video.hasAttribute('src');
+  video.addEventListener('play', () => {
+   if (!previewAllowed(video, ownerStage, evidence)) video.pause();
+   else if (!video.paused) pause(video);
+  });
+  video.addEventListener('playing', () => {
+   if (!previewAllowed(video, ownerStage, evidence)) video.pause();
+  });
+  video.addEventListener('error', () => { if (current()) { error.hidden = false; retry.hidden = false; } });
+  video.addEventListener('loadeddata', () => { if (current()) { error.hidden = true; retry.hidden = true; } });
+  retry.addEventListener('click', () => {
+   if (!previewAllowed(video, ownerStage, evidence)) return;
+   if (evidence) load(video, video.dataset.egoEvidence, true);
+   else video.load();
+   video.play().catch(errorEvent => {
+    if (errorEvent.name !== 'AbortError' && current() && previewAllowed(video, ownerStage, evidence)) {
+     error.hidden = false; retry.hidden = false;
+    }
+   });
+   video.focus({preventScroll:true});
+  });
+  previewObserver.observe(video);
+ }
+ function loadEvidence() {
+  if (!active || !inView || document.hidden || !$('evidence-panel').open) return;
+  for (const video of evidenceVideos) load(video, video.dataset.egoEvidence);
+ }
+ function renderEvidence(view) {
+  for (const video of evidenceVideos) { previewObserver.unobserve(video); clearMedia(video); }
+  evidenceVideos = [];
+  $('layers').replaceChildren();
+  setText('evidence-count', `${view.evidence.length} 段视频`);
+  for (const [id, label] of view.evidence) {
+   const card = document.createElement('figure');
+   card.className = 'ego-preview-card';
+   card.innerHTML = '<video controls playsinline muted preload="none"></video><figcaption><h6></h6><p></p></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden></button>';
+   const video = card.querySelector('video');
+   video.muted = true;
+   video.dataset.egoEvidence = id;
+   video.setAttribute('aria-label', `${label}过程视频`);
+   card.querySelector('h6').textContent = label;
+   card.querySelector('figcaption p').textContent = evidenceDescriptions[id] || '补充查看本阶段的处理过程。';
+   card.querySelector('button').textContent = `重试${label}`;
+   $('layers').append(card);
+   evidenceVideos.push(video);
+   bindPreview(video, stage, true);
+  }
  }
  function select(index, focus = false) {
   pause();
@@ -194,16 +272,11 @@ function mountCompactAgent(root) {
     video.src = `${MEDIA}${name}.mp4?v=physics10`;
    }
   }
-  $('layers').replaceChildren();
-  for (const [id, label] of view.evidence) {
-   const button = document.createElement('button');
-   button.type = 'button';
-   button.dataset.egoEvidence = id;
-   button.textContent = label;
-   button.addEventListener('click', () => choose(id));
-   $('layers').append(button);
-  }
+  renderEvidence(view);
   setText('description', view.description);
+  setText('stage-input', compactStageInfo[stage].input);
+  setText('stage-result', compactStageInfo[stage].result);
+  setText('artifact-note', compactStageInfo[stage].limit);
   if (view.main) choose(view.main[0]);
   else {
    layer = null;
@@ -231,9 +304,9 @@ function mountCompactAgent(root) {
  });
  $('play').addEventListener('click', () => want ? pause() : play());
  scrub.addEventListener('input', () => { const value = Number(scrub.value); pause(); jump(value); });
- $('back').addEventListener('click', () => {
-  const main = compactViews[stage].main;
-  if (main) { choose(main[0]); $('play').focus({preventScroll:true}); }
+ $('evidence-panel').addEventListener('toggle', () => {
+  if ($('evidence-panel').open) loadEvidence();
+  else evidenceVideos.forEach(video => video.pause());
  });
  $('compare').addEventListener('click', () => {
   if (!canCompare()) return;
@@ -265,26 +338,15 @@ function mountCompactAgent(root) {
  output.addEventListener('ended', () => {
   if (compactViews[stage].main) { time = compactClocks[clock].limit; pause(); }
  });
- for (const video of previews) {
-  const card = video.closest('figure');
-  const error = card.querySelector('[data-ego-preview-error]');
-  const retry = card.querySelector('[data-ego-preview-retry]');
-  video.addEventListener('play', () => {
-   if (!active || document.hidden || stage !== 1) video.pause();
-   else pause(video);
-  });
-  video.addEventListener('error', () => { error.hidden = false; retry.hidden = false; });
-  video.addEventListener('loadeddata', () => { error.hidden = true; retry.hidden = true; });
-  retry.addEventListener('click', () => {
-   video.load();
-   video.play().catch(() => {});
-   video.focus({preventScroll:true});
-  });
- }
- document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
- new IntersectionObserver(entries => { if (!entries.some(entry => entry.isIntersecting)) pause(); }, {threshold:.05}).observe(root);
+ for (const video of previews) bindPreview(video, 1);
+ document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); else loadEvidence(); });
+ window.addEventListener('pagehide', () => pause());
+ new IntersectionObserver(entries => {
+  inView = entries.some(entry => entry.isIntersecting);
+  if (!inView) pause(); else loadEvidence();
+ }, {threshold:.05}).observe(root);
  select(0);
- return {setActive(value) { active = value; if (!value) pause(); }, pause};
+ return {setActive(value) { active = value; if (!value) pause(); else loadEvidence(); }, pause};
 }
 
 function mountDetailedAgent(root){

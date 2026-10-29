@@ -4,9 +4,8 @@ export function mountRealSimWorkflow(root, { onStageChange = () => {} } = {}) {
   const tabs = [...root.querySelectorAll('[data-workflow-stage]')];
   const panels = [...root.querySelectorAll('[data-workflow-panel]')];
   const tablist = root.querySelector('[data-workflow-tabs]');
-  const videos = [...root.querySelectorAll('video')];
   const egoVideo = root.querySelector('[data-ego-video]');
-  const pause = () => videos.forEach(video => video.pause());
+  const pause = () => root.querySelectorAll('video').forEach(video => video.pause());
   const compact = window.matchMedia('(max-width: 800px)');
   let active = Math.max(0, tabs.findIndex(tab => tab.dataset.workflowStage === (root.dataset.activeStage || 'simulation')));
 
