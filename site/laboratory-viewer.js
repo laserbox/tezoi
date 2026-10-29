@@ -3862,3 +3862,6 @@ three/examples/jsm/libs/fflate.module.js:
   version 0.8.2
   *)
 */
+
+// Shared Three.js runtime for the baked studio viewer.
+export { Co as WebGLRenderer, Fn as Scene, X0 as Color, Pe as PerspectiveCamera, No as OrbitControls, Po as GLTFLoader, Et as MeshBasicMaterial, Te as SRGBColorSpace };

@@ -22,7 +22,7 @@ $$('[data-workflow-target]').forEach(link => link.addEventListener('click', () =
 mountSceneComparison($('[data-scene-comparison]'));
 mountSimulationExplorer($('[data-usedv6-explorer]'), {
   comparisonLabel: '照片对比',
-  loadViewer: root => import('./laboratory-viewer.js?v=usedv6-baked-20261026').then(module => module.mountLaboratorySceneViewer(root)),
+  loadViewer: root => import('./studio1-viewer.js?v=studio1-baked-20261029b').then(module => module.mountStudio1Viewer(root)),
 });
 
 const tabs = $$('[data-scene]');
