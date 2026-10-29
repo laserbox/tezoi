@@ -1,4 +1,5 @@
 import { icon } from './icons.js?v=mobile-polish-20261023';
+import { mountHeroVideo } from './hero-video.js?v=hero-20261029';
 import { mountAgentConversion } from './agent-conversion.js?v=contact11-20261028';
 import { mountRealSimWorkflow } from './real-sim-workflow.js?v=review-fixes-20261023';
 import { mountSceneComparison } from './scene-comparison.js?v=usedv6-comparison-20261026';
@@ -7,6 +8,7 @@ import { mountSimulationExplorer } from './simulation-explorer.js?v=usedv6-baked
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
+const heroVideo = mountHeroVideo($('[data-hero-media]'));
 const contactComparison = mountContactComparison($('[data-contact-comparison]'));
 const simulationExplorer = mountSimulationExplorer($('[data-simulation-explorer]'), { onPause: () => contactComparison?.pause() });
 const agentConversion = mountAgentConversion($('[data-agent-conversion]'));
@@ -94,6 +96,7 @@ $$('[data-video]').forEach((button) => button.addEventListener('click', () => {
   $('#video-note').textContent = video.note || '具身仿真演示。';
   player.src = video.src;
   dialog.showModal();
+  heroVideo?.setActive(false);
   realSimWorkflow?.pause();
   contactComparison?.pause();
   simulationExplorer?.pause();
@@ -108,6 +111,7 @@ dialog.addEventListener('click', (event) => {
   if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
 });
 dialog.addEventListener('close', () => {
+  heroVideo?.setActive(true);
   player.pause();
   player.removeAttribute('src');
   player.load();

@@ -88,6 +88,8 @@ h4 { font-size: var(--type-group); font-weight: 400; letter-spacing: -.025em; li
 .overview-stage { margin: 12px; min-height: 700px; height: min(1000px, 97svh); position: relative; overflow: hidden; border-radius: 24px; background: #27343c; color: white; }
 .overview-video { position: absolute; inset: 0; }
 .hero-image { width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
+.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none; }
+[data-hero-media] .hero-image { object-position: center; }
 .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, #1021296e, #12252b09 85%), linear-gradient(0deg, #122029a8, transparent 65%); }
 .hero-chapter { position: absolute; top: 150px; left: calc(var(--gutter) - 12px); display: flex; align-items: center; gap: 18px; }
 .hero-chapter h2 { font-size: 14px; font-weight: 500; letter-spacing: 0; line-height: 1.5; }
@@ -103,6 +105,10 @@ h4 { font-size: var(--type-group); font-weight: 400; letter-spacing: -.025em; li
 .hero-text-link > span { font-size: 18px; }
 .hero-bottom { position: absolute; left: calc(var(--gutter) - 12px); right: calc(var(--gutter) - 12px); bottom: 30px; display: flex; justify-content: space-between; gap: 20px; font-size: var(--type-meta); color: #d6e2e5; }
 .hero-credit { font-size: var(--type-meta); }
+.hero-tools { display: flex; align-items: center; gap: 16px; }
+.hero-toggle { min-height: 44px; padding: 9px 16px; border: 1px solid #ffffff70; border-radius: 8px; background: #14232b99; color: #fff; font: inherit; cursor: pointer; }
+.hero-toggle:hover { background: #14232bd9; }
+.hero-toggle:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 .chapter { --chapter-space: 112px; padding-block: var(--chapter-space); scroll-margin-top: calc(-1 * var(--chapter-space)); }
 .chapter-heading { min-width: 0; }
 .subchapter { padding-top: 0; }
@@ -321,6 +327,13 @@ body.modal-open { overflow: hidden; }
   .hero-button, .hero-text-link { justify-content: space-between; padding: 12px 14px; gap: 8px; font-size: 12px; line-height: 1.5; white-space: nowrap; }
   .hero-button .ui-icon, .hero-text-link .ui-icon { width: 16px; height: 16px; }
   .hero-bottom { left: 16px; right: 16px; bottom: 25px; flex-direction: column; gap: 8px; }
+  [data-hero-media] { height: auto; min-height: 0; max-height: none; padding-top: 124px; }
+  [data-hero-media] .overview-video { position: relative; aspect-ratio: 16 / 9; }
+  [data-hero-media] .hero-chapter { top: 91px; }
+  [data-hero-media] .hero-shade { background: none; }
+  [data-hero-media] .hero-content { position: relative; inset: auto; padding: 28px 16px; }
+  [data-hero-media] .hero-bottom { position: relative; inset: auto; padding: 0 16px 20px; }
+  [data-hero-media] .hero-tools { justify-content: space-between; }
   .chapter { --chapter-space: 67px; }
   .subchapter-heading { gap: 14px; margin-bottom: 32px; }
   .chapter-marker { margin-bottom: 24px; }
