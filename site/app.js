@@ -1,7 +1,7 @@
 import { icon } from './icons.js?v=mobile-polish-20261023';
 import { mountHeroVideo } from './hero-video.js?v=watch-full-20261029';
-import { mountAgentConversion } from './agent-conversion.js?v=contact11-20261028';
-import { mountRealSimWorkflow } from './real-sim-workflow.js?v=review-fixes-20261023';
+import { mountAgentConversion } from './agent-conversion.js?v=agent-hierarchy-20261029';
+import { mountRealSimWorkflow } from './real-sim-workflow.js?v=playground-20261029';
 import { mountSceneComparison } from './scene-comparison.js?v=usedv6-comparison-20261026';
 import { mountContactComparison } from './contact-comparison.js?v=review-fixes-20261023';
 import { mountSimulationExplorer } from './simulation-explorer.js?v=usedv6-baked-20261026';
@@ -100,6 +100,7 @@ $$('[data-video]').forEach((button) => button.addEventListener('click', () => {
   dialog.showModal();
   heroVideo?.setActive(false);
   realSimWorkflow?.pause();
+  agentConversion?.pause?.();
   contactComparison?.pause();
   simulationExplorer?.pause();
   document.body.classList.add('modal-open');
