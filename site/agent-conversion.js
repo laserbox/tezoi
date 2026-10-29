@@ -24,12 +24,12 @@ const compactClocks = {
  observation:{limit:43.83,label:'示教回放'},
  simulation:{limit:35,label:'仿真回放'}
 };
-const compactStageInfo = [
- {input:'第一视角操作示范',result:'按时间排列的操作意图与对象事件。',limit:'字幕描述操作意图，尚不能据此确认液体转移成功。'},
- {input:'视频帧、分割与相对深度',result:'分割、深度、遮挡处理及原任务三维资产。',limit:'坐标注册与布局适配为估计结果；遮挡区域仍有不确定性。'},
- {input:'重建场景、手部姿态与物体表面',result:'手与物体的接触候选及对应的几何检查。',limit:'几何候选不等于物理抓持成功；接触优化与机器人执行分开展示。'},
- {input:'场景、本体与规划动作',result:'机器人抓取、吸液、滴加与自然放回的仿真回放。',limit:'液体与反馈采用简化仿真模型，尚未完成真机验证。'},
- {input:'同一次仿真的动作、接触与液体记录',result:'接触、滑移、释放和液体守恒的检查结果。',limit:'简化液体模型的检查结果，不能替代完整 CFD 或真机验证。'}
+const compactStageLimits = [
+ '字幕描述操作意图，尚不能据此确认液体转移成功。',
+ '坐标注册与布局适配为估计结果；遮挡区域仍有不确定性。',
+ '几何候选不等于物理抓持成功；接触优化与机器人执行分开展示。',
+ '液体与反馈采用简化仿真模型，尚未完成真机验证。',
+ '简化液体模型的检查结果，不能替代完整 CFD 或真机验证。'
 ];
 const evidenceDescriptions = {
  contact:'查看优化前的三维接触距离与候选。',
@@ -274,9 +274,7 @@ function mountCompactAgent(root) {
   }
   renderEvidence(view);
   setText('description', view.description);
-  setText('stage-input', compactStageInfo[stage].input);
-  setText('stage-result', compactStageInfo[stage].result);
-  setText('artifact-note', compactStageInfo[stage].limit);
+  setText('artifact-note', compactStageLimits[stage]);
   if (view.main) choose(view.main[0]);
   else {
    layer = null;

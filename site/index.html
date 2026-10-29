@@ -7,10 +7,10 @@
   <meta name="description" content="TEZOI，智能高精度具身仿真。融合场景重建、视觉保真与物理交互，构建面向具身智能研发与验证的仿真环境。">
   <title>TEZOI | Intelligent, high-fidelity embodied simulation</title>
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=playground-20261029">
+  <link rel="stylesheet" href="styles.css?v=playground-simple-20261029">
   <script src="site-shell.js?v=site-navigation-20261022" type="module"></script>
-  <script src="app.js?v=playground-20261029" type="module"></script>
-  <link rel="stylesheet" href="ego2sim.css?v=agent-hierarchy-20261029">
+  <script src="app.js?v=playground-simple-20261029" type="module"></script>
+  <link rel="stylesheet" href="ego2sim.css?v=agent-simple-20261029">
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">跳到正文</a>
@@ -55,7 +55,6 @@
           <div class="workflow-main">
             <section class="workflow-panel" id="workflow-panel-source" data-workflow-panel="source" role="tabpanel" aria-labelledby="workflow-tab-source" hidden>
               <div class="workflow-pane-heading"><h4>Ego · 真实第一视角示范</h4><p>以连续视频保留环境、对象和操作顺序。</p></div>
-              <dl class="workflow-io" aria-label="Ego 输入与产出"><div><dt>输入</dt><dd>人类在真实环境中的操作</dd></div><div><dt>产出</dt><dd>连续的第一视角示范视频</dd></div></dl>
               <figure class="workflow-ego-media">
                 <video data-ego-video controls muted playsinline preload="none" poster="assets/ego-img-6100-2x.jpg" width="1920" height="1080" aria-label="第一视角操作视频，2 倍速">
                   <source src="assets/ego-img-6100-2x.mp4" type="video/mp4">
@@ -66,7 +65,6 @@
             </section>
             <section class="workflow-panel" id="workflow-panel-agent" data-workflow-panel="agent" role="tabpanel" aria-labelledby="workflow-tab-agent" hidden>
               <div class="workflow-pane-heading"><h4>Agent · 从示范构建仿真</h4><p>查看任务理解、场景构建与机器人动作的阶段结果。</p></div>
-              <dl class="workflow-io" aria-label="Agent 输入与产出"><div><dt>输入</dt><dd>第一视角操作示范</dd></div><div><dt>产出</dt><dd>场景、接触候选与仿真动作</dd></div></dl>
               <div class="ego-lab ego-compact" data-agent-conversion data-ego-compact aria-label="滴管任务 Ego2Sim 转换演示">
   <div class="ego-tabs" role="tablist" aria-label="Ego2Sim 转换阶段">
     <button type="button" role="tab" id="ego-tab-0" aria-selected="true" aria-controls="ego-stage" data-ego-step="0" tabindex="0"><span>01</span>任务理解</button>
@@ -80,7 +78,6 @@
       <div><h5 data-ego-result-title>任务字幕与观测</h5><p data-ego-description>识别操作意图，把捏取、转移、滴加与放回连接到实际观测。</p></div>
       <span class="ego-clock" data-ego-clock>示教回放</span>
     </div>
-    <dl class="ego-stage-input"><dt>本阶段输入</dt><dd data-ego-stage-input>第一视角操作示范</dd></dl>
     <section class="ego-reconstruction" data-ego-reconstruction aria-label="场景重建过程视频" hidden>
       <div class="ego-reconstruction-grid">
         <figure class="ego-preview-card"><video data-ego-preview="segmentation-comparison" controls playsinline muted preload="none" aria-label="精细分割与前后对比视频"></video><figcaption><h6>精细分割与对比</h6><p>查看分割修正前后，以及手部和物体的局部细节。</p></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试分割视频</button></figure>
@@ -101,7 +98,7 @@
     <div class="ego-controls"><button type="button" data-ego-play aria-label="播放演示">播放</button><input data-ego-scrub type="range" min="0" max="43.83" step="0.01" value="0" aria-label="示教回放时间"><output data-ego-time>00.0 / 43.8 s</output><button type="button" data-ego-fullscreen aria-label="全屏查看处理结果">放大 ↗</button></div>
     <div class="ego-media-status"><p data-ego-method role="status" hidden></p><button type="button" data-ego-retry hidden>重试加载</button></div>
     </div>
-    <dl class="ego-stage-outcome" aria-label="本阶段结果与限制"><div><dt>得到什么</dt><dd data-ego-stage-result>按时间排列的操作意图与对象事件。</dd></div><div><dt>当前限制</dt><dd data-ego-artifact-note>滴加意图不等于液体转移成功。</dd></div></dl>
+    <p class="ego-result-note"><span>当前限制：</span><span data-ego-artifact-note>滴加意图不等于液体转移成功。</span></p>
     <details class="ego-evidence" data-ego-evidence-panel hidden><summary>处理过程与对照 <span data-ego-evidence-count></span></summary><p class="ego-evidence-intro">补充查看处理过程；这些视频与上方主结果独立播放。</p><div class="ego-evidence-grid" data-ego-layers></div></details>
   </div>
   <div class="ego-compact-footer"><a href="assets/ego2sim/video2world-v11-review.html" target="_blank" rel="noopener">模型与优化记录 ↗</a><span>滴管吸液 · 滴加 · 自然放回 · 简化物理求解</span><a href="demo.html" target="_blank" rel="noopener">查看完整过程与报告 ↗</a></div>
@@ -110,7 +107,6 @@
             <section class="workflow-panel" id="workflow-panel-simulation" data-workflow-panel="simulation" role="tabpanel" aria-labelledby="workflow-tab-simulation">
               <div class="simulation-explorer" data-simulation-explorer>
                 <div class="compare-heading section-lead"><div><h4 id="contact-compare-title">M12 螺母旋拧</h4><p class="project-meta">Franka</p></div><p>独立仿真示例</p></div>
-                <dl class="workflow-io" aria-label="Simulation 输入与产出"><div><dt>输入</dt><dd>场景、本体与规划动作</dd></div><div><dt>产出</dt><dd>仿真回放与接触力观测</dd></div></dl>
                 <div class="simulation-view-tabs" role="tablist" aria-label="仿真展示方式">
                   <button type="button" role="tab" id="simulation-view-video" aria-controls="simulation-panel-video" aria-selected="true" data-simulation-view="video">Video comparison</button>
                   <button type="button" role="tab" id="simulation-view-scene" aria-controls="simulation-panel-scene" aria-selected="false" tabindex="-1" data-simulation-view="scene"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m10 2 7 4v8l-7 4-7-4V6Zm-7 4 7 4 7-4M10 10v8"/></svg>Interactive 3D</button>
@@ -168,7 +164,6 @@
             </section>
             <section class="workflow-panel" id="workflow-panel-validation" data-workflow-panel="validation" role="tabpanel" aria-labelledby="workflow-tab-validation" hidden>
               <div class="workflow-pane-heading"><h4>Robotics · 真机验证</h4><p>在真实任务中检查动作与策略的执行效果。</p></div>
-              <dl class="workflow-io" aria-label="Robotics 输入与产出"><div><dt>输入</dt><dd>待部署的动作或策略</dd></div><div><dt>预期产出 · 待补充</dt><dd>真机执行记录与任务结果</dd></div></dl>
               <div class="workflow-media-placeholder workflow-validation-placeholder">
                 <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="12" width="38" height="28" rx="5"/><circle cx="24" cy="26" r="8"/><path d="m16 12 3-5h10l3 5"/></svg>
                 <p>真机验证示例待补充</p><span>尚无可展示的真机执行录像与结果。下列维度为后续验证关注点。</span>
