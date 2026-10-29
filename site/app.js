@@ -55,12 +55,12 @@ tabs.forEach((tab, i) => {
 
 const videos = {
   "hero-full": {"src":"assets/homepage-hero.mp4","title":"TEZOI 仿真演示","description":"完整视频 · 00:32","note":"刚体接触、柔性物体操作与流体交互。","muted":false},
-  "gallery-soft-bag": {"src":"assets/gallery-soft-bag.mp4?v=task-cameras-20261029","title":"软袋开袋、加液与夹封","description":"实验室 / Dual UR5e / Allegro v4 / 2:15 / 原速","note":"固定斜前方视角与双腕画面同步展示。共享实验室中，双手开袋、协同托杯倾倒 225 mL 液体，再放回杯体、机械夹封并撤手。原脚本仿真记录重渲染，液体采用简化模型，夹封未经气密或泄漏验证；两工位间的物理交互未重新验证。"},
+  "gallery-soft-bag": {"src":"assets/gallery-soft-bag.mp4?v=lab-2k-20261030","title":"软袋开袋、加液与夹封","description":"实验室 / Dual UR5e / Allegro v4 / 2:15 / 2K主视角 / 原速","note":"固定斜前方视角与双腕画面同步展示。共享实验室中，双手开袋、协同托杯倾倒 225 mL 液体，再放回杯体、机械夹封并撤手。原脚本仿真记录重渲染，液体采用简化模型，夹封未经气密或泄漏验证；两工位间的物理交互未重新验证。"},
   "gallery-pigment-dilution": {"src":"assets/gallery-pigment-dilution.mp4","title":"色素稀释","description":"实验室 / UR5e / Robotiq 2F85 / 0:50","note":"夹爪挤压滴管胶头，展示不同预压力下的吸液、排液与色素浓度变化。液体采用简化模型，结果未经真机标定；此处播放完整仿真预览。"},
   "gallery-go2-walk": {"src":"assets/gallery-go2-walk.mp4","title":"Go2 行走","description":"运动控制 / Unitree Go2 / 0:05","note":"行走策略驱动四足机器人连续运动，呈现步态协调与足端地面接触。"},
   "gallery-g1-dance": {"src":"assets/gallery-g1-dance.mp4","title":"G1 舞蹈","description":"运动控制 / Unitree G1 / Dual Dex3 / 0:20","note":"舞蹈策略驱动人形机器人执行 Shuffle 动作，呈现连续步伐、躯干与双臂的协同运动。"},
-  "gallery-labimus-medicine": {"src":"assets/gallery-labimus-medicine.mp4?v=task-cameras-20261029","title":"双臂取药","description":"实验室 / Dual UR5e / Robotiq 2F85 / 2:43 / 原速","note":"固定右前上方视角与双腕画面同步展示。共享实验室中，双臂协同持瓶与持勺，倾瓶取出颗粒并扶正药瓶。播放原脚本仿真记录的重渲染取药段，保留原速；两工位间的物理交互未重新验证。"},
-  "gallery-labimus-weighing": {"src":"assets/gallery-labimus-weighing.mp4?v=task-cameras-20261029","title":"双臂称量","description":"实验室 / Dual UR5e / Robotiq 2F85 / 1:08 / 原速","note":"固定正前上方视角与双腕画面同步展示。共享实验室中，双臂将颗粒转移至称量舟，完成还勺、关门与稳定读数。播放原脚本仿真记录的重渲染称量段，原目标剂量仍未达；两工位间的物理交互未重新验证。"},
+  "gallery-labimus-medicine": {"src":"assets/gallery-labimus-medicine.mp4?v=lab-2k-20261030","title":"双臂取药","description":"实验室 / Dual UR5e / Robotiq 2F85 / 2:43 / 2K主视角 / 原速","note":"固定右前上方视角与双腕画面同步展示。共享实验室中，双臂协同持瓶与持勺，倾瓶取出颗粒并扶正药瓶。播放原脚本仿真记录的重渲染取药段，保留原速；两工位间的物理交互未重新验证。"},
+  "gallery-labimus-weighing": {"src":"assets/gallery-labimus-weighing.mp4?v=lab-2k-20261030","title":"双臂称量","description":"实验室 / Dual UR5e / Robotiq 2F85 / 1:08 / 2K主视角 / 原速","note":"固定正前上方视角与双腕画面同步展示。共享实验室中，双臂将颗粒转移至称量舟，完成还勺、关门与稳定读数。播放原脚本仿真记录的重渲染称量段，原目标剂量仍未达；两工位间的物理交互未重新验证。"},
   "gallery-flexible-rj45": {"src":"assets/gallery-flexible-rj45.mp4","title":"柔性网线插拔","description":"工厂 / Franka / 0:25","note":"呈现一米柔性网线的抓取、插入锁止、重抓解锁与拔出，展示柔性线缆与连接器的接触操作。"},
   "gallery-rubber-ring": {"src":"assets/gallery-rubber-ring.mp4","title":"双臂橡胶圈装配","description":"工厂 / Dual UR5e / 0:20","note":"双臂通过摩擦夹持完成胶圈拾取、搬运、拉伸与入槽。部分装配条件仍未达标。"},
   "gallery-ram-insertion": {"src":"assets/gallery-ram-insertion-hd.mp4","title":"双臂内存条插装","description":"工厂 / Dual UR5e / 0:37","note":"双臂协同完成内存条拾取、DIMM 插槽对准与压入，呈现松爪撤离后的状态。任务效果与训练适用性尚待验证。"},
