@@ -15,7 +15,8 @@ export function mountHeroVideo(root, { doc = globalThis.document, win = globalTh
   const shouldPlay = () => visible && active && !doc.hidden && !userPaused && !failed;
   function label() {
     toggle.hidden = failed;
-    toggle.textContent = userPaused ? '播放视频' : '暂停视频';
+    toggle.setAttribute('aria-label', userPaused ? '播放背景视频' : '暂停背景视频');
+    toggle.setAttribute('aria-pressed', String(!userPaused));
   }
   function sync() {
     label();
