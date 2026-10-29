@@ -15,13 +15,6 @@
 .ego-result-heading h5 { margin:0 0 8px; font-size:clamp(20px,2.2vw,28px); font-weight:400; line-height:1.4; }
 .ego-result-heading p { margin:0; max-width:760px; color:var(--eg-muted); font-size:14px; line-height:1.8; }
 .ego-clock { flex-shrink:0; padding:5px 9px; border:1px solid var(--eg-line); border-radius:5px; font-size:11px; color:var(--eg-muted); }
-.ego-stage-input { display:flex; align-items:baseline; gap:14px; margin:18px 0 24px; font-size:13px; line-height:1.7; }
-.ego-stage-input dt { flex-shrink:0; font-size:11px; color:var(--eg-muted); }
-.ego-stage-input dd { margin:0; }
-.ego-stage-outcome { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; margin:20px 0 24px; padding:18px 20px; border:1px solid var(--eg-line); border-radius:10px; background:#f3f7f5; }
-.ego-stage-outcome dt { margin-bottom:8px; color:var(--eg-muted); font-size:11px; }
-.ego-stage-outcome dd { margin:0; font-size:13px; line-height:1.8; }
-.ego-stage-outcome > div + div { border-left:1px solid var(--eg-line); padding-left:20px; }
 .ego-result-actions { display:flex; align-items:center; gap:16px; min-height:34px; margin:0 0 10px; }
 .ego-result-actions:has(button:not([hidden])) { min-height:34px; }
 .ego-result-actions:not(:has(button:not([hidden]))) { display:none; }
@@ -58,11 +51,7 @@
 .ego-preview-card button { margin:0 16px 16px; border:1px solid var(--eg-line); border-radius:5px; background:transparent; padding:7px 10px; color:#326b5e; font-size:12px; cursor:pointer; }
 .ego-preview-card video:focus-visible { outline:2px solid #507d71; outline-offset:-3px; }
 @media(max-width:650px) {
- .ego-stage-input { display:block; }
- .ego-stage-input dt { margin-bottom:5px; }
- .ego-stage-outcome,.ego-evidence-grid { grid-template-columns:minmax(0,1fr); gap:16px; }
- .ego-stage-outcome { padding:16px; }
- .ego-stage-outcome > div + div { border-left:0; border-top:1px solid var(--eg-line); padding-left:0; padding-top:14px; }
+ .ego-evidence-grid { grid-template-columns:minmax(0,1fr); gap:16px; }
  .ego-reconstruction-grid { grid-template-columns:minmax(0,1fr); gap:16px; }
  .ego-compact .ego-tabs { display:flex; gap:16px; overflow-x:auto; margin-bottom:20px; }
  .ego-compact .ego-tabs button { flex:0 0 88px; font-size:13px; }
