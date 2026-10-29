@@ -1,5 +1,5 @@
 import { icon } from './icons.js?v=mobile-polish-20261023';
-import { mountHeroVideo } from './hero-video.js?v=hero-20261029';
+import { mountHeroVideo } from './hero-video.js?v=watch-full-20261029';
 import { mountAgentConversion } from './agent-conversion.js?v=contact11-20261028';
 import { mountRealSimWorkflow } from './real-sim-workflow.js?v=review-fixes-20261023';
 import { mountSceneComparison } from './scene-comparison.js?v=usedv6-comparison-20261026';
@@ -54,6 +54,7 @@ tabs.forEach((tab, i) => {
 });
 
 const videos = {
+  "hero-full": {"src":"assets/homepage-hero.mp4","title":"TEZOI 仿真演示","description":"完整视频 · 00:32","note":"刚体接触、柔性物体操作与流体交互。","muted":false},
   "gallery-soft-bag": {"src":"assets/gallery-soft-bag.mp4?v=task-cameras-20261029","title":"软袋开袋、加液与夹封","description":"实验室 / Dual UR5e / Allegro v4 / 2:15 / 原速","note":"固定斜前方视角与双腕画面同步展示。共享实验室中，双手开袋、协同托杯倾倒 225 mL 液体，再放回杯体、机械夹封并撤手。原脚本仿真记录重渲染，液体采用简化模型，夹封未经气密或泄漏验证；两工位间的物理交互未重新验证。"},
   "gallery-pigment-dilution": {"src":"assets/gallery-pigment-dilution.mp4","title":"色素稀释","description":"实验室 / UR5e / Robotiq 2F85 / 0:50","note":"夹爪挤压滴管胶头，展示不同预压力下的吸液、排液与色素浓度变化。液体采用简化模型，结果未经真机标定；此处播放完整仿真预览。"},
   "gallery-go2-walk": {"src":"assets/gallery-go2-walk.mp4","title":"Go2 行走","description":"运动控制 / Unitree Go2 / 0:05","note":"行走策略驱动四足机器人连续运动，呈现步态协调与足端地面接触。"},
@@ -95,6 +96,7 @@ $$('[data-video]').forEach((button) => button.addEventListener('click', () => {
   $('#video-description').textContent = video.description;
   $('#video-note').textContent = video.note || '具身仿真演示。';
   player.src = video.src;
+  if (typeof video.muted === 'boolean') player.muted = video.muted;
   dialog.showModal();
   heroVideo?.setActive(false);
   realSimWorkflow?.pause();
