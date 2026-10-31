@@ -1,0 +1,10 @@
+import { copyFile, mkdir, stat } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+const source = process.argv[2];
+if (!source) throw new Error('Usage: node tools/prepare-reconstruction.mjs <absolute path to splat.sog>');
+const destination = new URL('../site/assets/reconstruction/splat.sog', import.meta.url);
+const info = await stat(source);
+if (info.size !== 49837148) throw new Error('This scene configuration expects the original 49837148-byte SOG. Update scene.json for a different model.');
+await mkdir(new URL('../site/assets/reconstruction/', import.meta.url), { recursive: true });
+await copyFile(source, destination);
+console.log(`Prepared full reconstruction: ${fileURLToPath(destination)}`);

@@ -24,7 +24,7 @@ $$('[data-workflow-target]').forEach(link => link.addEventListener('click', () =
 mountSceneComparison($('[data-scene-comparison]'));
 mountSimulationExplorer($('[data-usedv6-explorer]'), {
   comparisonLabel: '照片对比',
-  loadViewer: root => import('./laboratory-viewer.js?v=usedv6-baked-20261026').then(module => module.mountLaboratorySceneViewer(root)),
+  loadViewer: root => import('./studio1-viewer.js?v=studio1-baked-20261029b').then(module => module.mountStudio1Viewer(root)),
 });
 
 const tabs = $$('[data-scene]');
@@ -54,9 +54,9 @@ tabs.forEach((tab, i) => {
 });
 
 const videos = {
-  "hero-full": {"src":"assets/homepage-hero.mp4","title":"TEZOI 仿真演示","description":"完整视频 · 00:32","note":"刚体接触、柔性物体操作与流体交互。","muted":false},
+  "hero-full": {"src":"assets/homepage-hero.mp4?v=hero-v8-20261031","title":"TEZOI 仿真演示","description":"完整视频 · 00:34","note":"刚体接触、柔性物体操作与流体交互。","muted":false},
   "gallery-soft-bag": {"src":"assets/gallery-soft-bag.mp4?v=lab-2k-20261030","title":"软袋开袋、加液与夹封","description":"实验室 / Dual UR5e / Allegro v4 / 2:15 / 2K主视角 / 原速","note":"固定斜前方视角与双腕画面同步展示。共享实验室中，双手开袋、协同托杯倾倒 225 mL 液体，再放回杯体、机械夹封并撤手。原脚本仿真记录重渲染，液体采用简化模型，夹封未经气密或泄漏验证；两工位间的物理交互未重新验证。"},
-  "gallery-pigment-dilution": {"src":"assets/gallery-pigment-dilution.mp4","title":"色素稀释","description":"实验室 / UR5e / Robotiq 2F85 / 0:50","note":"夹爪挤压滴管胶头，展示不同预压力下的吸液、排液与色素浓度变化。液体采用简化模型，结果未经真机标定；此处播放完整仿真预览。"},
+  "gallery-pigment-dilution": {"src":"assets/gallery-pigment-dilution.mp4?v=20261031","title":"色素稀释","description":"实验室 / UR5e / Robotiq 2F85 / 0:50","note":"夹爪挤压滴管胶头，展示不同预压力下的吸液、排液与色素浓度变化。液体采用简化模型，结果未经真机标定；此处播放完整仿真预览。"},
   "gallery-go2-walk": {"src":"assets/gallery-go2-walk.mp4","title":"Go2 行走","description":"运动控制 / Unitree Go2 / 0:05","note":"行走策略驱动四足机器人连续运动，呈现步态协调与足端地面接触。"},
   "gallery-g1-dance": {"src":"assets/gallery-g1-dance.mp4","title":"G1 舞蹈","description":"运动控制 / Unitree G1 / Dual Dex3 / 0:20","note":"舞蹈策略驱动人形机器人执行 Shuffle 动作，呈现连续步伐、躯干与双臂的协同运动。"},
   "gallery-labimus-medicine": {"src":"assets/gallery-labimus-medicine.mp4?v=medicine-ipc-multiview-20261031","title":"双臂取药","description":"实验室 / Dual UR5e / Robotiq 2F85 / 2:43 / 2K主画面 / 同步三视角","note":"同步展示第三视角、左腕与右腕画面。主画面原生2560×1440，双腕各1280×720，组合3840×1440；完整162.5秒，原速无剪切。800颗粒由IPC重新计算，双臂沿既有控制轨迹执行；末态勺内4颗粒约965mg，非精密称量达标结果。"},
@@ -72,9 +72,9 @@ const videos = {
   "cables": {"src":"assets/ipc-cables.mp4","title":"线束弯曲与接触","description":"柔性线束动力学","note":"呈现多根线束在重力与接触作用下的弯曲、垂落与支撑。材料参数为仿真示例，尚未经实物标定。"},
   "fluid": {"src":"assets/ipc-fluid.mp4","title":"液体流动与流固接触","description":"液体流动与流固耦合","note":"呈现液体绕过障碍、形成波浪并与固体接触的动态过程。"},
   "tactile": {"src":"assets/ipc-tactile.mp4","title":"凝胶形变与接触力","description":"凝胶形变与法向接触力分布","note":"凝胶受压形变与法向接触力同步可视化，颜色用于显示仿真接触力分布。"},
-  "haoxiang-cloth": {"src":"assets/haoxiang-cloth.mp4?v=physical-20261028","title":"双臂毛毯对折","description":"Cloth / Dual Franka FR3 / 0:22","note":"双臂抓取床尾毛毯，沿圆弧翻折后释放与撤离，呈现布料接触与摩擦。"},
-  "haoxiang-shell": {"src":"assets/haoxiang-shell.mp4?v=physical-20261028","title":"水瓶挤压","description":"Shells & Fluids / Franka FR3 / 0:13","note":"呈现开口方瓶在夹持作用下的形变，以及液体从瓶口溢出的过程。"},
-  "haoxiang-porous": {"src":"assets/haoxiang-porous.mp4?v=physical-20261028","title":"海绵吸水与挤水","description":"Porous Media / Franka FR3 / 1:35","note":"呈现双槽水槽间四个周期的海绵吸水、换位重抓与挤水，保留排水近景。"},
+  "haoxiang-cloth": {"src":"assets/haoxiang-cloth.mp4?v=physical-robotbed-v20","title":"双臂毛毯对折","description":"Cloth / Dual Franka FR3 / 0:22","note":"双臂抓取床尾毛毯，沿圆弧翻折后释放与撤离，呈现布料接触与摩擦。"},
+  "haoxiang-shell": {"src":"assets/haoxiang-shell.mp4?v=physical-robotbed-v20","title":"水瓶挤压","description":"Shells & Fluids / Franka FR3 / 0:13","note":"呈现开口方瓶在夹持作用下的形变，以及液体从瓶口溢出的过程。"},
+  "haoxiang-porous": {"src":"assets/haoxiang-porous.mp4?v=physical-robotbed-v20","title":"海绵吸水与挤水","description":"Porous Media / Franka FR3 / 1:35","note":"呈现双槽水槽间四个周期的海绵吸水、换位重抓与挤水，保留排水近景。"},
   "haoxiang-safe-grasp": {"src":"assets/haoxiang-safe-grasp.mp4","title":"微滑反馈抓取","description":"触觉 / Parallel gripper / 0:13","note":"根据螺栓微滑反馈调整夹持力，完成提起与保持。"},
   "haoxiang-bolt-dashboard": {"src":"assets/haoxiang-bolt-dashboard.mp4","title":"多模态触觉感知","description":"触觉 / Parallel gripper / 0:09","note":"同步呈现螺栓抓取中的凝胶形变、触觉分布与三轴力。"},
   "haoxiang-allegro-vbts": {"src":"assets/haoxiang-allegro-vbts.mp4","title":"Allegro 触觉抓取","description":"触觉 / Allegro Hand / 0:07","note":"呈现灵巧手指端接触与凝胶形变，展示触觉深度变化。"},
@@ -84,7 +84,7 @@ const videos = {
   "haoxiang-basket-bunny": {"src":"assets/haoxiang-basket-bunny.mp4","title":"软体物体抓取","description":"软材料 / WujiHand / 1:03","note":"灵巧手从周转箱抓取软体物体，呈现包覆接触、材料形变与提起过程。"},
   "haoxiang-washroom-hang": {"src":"assets/haoxiang-washroom-hang.mp4","title":"双手衣物悬挂","description":"布料 / Dual WujiHand / 0:25","note":"双手协同完成衬衫抓取、衣架穿入、悬挂与释放。"},
   "haoxiang-go2-drape": {"src":"assets/haoxiang-go2-drape.mp4","title":"Go2 布料接触","description":"布料 / Unitree Go2 / Stationary / 0:04","note":"呈现布料在静止机器狗背部与四肢表面的接触和垂落。"},
-  "gallery-matterix-liquid": {"src":"assets/gallery-matterix-liquid.mp4","title":"实验室液体操作","description":"实验室 / Franka Panda · Robotiq 2F85 / 0:46 / 1× playback","note":"完整呈现两次抓杯、倾倒与放回，液体由琥珀色转为浅浑浊色。颜色为未标定的局部光学近似。"},
+  "gallery-matterix-liquid": {"src":"assets/gallery-matterix-liquid.mp4?v=20261031","title":"实验室液体操作","description":"实验室 / Franka Panda · Robotiq 2F85 / 0:46 / 1× playback","note":"完整呈现两次抓杯、倾倒与放回，液体由琥珀色转为浅浑浊色。颜色为未标定的局部光学近似。"},
 };
 const dialog = $('#video-dialog');
 const player = $('#demo-player');

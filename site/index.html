@@ -9,8 +9,10 @@
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=playground-simple-20261029">
   <script src="site-shell.js?v=site-navigation-20261022" type="module"></script>
-  <script src="app.js?v=medicine-ipc-multiview-20261031" type="module"></script>
+  <script src="app.js?v=hero-v8-20261031" type="module"></script>
   <link rel="stylesheet" href="ego2sim.css?v=agent-simple-20261029">
+  <link rel="stylesheet" href="school-splat.css?v=image-comparison-20261031">
+  <script type="module" src="school-splat.js?v=image-comparison-20261031"></script>
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">跳到正文</a>
@@ -30,7 +32,7 @@
     <section class="overview" id="overview" aria-labelledby="overview-title" data-chapter="1">
       <div class="overview-stage" data-hero-media>
         <h1 class="visually-hidden" id="overview-title">TEZOI 具身仿真演示</h1>
-        <div class="overview-video" data-slot="overview-video"><img class="hero-image" src="assets/homepage-hero.jpg" alt="双机械臂在卧室场景中操作毛毯的仿真演示" width="1920" height="1080" fetchpriority="high"><video class="hero-video" data-hero-video src="assets/homepage-hero.mp4" poster="assets/homepage-hero.jpg" width="1920" height="1080" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" hidden></video></div>
+        <div class="overview-video" data-slot="overview-video"><img class="hero-image" src="assets/homepage-hero.jpg?v=hero-v8-20261031" alt="TEZOI Sim 机械夹爪与 M12 螺母螺纹特写" width="1920" height="1080" fetchpriority="high"><video class="hero-video" data-hero-video src="assets/homepage-hero.mp4?v=hero-v8-20261031" poster="assets/homepage-hero.jpg?v=hero-v8-20261031" width="1920" height="1080" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" hidden></video></div>
         <div class="hero-bottom">
           <button class="hero-watch" type="button" data-video="hero-full" aria-haspopup="dialog" aria-controls="video-dialog"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor"/></svg><span lang="en">Watch Full Video</span></button>
           <button class="hero-toggle" data-hero-toggle type="button" aria-label="播放背景视频" aria-pressed="false" hidden><svg class="hero-play-icon" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor"/></svg><svg class="hero-pause-icon" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path d="M6 4h3v12H6Zm5 0h3v12h-3Z" fill="currentColor"/></svg></button>
@@ -115,7 +117,7 @@
                 <article class="contact-comparison" data-contact-comparison data-start="18" aria-labelledby="contact-compare-title">
                   <div class="playback-surface">
                   <div class="compare-stage" style="--split:50%">
-                    <video class="compare-video" data-compare-simulation muted playsinline preload="none" poster="assets/playground-m12-simulation-1080.jpg" src="assets/playground-m12-simulation-1080.mp4" aria-hidden="true" tabindex="-1"></video>
+                    <video class="compare-video" data-compare-simulation muted playsinline preload="none" poster="assets/playground-m12-simulation-1080-cover.png" src="assets/playground-m12-simulation-1080.mp4" aria-hidden="true" tabindex="-1"></video>
                     <video class="compare-video compare-force-video" data-compare-forces muted playsinline preload="none" poster="assets/playground-m12-forces-1080.jpg" src="assets/playground-m12-forces-1080.mp4" aria-hidden="true" tabindex="-1"></video>
                     <span class="compare-view-label compare-simulation-label">Simulation</span><span class="compare-view-label compare-forces-label">Contact forces</span>
                     <input class="compare-split" data-compare-split type="range" min="0" max="100" step="1" value="50" aria-label="左右对比位置" aria-valuetext="仿真画面 50%，接触力热点 50%" aria-describedby="compare-help">
@@ -234,7 +236,7 @@
           <div class="embodied-grid" id="embodied-studies">
             <article class="embodied-card" aria-labelledby="embodied-shell-title">
               <button type="button" class="embodied-film" data-video="haoxiang-shell" aria-label="播放PET水瓶挤压完整视频">
-                <video data-material-preview muted loop playsinline preload="none" src="assets/haoxiang-shell.mp4?v=physical-20261028" poster="assets/haoxiang-shell.jpg?v=physical-20261028" aria-hidden="true" tabindex="-1"></video>
+                <video data-material-preview muted loop playsinline preload="none" src="assets/haoxiang-shell.mp4?v=physical-robotbed-v20" poster="assets/haoxiang-shell.jpg?v=physical-robotbed-v20" aria-hidden="true" tabindex="-1"></video>
                 <span class="material-expand" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 15 15 5M5 5h10v10"/></svg></span>
               </button>
               <h4 id="embodied-shell-title">水瓶挤压</h4>
@@ -243,7 +245,7 @@
             </article>
             <article class="embodied-card" aria-labelledby="embodied-porous-title">
               <button type="button" class="embodied-film" data-video="haoxiang-porous" aria-label="播放海绵吸水与换位挤水完整视频">
-                <video data-material-preview muted loop playsinline preload="none" src="assets/haoxiang-porous.mp4?v=physical-20261028" poster="assets/haoxiang-porous.jpg?v=physical-20261028" aria-hidden="true" tabindex="-1"></video>
+                <video data-material-preview muted loop playsinline preload="none" src="assets/haoxiang-porous.mp4?v=physical-robotbed-v20" poster="assets/haoxiang-porous.jpg?v=physical-robotbed-v20" aria-hidden="true" tabindex="-1"></video>
                 <span class="material-expand" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 15 15 5M5 5h10v10"/></svg></span>
               </button>
               <h4 id="embodied-porous-title">海绵吸水与挤水</h4>
@@ -252,7 +254,7 @@
             </article>
             <article class="embodied-card" aria-labelledby="embodied-cloth-title">
               <button type="button" class="embodied-film" data-video="haoxiang-cloth" aria-label="播放双臂毛毯对折完整视频">
-                <video data-material-preview muted loop playsinline preload="none" src="assets/haoxiang-cloth.mp4?v=physical-20261028" poster="assets/haoxiang-cloth.jpg?v=physical-20261028" aria-hidden="true" tabindex="-1"></video>
+                <video data-material-preview muted loop playsinline preload="none" src="assets/haoxiang-cloth.mp4?v=physical-robotbed-v20" poster="assets/haoxiang-cloth.jpg?v=physical-robotbed-v20" aria-hidden="true" tabindex="-1"></video>
                 <span class="material-expand" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 15 15 5M5 5h10v10"/></svg></span>
               </button>
               <h4 id="embodied-cloth-title">双臂毛毯对折</h4>
@@ -263,7 +265,7 @@
         </section>
       </section>
       <section class="subchapter" id="visual-rendering" aria-labelledby="visual-title">
-        <div class="subchapter-heading section-lead"><h3 id="visual-title">Visual Rendering</h3><p>对比真实照片与 Real2Sim 场景，自由探索同一实验室的三维空间。</p></div>
+        <div class="subchapter-heading section-lead"><h3 id="visual-title">Visual Rendering</h3><p>验证重建与仿真场景的渲染保真：对比真实照片与 Real2Sim 画面，并自由探索同一实验室的三维空间。空间采集与重建见下方 Scene Reconstruction。</p></div>
         <div class="simulation-explorer usedv6-explorer" data-usedv6-explorer>
           <div class="simulation-view-tabs" role="tablist" aria-label="实验室展示方式">
             <button type="button" role="tab" id="usedv6-view-image" aria-controls="usedv6-panel-image" aria-selected="true" data-simulation-view="video">Image comparison</button>
@@ -272,18 +274,18 @@
           <div id="usedv6-panel-image" data-simulation-panel="video" role="tabpanel" aria-labelledby="usedv6-view-image">
             <article class="scene-comparison" data-scene-comparison data-state="loading" aria-label="实验室真实照片与 Real2Sim 场景对比">
               <div class="scene-comparison-stage" data-scene-stage aria-busy="true">
-                <img class="scene-comparison-image" data-scene-sim src="assets/visual-usedv6-render.png" alt="同一视角下的实验室仿真场景，保留岛台、水槽、柜体、晾架和排风臂" width="991" height="736" loading="lazy" decoding="async">
-                <img class="scene-comparison-image scene-comparison-real" data-scene-real src="assets/visual-usedv6-real.png" alt="用户提供的实验室原图：中央水槽岛台、灰色柜体、黑色晾架和红白排风臂" width="991" height="736" loading="lazy" decoding="async">
+                <img class="scene-comparison-image" data-scene-sim src="assets/visual-usedv6-render.png?v=reference-photo-20261031" alt="同一视角下的实验室仿真场景，保留岛台、水槽、柜体、晾架和排风臂" width="991" height="736" loading="lazy" decoding="async">
+                <img class="scene-comparison-image scene-comparison-real" data-scene-real src="assets/visual-usedv6-real.png?v=reference-photo-20261031" alt="用户提供的实验室原图：中央水槽岛台、灰色柜体、黑色晾架和红白排风臂" width="991" height="736" loading="lazy" decoding="async">
                 <span class="scene-comparison-label scene-comparison-label-real" data-scene-real-label>Real</span>
                 <span class="scene-comparison-label scene-comparison-label-sim" data-scene-sim-label>Real2Sim</span>
                 <input class="scene-comparison-split" data-scene-split type="range" min="0" max="100" step="1" value="50" aria-label="真实照片显示比例" aria-describedby="scene-comparison-help" disabled>
                 <div class="scene-comparison-divider" aria-hidden="true"><span class="scene-comparison-handle"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4m8-8 4 4-4 4M4 12h16"/></svg></span></div>
                 <div class="scene-comparison-feedback" data-scene-feedback><p data-scene-status role="status">正在加载对比画面…</p><button type="button" data-scene-retry hidden>重新加载</button></div>
               </div>
-              <div class="scene-comparison-caption"><p id="scene-comparison-help">左右拖动比较，也可聚焦后用方向键调整。</p><div class="scene-comparison-links"><a href="assets/visual-usedv6-real.png" target="_blank" rel="noopener">查看原图</a><a href="assets/visual-usedv6-render.png" target="_blank" rel="noopener">查看仿真渲染</a></div></div>
+              <div class="scene-comparison-caption"><p id="scene-comparison-help">左右拖动比较，也可聚焦后用方向键调整。</p><div class="scene-comparison-links"><a href="assets/visual-usedv6-real.png?v=reference-photo-20261031" target="_blank" rel="noopener">查看原图</a><a href="assets/visual-usedv6-render.png?v=reference-photo-20261031" target="_blank" rel="noopener">查看仿真渲染</a></div></div>
             </article>
           </div>
-          <section id="usedv6-panel-scene" data-simulation-panel="scene" data-scene-viewer data-scene-manifest="assets/usedv6-baked-scene.json" role="tabpanel" aria-labelledby="usedv6-view-scene" hidden>
+          <section id="usedv6-panel-scene" data-simulation-panel="scene" data-scene-viewer data-scene-manifest="assets/studio1-v9-web/studio1-baked.json?v=generated-coordinates-20261031" role="tabpanel" aria-labelledby="usedv6-view-scene" hidden>
             <div class="scene-stage">
               <div class="scene-viewport usedv6-scene-viewport" data-scene-viewport>
                 <div class="scene-camera-controls">
@@ -297,6 +299,43 @@
             <p class="scene-help" id="usedv6-scene-help"><span class="scene-desktop-help">拖动旋转，滚轮缩放，右键平移。方向键可平移，Shift + 方向键可旋转，加减键可缩放。</span><span class="scene-touch-help">触屏：单指旋转，双指缩放与平移。</span></p>
           </section>
         </div>
+      </section>
+      <section class="subchapter scene-reconstruction" id="scene-reconstruction" aria-labelledby="scene-reconstruction-title" data-school-showcase>
+        <div class="subchapter-heading section-lead">
+          <div><p class="school-eyebrow"><span></span> SIM2REAL / 3DGS</p><h3 id="scene-reconstruction-title">Scene Reconstruction</h3></div>
+          <p>对比实拍照片与重建结果，查看空间结构和外观细节；通过点云生长、连续漫游与交互探索，进一步观察同一场景。</p>
+        </div>
+        <div class="school-stage">
+          <div class="school-tabs" role="tablist" aria-label="场景展示方式">
+            <button type="button" role="tab" aria-selected="true" aria-controls="school-comparison" id="school-tab-comparison" data-school-mode="comparison"><span>01</span> Image comparison</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="school-evolution" id="school-tab-evolution" data-school-mode="evolution" tabindex="-1"><span>02</span> 重建演示 <em>00:34</em></button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="school-interactive" id="school-tab-interactive" data-school-mode="interactive" tabindex="-1"><span>03</span> 自由探索 <i>3D</i></button>
+          </div>
+          <div class="school-screen school-image-comparison" id="school-comparison" role="tabpanel" aria-labelledby="school-tab-comparison" data-school-panel="comparison" style="--school-split:50%">
+            <img src="assets/school-reconstruction-render.png?v=3dgut-mip2d-20261031" alt="实验室同视角的 3DGUT / mip2d 三维高斯重建结果" width="1600" height="900" loading="lazy" decoding="async">
+            <img class="school-photo-overlay" src="assets/school-reconstruction-photo.png" alt="实验室采集实拍照片" width="1600" height="900" loading="lazy" decoding="async">
+            <span class="school-image-label school-image-label-left">实拍 / Real</span><span class="school-image-label school-image-label-right">重建 / 3DGS</span>
+            <div class="school-image-divider" aria-hidden="true"><span>↔</span></div>
+            <input class="school-image-split" data-school-image-split type="range" min="0" max="100" value="50" step="1" aria-label="实拍照片显示比例" aria-valuetext="实拍 50%，重建 50%" aria-describedby="school-image-help">
+          </div>
+          <div class="school-screen" id="school-evolution" role="tabpanel" aria-labelledby="school-tab-evolution" data-school-panel="evolution" hidden>
+            <video controls muted playsinline preload="metadata" poster="assets/school-points-to-3dgs.jpg" src="assets/school-reconstruction-tour.mp4?v=20261031" aria-label="点云生长为三维高斯场景并连续漫游的重建演示" data-school-intro-video></video>
+            <div class="school-screen-label"><span class="school-live-dot"></span> POINT CLOUD → 3DGS → TOUR / 02</div>
+            <div class="school-endcta" data-school-intro-cta hidden><p>空间已重建。继续进入同一场景自由查看。</p><button type="button" data-school-enter-interactive>进入自由探索 <span aria-hidden="true">↗</span></button></div>
+          </div>
+          <div class="school-screen school-interactive" id="school-interactive" role="tabpanel" aria-labelledby="school-tab-interactive" data-school-panel="interactive" hidden>
+            <div class="school-canvas" data-school-canvas></div>
+            <div class="school-navigation" data-school-navigation hidden>
+              <label>导航 <select data-school-navigation-mode aria-label="相机导航模式"><option value="turntable">Turntable</option><option value="trackball">Trackball</option><option value="first_person">First person</option><option value="fly">Fly</option></select></label>
+              <button type="button" data-school-reset>重置位置</button><button type="button" data-school-fullscreen>全屏</button>
+            </div>
+            <div class="school-viewer-overlay" data-school-overlay><p data-school-status role="status">完整场景 · 300 万 Gaussian · SOG 下载约 49.8 MB，建议桌面浏览器</p><button type="button" data-school-load>进入三维场景 ↗</button></div>
+            <div class="school-screen-label"><span class="school-live-dot"></span> INTERACTIVE / 03</div>
+          </div>
+          <div class="school-footer"><p data-school-caption aria-live="polite">左右拖动分界线，对比实拍照片与重建结果的空间结构和外观细节。</p><span>REAL SPACE → DIGITAL SCENE → ROBOTICS</span></div>
+        </div>
+        <p class="school-note" id="school-image-help">拖动分界线比较实拍与重建，也可聚焦后使用方向键调整。<a href="assets/school-reconstruction-photo.png" target="_blank" rel="noopener">查看实拍原图</a> · <a href="assets/school-reconstruction-render.png?v=3dgut-mip2d-20261031" target="_blank" rel="noopener">查看重建原图</a></p>
+        <p class="school-note">重建演示展示点云生长与场景漫游，自由探索支持交互查看同一空间；渲染保真对比见上方 <a href="#visual-rendering">Visual Rendering</a>。策略训练、物理交互与真机迁移仍需另行验证。</p>
       </section>
     </section>
 
@@ -326,7 +365,7 @@
             <p class="gallery-caption">双臂协同拾取内存条、对准插槽并压入，随后松爪撤离。</p><p class="case-status">研究演示 · 任务效果待验证</p><div class="card-meta"><span>Dual UR5e</span><span>0:37</span></div>
           </article>
           <article class="gallery-card">
-            <button type="button" class="gallery-image" data-video="gallery-m12-nut" aria-label="播放指尖拧紧 M12 螺母"><img src="assets/playground-m12-simulation-1080.jpg" alt="Franka 指尖在螺杆上操作 M12 螺母" loading="lazy" width="1920" height="1080"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
+            <button type="button" class="gallery-image" data-video="gallery-m12-nut" aria-label="播放指尖拧紧 M12 螺母"><img src="assets/playground-m12-simulation-1080-cover.png" alt="Franka 指尖在螺杆上操作 M12 螺母" loading="lazy" width="1920" height="1080"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>指尖拧紧 M12 螺母</h4></div>
             <p class="gallery-caption">抓取并调整螺母，以指尖旋拧完成预紧与卸载。</p><p class="case-status">研究演示 · 夹持稳定性尚未达标</p><a class="gallery-alternate" href="#playground" data-workflow-target="simulation">接触力对比 <span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 15 15 5M5 5h10v10"/></svg></span></a><div class="card-meta"><span>Franka</span><span>1:17</span></div>
           </article>
@@ -356,7 +395,7 @@
             <div class="card-meta"><span>Dual UR5e / Allegro v4</span><span>2:15</span></div>
           </article>
           <article class="gallery-card">
-            <button type="button" class="gallery-image" data-video="gallery-pigment-dilution" aria-label="播放色素稀释仿真演示"><img src="assets/gallery-pigment-dilution.jpg" alt="单臂 UR5e 与 Robotiq 夹爪在实验台上操作滴管与不同浓度的色素溶液" loading="lazy" width="1280" height="720"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
+            <button type="button" class="gallery-image" data-video="gallery-pigment-dilution" aria-label="播放色素稀释仿真演示"><img src="assets/gallery-pigment-dilution.jpg?v=20261031" alt="单臂 UR5e 与 Robotiq 夹爪在实验台上操作滴管与不同浓度的色素溶液" loading="lazy" width="1280" height="720"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>色素稀释</h4></div>
             <p class="gallery-caption">夹爪挤压滴管胶头，展示不同预压力下的吸液、排液与浓度变化。</p><p class="case-status">脚本仿真 · 未经真机标定</p>
             <div class="card-meta"><span>UR5e / Robotiq 2F85</span><span>0:50</span></div>
@@ -374,7 +413,7 @@
             <div class="card-meta"><span>Dual UR5e / Robotiq 2F85</span><span>1:08</span></div>
           </article>
           <article class="gallery-card">
-            <button type="button" class="gallery-image" data-video="gallery-matterix-liquid" aria-label="播放两次抓杯倾倒与液体变色演示"><img src="assets/gallery-matterix-liquid.jpg" alt="机械臂两次侧向抓杯、倾倒与放回，液体随局部混合逐步变色。" loading="lazy" width="1920" height="1080"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
+            <button type="button" class="gallery-image" data-video="gallery-matterix-liquid" aria-label="播放两次抓杯倾倒与液体变色演示"><img src="assets/gallery-matterix-liquid.jpg?v=20261031-cover" alt="机械臂两次侧向抓杯、倾倒与放回，液体随局部混合逐步变色。" loading="lazy" width="1920" height="1080"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>实验室液体操作</h4></div>
             <p class="gallery-caption">机械臂两次侧向抓杯、倾倒与放回，液体随局部混合逐步变色。</p><div class="card-meta"><span>Franka Panda · Robotiq 2F85</span><span>0:46 · 1×</span></div>
           </article>

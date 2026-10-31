@@ -41,8 +41,9 @@ export function mountSimulationExplorer(root, {
         viewer = candidate;
         status.hidden = true;
         syncVisibility();
-      } catch {
+      } catch (error) {
         if(attempt!==generation)return;
+        console.error('三维场景加载失败：', error);
         status.textContent = `三维场景暂时无法加载，可重试或查看${comparisonLabel}。`;
         retry.hidden = false;
       } finally {
