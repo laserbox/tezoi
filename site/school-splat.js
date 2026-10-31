@@ -4,16 +4,10 @@ if (root) {
   const tabs = [...root.querySelectorAll('[data-school-mode]')];
   const panels = [...root.querySelectorAll('[data-school-panel]')];
   const stage = root.querySelector('.school-stage');
-  const caption = root.querySelector('[data-school-caption]');
   const introVideo = root.querySelector('[data-school-intro-video]');
   const introCta = root.querySelector('[data-school-intro-cta]');
   const enterInteractive = root.querySelector('[data-school-enter-interactive]');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const captions = {
-    comparison: '左右拖动分界线，对比实拍照片与重建结果的空间结构和外观细节。',
-    evolution: '从蓝色点云生长为完整 3DGS 场景，再沿原始相机轨迹连续漫游，观察空间结构与不同视角下的重建效果。',
-    interactive: '左键环绕 · 中键 / Shift+左键平移 · 滚轮缩放 · 按住右键 + WASD/QE 移动 · Shift 加速。',
-  };
   let viewer;
   let stageVisible = false;
 
@@ -42,7 +36,6 @@ if (root) {
       panel.hidden = panel.dataset.schoolPanel !== mode;
       panel.querySelectorAll('video').forEach(video => video.pause());
     });
-    caption.textContent = captions[mode];
     if (viewer) {
       if (mode === 'interactive' && stageVisible) viewer.start();
       else viewer.stop();

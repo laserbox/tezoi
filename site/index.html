@@ -7,12 +7,12 @@
   <meta name="description" content="TEZOI，智能高精度具身仿真。融合场景重建、视觉保真与物理交互，构建面向具身智能研发与验证的仿真环境。">
   <title>TEZOI | Intelligent, high-fidelity embodied simulation</title>
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=playground-simple-20261029">
+  <link rel="stylesheet" href="styles.css?v=concise-20261031">
   <script src="site-shell.js?v=site-navigation-20261022" type="module"></script>
-  <script src="app.js?v=laboratory-highlights-20261031" type="module"></script>
-  <link rel="stylesheet" href="ego2sim.css?v=agent-simple-20261029">
+  <script src="app.js?v=concise-20261031" type="module"></script>
+  <link rel="stylesheet" href="ego2sim.css?v=concise-20261031">
   <link rel="stylesheet" href="school-splat.css?v=image-comparison-20261031">
-  <script type="module" src="school-splat.js?v=image-comparison-20261031"></script>
+  <script type="module" src="school-splat.js?v=concise-20261031"></script>
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">跳到正文</a>
@@ -44,7 +44,7 @@
     <section class="playground chapter" id="playground" aria-labelledby="playground-title" data-chapter="2">
       <div class="section-wrap">
         <div class="chapter-marker"><div class="chapter-heading"><h2 id="playground-title">Playground</h2></div></div>
-        <div class="section-lead workflow-intro"><h3>从 Ego 到验证</h3><p>探索从第一视角视频，经 Agent 构建仿真与策略，再到真机验证的路径。各阶段以独立示例说明，尚未形成同一任务的完整闭环。</p></div>
+        <div class="section-lead workflow-intro"><h3>从 Ego 到验证</h3></div>
         <div class="real-sim-workflow" data-real-sim-workflow data-active-stage="simulation">
           <aside class="workflow-rail">
             <div class="workflow-steps" data-workflow-tabs role="tablist" aria-label="从 Ego 到真实验证" aria-orientation="vertical">
@@ -56,7 +56,7 @@
           </aside>
           <div class="workflow-main">
             <section class="workflow-panel" id="workflow-panel-source" data-workflow-panel="source" role="tabpanel" aria-labelledby="workflow-tab-source" hidden>
-              <div class="workflow-pane-heading"><h4>Ego · 真实第一视角示范</h4><p>以连续视频保留环境、对象和操作顺序。</p></div>
+              <div class="workflow-pane-heading"><h4>Ego · 真实第一视角示范</h4></div>
               <figure class="workflow-ego-media">
                 <video data-ego-video controls muted playsinline preload="none" poster="assets/ego-img-6100-2x.jpg" width="1920" height="1080" aria-label="第一视角操作视频，2 倍速">
                   <source src="assets/ego-img-6100-2x.mp4" type="video/mp4">
@@ -66,7 +66,7 @@
               </figure>
             </section>
             <section class="workflow-panel" id="workflow-panel-agent" data-workflow-panel="agent" role="tabpanel" aria-labelledby="workflow-tab-agent" hidden>
-              <div class="workflow-pane-heading"><h4>Agent · 从示范构建仿真</h4><p>查看任务理解、场景构建与机器人动作的阶段结果。</p></div>
+              <div class="workflow-pane-heading"><h4>Agent · 从示范构建仿真</h4></div>
               <div class="ego-lab ego-compact" data-agent-conversion data-ego-compact aria-label="滴管任务 Ego2Sim 转换演示">
   <div class="ego-tabs" role="tablist" aria-label="Ego2Sim 转换阶段">
     <button type="button" role="tab" id="ego-tab-0" aria-selected="true" aria-controls="ego-stage" data-ego-step="0" tabindex="0"><span>01</span>任务理解</button>
@@ -77,15 +77,15 @@
   </div>
   <div id="ego-stage" data-ego-stage role="tabpanel" aria-labelledby="ego-tab-0">
     <div class="ego-result-heading">
-      <div><h5 data-ego-result-title>任务字幕与观测</h5><p data-ego-description>识别操作意图，把捏取、转移、滴加与放回连接到实际观测。</p></div>
+      <div><h5 data-ego-result-title>任务字幕与观测</h5></div>
       <span class="ego-clock" data-ego-clock>示教回放</span>
     </div>
     <section class="ego-reconstruction" data-ego-reconstruction aria-label="场景重建过程视频" hidden>
       <div class="ego-reconstruction-grid">
-        <figure class="ego-preview-card"><video data-ego-preview="segmentation-comparison" controls playsinline muted preload="none" aria-label="精细分割与前后对比视频"></video><figcaption><h6>精细分割与对比</h6><p>查看分割修正前后，以及手部和物体的局部细节。</p></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试分割视频</button></figure>
-        <figure class="ego-preview-card"><video data-ego-preview="depth" controls playsinline muted preload="none" aria-label="相对深度估计视频"></video><figcaption><h6>相对深度</h6><p>估计桌面与物体的空间关系；颜色表示相对深度。</p></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试深度视频</button></figure>
-        <figure class="ego-preview-card"><video data-ego-preview="clean" controls playsinline muted preload="none" aria-label="去手与遮挡处理视频"></video><figcaption><h6>去手与遮挡</h6><p>查看前景去除结果，标记仍不可见的遮挡区域。</p></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试遮挡处理视频</button></figure>
-        <figure class="ego-preview-card"><video data-ego-preview="assets" controls playsinline muted loop preload="none" aria-label="三维场景与资产预览视频"></video><figcaption><h6>三维场景与资产</h6><p>烧杯、锥形瓶与滴管的原任务 CAD。独立循环预览，液体仅作外观。</p></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试三维资产视频</button></figure>
+        <figure class="ego-preview-card"><video data-ego-preview="segmentation-comparison" controls playsinline muted preload="none" aria-label="精细分割与前后对比视频"></video><figcaption><h6>精细分割与对比</h6></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试分割视频</button></figure>
+        <figure class="ego-preview-card"><video data-ego-preview="depth" controls playsinline muted preload="none" aria-label="相对深度估计视频"></video><figcaption><h6>相对深度</h6></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试深度视频</button></figure>
+        <figure class="ego-preview-card"><video data-ego-preview="clean" controls playsinline muted preload="none" aria-label="去手与遮挡处理视频"></video><figcaption><h6>去手与遮挡</h6></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试遮挡处理视频</button></figure>
+        <figure class="ego-preview-card"><video data-ego-preview="assets" controls playsinline muted loop preload="none" aria-label="三维场景与资产预览视频"></video><figcaption><h6>三维场景与资产</h6></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试三维资产视频</button></figure>
       </div>
     </section>
     <div data-ego-main-player>
@@ -95,20 +95,20 @@
     <div class="ego-viewer">
       <figure data-ego-source-figure hidden><div class="ego-view-label"><span>原始示范视频</span></div><video data-ego-source playsinline muted preload="none" aria-label="原始滴管示范视频"></video></figure>
       <figure><div class="ego-view-label"><span data-ego-right-label>任务字幕与观测</span></div><video data-ego-output playsinline muted preload="metadata" poster="assets/ego2sim/task.jpg?v=physics10" aria-label="任务字幕与观测演示"></video></figure>
-      <div class="ego-caption"><p data-ego-caption>识别烧杯与锥形瓶—滴管组合</p></div>
+
     </div>
     <div class="ego-controls"><button type="button" data-ego-play aria-label="播放演示">播放</button><input data-ego-scrub type="range" min="0" max="43.83" step="0.01" value="0" aria-label="示教回放时间"><output data-ego-time>00.0 / 43.8 s</output><button type="button" data-ego-fullscreen aria-label="全屏查看处理结果">放大 ↗</button></div>
     <div class="ego-media-status"><p data-ego-method role="status" hidden></p><button type="button" data-ego-retry hidden>重试加载</button></div>
     </div>
-    <p class="ego-result-note"><span>当前限制：</span><span data-ego-artifact-note>滴加意图不等于液体转移成功。</span></p>
-    <details class="ego-evidence" data-ego-evidence-panel hidden><summary>处理过程与对照 <span data-ego-evidence-count></span></summary><p class="ego-evidence-intro">补充查看处理过程；这些视频与上方主结果独立播放。</p><div class="ego-evidence-grid" data-ego-layers></div></details>
+
+    <details class="ego-evidence" data-ego-evidence-panel hidden><summary>处理过程与对照 <span data-ego-evidence-count></span></summary><div class="ego-evidence-grid" data-ego-layers></div></details>
   </div>
-  <div class="ego-compact-footer"><a href="assets/ego2sim/video2world-v11-review.html" target="_blank" rel="noopener">模型与优化记录 ↗</a><span>滴管吸液 · 滴加 · 自然放回 · 简化物理求解</span><a href="demo.html" target="_blank" rel="noopener">查看完整过程与报告 ↗</a></div>
+  <div class="ego-compact-footer"><a href="assets/ego2sim/video2world-v11-review.html" target="_blank" rel="noopener">模型与优化记录 ↗</a><a href="demo.html" target="_blank" rel="noopener">查看完整过程与报告 ↗</a></div>
 </div>
             </section>
             <section class="workflow-panel" id="workflow-panel-simulation" data-workflow-panel="simulation" role="tabpanel" aria-labelledby="workflow-tab-simulation">
               <div class="simulation-explorer" data-simulation-explorer>
-                <div class="compare-heading section-lead"><div><h4 id="contact-compare-title">M12 螺母旋拧</h4><p class="project-meta">Franka</p></div><p>独立仿真示例</p></div>
+                <div class="compare-heading section-lead"><div><h4 id="contact-compare-title">M12 螺母旋拧</h4><p class="project-meta">Franka</p></div></div>
                 <div class="simulation-view-tabs" role="tablist" aria-label="仿真展示方式">
                   <button type="button" role="tab" id="simulation-view-video" aria-controls="simulation-panel-video" aria-selected="true" data-simulation-view="video">Video comparison</button>
                   <button type="button" role="tab" id="simulation-view-scene" aria-controls="simulation-panel-scene" aria-selected="false" tabindex="-1" data-simulation-view="scene"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m10 2 7 4v8l-7 4-7-4V6Zm-7 4 7 4 7-4M10 10v8"/></svg>Interactive 3D</button>
@@ -120,7 +120,7 @@
                     <video class="compare-video" data-compare-simulation muted playsinline preload="none" poster="assets/playground-m12-simulation-1080-cover.png" src="assets/playground-m12-simulation-1080.mp4" aria-hidden="true" tabindex="-1"></video>
                     <video class="compare-video compare-force-video" data-compare-forces muted playsinline preload="none" poster="assets/playground-m12-forces-1080.jpg" src="assets/playground-m12-forces-1080.mp4" aria-hidden="true" tabindex="-1"></video>
                     <span class="compare-view-label compare-simulation-label">Simulation</span><span class="compare-view-label compare-forces-label">Contact forces</span>
-                    <input class="compare-split" data-compare-split type="range" min="0" max="100" step="1" value="50" aria-label="左右对比位置" aria-valuetext="仿真画面 50%，接触力热点 50%" aria-describedby="compare-help">
+                    <input class="compare-split" data-compare-split type="range" min="0" max="100" step="1" value="50" aria-label="左右对比位置" aria-valuetext="仿真画面 50%，接触力热点 50%">
                     <div class="compare-divider" aria-hidden="true"><span class="compare-knob"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10h14M6 7l-3 3 3 3M14 7l3 3-3 3"/></svg></span></div>
                   </div>
                   <div class="compare-controls playback-bar" role="group" aria-label="视频对比播放控制">
@@ -130,8 +130,8 @@
                     <button class="compare-restart" type="button" data-compare-restart aria-label="从头播放对比" disabled><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 8a6 6 0 1 1 0 5M4 3v5h5"/></svg><span>重新播放</span></button>
                   </div>
                   </div>
-                  <div class="compare-caption"><p id="compare-help">拖动分界线对比画面，拖动进度条查看细节。</p><p class="compare-status" data-compare-status role="status"></p></div>
-                  <p class="compare-note">颜色表示接触力分布，并非压力或应力；夹持稳定性尚未达标。</p>
+                  <div class="compare-caption"><p class="compare-status" data-compare-status role="status"></p></div>
+
                 </article>
                 </div>
                 <section id="simulation-panel-scene" data-simulation-panel="scene" data-scene-viewer role="tabpanel" aria-labelledby="simulation-view-scene" hidden>
@@ -159,18 +159,18 @@
                     <output class="compare-time" data-scene-time aria-live="off">00:18 / 01:17</output>
                   </div>
                   </div>
-                  <p class="scene-help"><span class="scene-desktop-help">拖动旋转，滚轮缩放，右键平移。键盘可用 Shift + 方向键旋转，加减键缩放。</span><span class="scene-touch-help">触屏：单指旋转，双指缩放与平移。</span></p>
-                  <p class="scene-note">热点以透视方式和固定色标显示接触力，不代表压力或应力。原始仿真轨迹的夹持稳定性尚未达标。</p>
+
+
                 </section>
               </div>
             </section>
             <section class="workflow-panel" id="workflow-panel-validation" data-workflow-panel="validation" role="tabpanel" aria-labelledby="workflow-tab-validation" hidden>
-              <div class="workflow-pane-heading"><h4>Robotics · 真机验证</h4><p>在真实任务中检查动作与策略的执行效果。</p></div>
+              <div class="workflow-pane-heading"><h4>Robotics · 真机验证</h4></div>
               <div class="workflow-media-placeholder workflow-validation-placeholder">
                 <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="12" width="38" height="28" rx="5"/><circle cx="24" cy="26" r="8"/><path d="m16 12 3-5h10l3 5"/></svg>
-                <p>真机验证示例待补充</p><span>尚无可展示的真机执行录像与结果。下列维度为后续验证关注点。</span>
+                <p>真机验证示例待补充</p>
               </div>
-              <div class="workflow-artifacts" aria-label="后续真机验证维度"><div><strong>任务结果</strong><p>任务是否实际完成</p></div><div><strong>执行一致性</strong><p>动作与物理交互是否一致</p></div><div><strong>变化适应</strong><p>面对场景变化的执行表现</p></div></div>
+
             </section>
           </div>
         </div>
@@ -180,7 +180,7 @@
     <section class="showcase section-wrap chapter" id="showcase" aria-labelledby="showcase-title" data-chapter="3">
       <div class="chapter-marker"><div class="chapter-heading"><h2 id="showcase-title">Features</h2></div></div>
       <section class="subchapter physics-subchapter" id="physical-contact" aria-labelledby="physics-title">
-        <div class="subchapter-heading section-lead"><h3 id="physics-title">Physical Interaction</h3><p>观察挤压、吸水与折叠中的形变、流动和接触响应。</p></div>
+        <div class="subchapter-heading section-lead"><h3 id="physics-title">Physical Interaction</h3></div>
         <div id="material-properties" hidden>
         <div class="physics-explorer">
           <div class="material-toolbar">
@@ -230,7 +230,7 @@
             <div class="material-description"><h5>凝胶形变与接触力</h5><p>凝胶表面的压入形变，与对应的接触力分布同步变化。</p><span class="material-detail">Gel deformation / Contact force</span><button type="button" class="film-link" data-video="tactile" aria-label="播放凝胶触觉与接触力分布完整视频">播放完整演示 <span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 15 15 5M5 5h10v10"/></svg></span></button></div>
           </section>
         </div>
-        <p class="material-note">基于物理计算的材料响应演示；参数尚未经实物标定。</p>
+
         </div>
         <section class="embodied-physics" id="embodied-contact" aria-labelledby="physics-title">
           <div class="embodied-grid" id="embodied-studies">
@@ -240,7 +240,7 @@
                 <span class="material-expand" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 15 15 5M5 5h10v10"/></svg></span>
               </button>
               <h4 id="embodied-shell-title">水瓶挤压</h4>
-              <p>夹持开口方瓶，观察瓶身形变与瓶口溢水。</p>
+
               <div class="card-meta"><span>Franka FR3</span><span>0:13</span></div>
             </article>
             <article class="embodied-card" aria-labelledby="embodied-porous-title">
@@ -249,7 +249,7 @@
                 <span class="material-expand" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 15 15 5M5 5h10v10"/></svg></span>
               </button>
               <h4 id="embodied-porous-title">海绵吸水与挤水</h4>
-              <p>在双槽水槽间吸水、换位重抓与挤水，共四个周期。</p>
+
               <div class="card-meta"><span>Franka FR3</span><span>1:35</span></div>
             </article>
             <article class="embodied-card" aria-labelledby="embodied-cloth-title">
@@ -258,14 +258,14 @@
                 <span class="material-expand" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 15 15 5M5 5h10v10"/></svg></span>
               </button>
               <h4 id="embodied-cloth-title">双臂毛毯对折</h4>
-              <p>双臂抓取床尾毛毯，沿圆弧翻折后释放与撤离。</p>
+
               <div class="card-meta"><span>Dual Franka FR3</span><span>0:22</span></div>
             </article>
           </div>
         </section>
       </section>
       <section class="subchapter" id="visual-rendering" aria-labelledby="visual-title">
-        <div class="subchapter-heading section-lead"><h3 id="visual-title">Visual Rendering</h3><p>验证重建与仿真场景的渲染保真：对比真实照片与 Real2Sim 画面，并自由探索同一实验室的三维空间。空间采集与重建见下方 Scene Reconstruction。</p></div>
+        <div class="subchapter-heading section-lead"><h3 id="visual-title">Visual Rendering</h3></div>
         <div class="simulation-explorer usedv6-explorer" data-usedv6-explorer>
           <div class="simulation-view-tabs" role="tablist" aria-label="实验室展示方式">
             <button type="button" role="tab" id="usedv6-view-image" aria-controls="usedv6-panel-image" aria-selected="true" data-simulation-view="video">Image comparison</button>
@@ -278,11 +278,11 @@
                 <img class="scene-comparison-image scene-comparison-real" data-scene-real src="assets/visual-usedv6-real.png?v=reference-photo-20261031" alt="用户提供的实验室原图：中央水槽岛台、灰色柜体、黑色晾架和红白排风臂" width="991" height="736" loading="lazy" decoding="async">
                 <span class="scene-comparison-label scene-comparison-label-real" data-scene-real-label>Real</span>
                 <span class="scene-comparison-label scene-comparison-label-sim" data-scene-sim-label>Real2Sim</span>
-                <input class="scene-comparison-split" data-scene-split type="range" min="0" max="100" step="1" value="50" aria-label="真实照片显示比例" aria-describedby="scene-comparison-help" disabled>
+                <input class="scene-comparison-split" data-scene-split type="range" min="0" max="100" step="1" value="50" aria-label="真实照片显示比例" disabled>
                 <div class="scene-comparison-divider" aria-hidden="true"><span class="scene-comparison-handle"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4m8-8 4 4-4 4M4 12h16"/></svg></span></div>
                 <div class="scene-comparison-feedback" data-scene-feedback><p data-scene-status role="status">正在加载对比画面…</p><button type="button" data-scene-retry hidden>重新加载</button></div>
               </div>
-              <div class="scene-comparison-caption"><p id="scene-comparison-help">左右拖动比较，也可聚焦后用方向键调整。</p><div class="scene-comparison-links"><a href="assets/visual-usedv6-real.png?v=reference-photo-20261031" target="_blank" rel="noopener">查看原图</a><a href="assets/visual-usedv6-render.png?v=reference-photo-20261031" target="_blank" rel="noopener">查看仿真渲染</a></div></div>
+              <div class="scene-comparison-caption"><div class="scene-comparison-links"><a href="assets/visual-usedv6-real.png?v=reference-photo-20261031" target="_blank" rel="noopener">查看原图</a><a href="assets/visual-usedv6-render.png?v=reference-photo-20261031" target="_blank" rel="noopener">查看仿真渲染</a></div></div>
             </article>
           </div>
           <section id="usedv6-panel-scene" data-simulation-panel="scene" data-scene-viewer data-scene-manifest="assets/studio1-v9-web/studio1-baked.json?v=generated-coordinates-20261031" role="tabpanel" aria-labelledby="usedv6-view-scene" hidden>
@@ -296,14 +296,14 @@
                 <div class="scene-loading"><p data-scene-status role="status">正在加载三维场景…</p><button type="button" data-scene-retry hidden>重新加载</button></div>
               </div>
             </div>
-            <p class="scene-help" id="usedv6-scene-help"><span class="scene-desktop-help">拖动旋转，滚轮缩放，右键平移。方向键可平移，Shift + 方向键可旋转，加减键可缩放。</span><span class="scene-touch-help">触屏：单指旋转，双指缩放与平移。</span></p>
+
           </section>
         </div>
       </section>
       <section class="subchapter scene-reconstruction" id="scene-reconstruction" aria-labelledby="scene-reconstruction-title" data-school-showcase>
         <div class="subchapter-heading section-lead">
-          <div><p class="school-eyebrow"><span></span> SIM2REAL / 3DGS</p><h3 id="scene-reconstruction-title">Scene Reconstruction</h3></div>
-          <p>对比实拍照片与重建结果，查看空间结构和外观细节；通过点云生长、连续漫游与交互探索，进一步观察同一场景。</p>
+          <div><h3 id="scene-reconstruction-title">Scene Reconstruction</h3></div>
+
         </div>
         <div class="school-stage">
           <div class="school-tabs" role="tablist" aria-label="场景展示方式">
@@ -316,12 +316,12 @@
             <img class="school-photo-overlay" src="assets/school-reconstruction-photo.png" alt="实验室采集实拍照片" width="1600" height="900" loading="lazy" decoding="async">
             <span class="school-image-label school-image-label-left">实拍 / Real</span><span class="school-image-label school-image-label-right">重建 / 3DGS</span>
             <div class="school-image-divider" aria-hidden="true"><span>↔</span></div>
-            <input class="school-image-split" data-school-image-split type="range" min="0" max="100" value="50" step="1" aria-label="实拍照片显示比例" aria-valuetext="实拍 50%，重建 50%" aria-describedby="school-image-help">
+            <input class="school-image-split" data-school-image-split type="range" min="0" max="100" value="50" step="1" aria-label="实拍照片显示比例" aria-valuetext="实拍 50%，重建 50%" >
           </div>
           <div class="school-screen" id="school-evolution" role="tabpanel" aria-labelledby="school-tab-evolution" data-school-panel="evolution" hidden>
             <video controls muted playsinline preload="metadata" poster="assets/school-points-to-3dgs.jpg" src="assets/school-reconstruction-tour.mp4?v=20261031" aria-label="点云生长为三维高斯场景并连续漫游的重建演示" data-school-intro-video></video>
             <div class="school-screen-label"><span class="school-live-dot"></span> POINT CLOUD → 3DGS → TOUR / 02</div>
-            <div class="school-endcta" data-school-intro-cta hidden><p>空间已重建。继续进入同一场景自由查看。</p><button type="button" data-school-enter-interactive>进入自由探索 <span aria-hidden="true">↗</span></button></div>
+            <div class="school-endcta" data-school-intro-cta hidden><button type="button" data-school-enter-interactive>进入自由探索 <span aria-hidden="true">↗</span></button></div>
           </div>
           <div class="school-screen school-interactive" id="school-interactive" role="tabpanel" aria-labelledby="school-tab-interactive" data-school-panel="interactive" hidden>
             <div class="school-canvas" data-school-canvas></div>
@@ -329,19 +329,19 @@
               <label>导航 <select data-school-navigation-mode aria-label="相机导航模式"><option value="turntable">Turntable</option><option value="trackball">Trackball</option><option value="first_person">First person</option><option value="fly">Fly</option></select></label>
               <button type="button" data-school-reset>重置位置</button><button type="button" data-school-fullscreen>全屏</button>
             </div>
-            <div class="school-viewer-overlay" data-school-overlay><p data-school-status role="status">完整场景 · 300 万 Gaussian · SOG 下载约 49.8 MB，建议桌面浏览器</p><button type="button" data-school-load>进入三维场景 ↗</button></div>
+            <div class="school-viewer-overlay" data-school-overlay><p data-school-status role="status">3D 场景 · 49.8 MB</p><button type="button" data-school-load>进入三维场景 ↗</button></div>
             <div class="school-screen-label"><span class="school-live-dot"></span> INTERACTIVE / 03</div>
           </div>
-          <div class="school-footer"><p data-school-caption aria-live="polite">左右拖动分界线，对比实拍照片与重建结果的空间结构和外观细节。</p><span>REAL SPACE → DIGITAL SCENE → ROBOTICS</span></div>
+
         </div>
-        <p class="school-note" id="school-image-help">拖动分界线比较实拍与重建，也可聚焦后使用方向键调整。<a href="assets/school-reconstruction-photo.png" target="_blank" rel="noopener">查看实拍原图</a> · <a href="assets/school-reconstruction-render.png?v=3dgut-mip2d-20261031" target="_blank" rel="noopener">查看重建原图</a></p>
-        <p class="school-note">重建演示展示点云生长与场景漫游，自由探索支持交互查看同一空间；渲染保真对比见上方 <a href="#visual-rendering">Visual Rendering</a>。策略训练、物理交互与真机迁移仍需另行验证。</p>
+        <p class="school-note" id="school-image-help"><a href="assets/school-reconstruction-photo.png" target="_blank" rel="noopener">查看实拍原图</a> · <a href="assets/school-reconstruction-render.png?v=3dgut-mip2d-20261031" target="_blank" rel="noopener">查看重建原图</a></p>
+
       </section>
     </section>
 
     <section class="gallery chapter section-wrap" id="gallery" aria-labelledby="gallery-title" data-chapter="4">
       <div class="chapter-marker"><div class="chapter-heading"><h2 id="gallery-title">Gallery</h2></div></div>
-      <div class="section-lead"><h3>Simulation in action</h3><p>探索工业装配、实验操作、材料交互与运动控制中的仿真表现。</p></div>
+      <div class="section-lead"><h3>Simulation in action</h3></div>
       <div class="gallery-tabs" role="tablist" aria-label="任务场景">
         <button type="button" role="tab" id="tab-factory" aria-selected="true" aria-controls="panel-factory" data-scene="factory"><span class="gallery-tab-label">工厂</span> <span class="gallery-tab-count">06</span></button>
         <button type="button" role="tab" id="tab-lab" aria-selected="false" aria-controls="panel-lab" tabindex="-1" data-scene="lab"><span class="gallery-tab-label">实验室</span> <span class="gallery-tab-count">06</span></button>
@@ -357,32 +357,32 @@
           <article class="gallery-card">
             <button type="button" class="gallery-image" data-video="gallery-flexible-rj45" aria-label="播放柔性网线插入、解锁与拔出"><img src="assets/gallery-flexible-rj45.jpg" alt="Franka 机械臂操作柔性网线与连接器" loading="lazy" width="1280" height="720"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>柔性网线插拔</h4></div>
-            <p class="gallery-caption">抓取一米柔性网线，完成插接锁止、重抓解锁与拔出。</p><div class="card-meta"><span>Franka</span><span>0:25</span></div>
+            <div class="card-meta"><span>Franka</span><span>0:25</span></div>
           </article>
           <article class="gallery-card">
             <button type="button" class="gallery-image" data-video="gallery-ram-insertion" aria-label="播放双臂内存条插装"><img src="assets/gallery-ram-insertion-hd.jpg" alt="双 UR5e 将内存条对准主板插槽并协同按压" loading="lazy" width="2560" height="1440"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>双臂内存条插装</h4></div>
-            <p class="gallery-caption">双臂协同拾取内存条、对准插槽并压入，随后松爪撤离。</p><p class="case-status">研究演示 · 任务效果待验证</p><div class="card-meta"><span>Dual UR5e</span><span>0:37</span></div>
+            <div class="card-meta"><span>Dual UR5e</span><span>0:37</span></div>
           </article>
           <article class="gallery-card">
             <button type="button" class="gallery-image" data-video="gallery-m12-nut" aria-label="播放指尖拧紧 M12 螺母"><img src="assets/playground-m12-simulation-1080-cover.png" alt="Franka 指尖在螺杆上操作 M12 螺母" loading="lazy" width="1920" height="1080"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>指尖拧紧 M12 螺母</h4></div>
-            <p class="gallery-caption">抓取并调整螺母，以指尖旋拧完成预紧与卸载。</p><p class="case-status">研究演示 · 夹持稳定性尚未达标</p><a class="gallery-alternate" href="#playground" data-workflow-target="simulation">接触力对比 <span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 15 15 5M5 5h10v10"/></svg></span></a><div class="card-meta"><span>Franka</span><span>1:17</span></div>
+            <a class="gallery-alternate" href="#playground" data-workflow-target="simulation">接触力对比 <span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 15 15 5M5 5h10v10"/></svg></span></a><div class="card-meta"><span>Franka</span><span>1:17</span></div>
           </article>
           <article class="gallery-card">
             <button type="button" class="gallery-image" data-video="gallery-bottle-packing" aria-label="播放水瓶装盒与托盘放置"><img src="assets/gallery-bottle-packing.jpg" alt="双 UR5e 在包装工位将水瓶装盒并折叠纸盒上盖" loading="lazy" width="2560" height="1440"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>水瓶装盒与托盘放置</h4></div>
-            <p class="gallery-caption">双臂协同完成水瓶入盒、盒盖折叠与托盘放置。</p><div class="card-meta"><span>Dual UR5e</span><span>0:40</span></div>
+            <div class="card-meta"><span>Dual UR5e</span><span>0:40</span></div>
           </article>
           <article class="gallery-card">
             <button type="button" class="gallery-image" data-video="gallery-rubber-ring" aria-label="播放双臂橡胶圈装配研究演示"><img src="assets/gallery-rubber-ring.jpg" alt="两只 UR5e 夹爪拉伸橡胶圈，呈现拉伸与入槽过程" loading="lazy" width="1280" height="720"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>双臂橡胶圈装配</h4></div>
-            <p class="gallery-caption">双臂抓取、拉伸柔性胶圈，执行对准与入槽。</p><p class="case-status">研究演示 · 部分装配条件未达标</p><div class="card-meta"><span>Dual UR5e</span><span>0:20</span></div>
+            <div class="card-meta"><span>Dual UR5e</span><span>0:20</span></div>
           </article>
           <article class="gallery-card">
             <button type="button" class="gallery-image" data-video="gallery-g1-box" aria-label="播放 G1 人形机器人搬箱与触觉接触可视化"><img src="assets/gallery-g1-box.jpg" alt="G1 与 Revo 灵巧手在工厂货架前持箱，右侧展示仿真触觉接触" loading="lazy" width="1920" height="1080"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>G1 人形机器人搬箱</h4></div>
-            <p class="gallery-caption">从货架双手取箱，行走搬运并放入蓝色箱筐。</p><p class="case-status">仿真演示 · 同步触觉接触可视化</p><div class="card-meta"><span>G1 / Revo</span><span>0:43</span></div>
+            <div class="card-meta"><span>G1 / Revo</span><span>0:43</span></div>
           </article>
         </div>
       </div>
@@ -391,36 +391,36 @@
           <article class="gallery-card">
             <button type="button" class="gallery-image" data-video="gallery-soft-bag" aria-label="播放软袋开袋、加液与夹封仿真演示"><img src="assets/gallery-soft-bag.jpg?v=laboratory-ipc-multiview-20261031" alt="软袋开袋、持杯加液与机械夹封的第三视角和左右腕同步画面" loading="lazy" width="3840" height="1440"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>软袋开袋、加液与夹封</h4></div>
-            <p class="gallery-caption">共享实验室中，双手打开软袋，协同持杯倾倒液体，放回杯体后夹封并撤手。</p><p class="case-status">IPC薄膜与液体动力学 · 三视角同步</p>
+
             <div class="card-meta"><span>Dual UR5e / Allegro v4</span><span>2:15</span></div>
           </article>
           <article class="gallery-card">
             <button type="button" class="gallery-image" data-video="gallery-pigment-dilution" aria-label="播放色素稀释仿真演示"><img src="assets/gallery-pigment-dilution.jpg?v=20261031" alt="单臂 UR5e 与 Robotiq 夹爪在实验台上操作滴管与不同浓度的色素溶液" loading="lazy" width="1280" height="720"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>色素稀释</h4></div>
-            <p class="gallery-caption">夹爪挤压滴管胶头，展示不同预压力下的吸液、排液与浓度变化。</p><p class="case-status">脚本仿真 · 未经真机标定</p>
+
             <div class="card-meta"><span>UR5e / Robotiq 2F85</span><span>0:50</span></div>
           </article>
           <article class="gallery-card">
             <button type="button" class="gallery-image" data-video="gallery-labimus-medicine" aria-label="播放双臂取药"><img src="assets/gallery-labimus-medicine.jpg?v=laboratory-highlights-20261031" alt="双臂取药的第三视角与左右腕相机同步画面" loading="lazy" width="3840" height="1440"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>双臂取药</h4></div>
-            <p class="gallery-caption">双臂协同持瓶与持勺，倾瓶取出颗粒并扶正药瓶。</p><p class="case-status">IPC颗粒动力学 · 关键步骤剪辑</p>
+
             <div class="card-meta"><span>Dual UR5e / Robotiq 2F85</span><span>0:58</span></div>
           </article>
           <article class="gallery-card">
             <button type="button" class="gallery-image" data-video="gallery-labimus-weighing" aria-label="播放双臂称量"><img src="assets/gallery-labimus-weighing.jpg?v=laboratory-highlights-20261031" alt="双臂称量的正前上方第三视角与左右腕相机同步画面" loading="lazy" width="3840" height="1440"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>双臂称量</h4></div>
-            <p class="gallery-caption">共享实验室中，倾勺将颗粒送入称量舟，完成还勺、关门并等待稳定。</p><p class="case-status">IPC颗粒动力学 · 关键步骤剪辑</p>
+
             <div class="card-meta"><span>Dual UR5e / Robotiq 2F85</span><span>0:52</span></div>
           </article>
           <article class="gallery-card">
             <button type="button" class="gallery-image" data-video="gallery-matterix-liquid" aria-label="播放两次抓杯倾倒与液体变色演示"><img src="assets/gallery-matterix-liquid.jpg?v=20261031-cover" alt="机械臂两次侧向抓杯、倾倒与放回，液体随局部混合逐步变色。" loading="lazy" width="1920" height="1080"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>实验室液体操作</h4></div>
-            <p class="gallery-caption">机械臂两次侧向抓杯、倾倒与放回，液体随局部混合逐步变色。</p><div class="card-meta"><span>Franka Panda · Robotiq 2F85</span><span>0:46 · 1×</span></div>
+            <div class="card-meta"><span>Franka Panda · Robotiq 2F85</span><span>0:46 · 1×</span></div>
           </article>
           <article class="gallery-card">
             <button type="button" class="gallery-image" data-video="gallery-panda-mixing" aria-label="播放双 Panda 离心管开盖与滴加混匀完整仿真视频"><img src="assets/gallery-panda-mixing.jpg" alt="两台 Panda 机械臂在实验台上协作操作离心管和胶头滴管" loading="lazy" width="1280" height="720"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>离心管开盖与滴加混匀</h4></div>
-            <p class="gallery-caption">双臂协作开盖、吸液与滴加，压盖后完成三次倒置混匀。</p><p class="case-status">脚本仿真 · 简化物理模型</p>
+
             <div class="card-meta"><span>Dual Panda</span><span>1:01</span></div>
           </article>
         </div>
@@ -504,8 +504,8 @@
       <div class="section-wrap">
         <div class="chapter-marker"><div class="chapter-heading"><h2 id="benchmark-title">Benchmark</h2></div></div>
         <div class="benchmark-layout">
-          <div class="benchmark-intro"><h3 class="benchmark-statement">以真实为参照，<br>验证仿真精度。</h3><p class="chapter-description">围绕视觉一致性、物理响应与任务迁移，评估仿真表现。</p></div>
-          <div class="benchmark-methods" data-slot="benchmark" aria-label="评测维度说明"><article><h4>Visual fidelity</h4><p>对照真实场景，评估几何、材质与光照的一致性。</p></article><article><h4>Physical accuracy</h4><p>结合接触、运动与形变结果，检验物理交互的仿真精度。</p></article><article><h4>Sim-to-real transfer</h4><p>通过仿真数据训练与任务验证，评估对具身学习的支持。</p></article><span class="benchmark-status">评测结果待发布</span></div>
+          <div class="benchmark-intro"><h3 class="benchmark-statement">以真实为参照，<br>验证仿真精度。</h3></div>
+          <div class="benchmark-methods" data-slot="benchmark" aria-label="评测维度说明"><article><h4>Visual fidelity</h4></article><article><h4>Physical accuracy</h4></article><article><h4>Sim-to-real transfer</h4></article><span class="benchmark-status">评测结果待发布</span></div>
         </div>
       </div>
     </section>
@@ -513,12 +513,12 @@
 
   <footer class="site-footer section-wrap">
     <div class="footer-main"><a class="footer-wordmark" href="./" aria-label="TEZOI 首页"><img src="assets/tezoi-logo-black.png" alt="" width="927" height="261" loading="lazy"></a><nav class="footer-navigation" aria-label="页脚导航"><a href="./" data-site-page="home" aria-current="page">Home</a><a href="company.html" data-site-page="company">Company</a><a href="blog.html" data-site-page="blog">Blog</a><a href="research.html" data-site-page="research">Research</a></nav></div>
-    <div class="footer-bottom"><span>© 2026 TEZOI</span><p>智能高精度具身仿真。</p><a href="./#gallery">查看演示库 <svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 15 15 5M5 5h10v10"/></svg></a><a href="#overview">返回顶部 <svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 16V4m-5 5 5-5 5 5"/></svg></a></div>
+    <div class="footer-bottom"><span>© 2026 TEZOI</span><a href="./#gallery">查看演示库 <svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 15 15 5M5 5h10v10"/></svg></a><a href="#overview">返回顶部 <svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 16V4m-5 5 5-5 5 5"/></svg></a></div>
   </footer>
   <dialog id="video-dialog" aria-labelledby="video-title">
-    <div class="dialog-heading"><div><h2 id="video-title">仿真演示</h2><p id="video-description"></p></div><button type="button" id="close-video" aria-label="关闭视频"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m5 5 10 10M15 5 5 15"/></svg></button></div>
+    <div class="dialog-heading"><div><h2 id="video-title">仿真演示</h2></div><button type="button" id="close-video" aria-label="关闭视频"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m5 5 10 10M15 5 5 15"/></svg></button></div>
     <video id="demo-player" controls playsinline preload="metadata"></video>
-    <p class="dialog-note" id="video-note">具身仿真演示。</p>
+
   </dialog>
 </body>
 </html>
