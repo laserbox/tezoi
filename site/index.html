@@ -9,7 +9,7 @@
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=playground-simple-20261029">
   <script src="site-shell.js?v=site-navigation-20261022" type="module"></script>
-  <script src="app.js?v=hero-v8-20261031" type="module"></script>
+  <script src="app.js?v=panda-mixing-20261031" type="module"></script>
   <link rel="stylesheet" href="ego2sim.css?v=agent-simple-20261029">
   <link rel="stylesheet" href="school-splat.css?v=image-comparison-20261031">
   <script type="module" src="school-splat.js?v=image-comparison-20261031"></script>
@@ -344,7 +344,7 @@
       <div class="section-lead"><h3>Simulation in action</h3><p>探索工业装配、实验操作、材料交互与运动控制中的仿真表现。</p></div>
       <div class="gallery-tabs" role="tablist" aria-label="任务场景">
         <button type="button" role="tab" id="tab-factory" aria-selected="true" aria-controls="panel-factory" data-scene="factory"><span class="gallery-tab-label">工厂</span> <span class="gallery-tab-count">06</span></button>
-        <button type="button" role="tab" id="tab-lab" aria-selected="false" aria-controls="panel-lab" tabindex="-1" data-scene="lab"><span class="gallery-tab-label">实验室</span> <span class="gallery-tab-count">05</span></button>
+        <button type="button" role="tab" id="tab-lab" aria-selected="false" aria-controls="panel-lab" tabindex="-1" data-scene="lab"><span class="gallery-tab-label">实验室</span> <span class="gallery-tab-count">06</span></button>
         <!-- 暂停这四类 Gallery 标签；恢复时同时取消下方对应面板的注释。
         <button type="button" role="tab" id="tab-tactile" aria-selected="false" aria-controls="panel-tactile" tabindex="-1" data-scene="tactile"><span class="gallery-tab-label">触觉</span> <span class="gallery-tab-count">05</span></button>
         <button type="button" role="tab" id="tab-soft" aria-selected="false" aria-controls="panel-soft" tabindex="-1" data-scene="soft"><span class="gallery-tab-label">软材料</span> <span class="gallery-tab-count">02</span></button>
@@ -416,6 +416,12 @@
             <button type="button" class="gallery-image" data-video="gallery-matterix-liquid" aria-label="播放两次抓杯倾倒与液体变色演示"><img src="assets/gallery-matterix-liquid.jpg?v=20261031-cover" alt="机械臂两次侧向抓杯、倾倒与放回，液体随局部混合逐步变色。" loading="lazy" width="1920" height="1080"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>实验室液体操作</h4></div>
             <p class="gallery-caption">机械臂两次侧向抓杯、倾倒与放回，液体随局部混合逐步变色。</p><div class="card-meta"><span>Franka Panda · Robotiq 2F85</span><span>0:46 · 1×</span></div>
+          </article>
+          <article class="gallery-card">
+            <button type="button" class="gallery-image" data-video="gallery-panda-mixing" aria-label="播放双 Panda 离心管开盖与滴加混匀完整仿真视频"><img src="assets/gallery-panda-mixing.jpg" alt="两台 Panda 机械臂在实验台上协作操作离心管和胶头滴管" loading="lazy" width="1280" height="720"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
+            <div class="gallery-card-copy"><h4>离心管开盖与滴加混匀</h4></div>
+            <p class="gallery-caption">双臂协作开盖、吸液与滴加，压盖后完成三次倒置混匀。</p><p class="case-status">脚本仿真 · 简化物理模型</p>
+            <div class="card-meta"><span>Dual Panda</span><span>1:01</span></div>
           </article>
         </div>
       </div>
