@@ -55,6 +55,7 @@ tabs.forEach((tab, i) => {
 
 const videos = {
   "hero-full": {"src":"assets/homepage-hero.mp4?v=hero-v8-20261031","title":"TEZOI 仿真演示","description":"完整视频 · 00:34","note":"刚体接触、柔性物体操作与流体交互。","muted":false},
+  "gallery-panda-mixing": {"src":"assets/gallery-panda-mixing.mp4","title":"离心管开盖与滴加混匀","description":"实验室 / Dual Panda / 1:01 / 原速","note":"双臂协作完成离心管开盖、胶头滴管吸液与滴加、压盖及三次倒置混匀。脚本控制的仿真演示，胶头、卡扣与液体采用未标定的简化模型；结果尚未经过真机验证。"},
   "gallery-soft-bag": {"src":"assets/gallery-soft-bag.mp4?v=lab-2k-20261030","title":"软袋开袋、加液与夹封","description":"实验室 / Dual UR5e / Allegro v4 / 2:15 / 2K主视角 / 原速","note":"固定斜前方视角与双腕画面同步展示。共享实验室中，双手开袋、协同托杯倾倒 225 mL 液体，再放回杯体、机械夹封并撤手。原脚本仿真记录重渲染，液体采用简化模型，夹封未经气密或泄漏验证；两工位间的物理交互未重新验证。"},
   "gallery-pigment-dilution": {"src":"assets/gallery-pigment-dilution.mp4?v=20261031","title":"色素稀释","description":"实验室 / UR5e / Robotiq 2F85 / 0:50","note":"夹爪挤压滴管胶头，展示不同预压力下的吸液、排液与色素浓度变化。液体采用简化模型，结果未经真机标定；此处播放完整仿真预览。"},
   "gallery-go2-walk": {"src":"assets/gallery-go2-walk.mp4","title":"Go2 行走","description":"运动控制 / Unitree Go2 / 0:05","note":"行走策略驱动四足机器人连续运动，呈现步态协调与足端地面接触。"},
