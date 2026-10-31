@@ -14,30 +14,15 @@ const fallbackPhases=[{start:0,end:1.8,caption:'识别烧杯与锥形瓶—滴�
 
 // Homepage ownership is deliberately smaller than the detailed report's history.
 const compactViews = [
- {main:['task','任务字幕与观测'], evidence:[], description:'识别操作意图，把捏取、转移、滴加与放回连接到实际观测。'},
- {main:null, title:'场景重建', evidence:[], description:'分割、相对深度、遮挡处理与三维场景，四段视频可独立播放和放大查看。'},
- {main:['contact-refinement','多起点接触优化'], evidence:[['contact','原三维接触与距离'],['human','三维手部回放'],['hands','原始视频骨架'],['contact-comparison','接触拟合前后对照']], description:'多起点与时序锚点修复三维接触，严格检查通过 187/192；剩余 5 组继续保留复查。'},
- {main:['robot','机器人完整动作'], evidence:[], description:'完整回放 RealMan + Xense 抓取滴管、吸液、滴加与自然放回。'},
- {main:['physics','接触力与验收'], evidence:[['liquid','液体转移与守恒'],['robot-detail','抓持近景']], description:'核对同一次仿真执行的接触、滑移、释放与液体守恒。'}
+ {main:['task','任务字幕与观测'], evidence:[]},
+ {main:null, title:'场景重建', evidence:[]},
+ {main:['contact-refinement','多起点接触优化'], evidence:[['contact','原三维接触与距离'],['human','三维手部回放'],['hands','原始视频骨架'],['contact-comparison','接触拟合前后对照']]},
+ {main:['robot','机器人完整动作'], evidence:[]},
+ {main:['physics','接触力与验收'], evidence:[['liquid','液体转移与守恒'],['robot-detail','抓持近景']]}
 ];
 const compactClocks = {
  observation:{limit:43.83,label:'示教回放'},
  simulation:{limit:35,label:'仿真回放'}
-};
-const compactStageLimits = [
- '字幕描述操作意图，尚不能据此确认液体转移成功。',
- '坐标注册与布局适配为估计结果；遮挡区域仍有不确定性。',
- '几何候选不等于物理抓持成功；接触优化与机器人执行分开展示。',
- '液体与反馈采用简化仿真模型，尚未完成真机验证。',
- '简化液体模型的检查结果，不能替代完整 CFD 或真机验证。'
-];
-const evidenceDescriptions = {
- contact:'查看优化前的三维接触距离与候选。',
- human:'观察重建手部姿态与任务物体的空间关系。',
- hands:'对照原始视频中的手部骨架观测。',
- 'contact-comparison':'对照接触拟合修复前后的几何结果。',
- liquid:'查看简化模型中的液体转移与守恒记录。',
- 'robot-detail':'从近景观察夹爪、胶头与滴管的持握。'
 };
 
 export function mountAgentConversion(root) {
@@ -85,8 +70,6 @@ function mountCompactAgent(root) {
   scrub.setAttribute('aria-valuetext', `${time.toFixed(1)} 秒，共 ${settings.limit.toFixed(1)} 秒`);
   setText('time', `${time.toFixed(1).padStart(4,'0')} / ${settings.limit.toFixed(1)} s`);
   setText('clock', settings.label);
-  setText('caption', ((clock === 'simulation' ? physicalPhases : fallbackPhases).find(p => time >= p.start && time < p.end)
-     || (clock === 'simulation' ? physicalPhases : fallbackPhases).at(-1)).caption);
   $('play').textContent = want ? '暂停' : '播放';
   $('play').setAttribute('aria-label', want ? '暂停演示' : '播放演示');
  }
@@ -238,13 +221,12 @@ function mountCompactAgent(root) {
   for (const [id, label] of view.evidence) {
    const card = document.createElement('figure');
    card.className = 'ego-preview-card';
-   card.innerHTML = '<video controls playsinline muted preload="none"></video><figcaption><h6></h6><p></p></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden></button>';
+   card.innerHTML = '<video controls playsinline muted preload="none"></video><figcaption><h6></h6></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden></button>';
    const video = card.querySelector('video');
    video.muted = true;
    video.dataset.egoEvidence = id;
    video.setAttribute('aria-label', `${label}过程视频`);
    card.querySelector('h6').textContent = label;
-   card.querySelector('figcaption p').textContent = evidenceDescriptions[id] || '补充查看本阶段的处理过程。';
    card.querySelector('button').textContent = `重试${label}`;
    $('layers').append(card);
    evidenceVideos.push(video);
@@ -273,8 +255,6 @@ function mountCompactAgent(root) {
    }
   }
   renderEvidence(view);
-  setText('description', view.description);
-  setText('artifact-note', compactStageLimits[stage]);
   if (view.main) choose(view.main[0]);
   else {
    layer = null;

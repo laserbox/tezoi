@@ -130,7 +130,7 @@ h4 { font-size: var(--type-group); font-weight: 400; letter-spacing: -.025em; li
 .chapter-marker { display: flex; align-items: center; gap: 24px; margin-bottom: 28px; }
 .chapter-marker::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 .chapter-marker h2 { font-size: 14px; font-weight: 500; letter-spacing: 0; line-height: 1.5; }
-.section-lead { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .8fr); align-items: end; gap: 64px; margin-bottom: 32px; }
+.section-lead { display: grid; grid-template-columns: minmax(0, 1fr); align-items: end; gap: 16px; margin-bottom: 32px; }
 .section-lead h3 { font-size: var(--type-display); font-weight: 400; letter-spacing: -.035em; line-height: 1.1; }
 .section-lead > p { max-width: 380px; font-size: var(--type-body); color: var(--muted); }
 .section-lead .project-meta { margin-top: 14px; font-size: var(--type-meta); color: var(--muted); }
@@ -735,3 +735,7 @@ body.modal-open { overflow: hidden; }
   .scene-help .scene-desktop-help { display: none; }
   .scene-help .scene-touch-help { display: inline; }
 }
+
+/* Compact presentation: names, media and controls carry the page. */
+.gallery-card .card-meta { margin-top:auto; padding-top:14px; }
+.gallery-card-copy { margin-bottom:14px; }
