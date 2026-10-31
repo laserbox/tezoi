@@ -68,7 +68,8 @@ def main():
         'resolution': [scene.render.resolution_x, scene.render.resolution_y],
     }
 
-    meshes = [o for o in scene.objects if o.type == 'MESH' and not o.hide_render and o.visible_get()]
+    # Curve taps must be converted too, otherwise the web scene loses the pipes.
+    meshes = [o for o in scene.objects if o.type in {'MESH', 'CURVE', 'SURFACE', 'FONT'} and not o.hide_render and o.visible_get()]
     if not meshes:
         raise RuntimeError('The source scene has no visible meshes')
     print('SOURCE_MESHES', len(meshes), flush=True)
@@ -79,6 +80,52 @@ def main():
     # Applying evaluated modifiers before joining preserves visible geometry.
     bpy.ops.object.convert(target='MESH')
     converted = list(bpy.context.selected_objects)
+    # Generated coordinates belong to each original object's bounding box.
+    # Joining meshes otherwise changes every procedural texture's scale.
+    coordinate_attribute = '__web_source_generated'
+    object_attribute = '__web_source_object'
+    for obj in converted:
+        vertices = obj.data.vertices
+        if not vertices:
+            continue
+        lower = Vector(tuple(min(v.co[i] for v in vertices) for i in range(3)))
+        upper = Vector(tuple(max(v.co[i] for v in vertices) for i in range(3)))
+        extent = upper - lower
+        attribute = obj.data.attributes.new(coordinate_attribute, 'FLOAT_VECTOR', 'POINT')
+        local_attribute = obj.data.attributes.new(object_attribute, 'FLOAT_VECTOR', 'POINT')
+        for vertex, value in zip(vertices, attribute.data):
+            value.vector = tuple((vertex.co[i] - lower[i]) / extent[i] if extent[i] else 0.0 for i in range(3))
+        for vertex, value in zip(vertices, local_attribute.data):
+            value.vector = vertex.co
+    materials = {slot.material for obj in converted for slot in obj.material_slots if slot.material}
+    for material in materials:
+        if not material.use_nodes:
+            continue
+        tree = material.node_tree
+        if material.name == 'Reference_charcoal_fine_polished_slab':
+            # High-frequency procedural bump aliases in the shared web atlas.
+            # Use the reference's smooth charcoal finish for this static bake.
+            bsdf = next(n for n in tree.nodes if n.type == 'BSDF_PRINCIPLED')
+            for name in ('Base Color', 'Normal', 'Roughness'):
+                for link in list(bsdf.inputs[name].links):
+                    tree.links.remove(link)
+            bsdf.inputs['Base Color'].default_value = (0.035, 0.039, 0.038, 1)
+            bsdf.inputs['Roughness'].default_value = 0.32
+        attribute_node = tree.nodes.new('ShaderNodeAttribute')
+        attribute_node.attribute_name = coordinate_attribute
+        local_node = tree.nodes.new('ShaderNodeAttribute')
+        local_node.attribute_name = object_attribute
+        for node in list(tree.nodes):
+            if node.type == 'TEX_COORD':
+                for link in list(node.outputs['Generated'].links):
+                    tree.links.new(attribute_node.outputs['Vector'], link.to_socket)
+                if node.object is None:
+                    for link in list(node.outputs['Object'].links):
+                        tree.links.new(local_node.outputs['Vector'], link.to_socket)
+            elif node.type.startswith('TEX_') and node.type != 'TEX_IMAGE':
+                vector = node.inputs.get('Vector')
+                if vector is not None and not vector.is_linked:
+                    tree.links.new(attribute_node.outputs['Vector'], vector)
     # The source extraction hood uses inward-facing normals. Cycles shades its
     # visible back faces in the original render, but texture baking samples the
     # front side, which would otherwise bake the entire hood nearly black.
@@ -153,8 +200,8 @@ def main():
     bpy.ops.export_scene.gltf(filepath=str(glb_path), export_format='GLB', use_selection=True,
                               export_yup=True, export_apply=True, export_image_format='AUTO')
     manifest = {
-        'model': glb_path.name + '?v=20261029b', 'camera': reference,
-        'source': 'studio1_drawer_warm_v9/final.blend',
+        'model': glb_path.name + '?v=generated-coordinates-20261031', 'camera': reference,
+        'source': bpy.data.filepath,
         'sourceMeshCount': len(meshes), 'faces': len(mesh.data.polygons),
         'bake': {'type': 'combined', 'textureSize': size, 'samples': samples,
                  'device': chosen, 'viewTransform': scene.view_settings.view_transform,

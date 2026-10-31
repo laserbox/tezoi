@@ -13,7 +13,7 @@ if (root) {
   const captions = {
     evolution: '8 秒导览：蓝色点云沿空间逐步生长为完整 3DGS 场景，收束到适合继续探索的视角。',
     trajectory: '26 秒连续轨迹：沿原始相机路径自动漫游，观察重建空间在运动中的稳定性。',
-    interactive: '拖动旋转视角，滚轮缩放，右键平移；触屏可单指旋转、双指缩放。',
+    interactive: '左键环绕 · 中键 / Shift+左键平移 · 滚轮缩放 · 按住右键 + WASD/QE 移动 · Shift 加速。',
   };
   let viewer;
   let stageVisible = false;
@@ -38,7 +38,7 @@ if (root) {
     });
     caption.textContent = captions[mode];
     if (viewer) {
-      if (mode === 'interactive') viewer.start();
+      if (mode === 'interactive' && stageVisible) viewer.start();
       else viewer.stop();
     }
     if (mode === 'evolution' && stageVisible && !reduceMotion.matches) {
@@ -84,6 +84,10 @@ if (root) {
   // The eight-second introduction starts only when it can actually be seen.
   const stageObserver = new IntersectionObserver(entries => {
     stageVisible = entries.some(entry => entry.isIntersecting);
+    if (viewer) {
+      if (stageVisible && activeMode() === 'interactive') viewer.start();
+      else viewer.stop();
+    }
     if (stageVisible) {
       if (activeMode() === 'evolution' && !reduceMotion.matches) playIntro();
     } else {
@@ -112,31 +116,40 @@ if (root) {
   const button = root.querySelector('[data-school-load]');
   const status = root.querySelector('[data-school-status]');
   const overlay = root.querySelector('[data-school-overlay]');
-  button.addEventListener('click', async () => {
+  window.addEventListener('pagehide', event => {
+    if (event.persisted) viewer?.stop();
+    else { viewer?.dispose(); viewer = null; }
+  });
+  window.addEventListener('pageshow', event => {
+    if (event.persisted && stageVisible && activeMode() === 'interactive') viewer?.start();
+  });
+  button.addEventListener('click', () => loadModel());
+  async function loadModel() {
+    viewer?.dispose(); viewer = null;
     button.disabled = true;
     status.textContent = '正在加载三维场景，请稍候…';
     try {
-      const { Viewer } = await import('./assets/vendor/gaussian-splats-3d.js');
-      viewer = new Viewer({
-        rootElement: root.querySelector('[data-school-canvas]'),
-        cameraUp: [0, 0, 1],
-        initialCameraPosition: [-0.035, -0.057, 0.049],
-        initialCameraLookAt: [1, -0.072, 0.052],
-        sharedMemoryForWorkers: false,
-        gpuAcceleratedSort: false,
+      const { mountReconstruction } = await import('./reconstruction-viewer.js?v=webgs-sog-20261031');
+      viewer = await mountReconstruction(root, {
+        onStatus: message => { status.textContent = message; },
+        onError: error => {
+          status.textContent = `三维场景不可用：${error.message}`;
+          overlay.hidden = false;
+          button.textContent = '重新加载';
+          button.disabled = false;
+        },
       });
-      await viewer.addSplatScene('assets/school-preview.splat', { showLoadingUI: false, splatAlphaRemovalThreshold: 5 });
       overlay.hidden = true;
-      if (activeMode() === 'interactive') viewer.start();
+      if (activeMode() === 'interactive' && stageVisible) viewer.start();
     } catch (error) {
       console.error('3DGS 加载失败', error);
       if (viewer) {
         viewer.dispose();
         viewer = null;
       }
-      status.textContent = '三维场景加载失败。请检查网络或浏览器的 WebGL 支持。';
+      status.textContent = `三维场景加载失败：${error.message} 请使用支持 WebGPU 的桌面浏览器。`;
       button.textContent = '重新加载';
       button.disabled = false;
     }
-  });
+  }
 }
