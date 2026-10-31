@@ -7,10 +7,10 @@
   <meta name="description" content="TEZOI，智能高精度具身仿真。融合场景重建、视觉保真与物理交互，构建面向具身智能研发与验证的仿真环境。">
   <title>TEZOI | Intelligent, high-fidelity embodied simulation</title>
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=usedv6-baked-20261026">
+  <link rel="stylesheet" href="styles.css?v=playground-simple-20261029">
   <script src="site-shell.js?v=site-navigation-20261022" type="module"></script>
-  <script src="app.js?v=studio1-baked-20261029b" type="module"></script>
-  <link rel="stylesheet" href="ego2sim.css?v=agent-grid-20261028">
+  <script src="app.js?v=medicine-ipc-multiview-20261031" type="module"></script>
+  <link rel="stylesheet" href="ego2sim.css?v=agent-simple-20261029">
   <link rel="stylesheet" href="school-splat.css?v=school-3dgs-20261029d">
   <script type="module" src="school-splat.js?v=school-3dgs-20261029b"></script>
 </head>
@@ -30,11 +30,13 @@
 
   <main id="main">
     <section class="overview" id="overview" aria-labelledby="overview-title" data-chapter="1">
-      <div class="overview-stage">
-        <div class="overview-video" data-slot="overview-video" aria-label="具身仿真概念视觉"><img class="hero-image" src="assets/hero.webp" alt="机械臂使用滴管操作烧杯的实验室概念场景" width="1672" height="941" fetchpriority="high"><div class="hero-shade"></div></div>
-        <div class="hero-chapter"><h2 id="overview-title">Overall</h2></div>
-        <div class="hero-content"><h1>智能高精度<br>具身仿真。</h1><p>以高保真场景与精细物理交互，支持具身智能的开发与验证。</p><div class="hero-actions"><a class="hero-button" href="#physical-contact">探索物理交互<span class="button-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 4v12m-5-5 5 5 5-5"/></svg></span></a><a class="hero-text-link" href="#gallery">浏览演示库 <span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 4v12m-5-5 5 5 5-5"/></svg></span></a></div></div>
-        <div class="hero-bottom"><span>Visual fidelity. Physical accuracy.</span><span class="hero-credit">概念视觉 / AI 生成</span></div>
+      <div class="overview-stage" data-hero-media>
+        <h1 class="visually-hidden" id="overview-title">TEZOI 具身仿真演示</h1>
+        <div class="overview-video" data-slot="overview-video"><img class="hero-image" src="assets/homepage-hero.jpg" alt="双机械臂在卧室场景中操作毛毯的仿真演示" width="1920" height="1080" fetchpriority="high"><video class="hero-video" data-hero-video src="assets/homepage-hero.mp4" poster="assets/homepage-hero.jpg" width="1920" height="1080" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" hidden></video></div>
+        <div class="hero-bottom">
+          <button class="hero-watch" type="button" data-video="hero-full" aria-haspopup="dialog" aria-controls="video-dialog"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor"/></svg><span lang="en">Watch Full Video</span></button>
+          <button class="hero-toggle" data-hero-toggle type="button" aria-label="播放背景视频" aria-pressed="false" hidden><svg class="hero-play-icon" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor"/></svg><svg class="hero-pause-icon" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path d="M6 4h3v12H6Zm5 0h3v12h-3Z" fill="currentColor"/></svg></button>
+        </div>
       </div>
 
     </section>
@@ -46,15 +48,15 @@
         <div class="real-sim-workflow" data-real-sim-workflow data-active-stage="simulation">
           <aside class="workflow-rail">
             <div class="workflow-steps" data-workflow-tabs role="tablist" aria-label="从 Ego 到真实验证" aria-orientation="vertical">
-              <button class="workflow-step" type="button" role="tab" id="workflow-tab-source" aria-controls="workflow-panel-source" aria-selected="false" tabindex="-1" data-workflow-stage="source"><span class="workflow-number" aria-hidden="true">01</span><span><strong>Ego</strong><small><span>真实第一</span><span>视角视频</span></small></span></button>
-              <button class="workflow-step" type="button" role="tab" id="workflow-tab-agent" aria-controls="workflow-panel-agent" aria-selected="false" tabindex="-1" data-workflow-stage="agent"><span class="workflow-number" aria-hidden="true">02</span><span><strong>Agent</strong><small>Ego 转仿真</small></span></button>
-              <button class="workflow-step" type="button" role="tab" id="workflow-tab-simulation" aria-controls="workflow-panel-simulation" aria-selected="true" data-workflow-stage="simulation"><span class="workflow-number" aria-hidden="true">03</span><span><strong>Simulation</strong><small>仿真交互</small></span></button>
-              <button class="workflow-step" type="button" role="tab" id="workflow-tab-validation" aria-controls="workflow-panel-validation" aria-selected="false" tabindex="-1" data-workflow-stage="validation"><span class="workflow-number" aria-hidden="true">04</span><span><strong>Robotics</strong><small>真机</small></span></button>
+              <button class="workflow-step" type="button" role="tab" id="workflow-tab-source" aria-controls="workflow-panel-source" aria-selected="false" tabindex="-1" data-workflow-stage="source"><span class="workflow-number" aria-hidden="true">01</span><span><strong>Ego</strong><small>真实示范</small></span></button>
+              <button class="workflow-step" type="button" role="tab" id="workflow-tab-agent" aria-controls="workflow-panel-agent" aria-selected="false" tabindex="-1" data-workflow-stage="agent"><span class="workflow-number" aria-hidden="true">02</span><span><strong>Agent</strong><small>场景与动作</small></span></button>
+              <button class="workflow-step" type="button" role="tab" id="workflow-tab-simulation" aria-controls="workflow-panel-simulation" aria-selected="true" data-workflow-stage="simulation"><span class="workflow-number" aria-hidden="true">03</span><span><strong>Simulation</strong><small>仿真运行</small></span></button>
+              <button class="workflow-step" type="button" role="tab" id="workflow-tab-validation" aria-controls="workflow-panel-validation" aria-selected="false" tabindex="-1" data-workflow-stage="validation"><span class="workflow-number" aria-hidden="true">04</span><span><strong>Robotics</strong><small>真机待验证</small></span></button>
             </div>
           </aside>
           <div class="workflow-main">
             <section class="workflow-panel" id="workflow-panel-source" data-workflow-panel="source" role="tabpanel" aria-labelledby="workflow-tab-source" hidden>
-              <div class="workflow-pane-heading"><h4>Ego video</h4><p>第一视角液体操作示例，呈现场景、对象与连续操作过程。</p></div>
+              <div class="workflow-pane-heading"><h4>Ego · 真实第一视角示范</h4><p>以连续视频保留环境、对象和操作顺序。</p></div>
               <figure class="workflow-ego-media">
                 <video data-ego-video controls muted playsinline preload="none" poster="assets/ego-img-6100-2x.jpg" width="1920" height="1080" aria-label="第一视角操作视频，2 倍速">
                   <source src="assets/ego-img-6100-2x.mp4" type="video/mp4">
@@ -62,11 +64,10 @@
                 </video>
                 <figcaption>第一视角操作视频 · 2 倍速</figcaption>
               </figure>
-              <div class="workflow-artifacts" aria-label="Ego 输入"><div><strong>Scene</strong><p>真实环境与空间关系</p></div><div><strong>Interaction</strong><p>对象、接触与操作过程</p></div><div><strong>Task</strong><p>任务目标与子任务顺序</p></div></div>
             </section>
             <section class="workflow-panel" id="workflow-panel-agent" data-workflow-panel="agent" role="tabpanel" aria-labelledby="workflow-tab-agent" hidden>
-              <div class="workflow-pane-heading"><h4>从 Ego 构建仿真</h4><p>一段人类示范，如何成为机器人的场景与动作。</p></div>
-<div class="ego-lab ego-compact" data-agent-conversion data-ego-compact aria-label="滴管任务 Ego2Sim 转换演示">
+              <div class="workflow-pane-heading"><h4>Agent · 从示范构建仿真</h4><p>查看任务理解、场景构建与机器人动作的阶段结果。</p></div>
+              <div class="ego-lab ego-compact" data-agent-conversion data-ego-compact aria-label="滴管任务 Ego2Sim 转换演示">
   <div class="ego-tabs" role="tablist" aria-label="Ego2Sim 转换阶段">
     <button type="button" role="tab" id="ego-tab-0" aria-selected="true" aria-controls="ego-stage" data-ego-step="0" tabindex="0"><span>01</span>任务理解</button>
     <button type="button" role="tab" id="ego-tab-1" aria-selected="false" aria-controls="ego-stage" data-ego-step="1" tabindex="-1"><span>02</span>场景重建</button>
@@ -89,7 +90,6 @@
     </section>
     <div data-ego-main-player>
     <div class="ego-result-actions">
-      <button type="button" data-ego-back hidden>← 返回主结果</button>
       <button type="button" data-ego-compare aria-pressed="false">对照原视频</button>
     </div>
     <div class="ego-viewer">
@@ -99,11 +99,11 @@
     </div>
     <div class="ego-controls"><button type="button" data-ego-play aria-label="播放演示">播放</button><input data-ego-scrub type="range" min="0" max="43.83" step="0.01" value="0" aria-label="示教回放时间"><output data-ego-time>00.0 / 43.8 s</output><button type="button" data-ego-fullscreen aria-label="全屏查看处理结果">放大 ↗</button></div>
     <div class="ego-media-status"><p data-ego-method role="status" hidden></p><button type="button" data-ego-retry hidden>重试加载</button></div>
-    <p class="ego-result-note" data-ego-artifact-note>滴加意图不等于液体转移成功</p>
     </div>
-    <details class="ego-evidence" data-ego-evidence-panel hidden><summary>查看处理过程与证据</summary><div class="ego-subviews" role="group" aria-label="本阶段辅助证据" data-ego-layers></div></details>
+    <p class="ego-result-note"><span>当前限制：</span><span data-ego-artifact-note>滴加意图不等于液体转移成功。</span></p>
+    <details class="ego-evidence" data-ego-evidence-panel hidden><summary>处理过程与对照 <span data-ego-evidence-count></span></summary><p class="ego-evidence-intro">补充查看处理过程；这些视频与上方主结果独立播放。</p><div class="ego-evidence-grid" data-ego-layers></div></details>
   </div>
-  <div class="ego-compact-footer"><span>滴管吸液 · 滴加 · 自然放回 · 简化物理求解</span><a href="demo.html" target="_blank" rel="noopener">查看完整过程与报告 ↗</a></div>
+  <div class="ego-compact-footer"><a href="assets/ego2sim/video2world-v11-review.html" target="_blank" rel="noopener">模型与优化记录 ↗</a><span>滴管吸液 · 滴加 · 自然放回 · 简化物理求解</span><a href="demo.html" target="_blank" rel="noopener">查看完整过程与报告 ↗</a></div>
 </div>
             </section>
             <section class="workflow-panel" id="workflow-panel-simulation" data-workflow-panel="simulation" role="tabpanel" aria-labelledby="workflow-tab-simulation">
@@ -165,12 +165,12 @@
               </div>
             </section>
             <section class="workflow-panel" id="workflow-panel-validation" data-workflow-panel="validation" role="tabpanel" aria-labelledby="workflow-tab-validation" hidden>
-              <div class="workflow-pane-heading"><h4>Policy validation</h4><p>面向真机的验证阶段：在真实任务中检查策略的执行效果。</p></div>
+              <div class="workflow-pane-heading"><h4>Robotics · 真机验证</h4><p>在真实任务中检查动作与策略的执行效果。</p></div>
               <div class="workflow-media-placeholder workflow-validation-placeholder">
                 <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="12" width="38" height="28" rx="5"/><circle cx="24" cy="26" r="8"/><path d="m16 12 3-5h10l3 5"/></svg>
-                <p>真机验证示例待补充</p><span>Real-world execution</span>
+                <p>真机验证示例待补充</p><span>尚无可展示的真机执行录像与结果。下列维度为后续验证关注点。</span>
               </div>
-              <div class="workflow-artifacts" aria-label="真实场景验证维度"><div><strong>Task outcome</strong><p>任务是否实际完成</p></div><div><strong>Consistency</strong><p>动作与物理交互是否一致</p></div><div><strong>Robustness</strong><p>面对场景变化的执行表现</p></div></div>
+              <div class="workflow-artifacts" aria-label="后续真机验证维度"><div><strong>任务结果</strong><p>任务是否实际完成</p></div><div><strong>执行一致性</strong><p>动作与物理交互是否一致</p></div><div><strong>变化适应</strong><p>面对场景变化的执行表现</p></div></div>
             </section>
           </div>
         </div>
@@ -381,7 +381,7 @@
       <div id="panel-lab" role="tabpanel" aria-labelledby="tab-lab" data-scene-panel="lab" hidden>
         <div class="gallery-grid">
           <article class="gallery-card">
-            <button type="button" class="gallery-image" data-video="gallery-soft-bag" aria-label="播放软袋开袋、加液与夹封仿真演示"><img src="assets/gallery-soft-bag.jpg?v=shared-lab-20261025" alt="共享实验室总览与软袋工位的双腕视角" loading="lazy" width="1920" height="720"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
+            <button type="button" class="gallery-image" data-video="gallery-soft-bag" aria-label="播放软袋开袋、加液与夹封仿真演示"><img src="assets/gallery-soft-bag.jpg?v=lab-2k-20261030" alt="软袋工位的斜前方第三视角，突出袋口、杯体与夹封操作" loading="lazy" width="2560" height="1440"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>软袋开袋、加液与夹封</h4></div>
             <p class="gallery-caption">共享实验室中，双手打开软袋，协同持杯倾倒液体，放回杯体后夹封并撤手。</p><p class="case-status">原记录重渲染 · 未验气密性</p>
             <div class="card-meta"><span>Dual UR5e / Allegro v4</span><span>2:15</span></div>
@@ -393,13 +393,13 @@
             <div class="card-meta"><span>UR5e / Robotiq 2F85</span><span>0:50</span></div>
           </article>
           <article class="gallery-card">
-            <button type="button" class="gallery-image" data-video="gallery-labimus-medicine" aria-label="播放双臂取药"><img src="assets/gallery-labimus-medicine.jpg?v=shared-lab-20261025" alt="共享实验室总览与颗粒取药工位的双腕视角" loading="lazy" width="1920" height="720"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
+            <button type="button" class="gallery-image" data-video="gallery-labimus-medicine" aria-label="播放双臂取药"><img src="assets/gallery-labimus-medicine.jpg?v=medicine-ipc-multiview-20261031" alt="双臂取药的第三视角与左右腕相机同步画面" loading="lazy" width="3840" height="1440"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>双臂取药</h4></div>
-            <p class="gallery-caption">共享实验室中，双臂协同持瓶与持勺，倾瓶取出颗粒并扶正药瓶。</p><p class="case-status">原记录重渲染</p>
+            <p class="gallery-caption">双臂协同持瓶与持勺，倾瓶取出颗粒并扶正药瓶。</p><p class="case-status">IPC颗粒动力学 · 三视角同步</p>
             <div class="card-meta"><span>Dual UR5e / Robotiq 2F85</span><span>2:43</span></div>
           </article>
           <article class="gallery-card">
-            <button type="button" class="gallery-image" data-video="gallery-labimus-weighing" aria-label="播放双臂称量"><img src="assets/gallery-labimus-weighing.jpg?v=shared-lab-20261025" alt="共享实验室总览与双腕视角下向天平转移颗粒的操作" loading="lazy" width="1920" height="720"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
+            <button type="button" class="gallery-image" data-video="gallery-labimus-weighing" aria-label="播放双臂称量"><img src="assets/gallery-labimus-weighing.jpg?v=lab-2k-20261030" alt="称量工位的正前上方第三视角，展示称量舟、天平与还勺操作" loading="lazy" width="2560" height="1440"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>双臂称量</h4></div>
             <p class="gallery-caption">共享实验室中，将颗粒送入称量舟，完成倒料、还勺、关门与稳定读数。</p><p class="case-status">原记录重渲染 · 目标剂量未达</p>
             <div class="card-meta"><span>Dual UR5e / Robotiq 2F85</span><span>1:08</span></div>

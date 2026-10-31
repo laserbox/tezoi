@@ -4,7 +4,7 @@ const CORRECTION_PENDING=false;
 const stages=[
  {purpose:'VIDEO → OBJECT EVENTS → TASK GRAPH',title:'让任务分解连接实际观测。',description:'同一视频时间轴上展示操作意图、胶头与管尖观测状态，再用人手—物体接触候选确定机器人换物时机。字幕描述任务意图；液量和任务成功仍未测量。',layers:[['task','任务字幕与观测']],left:'source',leftLabel:'INPUT / 第一视角',rightLabel:'OUTPUT / 任务分解',evidence:'视频观察 + 接触事件',logs:[['保留原视频时间轴','43.89 s'],['识别两组任务资产','2 groups'],['接触事件连接机器人换物','source linked']],artifact:'任务图与源帧事件',note:'滴加意图不等于液体转移成功'},
  {purpose:'DEPTH → WORLD → DYNAMIC MESH POSE',title:'把静态重建补成动态资产轨迹。',description:'SAM3 分割与 DA3 深度经过桌面注册，进入统一观测世界。固定原滴管 CAD 尺寸，逐帧拟合胶头、可见管尖和烧杯位姿；遮挡管尖使用管长与容器几何先验，轴向转角仍不可观测。视频到机器人的刚体矩阵与额外布局适配分别保存。',layers:[['mapping','场景重建与坐标配准'],['segmentation-comparison','精细分割与对比'],['depth','相对深度'],['clean','去手与遮挡'],['assets','原任务资产']],left:'source',leftLabel:'INPUT / 原始观测',rightLabel:'OUTPUT / 动态几何与配准',evidence:'实际点云 + 动态 CAD 拟合',logs:[['反投影与桌面注册','88 clouds'],['逐帧滴管和烧杯变换','263 poses'],['区分观测与遮挡先验','82 visible tips']],artifact:'动态位姿、坐标矩阵、点云和场景',note:'估计注册与布局适配；不是实测外参标定'},
- {purpose:'3D HAND → ARTICULATION → TRIANGLE CONTACT',title:'逐段修复捏合姿态，保留观测边界。',description:'固定动态滴管、相机和原始候选，逐段优化拇指与食指关节，保持骨段长度。相同的 12 mm／12 px 门槛下，接触候选由 81/192 提高到 185/192；更严格的逐指投影检查则从 60/192 提高到 160/192。未通过项保留时间、距离和原因，不能当作物理抓持成功。',layers:[['contact','三维接触与距离'],['contact-comparison','逐段修复前后'],['human','三维手到任务世界'],['hands','原始视频骨架']],left:'source',leftLabel:'INPUT / 人类示范',rightLabel:'OUTPUT / 三维手与接触候选',evidence:'保骨长关节优化 + 实际 Mesh 表面',logs:[['固定原始候选与门槛','192 pairs'],['三维接触几何门槛','185 pass'],['严格逐指投影检查','160 pass']],artifact:'逐段审计、三维手与三角面锚点',note:'几何候选不等于接触力、穿透认证或抓持成功'},
+ {purpose:'3D HAND → ARTICULATION → TRIANGLE CONTACT',title:'逐段修复捏合姿态，保留观测边界。',description:'固定动态滴管、相机和原始候选，加入五个深度起点与物体局部时序锚点，保持骨段长度。原 12 mm／12 px 门槛下，三维几何检查从 185/192 提高到 189/192，严格逐指检查从 160/192 提高到 187/192。剩余 5 组保留并回查身份、深度或投影；这是新的几何结果，尚未用于重新求解机器人。',layers:[['contact-refinement','多起点接触优化'],['contact','原三维接触与距离'],['contact-comparison','逐段修复前后'],['human','三维手到任务世界'],['hands','原始视频骨架']],left:'source',leftLabel:'INPUT / 人类示范',rightLabel:'OUTPUT / 三维手与接触候选',evidence:'保骨长关节优化 + 实际 Mesh 表面',logs:[['固定原始候选与门槛','192 pairs'],['三维接触几何门槛','189 pass'],['严格逐指投影检查','187 pass']],artifact:'逐段审计、三维手与三角面锚点',note:'几何候选不等于接触力、穿透认证或抓持成功'},
  {purpose:'CONTACT → ASPIRATE → DISPENSE → RETURN',title:'同一构型完成抓取、滴加和放回。',description:'保留 RealMan RM65-B、Xense、原相机及视觉资产。机械臂从重新规划的安全预抓取位出发，消除开场大幅翻肘；沿倾斜管轴取放，以实际模拟位姿反馈修正对准。胶头压缩驱动简化气压与管内流动求解，液滴在重力下进入烧杯。35 秒为重新规划的执行时钟，原视频及上游分项保留观测时钟。',layers:[['robot','机器人完整动作'],['robot-detail','滴管与夹爪近景'],['liquid','吸液与滴加'],['robot-external','原固定相机'],['mapping','坐标与布局适配'],['human','三维人手对照']],left:'robot',leftLabel:'同一求解 / 总览',rightLabel:'OUTPUT / RealMan RM65-B + Xense',evidence:'自由物体接触 + 简化液体',logs:[['连续原生步','175,000'],['持握 · 滴加 · 自由放回','已检查'],['液体模型','简化气压与流动']],artifact:'同步机器人视频、接触与体积记录',note:'仿真状态反馈；不是完整 CFD 或真机验证'},
  {purpose:'OBSERVE → DIAGNOSE → REPAIR → VERIFY',title:'让接触和转移量成为修改依据。',description:'每个 0.2 ms 原生步检查接触、关节限制、自由释放和液体体积。区分胶头接触处的切向滑移与长管尖因柔性转动产生的偏移；管尖相对位移与接触滑移同时满足原门槛，保留每轮失败记录。瓶底和瓶颈真实支撑释放后的滴管。液体使用简化气压、黏性管流、弹道液滴和静液面，不包含完整 CFD、飞溅或化学反应。',layers:[['physics','接触力与验收'],['liquid','液体转移与守恒'],['robot-detail','实际抓持近景'],['feedback','早期几何修复记录'],['contact-comparison','手部接触修复前后'],['contact','手部接触几何']],left:'robot-detail',leftLabel:'同一求解 / 抓持近景',rightLabel:'OUTPUT / 实际求解与测量',evidence:'接触与液体逐步核对',logs:[['管尖相对位移 ≤5 mm','4.33 mm'],['液体转移与守恒','简化模型'],['完整 CFD / 真机','未验证']],artifact:'连续回放、原生审计与边界说明',note:'原始管尖门槛与接触、滴加共同复验；不代表真机验证'}
 ];
@@ -16,13 +16,28 @@ const fallbackPhases=[{start:0,end:1.8,caption:'识别烧杯与锥形瓶—滴�
 const compactViews = [
  {main:['task','任务字幕与观测'], evidence:[], description:'识别操作意图，把捏取、转移、滴加与放回连接到实际观测。'},
  {main:null, title:'场景重建', evidence:[], description:'分割、相对深度、遮挡处理与三维场景，四段视频可独立播放和放大查看。'},
- {main:['contact','三维接触与距离'], evidence:[['human','三维手部回放'],['hands','原始视频骨架'],['contact-comparison','接触拟合前后对照']], description:'恢复手部姿态与接触距离，为机器人动作提供几何约束。'},
+ {main:['contact-refinement','多起点接触优化'], evidence:[['contact','原三维接触与距离'],['human','三维手部回放'],['hands','原始视频骨架'],['contact-comparison','接触拟合前后对照']], description:'多起点与时序锚点修复三维接触，严格检查通过 187/192；剩余 5 组继续保留复查。'},
  {main:['robot','机器人完整动作'], evidence:[], description:'完整回放 RealMan + Xense 抓取滴管、吸液、滴加与自然放回。'},
  {main:['physics','接触力与验收'], evidence:[['liquid','液体转移与守恒'],['robot-detail','抓持近景']], description:'核对同一次仿真执行的接触、滑移、释放与液体守恒。'}
 ];
 const compactClocks = {
  observation:{limit:43.83,label:'示教回放'},
  simulation:{limit:35,label:'仿真回放'}
+};
+const compactStageLimits = [
+ '字幕描述操作意图，尚不能据此确认液体转移成功。',
+ '坐标注册与布局适配为估计结果；遮挡区域仍有不确定性。',
+ '几何候选不等于物理抓持成功；接触优化与机器人执行分开展示。',
+ '液体与反馈采用简化仿真模型，尚未完成真机验证。',
+ '简化液体模型的检查结果，不能替代完整 CFD 或真机验证。'
+];
+const evidenceDescriptions = {
+ contact:'查看优化前的三维接触距离与候选。',
+ human:'观察重建手部姿态与任务物体的空间关系。',
+ hands:'对照原始视频中的手部骨架观测。',
+ 'contact-comparison':'对照接触拟合修复前后的几何结果。',
+ liquid:'查看简化模型中的液体转移与守恒记录。',
+ 'robot-detail':'从近景观察夹爪、胶头与滴管的持握。'
 };
 
 export function mountAgentConversion(root) {
@@ -37,9 +52,18 @@ function mountCompactAgent(root) {
  const viewer = root.querySelector('.ego-viewer');
  const positions = {observation:0,simulation:0};
  const previews = [...root.querySelectorAll('[data-ego-preview]')];
+ let evidenceVideos = [];
+ const allPreviews = () => [...previews, ...evidenceVideos];
+ const previewVisibility = new WeakMap();
+ const previewObserver = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+   previewVisibility.set(entry.target, entry.isIntersecting);
+   if (!entry.isIntersecting) entry.target.pause();
+  }
+ }, {threshold:.05});
  const failures = new Set();
  let stage = 0, layer = 'task', clock = 'observation', time = 0;
- let active = false, want = false, comparison = false, frame = null, revision = 0;
+ let active = false, inView = true, want = false, comparison = false, frame = null, revision = 0;
  const clockFor = () => stage < 3 ? 'observation' : 'simulation';
  const canCompare = () => Boolean(compactViews[stage].main) && stage < 3;
  const setText = (name, value) => { if ($(name)) $(name).textContent = value; };
@@ -72,7 +96,7 @@ function mountCompactAgent(root) {
   revision++;
   source.pause();
   output.pause();
-  previews.forEach(video => { if (video !== exceptPreview) video.pause(); });
+  allPreviews().forEach(video => { if (video !== exceptPreview) video.pause(); });
   if (frame !== null) cancelAnimationFrame(frame);
   frame = null;
   update();
@@ -105,8 +129,8 @@ function mountCompactAgent(root) {
   frame = requestAnimationFrame(tick);
  }
  function play() {
-  if (!compactViews[stage].main || !active || document.hidden || failures.size) return;
-  previews.forEach(video => video.pause());
+  if (!compactViews[stage].main || !active || !inView || document.hidden || document.querySelector('dialog[open]') || failures.size) return;
+  allPreviews().forEach(video => video.pause());
   if (time >= compactClocks[clock].limit - .05) jump(0);
   want = true;
   const token = ++revision;
@@ -167,11 +191,65 @@ function mountCompactAgent(root) {
   const label = [view.main, ...view.evidence].find(([name]) => name === id)[1];
   setText('result-title', label);
   setText('right-label', label);
-  setText('artifact-note', stages[stage].note);
   output.setAttribute('aria-label', `${label}演示`);
-  $('back').hidden = id === view.main[0];
-  root.querySelectorAll('[data-ego-evidence]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.egoEvidence === id)));
   update();
+ }
+ function previewAllowed(video, ownerStage, evidence) {
+  return active && inView && !document.hidden && !document.querySelector('dialog[open]')
+   && stage === ownerStage && root.contains(video) && previewVisibility.get(video) !== false
+   && (!evidence || $('evidence-panel').open);
+ }
+ function bindPreview(video, ownerStage, evidence = false) {
+  const card = video.closest('figure');
+  const error = card.querySelector('[data-ego-preview-error]');
+  const retry = card.querySelector('[data-ego-preview-retry]');
+  const current = () => root.contains(video) && video.hasAttribute('src');
+  video.addEventListener('play', () => {
+   if (!previewAllowed(video, ownerStage, evidence)) video.pause();
+   else if (!video.paused) pause(video);
+  });
+  video.addEventListener('playing', () => {
+   if (!previewAllowed(video, ownerStage, evidence)) video.pause();
+  });
+  video.addEventListener('error', () => { if (current()) { error.hidden = false; retry.hidden = false; } });
+  video.addEventListener('loadeddata', () => { if (current()) { error.hidden = true; retry.hidden = true; } });
+  retry.addEventListener('click', () => {
+   if (!previewAllowed(video, ownerStage, evidence)) return;
+   if (evidence) load(video, video.dataset.egoEvidence, true);
+   else video.load();
+   video.play().catch(errorEvent => {
+    if (errorEvent.name !== 'AbortError' && current() && previewAllowed(video, ownerStage, evidence)) {
+     error.hidden = false; retry.hidden = false;
+    }
+   });
+   video.focus({preventScroll:true});
+  });
+  previewObserver.observe(video);
+ }
+ function loadEvidence() {
+  if (!active || !inView || document.hidden || !$('evidence-panel').open) return;
+  for (const video of evidenceVideos) load(video, video.dataset.egoEvidence);
+ }
+ function renderEvidence(view) {
+  for (const video of evidenceVideos) { previewObserver.unobserve(video); clearMedia(video); }
+  evidenceVideos = [];
+  $('layers').replaceChildren();
+  setText('evidence-count', `${view.evidence.length} 段视频`);
+  for (const [id, label] of view.evidence) {
+   const card = document.createElement('figure');
+   card.className = 'ego-preview-card';
+   card.innerHTML = '<video controls playsinline muted preload="none"></video><figcaption><h6></h6><p></p></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden></button>';
+   const video = card.querySelector('video');
+   video.muted = true;
+   video.dataset.egoEvidence = id;
+   video.setAttribute('aria-label', `${label}过程视频`);
+   card.querySelector('h6').textContent = label;
+   card.querySelector('figcaption p').textContent = evidenceDescriptions[id] || '补充查看本阶段的处理过程。';
+   card.querySelector('button').textContent = `重试${label}`;
+   $('layers').append(card);
+   evidenceVideos.push(video);
+   bindPreview(video, stage, true);
+  }
  }
  function select(index, focus = false) {
   pause();
@@ -194,16 +272,9 @@ function mountCompactAgent(root) {
     video.src = `${MEDIA}${name}.mp4?v=physics10`;
    }
   }
-  $('layers').replaceChildren();
-  for (const [id, label] of view.evidence) {
-   const button = document.createElement('button');
-   button.type = 'button';
-   button.dataset.egoEvidence = id;
-   button.textContent = label;
-   button.addEventListener('click', () => choose(id));
-   $('layers').append(button);
-  }
+  renderEvidence(view);
   setText('description', view.description);
+  setText('artifact-note', compactStageLimits[stage]);
   if (view.main) choose(view.main[0]);
   else {
    layer = null;
@@ -231,9 +302,9 @@ function mountCompactAgent(root) {
  });
  $('play').addEventListener('click', () => want ? pause() : play());
  scrub.addEventListener('input', () => { const value = Number(scrub.value); pause(); jump(value); });
- $('back').addEventListener('click', () => {
-  const main = compactViews[stage].main;
-  if (main) { choose(main[0]); $('play').focus({preventScroll:true}); }
+ $('evidence-panel').addEventListener('toggle', () => {
+  if ($('evidence-panel').open) loadEvidence();
+  else evidenceVideos.forEach(video => video.pause());
  });
  $('compare').addEventListener('click', () => {
   if (!canCompare()) return;
@@ -265,26 +336,15 @@ function mountCompactAgent(root) {
  output.addEventListener('ended', () => {
   if (compactViews[stage].main) { time = compactClocks[clock].limit; pause(); }
  });
- for (const video of previews) {
-  const card = video.closest('figure');
-  const error = card.querySelector('[data-ego-preview-error]');
-  const retry = card.querySelector('[data-ego-preview-retry]');
-  video.addEventListener('play', () => {
-   if (!active || document.hidden || stage !== 1) video.pause();
-   else pause(video);
-  });
-  video.addEventListener('error', () => { error.hidden = false; retry.hidden = false; });
-  video.addEventListener('loadeddata', () => { error.hidden = true; retry.hidden = true; });
-  retry.addEventListener('click', () => {
-   video.load();
-   video.play().catch(() => {});
-   video.focus({preventScroll:true});
-  });
- }
- document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
- new IntersectionObserver(entries => { if (!entries.some(entry => entry.isIntersecting)) pause(); }, {threshold:.05}).observe(root);
+ for (const video of previews) bindPreview(video, 1);
+ document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); else loadEvidence(); });
+ window.addEventListener('pagehide', () => pause());
+ new IntersectionObserver(entries => {
+  inView = entries.some(entry => entry.isIntersecting);
+  if (!inView) pause(); else loadEvidence();
+ }, {threshold:.05}).observe(root);
  select(0);
- return {setActive(value) { active = value; if (!value) pause(); }, pause};
+ return {setActive(value) { active = value; if (!value) pause(); else loadEvidence(); }, pause};
 }
 
 function mountDetailedAgent(root){
