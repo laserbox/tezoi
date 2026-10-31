@@ -6,17 +6,23 @@ if (root) {
   const stage = root.querySelector('.school-stage');
   const caption = root.querySelector('[data-school-caption]');
   const introVideo = root.querySelector('[data-school-intro-video]');
-  const tourVideo = root.querySelector('[data-school-tour-video]');
   const introCta = root.querySelector('[data-school-intro-cta]');
   const enterInteractive = root.querySelector('[data-school-enter-interactive]');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const captions = {
-    evolution: '8 秒导览：蓝色点云沿空间逐步生长为完整 3DGS 场景，收束到适合继续探索的视角。',
-    trajectory: '26 秒连续轨迹：沿原始相机路径自动漫游，观察重建空间在运动中的稳定性。',
+    comparison: '左右拖动分界线，对比实拍照片与重建结果的空间结构和外观细节。',
+    evolution: '从蓝色点云生长为完整 3DGS 场景，再沿原始相机轨迹连续漫游，观察空间结构与不同视角下的重建效果。',
     interactive: '左键环绕 · 中键 / Shift+左键平移 · 滚轮缩放 · 按住右键 + WASD/QE 移动 · Shift 加速。',
   };
   let viewer;
   let stageVisible = false;
+
+  const imageSplit = root.querySelector('[data-school-image-split]');
+  imageSplit.addEventListener('input', () => {
+    const value = Number(imageSplit.value);
+    imageSplit.closest('.school-image-comparison').style.setProperty('--school-split', `${value}%`);
+    imageSplit.setAttribute('aria-valuetext', `实拍 ${value}%，重建 ${100 - value}%`);
+  });
 
   const activeMode = () => tabs.find(tab => tab.getAttribute('aria-selected') === 'true')?.dataset.schoolMode;
 
@@ -81,7 +87,7 @@ if (root) {
     stage.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'center' });
   });
 
-  // The eight-second introduction starts only when it can actually be seen.
+  // The reconstruction film starts only when it can actually be seen.
   const stageObserver = new IntersectionObserver(entries => {
     stageVisible = entries.some(entry => entry.isIntersecting);
     if (viewer) {
@@ -92,7 +98,6 @@ if (root) {
       if (activeMode() === 'evolution' && !reduceMotion.matches) playIntro();
     } else {
       introVideo.pause();
-      tourVideo.pause();
     }
   }, { threshold: 0.45 });
   stageObserver.observe(stage);
@@ -100,7 +105,6 @@ if (root) {
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       introVideo.pause();
-      tourVideo.pause();
     } else if (stageVisible && activeMode() === 'evolution') {
       playIntro();
     }
@@ -109,7 +113,6 @@ if (root) {
   reduceMotion.addEventListener('change', event => {
     if (event.matches) {
       introVideo.pause();
-      tourVideo.pause();
     }
   });
 

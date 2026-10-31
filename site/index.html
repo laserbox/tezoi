@@ -11,8 +11,8 @@
   <script src="site-shell.js?v=site-navigation-20261022" type="module"></script>
   <script src="app.js?v=hero-v8-20261031" type="module"></script>
   <link rel="stylesheet" href="ego2sim.css?v=agent-simple-20261029">
-  <link rel="stylesheet" href="school-splat.css?v=webgs-sog-20261031b">
-  <script type="module" src="school-splat.js?v=webgs-sog-20261031b"></script>
+  <link rel="stylesheet" href="school-splat.css?v=image-comparison-20261031">
+  <script type="module" src="school-splat.js?v=image-comparison-20261031"></script>
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">跳到正文</a>
@@ -303,22 +303,25 @@
       <section class="subchapter scene-reconstruction" id="scene-reconstruction" aria-labelledby="scene-reconstruction-title" data-school-showcase>
         <div class="subchapter-heading section-lead">
           <div><p class="school-eyebrow"><span></span> SIM2REAL / 3DGS</p><h3 id="scene-reconstruction-title">Scene Reconstruction</h3></div>
-          <p>从真实空间采集，到高斯重建，再到可探索的数字场景。01 展示空间生长，02 保留 26 秒连续轨迹，用于观察重建场景在运动中的稳定性。</p>
+          <p>对比实拍照片与重建结果，查看空间结构和外观细节；通过点云生长、连续漫游与交互探索，进一步观察同一场景。</p>
         </div>
         <div class="school-stage">
           <div class="school-tabs" role="tablist" aria-label="场景展示方式">
-            <button type="button" role="tab" aria-selected="true" aria-controls="school-evolution" id="school-tab-evolution" data-school-mode="evolution"><span>01</span> 空间生长 <em>00:08</em></button>
-            <button type="button" role="tab" aria-selected="false" aria-controls="school-trajectory" id="school-tab-trajectory" data-school-mode="trajectory" tabindex="-1"><span>02</span> 自动漫游 <em>00:26</em></button>
+            <button type="button" role="tab" aria-selected="true" aria-controls="school-comparison" id="school-tab-comparison" data-school-mode="comparison"><span>01</span> Image comparison</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="school-evolution" id="school-tab-evolution" data-school-mode="evolution" tabindex="-1"><span>02</span> 重建演示 <em>00:34</em></button>
             <button type="button" role="tab" aria-selected="false" aria-controls="school-interactive" id="school-tab-interactive" data-school-mode="interactive" tabindex="-1"><span>03</span> 自由探索 <i>3D</i></button>
           </div>
-          <div class="school-screen" id="school-evolution" role="tabpanel" aria-labelledby="school-tab-evolution" data-school-panel="evolution">
-            <video controls muted playsinline preload="metadata" poster="assets/school-points-to-3dgs.jpg" src="assets/school-points-to-3dgs.mp4" aria-label="蓝色点云沿空间生长为完整三维高斯场景的 8 秒导览" data-school-intro-video></video>
-            <div class="school-screen-label"><span class="school-live-dot"></span> POINT CLOUD → 3DGS / 01</div>
-            <div class="school-endcta" data-school-intro-cta hidden><p>空间已重建。继续进入同一场景自由查看。</p><button type="button" data-school-enter-interactive>进入自由探索 <span aria-hidden="true">↗</span></button></div>
+          <div class="school-screen school-image-comparison" id="school-comparison" role="tabpanel" aria-labelledby="school-tab-comparison" data-school-panel="comparison" style="--school-split:50%">
+            <img src="assets/school-reconstruction-render.png?v=3dgut-mip2d-20261031" alt="实验室同视角的 3DGUT / mip2d 三维高斯重建结果" width="1600" height="900" loading="lazy" decoding="async">
+            <img class="school-photo-overlay" src="assets/school-reconstruction-photo.png" alt="实验室采集实拍照片" width="1600" height="900" loading="lazy" decoding="async">
+            <span class="school-image-label school-image-label-left">实拍 / Real</span><span class="school-image-label school-image-label-right">重建 / 3DGS</span>
+            <div class="school-image-divider" aria-hidden="true"><span>↔</span></div>
+            <input class="school-image-split" data-school-image-split type="range" min="0" max="100" value="50" step="1" aria-label="实拍照片显示比例" aria-valuetext="实拍 50%，重建 50%" aria-describedby="school-image-help">
           </div>
-          <div class="school-screen" id="school-trajectory" role="tabpanel" aria-labelledby="school-tab-trajectory" data-school-panel="trajectory" hidden>
-            <video controls muted playsinline preload="none" poster="assets/school-auto-tour.jpg" src="assets/school-auto-tour.mp4" aria-label="沿原始相机轨迹连续漫游高斯重建场景的 26 秒回放" data-school-tour-video></video>
-            <div class="school-screen-label"><span class="school-live-dot"></span> AUTO TOUR / 02</div>
+          <div class="school-screen" id="school-evolution" role="tabpanel" aria-labelledby="school-tab-evolution" data-school-panel="evolution" hidden>
+            <video controls muted playsinline preload="metadata" poster="assets/school-points-to-3dgs.jpg" src="assets/school-reconstruction-tour.mp4?v=20261031" aria-label="点云生长为三维高斯场景并连续漫游的重建演示" data-school-intro-video></video>
+            <div class="school-screen-label"><span class="school-live-dot"></span> POINT CLOUD → 3DGS → TOUR / 02</div>
+            <div class="school-endcta" data-school-intro-cta hidden><p>空间已重建。继续进入同一场景自由查看。</p><button type="button" data-school-enter-interactive>进入自由探索 <span aria-hidden="true">↗</span></button></div>
           </div>
           <div class="school-screen school-interactive" id="school-interactive" role="tabpanel" aria-labelledby="school-tab-interactive" data-school-panel="interactive" hidden>
             <div class="school-canvas" data-school-canvas></div>
@@ -329,9 +332,10 @@
             <div class="school-viewer-overlay" data-school-overlay><p data-school-status role="status">完整场景 · 300 万 Gaussian · SOG 下载约 49.8 MB，建议桌面浏览器</p><button type="button" data-school-load>进入三维场景 ↗</button></div>
             <div class="school-screen-label"><span class="school-live-dot"></span> INTERACTIVE / 03</div>
           </div>
-          <div class="school-footer"><p data-school-caption aria-live="polite">蓝色点云沿空间逐步生长为完整 3DGS 场景，收束到适合继续探索的视角。</p><span>REAL SPACE → DIGITAL SCENE → ROBOTICS</span></div>
+          <div class="school-footer"><p data-school-caption aria-live="polite">左右拖动分界线，对比实拍照片与重建结果的空间结构和外观细节。</p><span>REAL SPACE → DIGITAL SCENE → ROBOTICS</span></div>
         </div>
-        <p class="school-note">01 / 02 展示空间如何从真实采集生长为可探索的 3DGS；渲染保真对比见上方 <a href="#visual-rendering">Visual Rendering</a>。策略训练、物理交互与真机迁移仍需另行验证。</p>
+        <p class="school-note" id="school-image-help">拖动分界线比较实拍与重建，也可聚焦后使用方向键调整。<a href="assets/school-reconstruction-photo.png" target="_blank" rel="noopener">查看实拍原图</a> · <a href="assets/school-reconstruction-render.png?v=3dgut-mip2d-20261031" target="_blank" rel="noopener">查看重建原图</a></p>
+        <p class="school-note">重建演示展示点云生长与场景漫游，自由探索支持交互查看同一空间；渲染保真对比见上方 <a href="#visual-rendering">Visual Rendering</a>。策略训练、物理交互与真机迁移仍需另行验证。</p>
       </section>
     </section>
 
