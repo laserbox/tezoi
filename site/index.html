@@ -9,7 +9,7 @@
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=compact-footer-20261102">
   <script src="site-shell.js?v=website-audit-20261101" type="module"></script>
-  <script src="app.js?v=laboratory-unified-20261101" type="module"></script>
+  <script src="app.js?v=agent-cleanup-20261102" type="module"></script>
   <link rel="stylesheet" href="ego2sim.css?v=rokae6263-v1">
   <link rel="stylesheet" href="school-splat.css?v=image-comparison-20261031">
   <script type="module" src="school-splat.js?v=website-audit-20261101"></script>
@@ -69,7 +69,6 @@
               </figure>
             </section>
             <section class="workflow-panel" id="workflow-panel-agent" data-workflow-panel="agent" role="tabpanel" aria-labelledby="workflow-tab-agent" hidden>
-              <div class="workflow-pane-heading"><h4>Agent · 从示范构建仿真</h4></div>
               <div class="ego-lab ego-compact" data-agent-conversion data-ego-compact aria-label="滴管任务 Ego2Sim 转换演示">
   <div class="ego-tabs" role="tablist" aria-label="Ego2Sim 转换阶段">
     <button type="button" role="tab" id="ego-tab-0" aria-selected="true" aria-controls="ego-stage" data-ego-step="0" tabindex="0"><span>01</span>任务理解</button>
@@ -78,10 +77,6 @@
     <button type="button" role="tab" id="ego-tab-3" aria-selected="false" aria-controls="ego-stage" data-ego-step="3" tabindex="-1"><span>04</span>动作重定向</button>
   </div>
   <div id="ego-stage" data-ego-stage role="tabpanel" aria-labelledby="ego-tab-0">
-    <div class="ego-result-heading">
-      <div><h5 data-ego-result-title>任务字幕与观测</h5></div>
-      <span class="ego-clock" data-ego-clock>示教回放</span>
-    </div>
     <section class="ego-reconstruction" data-ego-reconstruction aria-label="场景重建过程视频" hidden>
       <div class="ego-reconstruction-grid">
         <figure class="ego-preview-card"><video data-ego-preview="segmentation" controls playsinline muted preload="none" aria-label="任务对象分割视频"></video><figcaption><h6>任务对象分割</h6></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试分割视频</button></figure>
@@ -91,21 +86,16 @@
       </div>
     </section>
     <div data-ego-main-player>
-    <div class="ego-result-actions">
-      <button type="button" data-ego-compare aria-pressed="false">对照示范视频</button>
-    </div>
     <div class="ego-viewer">
-      <figure data-ego-source-figure hidden><div class="ego-view-label"><span>示范展示版</span></div><video data-ego-source playsinline muted preload="none" aria-label="背景修补后的滴管示范视频"></video></figure>
-      <figure><div class="ego-view-label"><span data-ego-right-label>任务字幕与观测</span></div><video data-ego-output playsinline muted preload="metadata" poster="assets/ego2sim/rokae6263/task.jpg?v=rokae6263-v1" aria-label="任务字幕与观测演示"></video></figure>
+      <figure><video data-ego-output playsinline muted preload="metadata" poster="assets/ego2sim/rokae6263/task.jpg?v=rokae6263-v1" aria-label="任务理解演示"></video></figure>
 
     </div>
     <div class="ego-controls"><button type="button" data-ego-play aria-label="播放演示">播放</button><input data-ego-scrub type="range" min="0" max="43.83" step="0.01" value="0" aria-label="示教回放时间"><output data-ego-time>00.0 / 43.8 s</output><button type="button" data-ego-fullscreen aria-label="全屏查看处理结果">放大 ↗</button></div>
     <div class="ego-media-status"><p data-ego-method role="status" hidden></p><button type="button" data-ego-retry hidden>重试加载</button></div>
     </div>
 
-    <details class="ego-evidence" data-ego-evidence-panel hidden><summary>处理过程与对照 <span data-ego-evidence-count></span></summary><div class="ego-evidence-grid" data-ego-layers></div></details>
+    <details class="ego-evidence" data-ego-evidence-panel hidden><summary>演示 <span data-ego-evidence-count></span></summary><div class="ego-evidence-grid" data-ego-layers></div></details>
   </div>
-  <div class="ego-compact-footer"><span>IMG_6263 · 资产重建与动作映射</span><span>三维估计与运动学求解 · 原生物理未验证</span></div>
 </div>
             </section>
             <section class="workflow-panel" id="workflow-panel-simulation" data-workflow-panel="simulation" role="tabpanel" aria-labelledby="workflow-tab-simulation">
