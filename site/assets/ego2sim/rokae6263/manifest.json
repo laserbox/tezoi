@@ -1,0 +1,53 @@
+{
+  "source": "IMG_6263 2.MOV",
+  "duration_s": 44.0,
+  "physics_run": false,
+  "phases": [
+    {
+      "start": 0,
+      "end": 3,
+      "caption": "Pinch the blue pipette bulb"
+    },
+    {
+      "start": 3,
+      "end": 9,
+      "caption": "Lift and transfer the pipette"
+    },
+    {
+      "start": 9,
+      "end": 22,
+      "caption": "Operate above the yellow beaker"
+    },
+    {
+      "start": 22,
+      "end": 28,
+      "caption": "Return the pipette to the flask"
+    },
+    {
+      "start": 28,
+      "end": 39,
+      "caption": "Lift and move the beaker"
+    },
+    {
+      "start": 39,
+      "end": 44,
+      "caption": "Release and transition"
+    }
+  ],
+  "modules": [
+    "task",
+    "segmentation",
+    "depth",
+    "mapping",
+    "assets",
+    "hands",
+    "contact",
+    "robot"
+  ],
+  "stages": [
+    "task understanding",
+    "scene and assets",
+    "3D hand/contact candidates",
+    "Rokae/Wuji kinematic mapping"
+  ]
+}

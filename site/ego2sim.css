@@ -8,7 +8,7 @@
 #workflow-panel-agent { scroll-margin-top:125px; }
 .ego-compact { max-width:none; }
 .ego-compact [hidden] { display:none!important; }
-.ego-compact .ego-tabs { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:16px; margin:0 0 24px; overflow:visible; }
+.ego-compact .ego-tabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; margin:0 0 24px; overflow:visible; }
 .ego-compact .ego-tabs button { padding:14px 0; margin:0; font-size:14px; text-align:left; line-height:1.5; }
 .ego-compact .ego-tabs button span { display:block; margin-bottom:5px; }
 .ego-result-heading { display:flex; justify-content:space-between; align-items:flex-start; gap:24px; margin-bottom:12px; }

@@ -1,6 +1,6 @@
 import { icon } from './icons.js?v=mobile-polish-20261023';
 import { mountHeroVideo } from './hero-video.js?v=watch-full-20261029';
-import { mountAgentConversion } from './agent-conversion.js?v=concise-20261031';
+import { mountAgentConversion } from './agent-rokae-conversion.js?v=rokae6263-v1';
 import { mountRealSimWorkflow } from './real-sim-workflow.js?v=playground-20261029';
 import { mountSceneComparison } from './scene-comparison.js?v=usedv6-comparison-20261026';
 import { mountContactComparison } from './contact-comparison.js?v=review-fixes-20261023';
