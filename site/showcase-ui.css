@@ -64,6 +64,10 @@ h2, h3, h4, h5, h6 { text-wrap: balance; }
 
 /* Navigation remains a compact capsule; other actions use a consistent radius. */
 .site-header { max-width: 1360px; gap: 16px; padding: 10px 16px 10px 22px; }
+@media (min-width: 851px) {
+  .site-header { grid-template-columns: minmax(120px, 1fr) auto auto; }
+  .site-header .language-switch { grid-column: 3; }
+}
 .site-header.is-scrolled { background: #f7faf9f2; border-color: #d8e4e0; box-shadow: 0 8px 28px #1d3e3510; }
 .site-header nav a { display: flex; align-items: center; min-height: 44px; }
 .site-header nav .language-mobile-demo { display: none; }
