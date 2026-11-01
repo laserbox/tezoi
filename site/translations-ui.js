@@ -319,9 +319,9 @@ export default {
     "zh": "生成报告 ↗",
     "en": "Report ↗"
   },
-  "TEZOI 专注智能高精度具身仿真，探索环境、物理交互与机器人任务验证。": {
-    "zh": "TEZOI 专注智能高精度具身仿真，探索环境、物理交互与机器人任务验证。",
-    "en": "TEZOI focuses on intelligent, high-fidelity embodied simulation, exploring environments, physical interactions, and robot task validation."
+  "了解 TEZOI 及我们的机器人仿真工作。": {
+    "zh": "了解 TEZOI 及我们的机器人仿真工作。",
+    "en": "Learn about TEZOI and our work in robot simulation."
   },
   "Company | TEZOI": {
     "zh": "关于我们 | TEZOI",
@@ -423,13 +423,9 @@ export default {
     "zh": "返回顶部",
     "en": "Back to top"
   },
-  "TEZOI，智能高精度具身仿真。融合场景重建、视觉保真与物理交互，构建面向具身智能研发与验证的仿真环境。": {
-    "zh": "TEZOI，智能高精度具身仿真。融合场景重建、视觉保真与物理交互，构建面向具身智能研发与验证的仿真环境。",
-    "en": "TEZOI: intelligent, high-fidelity embodied simulation. Combining scene reconstruction, visual fidelity, and physical interaction to build simulation environments for embodied AI research, development, and validation."
-  },
-  "TEZOI | Intelligent, high-fidelity embodied simulation": {
-    "zh": "TEZOI | 智能高精度具身仿真",
-    "en": "TEZOI | Intelligent, high-fidelity embodied simulation"
+  "场景重建、物理交互与机器人仿真演示。": {
+    "zh": "场景重建、物理交互与机器人仿真演示。",
+    "en": "Demos of scene reconstruction, physical interaction, and robot simulation."
   },
   "TEZOI 具身仿真演示": {
     "zh": "TEZOI 具身仿真演示",
