@@ -20,6 +20,7 @@ menu.addEventListener('click', () => {
   menu.setAttribute('aria-expanded', String(open));
   menu.setAttribute('aria-label', open ? '关闭导航' : '打开导航');
   navigation.classList.toggle('is-open', open);
+  if (open) navigation.querySelector('a')?.focus({ preventScroll: true });
 });
 navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
 document.addEventListener('keydown', (event) => {

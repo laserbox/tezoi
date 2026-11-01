@@ -353,7 +353,19 @@ function mountDetailedAgent(root){
   output.setAttribute('aria-label',label+'演示');
  }
  function layers(){
-  if(!$('layers'))return;$('layers').replaceChildren();for(const [id,label] of stages[stage].layers){const b=document.createElement('button');b.type='button';b.textContent=label;b.setAttribute('aria-pressed',String(id===layer));b.addEventListener('click',()=>{layer=id;media(output,id);configureTimeline();layers();layerLabel();if(want)play()});$('layers').append(b)}
+  const container=$('layers');
+  if(!container)return;
+  container.replaceChildren();
+  for(const [id,label] of stages[stage].layers){
+   const b=document.createElement('button');b.type='button';b.textContent=label;
+   b.setAttribute('aria-pressed',String(id===layer));
+   b.addEventListener('click',()=>{
+    layer=id;media(output,id);configureTimeline();
+    for(const item of container.querySelectorAll('button'))item.setAttribute('aria-pressed',String(item===b));
+    layerLabel();if(want)play();
+   });
+   container.append(b);
+  }
  }
  function select(i,focus=false){
   const playing=want;source.pause();output.pause();stage=i;const s=stages[i];layer=s.layers[0][0];media(source,s.left);source.setAttribute('aria-label',i===4?'机器人动作候选':'原始滴管视频');media(output,layer);layers();

@@ -1,7 +1,9 @@
+import { importViewerModule } from './viewer-module.js?v=website-audit-20261101';
 // Keep the comparison and its real 3D viewer in one stage.
 export function mountSimulationExplorer(root, {
-  loadViewer = element => import('./simulation-viewer.js?v=usedv6-3d-20261026').then(module => module.mountSceneViewer(element)),
+  loadViewer = element => importViewerModule('./simulation-viewer.js?v=usedv6-3d-20261026').then(module => module.mountSceneViewer(element)),
   onPause = () => {},
+  reloadPage = () => window.location.reload(),
   comparisonLabel = '视频对比',
 } = {}) {
   if (!root) return null;
@@ -16,6 +18,7 @@ export function mountSimulationExplorer(root, {
   let viewer;
   let pending;
   let generation=0;
+  let reloadRequired=false;
 
   function pause() {
     onPause();
@@ -28,11 +31,12 @@ export function mountSimulationExplorer(root, {
     viewer?.setVisible(visible);
   }
   async function ensureViewer() {
-    if (viewer) return;
+    if (viewer || reloadRequired) return;
     if (pending) return pending;
     status.textContent = '正在加载三维场景…';
     status.hidden = false;
     retry.hidden = true;
+    retry.textContent = '重新加载';
     const attempt=++generation;let finished=false;
     const request = (async () => {
       try {
@@ -44,7 +48,9 @@ export function mountSimulationExplorer(root, {
       } catch (error) {
         if(attempt!==generation)return;
         console.error('三维场景加载失败：', error);
-        status.textContent = `三维场景暂时无法加载，可重试或查看${comparisonLabel}。`;
+        reloadRequired = error?.code === 'VIEWER_MODULE_LOAD_FAILED';
+        status.textContent = reloadRequired ? '三维组件加载失败，请刷新页面重试。' : `三维场景暂时无法加载，可重试或查看${comparisonLabel}。`;
+        retry.textContent = reloadRequired ? '刷新页面' : '重新加载';
         retry.hidden = false;
       } finally {
         finished=true;
@@ -79,9 +85,11 @@ export function mountSimulationExplorer(root, {
       if (next) { event.preventDefault(); select(next.dataset.simulationView, true); }
     });
   });
-  retry.addEventListener('click', () => void ensureViewer());
+  retry.addEventListener('click', () => reloadRequired ? reloadPage() : void ensureViewer());
   viewerRoot.addEventListener('scene-viewer-error',()=>{
     generation++;
+    reloadRequired=false;
+    retry.textContent='重新加载';
     viewer?.dispose?.();
     viewer=undefined;
     pending=null;

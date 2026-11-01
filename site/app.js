@@ -1,10 +1,11 @@
+import { importViewerModule } from './viewer-module.js?v=website-audit-20261101';
 import { icon } from './icons.js?v=mobile-polish-20261023';
 import { mountHeroVideo } from './hero-video.js?v=watch-full-20261029';
 import { mountAgentConversion } from './agent-rokae-conversion.js?v=rokae6263-ego-v3';
-import { mountRealSimWorkflow } from './real-sim-workflow.js?v=playground-20261029';
-import { mountSceneComparison } from './scene-comparison.js?v=touch-20261101';
-import { mountContactComparison } from './contact-comparison.js?v=touch-20261101';
-import { mountSimulationExplorer } from './simulation-explorer.js?v=usedv6-baked-20261026';
+import { mountRealSimWorkflow } from './real-sim-workflow.js?v=website-audit-20261101';
+import { mountSceneComparison } from './scene-comparison.js?v=website-audit-20261101';
+import { mountContactComparison } from './contact-comparison.js?v=website-audit-20261101';
+import { mountSimulationExplorer } from './simulation-explorer.js?v=website-audit-20261101';
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
@@ -24,7 +25,7 @@ $$('[data-workflow-target]').forEach(link => link.addEventListener('click', () =
 mountSceneComparison($('[data-scene-comparison]'));
 const usedv6Explorer = mountSimulationExplorer($('[data-usedv6-explorer]'), {
   comparisonLabel: '照片对比',
-  loadViewer: root => import('./studio1-viewer.js?v=studio1-baked-20261029b').then(module => module.mountStudio1Viewer(root)),
+  loadViewer: root => importViewerModule('./studio1-viewer.js?v=studio1-baked-20261029b').then(module => module.mountStudio1Viewer(root)),
 });
 
 const meshMethodPanel = $('[data-usedv6-explorer]')?.closest('[data-reconstruction-panel]');
