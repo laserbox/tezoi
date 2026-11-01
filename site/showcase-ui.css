@@ -200,6 +200,7 @@ h2, h3, h4, h5, h6 { text-wrap: balance; }
   font-weight: var(--ui-weight-medium); line-height: 1.4; letter-spacing: 0;
   backdrop-filter: blur(8px);
 }
+#scene-reconstruction .school-viewer-overlay:not([hidden]) + .school-screen-label { visibility: hidden; }
 #scene-reconstruction :is(.school-image-label-left, .scene-comparison-label-real, .school-screen-label) { left: 20px; }
 #scene-reconstruction :is(.school-image-label-right, .scene-comparison-label-sim) { right: 20px; }
 #scene-reconstruction :is(.school-image-divider, .scene-comparison-divider) { width: 2px; background: #fff; }
