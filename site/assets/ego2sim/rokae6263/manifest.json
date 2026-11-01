@@ -38,16 +38,56 @@
     "task",
     "segmentation",
     "depth",
-    "mapping",
+    "mapping-ego-v3",
     "assets",
     "hands",
-    "contact",
-    "robot"
+    "contact-ego-v3",
+    "robot-ego-v3",
+    "robot-paired-v3"
   ],
   "stages": [
     "task understanding",
     "scene and assets",
     "3D hand/contact candidates",
     "Rokae/Wuji kinematic mapping"
-  ]
+  ],
+  "version": "rokae6263-ego-v3",
+  "robot_excerpts_source_s": [
+    [
+      4,
+      10
+    ],
+    [
+      12,
+      20
+    ]
+  ],
+  "robot_video_duration_s": 14,
+  "robot_view": "designed egocentric observation camera, not hardware calibration",
+  "native_physics": false,
+  "collision_verified": false,
+  "robot_solver": "contact-anchored multi-start hand fit and bounded full-arm/hand keypoint IK",
+  "tool_axis": "CAD length and task-container prior for hidden shaft",
+  "media_checks": {
+    "robot-ego-v3": {
+      "sha256": "e4ecda8f50d55d3ff851d4645435ef72e40d54afc8c01810b3b01c1f234f0282",
+      "decode_ok": true,
+      "bytes": 627463
+    },
+    "robot-paired-v3": {
+      "sha256": "11610170a11f6fb5f159c52a5f213eb94ddafce65bf5a32c1d959974a790ca02",
+      "decode_ok": true,
+      "bytes": 1056227
+    },
+    "contact-ego-v3": {
+      "sha256": "d38ed930f872cbdf729956c428620a0b3abf1919bf6d26dded4c447abdf14ca8",
+      "decode_ok": true,
+      "bytes": 2784061
+    },
+    "mapping-ego-v3": {
+      "sha256": "8f01a05557454cd2310c32715bdc7cf686681cc1dacd66e270eab432680b4efa",
+      "decode_ok": true,
+      "bytes": 2974458
+    }
+  }
 }

@@ -3,10 +3,10 @@ const MEDIA='assets/ego2sim/rokae6263/';
 const compactViews = [
  {main:['task','任务字幕与观测'], evidence:[]},
  {main:null,title:'场景与资产重建',evidence:[]},
- {main:['contact','三维手部与接触候选'],evidence:[['hands','视频手部关键点']]},
- {main:['robot','人手到 Rokae 双臂 · Wuji 手的映射'],evidence:[]}
+ {main:['contact-ego-v3','接触约束下的三维手部'],evidence:[['hands','视频手部关键点']]},
+ {main:['robot-ego-v3','机器人第一视角 · Rokae／Wuji'],evidence:[['robot-paired-v3','人类 Ego 与机器人 Ego 对照']]}
 ];
-const compactClocks={observation:{limit:44,label:'示范处理'},simulation:{limit:16,label:'映射片段'}};
+const compactClocks={observation:{limit:44,label:'示范处理'},simulation:{limit:14,label:'运动学求解片段'}};
 export function mountAgentConversion(root){return root ? mountCompactAgent(root) : null;}
 function mountCompactAgent(root) {
  const $ = name => root.querySelector(`[data-ego-${name}]`);
@@ -121,9 +121,9 @@ function mountCompactAgent(root) {
   video.pause();
   video.dataset.media = name;
   video.loop = name === 'assets';
-  video.poster = `${MEDIA}${name}.jpg?v=rokae6263-v1`;
+  video.poster = `${MEDIA}${name}.jpg?v=rokae6263-ego-v3`;
   video.style.aspectRatio = '16 / 9';
-  video.src = `${MEDIA}${name}.mp4?v=rokae6263-v1`;
+  video.src = `${MEDIA}${name}.mp4?v=rokae6263-ego-v3`;
   video.load();
  }
  function syncComparison() {
@@ -228,8 +228,8 @@ function mountCompactAgent(root) {
   if (stage === 1) for (const video of previews) {
    if (!video.hasAttribute('src')) {
     const name = video.dataset.egoPreview;
-    video.poster = `${MEDIA}${name}.jpg?v=rokae6263-v1`;
-    video.src = `${MEDIA}${name}.mp4?v=rokae6263-v1`;
+    video.poster = `${MEDIA}${name}.jpg?v=rokae6263-ego-v3`;
+    video.src = `${MEDIA}${name}.mp4?v=rokae6263-ego-v3`;
    }
   }
   renderEvidence(view);

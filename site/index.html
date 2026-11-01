@@ -9,7 +9,7 @@
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=concise-20261031">
   <script src="site-shell.js?v=site-navigation-20261022" type="module"></script>
-  <script src="app.js?v=rokae6263-v1" type="module"></script>
+  <script src="app.js?v=rokae6263-ego-v3" type="module"></script>
   <link rel="stylesheet" href="ego2sim.css?v=rokae6263-v1">
   <link rel="stylesheet" href="school-splat.css?v=image-comparison-20261031">
   <script type="module" src="school-splat.js?v=concise-20261031"></script>
@@ -83,7 +83,7 @@
       <div class="ego-reconstruction-grid">
         <figure class="ego-preview-card"><video data-ego-preview="segmentation" controls playsinline muted preload="none" aria-label="任务对象分割视频"></video><figcaption><h6>任务对象分割</h6></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试分割视频</button></figure>
         <figure class="ego-preview-card"><video data-ego-preview="depth" controls playsinline muted preload="none" aria-label="相对深度估计视频"></video><figcaption><h6>相对深度</h6></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试深度视频</button></figure>
-        <figure class="ego-preview-card"><video data-ego-preview="mapping" controls playsinline muted preload="none" aria-label="点云与统一坐标视频"></video><figcaption><h6>点云与统一坐标</h6></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试点云视频</button></figure>
+        <figure class="ego-preview-card"><video data-ego-preview="mapping-ego-v3" controls playsinline muted preload="none" aria-label="点云与统一坐标视频"></video><figcaption><h6>点云与统一坐标</h6></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试点云视频</button></figure>
         <figure class="ego-preview-card"><video data-ego-preview="assets" controls playsinline muted loop preload="none" aria-label="三维场景与资产预览视频"></video><figcaption><h6>三维场景与资产</h6></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试三维资产视频</button></figure>
       </div>
     </section>
@@ -102,7 +102,7 @@
 
     <details class="ego-evidence" data-ego-evidence-panel hidden><summary>处理过程与对照 <span data-ego-evidence-count></span></summary><div class="ego-evidence-grid" data-ego-layers></div></details>
   </div>
-  <div class="ego-compact-footer"><span>IMG_6263 · 资产重建与动作映射</span><span>三维估计与运动学候选 · 未进行物理求解</span></div>
+  <div class="ego-compact-footer"><span>IMG_6263 · 资产重建与动作映射</span><span>三维估计与运动学求解 · 原生物理未验证</span></div>
 </div>
             </section>
             <section class="workflow-panel" id="workflow-panel-simulation" data-workflow-panel="simulation" role="tabpanel" aria-labelledby="workflow-tab-simulation">
