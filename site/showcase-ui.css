@@ -182,6 +182,41 @@ h2, h3, h4, h5, h6 { text-wrap: balance; }
 .scene-comparison { overflow: hidden; border-radius: 0 0 var(--ui-radius) var(--ui-radius); }
 .scene-comparison-caption { border: 1px solid #dce5e0; border-top: 0; padding: 0 18px 8px; border-radius: 0 0 var(--ui-radius) var(--ui-radius); background: #fff; }
 
+/* Both reconstruction methods read as one frame: tabs above, media below. */
+#scene-reconstruction .usedv6-explorer > .school-tabs {
+  border-radius: var(--ui-radius) var(--ui-radius) 0 0;
+}
+#scene-reconstruction .usedv6-explorer .scene-comparison-stage,
+#scene-reconstruction .usedv6-explorer .scene-viewport {
+  border-radius: 0 0 var(--ui-radius) var(--ui-radius);
+}
+#scene-reconstruction .scene-comparison { overflow: visible; border-radius: 0; }
+#scene-reconstruction .scene-comparison-caption {
+  margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent;
+}
+#scene-reconstruction :is(.school-image-label, .scene-comparison-label, .school-screen-label) {
+  top: 20px; padding: 8px 12px; border: 1px solid #ffffff2e; border-radius: 8px;
+  background: #203033d9; color: #fff; font-size: 12px;
+  font-weight: var(--ui-weight-medium); line-height: 1.4; letter-spacing: 0;
+  backdrop-filter: blur(8px);
+}
+#scene-reconstruction :is(.school-image-label-left, .scene-comparison-label-real, .school-screen-label) { left: 20px; }
+#scene-reconstruction :is(.school-image-label-right, .scene-comparison-label-sim) { right: 20px; }
+#scene-reconstruction :is(.school-image-divider, .scene-comparison-divider) { width: 2px; background: #fff; }
+#scene-reconstruction :is(.school-image-divider > span, .scene-comparison-handle) {
+  width: 48px; height: 48px; border: 1px solid #ffffff80; border-radius: 50%;
+  background: #fff; color: var(--ui-ink); box-shadow: 0 3px 18px #19273126;
+  backdrop-filter: none;
+}
+@media (max-width: 640px) {
+  #scene-reconstruction :is(.school-image-label, .scene-comparison-label, .school-screen-label) {
+    top: 12px; padding: 6px 9px; font-size: 11px;
+  }
+  #scene-reconstruction :is(.school-image-label-left, .scene-comparison-label-real, .school-screen-label) { left: 12px; }
+  #scene-reconstruction :is(.school-image-label-right, .scene-comparison-label-sim) { right: 12px; }
+  #scene-reconstruction :is(.school-image-divider > span, .scene-comparison-handle) { width: 44px; height: 44px; }
+}
+
 /* Utility actions: retain their labels, states, event handlers and media geometry. */
 .scene-zoom, .scene-reset, .scene-contact-toggle, .scene-contact-legend button,
 .school-navigation button, .school-navigation select,
