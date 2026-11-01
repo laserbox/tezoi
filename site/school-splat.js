@@ -1,3 +1,4 @@
+import { mountReconstructionMethods } from './reconstruction-methods.js?v=methods-20261101';
 const root = document.querySelector('[data-school-showcase]');
 
 if (root) {
@@ -10,6 +11,19 @@ if (root) {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let viewer;
   let stageVisible = false;
+  const methodPanel = root.closest('[data-reconstruction-panel]');
+  let methodActive = !methodPanel?.hidden;
+  const canRender = () => methodActive && stageVisible && !document.hidden;
+  function syncMethod() {
+    if (canRender() && activeMode() === 'interactive') viewer?.start();
+    else viewer?.stop();
+    if (!canRender()) introVideo.pause();
+    else if (activeMode() === 'evolution' && !reduceMotion.matches) playIntro();
+  }
+  methodPanel?.addEventListener('reconstruction-visibility', event => {
+    methodActive = event.detail.active;
+    syncMethod();
+  });
 
   const imageSplit = root.querySelector('[data-school-image-split]');
   imageSplit.addEventListener('input', () => {
@@ -37,10 +51,10 @@ if (root) {
       panel.querySelectorAll('video').forEach(video => video.pause());
     });
     if (viewer) {
-      if (mode === 'interactive' && stageVisible) viewer.start();
+      if (mode === 'interactive' && canRender()) viewer.start();
       else viewer.stop();
     }
-    if (mode === 'evolution' && stageVisible && !reduceMotion.matches) {
+    if (mode === 'evolution' && canRender() && !reduceMotion.matches) {
       playIntro();
     }
   }
@@ -84,10 +98,10 @@ if (root) {
   const stageObserver = new IntersectionObserver(entries => {
     stageVisible = entries.some(entry => entry.isIntersecting);
     if (viewer) {
-      if (stageVisible && activeMode() === 'interactive') viewer.start();
+      if (canRender() && activeMode() === 'interactive') viewer.start();
       else viewer.stop();
     }
-    if (stageVisible) {
+    if (canRender()) {
       if (activeMode() === 'evolution' && !reduceMotion.matches) playIntro();
     } else {
       introVideo.pause();
@@ -95,13 +109,7 @@ if (root) {
   }, { threshold: 0.45 });
   stageObserver.observe(stage);
 
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      introVideo.pause();
-    } else if (stageVisible && activeMode() === 'evolution') {
-      playIntro();
-    }
-  });
+  document.addEventListener('visibilitychange', syncMethod);
 
   reduceMotion.addEventListener('change', event => {
     if (event.matches) {
@@ -117,7 +125,7 @@ if (root) {
     else { viewer?.dispose(); viewer = null; }
   });
   window.addEventListener('pageshow', event => {
-    if (event.persisted && stageVisible && activeMode() === 'interactive') viewer?.start();
+    if (event.persisted && canRender() && activeMode() === 'interactive') viewer?.start();
   });
   button.addEventListener('click', () => loadModel());
   async function loadModel() {
@@ -136,7 +144,7 @@ if (root) {
         },
       });
       overlay.hidden = true;
-      if (activeMode() === 'interactive' && stageVisible) viewer.start();
+      if (activeMode() === 'interactive' && canRender()) viewer.start();
     } catch (error) {
       console.error('3DGS 加载失败', error);
       if (viewer) {
@@ -149,3 +157,5 @@ if (root) {
     }
   }
 }
+
+mountReconstructionMethods(document.querySelector('[data-reconstruction-methods]'));
