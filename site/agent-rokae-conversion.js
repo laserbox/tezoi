@@ -1,16 +1,16 @@
 // IMG_6263 preprocessing and kinematic mapping. No simulation is invoked.
 const MEDIA='assets/ego2sim/rokae6263/';
 const compactViews = [
- {main:['task','任务字幕与观测'], evidence:[]},
+ {main:['task','任务理解'], evidence:[]},
  {main:null,title:'场景与资产重建',evidence:[]},
  {main:['contact-ego-v3','接触约束下的三维手部'],evidence:[['hands','视频手部关键点']]},
- {main:['robot-ego-v3','机器人第一视角 · Rokae／Wuji'],evidence:[['robot-paired-v3','人类 Ego 与机器人 Ego 对照']]}
+ {main:['robot-ego-v3','机器人第一视角 · Rokae／Wuji'],evidence:[]}
 ];
 const compactClocks={observation:{limit:44,label:'示范处理'},simulation:{limit:14,label:'运动学求解片段'}};
 export function mountAgentConversion(root){return root ? mountCompactAgent(root) : null;}
 function mountCompactAgent(root) {
  const $ = name => root.querySelector(`[data-ego-${name}]`);
- const source = $('source'), output = $('output'), scrub = $('scrub');
+ const output = $('output'), scrub = $('scrub');
  const tabs = [...root.querySelectorAll('[data-ego-step]')];
  const viewer = root.querySelector('.ego-viewer');
  const positions = {observation:0,simulation:0};
@@ -26,9 +26,8 @@ function mountCompactAgent(root) {
  }, {threshold:.05});
  const failures = new Set();
  let stage = 0, layer = 'task', clock = 'observation', time = 0;
- let active = false, inView = true, want = false, comparison = false, frame = null, revision = 0;
+ let active = false, inView = true, want = false, frame = null, revision = 0;
  const clockFor = () => stage < 3 ? 'observation' : 'simulation';
- const canCompare = () => Boolean(compactViews[stage].main) && stage < 3;
  const setText = (name, value) => { if ($(name)) $(name).textContent = value; };
 
  function seekVideo(video, value, force = false) {
@@ -47,7 +46,6 @@ function mountCompactAgent(root) {
   scrub.setAttribute('aria-label', `${settings.label}时间`);
   scrub.setAttribute('aria-valuetext', `${time.toFixed(1)} 秒，共 ${settings.limit.toFixed(1)} 秒`);
   setText('time', `${time.toFixed(1).padStart(4,'0')} / ${settings.limit.toFixed(1)} s`);
-  setText('clock', settings.label);
   $('play').textContent = want ? '暂停' : '播放';
   $('play').setAttribute('aria-label', want ? '暂停演示' : '播放演示');
  }
@@ -55,7 +53,6 @@ function mountCompactAgent(root) {
   remember();
   want = false;
   revision++;
-  source.pause();
   output.pause();
   allPreviews().forEach(video => { if (video !== exceptPreview) video.pause(); });
   if (frame !== null) cancelAnimationFrame(frame);
@@ -83,7 +80,6 @@ function mountCompactAgent(root) {
   if (!output.paused && !output.seeking) {
    time = Math.min(compactClocks[clock].limit, output.currentTime);
    positions[clock] = time;
-   if (comparison) seekVideo(source, time);
    update();
    if (time >= compactClocks[clock].limit) { pause(); return; }
   }
@@ -97,7 +93,6 @@ function mountCompactAgent(root) {
   const token = ++revision;
   seekVideo(output, time, true);
   startVideo(output, token);
-  if (comparison) { seekVideo(source, time, true); startVideo(source, token); }
   if (frame === null) frame = requestAnimationFrame(tick);
   update();
  }
@@ -106,7 +101,6 @@ function mountCompactAgent(root) {
   time = Math.min(compactClocks[clock].limit, Math.max(0, value));
   positions[clock] = time;
   seekVideo(output, time, true);
-  if (comparison) seekVideo(source, time, true);
   update();
  }
  function clearMedia(video) {
@@ -126,16 +120,6 @@ function mountCompactAgent(root) {
   video.src = `${MEDIA}${name}.mp4?v=rokae6263-ego-v3`;
   video.load();
  }
- function syncComparison() {
-  comparison = comparison && canCompare();
-  $('source-figure').hidden = !comparison;
-  viewer.classList.toggle('is-comparing', comparison);
-  $('compare').hidden = !canCompare();
-  $('compare').setAttribute('aria-pressed', String(comparison));
-  $('compare').textContent = comparison ? '收起示范对照' : '对照示范视频';
-  if (comparison) load(source, 'source');
-  else if (source.hasAttribute('src')) clearMedia(source);
- }
  function choose(id) {
   const view = compactViews[stage];
   if (!view.main) return;
@@ -143,15 +127,10 @@ function mountCompactAgent(root) {
   layer = id;
   clock = clockFor();
   time = positions[clock];
-  failures.delete(source);
   if (output.dataset.media !== id) failures.delete(output);
   showFailures();
-  comparison = false;
-  syncComparison();
   load(output, id);
   const label = [view.main, ...view.evidence].find(([name]) => name === id)[1];
-  setText('result-title', label);
-  setText('right-label', label);
   output.setAttribute('aria-label', `${label}演示`);
   update();
  }
@@ -224,7 +203,6 @@ function mountCompactAgent(root) {
   $('evidence-panel').hidden = view.evidence.length === 0;
   $('reconstruction').hidden = stage !== 1;
   $('main-player').hidden = !view.main;
-  $('clock').hidden = !view.main;
   if (stage === 1) for (const video of previews) {
    if (!video.hasAttribute('src')) {
     const name = video.dataset.egoPreview;
@@ -238,12 +216,9 @@ function mountCompactAgent(root) {
    layer = null;
    clock = 'observation';
    time = positions[clock];
-   comparison = false;
-   syncComparison();
    clearMedia(output);
    failures.clear();
    showFailures();
-   setText('result-title', view.title);
    update();
   }
   if (focus) {
@@ -264,10 +239,6 @@ function mountCompactAgent(root) {
   if ($('evidence-panel').open) loadEvidence();
   else evidenceVideos.forEach(video => video.pause());
  });
- $('compare').addEventListener('click', () => {
-  if (!canCompare()) return;
-  pause(); comparison = !comparison; failures.delete(source); showFailures(); syncComparison(); seekVideo(source,time,true);
- });
  $('fullscreen').addEventListener('click', () => {
   if (!compactViews[stage].main) return;
   if (viewer.requestFullscreen) viewer.requestFullscreen()?.catch(() => {});
@@ -276,18 +247,16 @@ function mountCompactAgent(root) {
  $('retry').addEventListener('click', () => {
   for (const video of failures) load(video, video.dataset.media, true);
  });
- for (const video of [source, output]) {
+ for (const video of [output]) {
   video.addEventListener('loadedmetadata', () => {
-   if (video === source && !comparison) return;
    video.style.aspectRatio = `${video.videoWidth} / ${video.videoHeight}`;
    seekVideo(video, time, true);
   });
   video.addEventListener('loadeddata', () => {
-   if (video === source && !comparison) return;
    failures.delete(video); showFailures();
   });
   video.addEventListener('error', () => {
-   if ((video === source && !comparison) || !video.hasAttribute('src')) return;
+   if (!video.hasAttribute('src')) return;
    pause(); failures.add(video); showFailures();
   });
  }
