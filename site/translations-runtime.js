@@ -4,8 +4,8 @@ export default {
     "en": "VIDEO → OBJECT EVENTS → TASK GRAPH"
   },
   "让任务分解连接实际观测。": {
-    "zh": "让任务分解连接实际观测。",
-    "en": "Connect task decomposition to actual observations."
+    "zh": "连接任务与观测",
+    "en": "Link tasks to observations"
   },
   "同一视频时间轴上展示操作意图、胶头与管尖观测状态，再用人手—物体接触候选确定机器人换物时机。字幕描述任务意图；液量和任务成功仍未测量。": {
     "zh": "同一视频时间轴上展示操作意图、胶头与管尖观测状态，再用人手—物体接触候选确定机器人换物时机。字幕描述任务意图；液量和任务成功仍未测量。",
@@ -13,7 +13,7 @@ export default {
   },
   "任务字幕与观测": {
     "zh": "任务字幕与观测",
-    "en": "Task captions and observations"
+    "en": "Task observations"
   },
   "INPUT / 第一视角": {
     "zh": "输入 / 第一视角",
@@ -52,8 +52,8 @@ export default {
     "en": "DEPTH → WORLD → DYNAMIC MESH POSE"
   },
   "把静态重建补成动态资产轨迹。": {
-    "zh": "把静态重建补成动态资产轨迹。",
-    "en": "Extend static reconstruction into dynamic asset trajectories."
+    "zh": "重建动态资产轨迹",
+    "en": "Track scene assets"
   },
   "SAM3 分割与 DA3 深度经过桌面注册，进入统一观测世界。固定原滴管 CAD 尺寸，逐帧拟合胶头、可见管尖和烧杯位姿；遮挡管尖使用管长与容器几何先验，轴向转角仍不可观测。视频到机器人的刚体矩阵与额外布局适配分别保存。": {
     "zh": "SAM3 分割与 DA3 深度经过桌面注册，进入统一观测世界。固定原滴管 CAD 尺寸，逐帧拟合胶头、可见管尖和烧杯位姿；遮挡管尖使用管长与容器几何先验，轴向转角仍不可观测。视频到机器人的刚体矩阵与额外布局适配分别保存。",
@@ -61,11 +61,11 @@ export default {
   },
   "场景重建与坐标配准": {
     "zh": "场景重建与坐标配准",
-    "en": "Scene reconstruction and coordinate registration"
+    "en": "Scene alignment"
   },
   "精细分割与对比": {
     "zh": "精细分割与对比",
-    "en": "Detailed segmentation and comparison"
+    "en": "Fine segmentation"
   },
   "相对深度": {
     "zh": "相对深度",
@@ -73,11 +73,11 @@ export default {
   },
   "去手与遮挡": {
     "zh": "去手与遮挡",
-    "en": "Hand removal and occlusion"
+    "en": "Hand removal & occlusion"
   },
   "原任务资产": {
     "zh": "原任务资产",
-    "en": "Original task assets"
+    "en": "Task assets"
   },
   "INPUT / 原始观测": {
     "zh": "输入 / 原始观测",
@@ -112,8 +112,8 @@ export default {
     "en": "Estimated registration and layout adaptation; not measured extrinsic calibration"
   },
   "逐段修复捏合姿态，保留观测边界。": {
-    "zh": "逐段修复捏合姿态，保留观测边界。",
-    "en": "Refine pinch poses segment by segment while preserving observational limits."
+    "zh": "优化接触姿态",
+    "en": "Refine contact poses"
   },
   "固定动态滴管、相机和原始候选，加入五个深度起点与物体局部时序锚点，保持骨段长度。原 12 mm／12 px 门槛下，三维几何检查从 185/192 提高到 189/192，严格逐指检查从 160/192 提高到 187/192。剩余 5 组保留并回查身份、深度或投影；这是新的几何结果，尚未用于重新求解机器人。": {
     "zh": "固定动态滴管、相机和原始候选，加入五个深度起点与物体局部时序锚点，保持骨段长度。原 12 mm／12 px 门槛下，三维几何检查从 185/192 提高到 189/192，严格逐指检查从 160/192 提高到 187/192。剩余 5 组保留并回查身份、深度或投影；这是新的几何结果，尚未用于重新求解机器人。",
@@ -121,23 +121,23 @@ export default {
   },
   "多起点接触优化": {
     "zh": "多起点接触优化",
-    "en": "Multi-start contact optimization"
+    "en": "Contact refinement"
   },
   "原三维接触与距离": {
     "zh": "原三维接触与距离",
-    "en": "Original 3D contacts and distances"
+    "en": "Contact distances"
   },
   "逐段修复前后": {
     "zh": "逐段修复前后",
-    "en": "Before and after segment-by-segment refinement"
+    "en": "Before / after"
   },
   "三维手到任务世界": {
     "zh": "三维手到任务世界",
-    "en": "3D hand in the task world frame"
+    "en": "3D hand alignment"
   },
   "原始视频骨架": {
     "zh": "原始视频骨架",
-    "en": "Original video skeleton"
+    "en": "Source skeleton"
   },
   "INPUT / 人类示范": {
     "zh": "输入 / 人类示范",
@@ -176,8 +176,8 @@ export default {
     "en": "CONTACT → ASPIRATE → DISPENSE → RETURN"
   },
   "同一构型完成抓取、滴加和放回。": {
-    "zh": "同一构型完成抓取、滴加和放回。",
-    "en": "Grasp, dispense, and return with the same arm configuration."
+    "zh": "抓取、滴加与放回",
+    "en": "Grasp, dispense & return"
   },
   "保留 RealMan RM65-B、Xense、原相机及视觉资产。机械臂从重新规划的安全预抓取位出发，消除开场大幅翻肘；沿倾斜管轴取放，以实际模拟位姿反馈修正对准。胶头压缩驱动简化气压与管内流动求解，液滴在重力下进入烧杯。35 秒为重新规划的执行时钟，原视频及上游分项保留观测时钟。": {
     "zh": "保留 RealMan RM65-B、Xense、原相机及视觉资产。机械臂从重新规划的安全预抓取位出发，消除开场大幅翻肘；沿倾斜管轴取放，以实际模拟位姿反馈修正对准。胶头压缩驱动简化气压与管内流动求解，液滴在重力下进入烧杯。35 秒为重新规划的执行时钟，原视频及上游分项保留观测时钟。",
@@ -185,27 +185,27 @@ export default {
   },
   "机器人完整动作": {
     "zh": "机器人完整动作",
-    "en": "Complete robot motion"
+    "en": "Robot motion"
   },
   "滴管与夹爪近景": {
     "zh": "滴管与夹爪近景",
-    "en": "Dropper and gripper close-up"
+    "en": "Dropper & gripper"
   },
   "吸液与滴加": {
     "zh": "吸液与滴加",
-    "en": "Aspiration and dispensing"
+    "en": "Aspirate & dispense"
   },
   "原固定相机": {
     "zh": "原固定相机",
-    "en": "Original fixed camera"
+    "en": "Fixed camera"
   },
   "坐标与布局适配": {
     "zh": "坐标与布局适配",
-    "en": "Coordinate and layout adaptation"
+    "en": "Layout adaptation"
   },
   "三维人手对照": {
     "zh": "三维人手对照",
-    "en": "3D human-hand comparison"
+    "en": "Hand comparison"
   },
   "同一求解 / 总览": {
     "zh": "同一求解 / 总览",
@@ -248,8 +248,8 @@ export default {
     "en": "OBSERVE → DIAGNOSE → REPAIR → VERIFY"
   },
   "让接触和转移量成为修改依据。": {
-    "zh": "让接触和转移量成为修改依据。",
-    "en": "Use contact and transferred volume to guide revisions."
+    "zh": "验证与优化",
+    "en": "Validate & refine"
   },
   "每个 0.2 ms 原生步检查接触、关节限制、自由释放和液体体积。区分胶头接触处的切向滑移与长管尖因柔性转动产生的偏移；管尖相对位移与接触滑移同时满足原门槛，保留每轮失败记录。瓶底和瓶颈真实支撑释放后的滴管。液体使用简化气压、黏性管流、弹道液滴和静液面，不包含完整 CFD、飞溅或化学反应。": {
     "zh": "每个 0.2 ms 原生步检查接触、关节限制、自由释放和液体体积。区分胶头接触处的切向滑移与长管尖因柔性转动产生的偏移；管尖相对位移与接触滑移同时满足原门槛，保留每轮失败记录。瓶底和瓶颈真实支撑释放后的滴管。液体使用简化气压、黏性管流、弹道液滴和静液面，不包含完整 CFD、飞溅或化学反应。",
@@ -257,27 +257,27 @@ export default {
   },
   "接触力与验收": {
     "zh": "接触力与验收",
-    "en": "Contact forces and acceptance checks"
+    "en": "Contact validation"
   },
   "液体转移与守恒": {
     "zh": "液体转移与守恒",
-    "en": "Liquid transfer and conservation"
+    "en": "Transfer & conservation"
   },
   "实际抓持近景": {
     "zh": "实际抓持近景",
-    "en": "Actual grasp close-up"
+    "en": "Grasp close-up"
   },
   "早期几何修复记录": {
     "zh": "早期几何修复记录",
-    "en": "Early geometry refinement records"
+    "en": "Geometry revisions"
   },
   "手部接触修复前后": {
-    "zh": "手部接触修复前后",
-    "en": "Before and after hand-contact refinement"
+    "zh": "接触修复对比",
+    "en": "Before / after"
   },
   "手部接触几何": {
     "zh": "手部接触几何",
-    "en": "Hand-contact geometry"
+    "en": "Contact geometry"
   },
   "同一求解 / 抓持近景": {
     "zh": "同一求解 / 抓持近景",
@@ -373,7 +373,7 @@ export default {
   },
   "场景重建": {
     "zh": "场景重建",
-    "en": "Scene reconstruction"
+    "en": "Reconstruction"
   },
   "三维手部回放": {
     "zh": "三维手部回放",
@@ -428,12 +428,12 @@ export default {
     "en": "AbortError"
   },
   "收起原视频对照": {
-    "zh": "收起原视频对照",
-    "en": "Hide original video comparison"
+    "zh": "收起对照",
+    "en": "Hide comparison"
   },
   "对照原视频": {
     "zh": "对照原视频",
-    "en": "Compare with original video"
+    "en": "Compare video"
   },
   "{0}演示": {
     "zh": "{0}演示",
@@ -629,11 +629,11 @@ export default {
   },
   "场景与资产重建": {
     "zh": "场景与资产重建",
-    "en": "Scene and asset reconstruction"
+    "en": "Scene & assets"
   },
   "接触约束下的三维手部": {
     "zh": "接触约束下的三维手部",
-    "en": "3D hand under contact constraints"
+    "en": "3D hand contact"
   },
   "视频手部关键点": {
     "zh": "视频手部关键点",
@@ -641,31 +641,31 @@ export default {
   },
   "机器人第一视角 · Rokae／Wuji": {
     "zh": "机器人第一视角 · Rokae／Wuji",
-    "en": "Robot first-person view · Rokae／Wuji"
+    "en": "Robot POV · Rokae／Wuji"
   },
   "人类 Ego 与机器人 Ego 对照": {
     "zh": "人类第一视角与机器人第一视角对照",
-    "en": "Human and robot first-person comparison"
+    "en": "Human / robot views"
   },
   "示范处理": {
     "zh": "示范处理",
-    "en": "Demonstration processing"
+    "en": "Demo processing"
   },
   "运动学求解片段": {
     "zh": "运动学求解片段",
     "en": "Kinematic solution clip"
   },
   "收起示范对照": {
-    "zh": "收起示范对照",
-    "en": "Hide demonstration comparison"
+    "zh": "收起对照",
+    "en": "Hide comparison"
   },
   "对照示范视频": {
-    "zh": "对照示范视频",
-    "en": "Compare with demonstration video"
+    "zh": "对照示范",
+    "en": "Compare video"
   },
   "照片对比": {
     "zh": "照片对比",
-    "en": "Photo comparison"
+    "en": "Compare"
   },
   "TEZOI 仿真演示": {
     "zh": "TEZOI 仿真演示",
@@ -673,11 +673,11 @@ export default {
   },
   "离心管开盖与滴加混匀": {
     "zh": "离心管开盖与滴加混匀",
-    "en": "Centrifuge tube uncapping, dispensing, and mixing"
+    "en": "Tube opening, dosing & mixing"
   },
   "软袋开袋、加液与夹封": {
     "zh": "软袋开袋、加液与夹封",
-    "en": "Pouch opening, liquid filling, and clip sealing"
+    "en": "Pouch opening, filling & sealing"
   },
   "色素稀释": {
     "zh": "色素稀释",
@@ -701,27 +701,27 @@ export default {
   },
   "柔性网线插拔": {
     "zh": "柔性网线插拔",
-    "en": "Flexible Ethernet cable insertion and removal"
+    "en": "Ethernet plug/unplug"
   },
   "双臂橡胶圈装配": {
     "zh": "双臂橡胶圈装配",
-    "en": "Dual-arm rubber ring assembly"
+    "en": "Dual-arm ring assembly"
   },
   "双臂内存条插装": {
     "zh": "双臂内存条插装",
-    "en": "Dual-arm RAM module insertion"
+    "en": "Dual-arm RAM insertion"
   },
   "指尖拧紧 M12 螺母": {
     "zh": "指尖拧紧 M12 螺母",
-    "en": "Fingertip tightening of an M12 nut"
+    "en": "M12 nut tightening"
   },
   "水瓶装盒与托盘放置": {
     "zh": "水瓶装盒与托盘放置",
-    "en": "Water bottle boxing and tray placement"
+    "en": "Bottle packing & placement"
   },
   "G1 人形机器人搬箱": {
     "zh": "G1 人形机器人搬箱",
-    "en": "G1 humanoid robot box transport"
+    "en": "G1 box transport"
   },
   "连锁接触与动量传递": {
     "zh": "连锁接触与动量传递",
@@ -753,7 +753,7 @@ export default {
   },
   "海绵吸水与挤水": {
     "zh": "海绵吸水与挤水",
-    "en": "Sponge water absorption and squeezing"
+    "en": "Sponge absorption & squeezing"
   },
   "微滑反馈抓取": {
     "zh": "微滑反馈抓取",
@@ -977,7 +977,7 @@ export default {
   },
   "视频对比": {
     "zh": "视频对比",
-    "en": "Video comparison"
+    "en": "Compare"
   },
   "正在加载三维场景…": {
     "zh": "正在加载三维场景…",
@@ -1658,5 +1658,9 @@ export default {
   "三维接触与距离": {
     "zh": "三维接触与距离",
     "en": "3D contacts and distances"
+  },
+  "1 段视频": {
+    "zh": "1 段视频",
+    "en": "1 video"
   }
 };
