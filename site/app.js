@@ -4,7 +4,7 @@ import { mountHeroVideo } from './hero-video.js?v=watch-full-20261029';
 import { mountAgentConversion } from './agent-rokae-conversion.js?v=rokae6263-ego-v3';
 import { mountRealSimWorkflow } from './real-sim-workflow.js?v=website-audit-20261101';
 import { mountSceneComparison } from './scene-comparison.js?v=website-audit-20261101';
-import { mountContactComparison } from './contact-comparison.js?v=website-audit-20261101';
+import { mountContactComparison } from './contact-comparison.js?v=deep-audit-20261101';
 import { mountSimulationExplorer } from './simulation-explorer.js?v=website-audit-20261101';
 
 const $ = (selector) => document.querySelector(selector);
@@ -194,4 +194,12 @@ materialTabs.forEach((tab, i) => {
   });
 });
 
-if(location.hash === '#ego2sim') { realSimWorkflow?.selectStage('agent'); agentConversion?.setActive(true); document.querySelector('#workflow-panel-agent')?.scrollIntoView(); }
+// Legacy report links can change only the fragment without reloading the page.
+function syncAgentLink() {
+  if (location.hash !== '#ego2sim') return;
+  realSimWorkflow?.selectStage('agent');
+  agentConversion?.setActive(true);
+  document.querySelector('#workflow-panel-agent')?.scrollIntoView({ block: 'start' });
+}
+window.addEventListener('hashchange', syncAgentLink);
+syncAgentLink();
