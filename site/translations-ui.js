@@ -1466,5 +1466,9 @@ export default {
   "双臂在实验室取样并送入分析天平称量": {
     "zh": "双臂在实验室取样并送入分析天平称量",
     "en": "Two robot arms sample granules and transfer them to an analytical balance for weighing"
+  },
+  "机器人双臂在实验台上展开透明软袋、持杯加液并夹封": {
+    "zh": "机器人双臂在实验台上展开透明软袋、持杯加液并夹封",
+    "en": "Two robot arms open a transparent pouch, pour liquid from a cup, and clamp it shut on a laboratory bench"
   }
 };
