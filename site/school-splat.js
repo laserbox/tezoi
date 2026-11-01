@@ -1,3 +1,4 @@
+import { bindComparisonDrag } from './comparison-drag.js?v=touch-20261101';
 import { mountReconstructionMethods } from './reconstruction-methods.js?v=methods-20261101';
 const root = document.querySelector('[data-school-showcase]');
 
@@ -26,6 +27,7 @@ if (root) {
   });
 
   const imageSplit = root.querySelector('[data-school-image-split]');
+  bindComparisonDrag(imageSplit);
   imageSplit.addEventListener('input', () => {
     const value = Number(imageSplit.value);
     imageSplit.closest('.school-image-comparison').style.setProperty('--school-split', `${value}%`);

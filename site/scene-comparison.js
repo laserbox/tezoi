@@ -1,3 +1,4 @@
+import { bindComparisonDrag } from './comparison-drag.js?v=touch-20261101';
 // Static images retain the same size; only their shared clipping boundary moves.
 export function mountSceneComparison(root) {
   if (!root) return;
@@ -50,6 +51,7 @@ export function mountSceneComparison(root) {
     });
     updateState();
   });
+  bindComparisonDrag(split);
   split.addEventListener('input', updateSplit);
   updateSplit();
   updateState();

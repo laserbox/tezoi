@@ -1,3 +1,4 @@
+import { bindComparisonDrag } from './comparison-drag.js?v=touch-20261101';
 import { icon } from './icons.js?v=mobile-polish-20261023';
 // One camera and timeline, with a draggable reveal of the contact-force view.
 export function mountContactComparison(root) {
@@ -211,6 +212,7 @@ export function mountContactComparison(root) {
     pause();
     seekPair(time).catch(showError);
   });
+  bindComparisonDrag(split);
   split.addEventListener('input', () => {
     const position = Number(split.value);
     stage.style.setProperty('--split', `${position}%`);
