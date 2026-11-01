@@ -330,7 +330,9 @@ function mountCompactAgent(root) {
 function mountDetailedAgent(root){
  if(!root)return null;
  const $=n=>root.querySelector(`[data-ego-${n}]`),source=$('source'),output=$('output'),tabs=[...root.querySelectorAll('[data-ego-step]')];
- let stage=0,layer='task',active=false,want=false,time=0,phases=fallbackPhases,sourcePhases=fallbackPhases,limit=43.8,manifest=null,frame=null;
+ let stage=0,layer='task',active=false,want=false,time=0,phases=fallbackPhases,sourcePhases=fallbackPhases,limit=43.8,manifest=null,frame=null,revision=0;
+ const originalMethod=$('method')?.textContent ?? '';
+ let mediaFailed=false;
  const native=()=>stage>=3&&physicalMedia.has(layer);
  const short=['识别','捏取','转移','滴加','放回','操作烧杯','退出'];
  const setText=(n,t)=>{const el=$(n);if(el)el.textContent=t};
@@ -343,8 +345,20 @@ function mountDetailedAgent(root){
   if(stage===4&&!native()){setText('caption','早期几何修复记录 · 物理结果请切换「接触力与验收」');setText('phase-index','HISTORY');setText('phase-window','原观测时钟');}
   $('play').textContent=want?'暂停':'播放';$('play').setAttribute('aria-label',want?'暂停同步演示':'播放同步演示');
  }
- function play(){if(!active||document.hidden)return;seekVideo(source,time);seekVideo(output,time);source.play().catch(()=>{want=false;update()});output.play().catch(()=>{});}
- function pause(){source.pause();output.pause();want=false;update();}
+ function clearMediaFailure(){if(mediaFailed){mediaFailed=false;setText('method',originalMethod);}}
+ function mediaFailure(){pause();mediaFailed=true;setText('method','媒体尚未加载，请检查本地文件或网络连接。');}
+ function startVideo(video,token){return video.play().catch(()=>{if(token===revision&&want)mediaFailure();});}
+ function play(){
+  if(!active||document.hidden)return;
+  const token=++revision;
+  // A failed HTMLMediaElement does not fetch again until load() clears error.
+  for(const video of [source,output])if(video.error)video.load();
+  seekVideo(source,time);seekVideo(output,time);
+  Promise.all([startVideo(source,token),startVideo(output,token)]).then(()=>{
+   if(token===revision&&want)clearMediaFailure();
+  });
+ }
+ function pause(){revision++;want=false;source.pause();output.pause();update();}
  function jump(t){time=Math.min(limit,Math.max(0,t));seekVideo(source,time);seekVideo(output,time);update();}
  function layerLabel(){
   const label=stages[stage].layers.find(([id])=>id===layer)?.[1];
@@ -360,7 +374,7 @@ function mountDetailedAgent(root){
    const b=document.createElement('button');b.type='button';b.textContent=label;
    b.setAttribute('aria-pressed',String(id===layer));
    b.addEventListener('click',()=>{
-    layer=id;media(output,id);configureTimeline();
+    revision++;layer=id;media(output,id);configureTimeline();
     for(const item of container.querySelectorAll('button'))item.setAttribute('aria-pressed',String(item===b));
     layerLabel();if(want)play();
    });
@@ -368,7 +382,7 @@ function mountDetailedAgent(root){
   }
  }
  function select(i,focus=false){
-  const playing=want;source.pause();output.pause();stage=i;const s=stages[i];layer=s.layers[0][0];media(source,s.left);source.setAttribute('aria-label',i===4?'机器人动作候选':'原始滴管视频');media(output,layer);layers();
+  const playing=want;revision++;source.pause();output.pause();stage=i;const s=stages[i];layer=s.layers[0][0];media(source,s.left);source.setAttribute('aria-label',i===4?'机器人动作候选':'原始滴管视频');media(output,layer);layers();
   for(const key of ['purpose','title','description','leftLabel','rightLabel','evidence','artifact']){const name=key.replace(/[A-Z]/g,c=>'-'+c.toLowerCase());setText(name,s[key])}setText('artifact-note',s.note);
   tabs.forEach((b,j)=>{b.setAttribute('aria-selected',String(i===j));b.tabIndex=i===j?0:-1});$('stage');root.querySelector('#ego-stage').setAttribute('aria-labelledby',tabs[i].id);
   if($('properties'))$('properties').hidden=i!==1;if($('phases'))$('phases').hidden=false;$('scrub').setAttribute('aria-label',i===4?'反馈演示时间':'原视频时间');if($('download'))$('download').href=MEDIA+['task','mapping','contact','robot','physics'][i]+'.mp4';root.querySelectorAll('[data-demo-stage]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.demoStage)===i))); if($('feedback'))$('feedback').hidden=i!==4;
@@ -387,7 +401,11 @@ function mountDetailedAgent(root){
  $('play').addEventListener('click',()=>{if(want)pause();else{if(time>limit-.2)jump(0);want=true;play();update()}});
  $('scrub').addEventListener('input',e=>{const target=Number(e.target.value);pause();jump(target)});
  $('fullscreen').addEventListener('click',()=>{const v=root.querySelector('.ego-viewer');if(v.requestFullscreen)v.requestFullscreen();else output.webkitEnterFullscreen?.()});
- for(const v of [source,output]){v.addEventListener('loadedmetadata',()=>{seekVideo(v,time);if(want&&active)v.play().catch(()=>{})});v.addEventListener('error',()=>{setText('method','媒体尚未加载，请检查本地文件或网络连接。')})}
+ for(const v of [source,output]){
+  v.addEventListener('loadedmetadata',()=>{seekVideo(v,time);if(want&&active)startVideo(v,revision)});
+  v.addEventListener('loadeddata',()=>{if([source,output].every(video=>!video.error&&video.readyState>=2))clearMediaFailure()});
+  v.addEventListener('error',()=>{if(v.hasAttribute('src'))mediaFailure()});
+ }
  source.addEventListener('ended',()=>{time=limit;pause()});
  function tick(){if(want&&active&&!source.paused){time=Math.min(limit,source.currentTime);seekVideo(output,time);update();if(time>=limit)pause()}frame=requestAnimationFrame(tick)}tick();
  document.addEventListener('visibilitychange',()=>{if(document.hidden)pause()});

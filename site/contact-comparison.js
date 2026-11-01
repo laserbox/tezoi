@@ -50,6 +50,7 @@ export function mountContactComparison(root) {
   }
   function pause() {
     desiredPlaying = false;
+    if (buffering) status.textContent = '';
     buffering = false;
     intent += 1;
     stopMedia();
