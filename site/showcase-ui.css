@@ -1,0 +1,276 @@
+/* Shared presentation rules. Media geometry and interaction state stay in their owning modules. */
+:root {
+  --ui-surface: #fff;
+  --ui-soft: #edf3f2;
+  --ui-line: #dce6e4;
+  --ui-ink: #20343b;
+  --ui-muted: #607577;
+  --ui-accent: #416f66;
+  --ui-accent-soft: #e2eeea;
+  --ui-radius: 18px;
+  --ui-control-radius: 12px;
+  --ui-shadow: 0 8px 28px #1e3e3510;
+  --gutter: clamp(24px, 5.5vw, 80px);
+  --type-control: 14px;
+}
+.section-wrap { max-width: 1440px; }
+h2, h3, h4, h5, h6 { text-wrap: balance; }
+.chapter { --chapter-space: 88px; }
+.chapter-marker { margin-bottom: 28px; }
+.chapter-heading h2 { font-weight: 500; }
+.subchapter + .subchapter { margin-top: 80px; }
+.subchapter-heading { margin-bottom: 28px; }
+.subchapter-heading h3 { font-size: clamp(28px, 2.7vw, 38px); }
+
+/* Navigation remains a compact capsule; other actions use a consistent radius. */
+.site-header { max-width: 1360px; gap: 16px; padding: 10px 16px 10px 22px; }
+.site-header.is-scrolled { background: #f7faf9f2; border-color: #d8e4e0; box-shadow: 0 8px 28px #1d3e3510; }
+.site-header nav a { display: flex; align-items: center; min-height: 44px; }
+.site-header nav .language-mobile-demo { display: none; }
+.header-cta { min-height: 44px; }
+.language-switch { padding: 3px; border-color: #8baba15c; }
+.language-switch button { min-height: 40px; min-width: 40px; }
+.site-header .language-switch button { min-height: 44px; min-width: 44px; }
+.menu-button { min-width: 44px; min-height: 44px; border-radius: 50%; }
+.menu-button:hover { background: #8eaaa51a; }
+.hero-watch { min-height: 48px; padding: 12px 24px; box-shadow: 0 3px 16px #142b2820; }
+.hero-watch:hover { background: #e7f1ed; }
+
+/* Two selector levels: grouped choices outside, numbered tabs within a display. */
+.gallery-tabs {
+  width: min(100%, 560px); gap: 4px; padding: 5px; margin-bottom: 28px;
+  background: #eaf1ef; border-color: #d7e3df; border-radius: 15px;
+}
+.gallery-tabs button { min-height: 48px; padding: 12px 18px; border-radius: 10px; color: #526d6b; line-height: 1.5; }
+.gallery-tabs button[aria-selected="true"] { background: var(--ui-ink); color: white; box-shadow: 0 2px 5px #183b2520; }
+.gallery-tabs button:not([aria-selected="true"]):hover { background: #deebe6; }
+[data-reconstruction-methods] > .gallery-tabs { width: min(100%, 760px); }
+.simulation-view-tabs {
+  width: min(100%, 520px); padding: 0; gap: 16px; margin-bottom: 20px;
+  border: 0; border-bottom: 1px solid var(--ui-line); border-radius: 0; background: transparent;
+}
+.simulation-view-tabs button {
+  justify-content: flex-start; min-height: 52px; padding: 12px 4px; border-bottom: 2px solid transparent;
+  border-radius: 0; color: var(--ui-muted); line-height: 1.5;
+}
+.simulation-view-tabs button[aria-selected="true"] { color: var(--ui-ink); background: transparent; border-bottom-color: var(--ui-accent); }
+.simulation-view-tabs button:hover { color: var(--ui-ink); }
+.school-tabs {
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 4px;
+  padding: 0 16px; overflow: visible;
+}
+.school-tabs button { min-width: 0; min-height: 60px; padding: 16px 10px; white-space: normal; text-align: left; line-height: 1.5; }
+.school-tabs button span { margin-right: 8px; }
+.school-tabs button em { white-space: nowrap; }
+
+/* The demonstration has one clear rail, one content area, and one media surface. */
+.playground { margin: 12px; border-radius: 24px; background: #edf3f2; }
+.workflow-intro { margin-bottom: 32px; }
+.workflow-intro h3 { max-width: 940px; font-size: clamp(36px, 3.9vw, 54px); line-height: 1.2; }
+.real-sim-workflow { grid-template-columns: 164px minmax(0, 1fr); gap: 28px; }
+.workflow-steps { gap: 12px; }
+.workflow-steps::before { left: 28px; top: 32px; bottom: 32px; background: #cfddd7; }
+.workflow-step { min-height: 76px; padding: 12px; gap: 12px; border-radius: 14px; transition: background .18s ease, color .18s ease; }
+.workflow-step strong { font-size: 17px; }
+.workflow-step small { color: #627974; line-height: 1.5; }
+.workflow-step:hover { background: #e1ece7; }
+.workflow-step[aria-selected="true"] { background: #ddebe5; }
+.workflow-number { width: 34px; flex-basis: 34px; height: 34px; border-color: #bfcec8; background: #edf3f2; }
+.workflow-step[aria-selected="true"] .workflow-number { background: #315e53; border-color: #315e53; }
+.workflow-main { padding: 24px; border: 1px solid #dae6e0; border-radius: 20px; background: var(--ui-surface); }
+.workflow-pane-heading { margin-bottom: 24px; }
+.workflow-pane-heading h4, .workflow-panel .compare-heading h4 { font-size: 23px; font-weight: 500; line-height: 1.4; }
+.workflow-panel .compare-heading { margin-bottom: 20px; }
+.playback-surface { border-color: #dae4e0; border-radius: var(--ui-radius); background: #f3f7f5; }
+.playback-bar { min-height: 60px; gap: 10px; padding: 7px 10px; background: #f1f6f3; border-top-color: #dae5df; }
+.playback-bar button { min-width: 44px; min-height: 44px; border-radius: 50%; }
+.playback-bar .compare-play { background: #315e53; color: #fff; }
+.playback-bar .compare-play:hover { background: #254b41; color: #fff; }
+.playback-bar .compare-play:disabled { background: #d6e2dd; color: #526960; }
+.playback-bar input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 4px; }
+.playback-bar input[type="range"]::-webkit-slider-thumb { width: 12px; height: 12px; margin-top: -4px; }
+.playback-bar input[type="range"]::-moz-range-track { height: 4px; border-radius: 4px; }
+.playback-bar input[type="range"]::-moz-range-thumb { width: 12px; height: 12px; }
+.playback-bar output { font-size: 12px; color: #536963; }
+
+/* Agent tabs and actions share the same hierarchy as the other displays. */
+.ego-lab { --eg-line: #dbe5e0; --eg-ink: #20343b; --eg-muted: #607577; }
+.ego-compact .ego-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; overflow: visible; margin: 0 0 24px; }
+.ego-compact .ego-tabs button { min-width: 0; min-height: 68px; padding: 12px 8px; font-size: 14px; line-height: 1.5; white-space: normal; border-bottom: 2px solid #dce5df; }
+.ego-compact .ego-tabs button[aria-selected="true"] { border-color: var(--ui-accent); color: var(--ui-ink); background: #f0f6f2; }
+.ego-compact .ego-tabs button:hover { color: var(--ui-ink); background: #f2f6f3; }
+.ego-compact .ego-tabs button span { margin-bottom: 4px; font-size: 11px; color: #7a9387; }
+.ego-result-heading { gap: 16px; margin-bottom: 16px; }
+.ego-result-heading h5 { font-size: clamp(20px, 2vw, 26px); font-weight: 500; line-height: 1.4; }
+.ego-clock { border-color: #dce6e0; background: #f4f7f5; padding: 6px 10px; border-radius: 6px; }
+.ego-reconstruction-grid { gap: 20px; }
+.ego-preview-card { border-color: var(--ui-line); border-radius: var(--ui-radius); background: var(--ui-surface); }
+.ego-preview-card figcaption { padding: 16px 18px; }
+.ego-preview-card h6 { margin: 0; font-size: 16px; line-height: 1.5; color: var(--ui-ink); }
+.ego-result-actions { margin-bottom: 14px; }
+.ego-result-actions button, .ego-media-status button, .ego-preview-card button {
+  min-height: 44px; padding: 10px 16px; border: 1px solid #ccddd3; border-radius: 10px;
+  background: #eff5f1; color: #315e53; font-size: 13px; line-height: 1.5; text-decoration: none;
+}
+.ego-result-actions button[aria-pressed="true"] { background: #ddebe4; border-color: #8dab9b; }
+.ego-controls { gap: 12px; align-items: center; padding: 10px 12px; background: #f1f6f3; border: 1px solid #dbe5df; border-top: 0; border-radius: 0 0 16px 16px; }
+.ego-controls button { min-width: 44px; min-height: 44px; padding: 10px 14px; border-radius: 10px; font-size: 13px; line-height: 1.4; }
+.ego-controls button:first-child { background: #315e53; border-color: #315e53; color: #fff; }
+.ego-controls input[type="range"] { min-width: 0; min-height: 44px; accent-color: #416f66; }
+.ego-controls output { font-variant-numeric: tabular-nums; }
+.ego-compact .ego-viewer { overflow: hidden; border-radius: 16px 16px 0 0; }
+.ego-compact-footer { margin-top: 24px; padding-top: 16px; gap: 12px; line-height: 1.6; }
+.ego-evidence summary { min-height: 44px; display: flex; align-items: center; gap: 8px; }
+.ego-subviews button { min-height: 44px; border-radius: 10px; }
+
+/* Video collections use a quiet shared card, with the title attached to the image. */
+.embodied-grid, .gallery-grid { gap: 28px; }
+.gallery-card, .embodied-card { min-width: 0; overflow: hidden; border: 1px solid #dce5e0; border-radius: var(--ui-radius); background: var(--ui-surface); transition: border-color .18s ease, box-shadow .18s ease; }
+.gallery-card:hover, .embodied-card:hover { border-color: #b3cabd; box-shadow: var(--ui-shadow); }
+.gallery-card:focus-within, .embodied-card:focus-within { border-color: #789f8c; }
+.gallery-image, .embodied-film { border-radius: 0; }
+.gallery-card-copy { margin: 0; padding: 18px 20px 20px; }
+.gallery-card h4, .embodied-card h4 { margin: 0; font-size: 19px; font-weight: 500; line-height: 1.5; letter-spacing: -.015em; }
+.embodied-card h4 { padding: 18px 20px 20px; }
+.gallery-play, .embodied-film .material-expand { width: 44px; height: 44px; border: 1px solid #ffffff70; background: #23453ce0; color: #fff; backdrop-filter: blur(8px); }
+.gallery-image:hover .gallery-play, .embodied-film:hover .material-expand { background: #315f52; }
+.school-stage { border-radius: var(--ui-radius); }
+.school-note, .scene-comparison-links { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; margin-top: 16px; }
+.school-note a, .scene-comparison-links a { min-height: 44px; display: inline-flex; align-items: center; text-decoration: underline; text-decoration-color: #b5cdc0; text-underline-offset: 5px; color: #426c5e; }
+.scene-comparison { overflow: hidden; border-radius: 0 0 var(--ui-radius) var(--ui-radius); }
+.scene-comparison-caption { border: 1px solid #dce5e0; border-top: 0; padding: 0 18px 8px; border-radius: 0 0 var(--ui-radius) var(--ui-radius); background: #fff; }
+
+/* Utility actions: retain their labels, states, event handlers and media geometry. */
+.scene-zoom, .scene-reset, .scene-contact-toggle, .scene-contact-legend button,
+.school-navigation button, .school-navigation select,
+.scene-loading button, .scene-comparison-feedback button, .school-viewer-overlay button, .school-endcta button {
+  min-height: 44px; border-radius: 10px; line-height: 1.4;
+}
+.scene-zoom, .scene-reset { min-width: 44px; }
+.scene-loading button, .scene-comparison-feedback button, .school-viewer-overlay button, .school-endcta button { padding: 11px 18px; }
+.scene-loading button:hover, .ego-result-actions button:hover, .ego-preview-card button:hover { background: #e0ece5; }
+.school-viewer-overlay button { background: #def0e4; border-color: #b8d8c4; color: #224f3d; }
+.school-navigation { padding: 8px; border-radius: 12px; gap: 8px; }
+.scene-camera-controls { gap: 6px; }
+button:disabled { cursor: default; }
+button:focus-visible, a:focus-visible, select:focus-visible { outline: 3px solid #658e7b; outline-offset: 3px; }
+.school-tabs button:focus-visible { outline-color: #a9d4bd; outline-offset: -4px; }
+#close-video { min-width: 44px; min-height: 44px; border-radius: 50%; }
+dialog { border-radius: 22px; padding: 24px; box-shadow: 0 24px 100px #10291f40; }
+.dialog-heading h2 { font-size: clamp(20px, 2.2vw, 28px); line-height: 1.4; }
+
+/* Secondary pages share the same rhythm without changing their information structure. */
+.page-main { padding-top: 160px; }
+.page-intro { padding-bottom: 36px; }
+.page-intro h1 { font-size: clamp(42px, 4.5vw, 64px); }
+.company-story, .research-study { gap: 48px; }
+.page-figure { overflow: hidden; border-radius: var(--ui-radius); background: #edf3f2; }
+.page-figure img { border-radius: 0; }
+.page-topics { gap: 24px; }
+.page-topics article { padding: 24px; border: 1px solid var(--ui-line); border-radius: var(--ui-radius); background: #fff; }
+.page-topics h2 { font-size: 22px; line-height: 1.4; }
+.page-link { display: inline-flex; min-height: 44px; align-items: center; margin-top: 18px; gap: 8px; text-underline-offset: 5px; }
+.journal-entry { gap: 40px; padding-block: 36px; }
+.journal-entry summary { min-height: 56px; }
+.journal-entry h2 { font-size: clamp(24px, 2.5vw, 32px); }
+.footer-main { padding-bottom: 36px; }
+.footer-navigation a { min-height: 44px; border-radius: 10px; }
+.footer-bottom { gap: 24px; }
+.ego-standalone .ego-demo-header { min-height: 80px; height: auto; gap: 20px; padding-block: 16px; }
+.ego-standalone .ego-demo-gallery { gap: 16px; }
+.ego-standalone .ego-demo-gallery button { border-radius: 16px; }
+.ego-standalone .ego-tabs { gap: 8px; }
+.ego-standalone .ego-tabs button { min-height: 56px; padding: 12px; border-radius: 10px; white-space: normal; }
+.ego-standalone .ego-subviews { gap: 8px; }
+
+@media (max-width: 1050px) {
+  .real-sim-workflow { grid-template-columns: 146px minmax(0, 1fr); gap: 20px; }
+  .workflow-main { padding: 20px; }
+  .workflow-step { gap: 10px; padding-inline: 8px; }
+  .workflow-steps::before { left: 24px; }
+  .company-story, .research-study { gap: 32px; }
+}
+@media (max-width: 850px) {
+  .site-header nav .language-mobile-demo { display: flex; }
+  .site-header { gap: 8px; }
+  .real-sim-workflow { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .workflow-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .workflow-steps::before { display: none; }
+  .workflow-step { flex-direction: column; align-items: center; text-align: center; justify-content: flex-start; gap: 8px; min-height: 106px; padding: 12px 8px; border: 1px solid transparent; }
+  .workflow-step strong { font-size: 15px; }
+  .workflow-step small { font-size: 11px; margin-top: 5px; }
+  .workflow-step[aria-selected="true"] { border-color: #cbded1; }
+  .embodied-grid, .gallery-grid { gap: 22px; }
+}
+@media (max-width: 650px) {
+  .ego-compact .ego-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: visible; gap: 8px 16px; }
+  .ego-compact .ego-tabs button { min-height: 64px; padding: 10px 12px; font-size: 14px; }
+  .ego-reconstruction-grid { gap: 16px; }
+  .ego-controls { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto 44px; gap: 8px; padding: 8px; }
+  .ego-controls button { padding: 0; }
+  .ego-controls button:last-child { font-size: 11px; overflow-wrap: anywhere; }
+  .ego-controls output { font-size: 11px; white-space: nowrap; }
+  .ego-compact-footer { gap: 8px; font-size: 11px; }
+  .ego-standalone .ego-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: visible; }
+  .ego-standalone .ego-tabs button { min-width: 0; }
+}
+@media (max-width: 600px) {
+  :root { --gutter: 24px; }
+  .chapter { --chapter-space: 60px; }
+  .subchapter + .subchapter { margin-top: 56px; }
+  .subchapter-heading { margin-bottom: 24px; }
+  .subchapter-heading h3 { font-size: 28px; line-height: 1.25; }
+  .site-header { padding: 7px 10px; }
+  .site-header .brand { width: clamp(104px, 30vw, 132px); }
+  .site-header .language-switch { gap: 0; padding: 2px; }
+  .site-header .language-switch button { padding: 5px; }
+  .site-header nav a { border-radius: 10px; }
+  .playground { margin: 8px; border-radius: 20px; }
+  .playground > .section-wrap { padding-inline: 16px; }
+  .workflow-intro { margin-bottom: 24px; }
+  .workflow-intro h3 { font-size: 32px; line-height: 1.25; letter-spacing: -.04em; }
+  .workflow-main { padding: 0; border: 0; background: transparent; }
+  .workflow-step { min-height: 108px; padding: 10px 4px; gap: 7px; border-radius: 12px; }
+  .workflow-step strong { font-size: 13px; }
+  .workflow-step small { font-size: 10px; line-height: 1.5; }
+  .workflow-number { width: 30px; flex-basis: 30px; height: 30px; font-size: 10px; }
+  .workflow-pane-heading h4, .workflow-panel .compare-heading h4 { font-size: 21px; }
+  .workflow-pane-heading { margin-bottom: 20px; }
+  .gallery-tabs { gap: 3px; padding: 4px; margin-bottom: 24px; border-radius: 14px; }
+  .gallery-tabs button { flex-direction: row; gap: 7px; min-height: 48px; padding: 10px; font-size: 13px; }
+  [data-reconstruction-methods] > .gallery-tabs button { align-items: center; min-height: 68px; padding: 10px 7px; font-size: 12px; overflow-wrap: normal; }
+  html[lang="en"] [data-reconstruction-methods] > .gallery-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  html[lang="en"] [data-reconstruction-methods] > .gallery-tabs button { overflow-wrap: normal; word-break: normal; hyphens: none; }
+  html[lang="en"] [data-reconstruction-methods] > .gallery-tabs button:last-child { grid-column: 1 / -1; min-height: 48px; }
+  .simulation-view-tabs { width: 100%; gap: 12px; margin-bottom: 16px; }
+  .simulation-view-tabs button { min-height: 52px; padding-inline: 2px; font-size: 13px; }
+  .school-tabs { padding-inline: 8px; gap: 2px; }
+  .school-tabs button { min-height: 72px; padding: 10px 6px; font-size: 12px; }
+  .school-tabs button span { display: block; margin: 0 0 4px; }
+  .school-tabs button em { margin-left: 4px; font-size: 9px; }
+  .school-image-label { top: 14px; padding: 7px 9px; font-size: 11px; }
+  .school-image-label-left { left: 12px; }
+  .school-image-label-right { right: 12px; }
+  .embodied-grid, .gallery-grid { gap: 24px; }
+  .gallery-card-copy, .embodied-card h4 { padding: 16px 18px 18px; }
+  .gallery-card h4, .embodied-card h4 { font-size: 18px; }
+  .playback-bar { min-height: 60px; padding: 7px 8px; gap: 6px; }
+  .playback-bar output { font-size: 11px; }
+  .scene-camera-controls { gap: 4px; }
+  .scene-contact-toggle { padding-inline: 8px; }
+  .school-note, .scene-comparison-links { column-gap: 14px; margin-top: 8px; font-size: 12px; }
+  .page-main { padding-top: 130px; }
+  .page-intro { padding-bottom: 24px; }
+  .page-intro h1 { font-size: 42px; }
+  .company-story, .research-study { gap: 24px; }
+  .page-topics { gap: 16px; }
+  .page-topics article { padding: 24px; }
+  .journal-entry { gap: 16px; padding-block: 28px; }
+  .journal-entry h2 { font-size: 24px; }
+  .footer-main { gap: 28px; padding-bottom: 32px; }
+  .footer-bottom { gap: 8px 20px; }
+  dialog { padding: 16px; border-radius: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .workflow-step, .gallery-card, .embodied-card { transition: none; }
+}
