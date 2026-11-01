@@ -16,7 +16,7 @@
 
 <link rel="stylesheet" href="./i18n.css?v=bilingual-20261101" data-tezoi-i18n>
 <script type="module" src="./i18n.js?v=physical-titles-20261102" data-tezoi-i18n></script>
-<link rel="stylesheet" href="./showcase-ui.css?v=visual-upgrade-20261102" data-tezoi-ui>
+<link rel="stylesheet" href="./showcase-ui.css?v=taste-20261102" data-tezoi-ui>
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">跳到正文</a>
@@ -48,7 +48,7 @@
       <div class="section-wrap">
         <div class="chapter-marker"><div class="chapter-heading"><h2 id="playground-title">Playground</h2></div></div>
         <div class="section-lead workflow-intro"><h3>从 Ego 到验证</h3></div>
-        <div class="real-sim-workflow" data-real-sim-workflow data-active-stage="simulation">
+        <div class="real-sim-workflow" data-ui data-real-sim-workflow data-active-stage="simulation">
           <aside class="workflow-rail">
             <div class="workflow-steps" data-workflow-tabs role="tablist" aria-label="从 Ego 到真实验证" aria-orientation="vertical">
               <button class="workflow-step" type="button" role="tab" id="workflow-tab-source" aria-controls="workflow-panel-source" aria-selected="false" tabindex="-1" data-workflow-stage="source"><span class="workflow-number" aria-hidden="true">01</span><span><strong>Ego</strong><small>真实示范</small></span></button>
@@ -252,13 +252,13 @@
       </section>
 <section class="subchapter scene-reconstruction" id="scene-reconstruction" aria-labelledby="scene-reconstruction-title" data-reconstruction-methods>
         <div class="subchapter-heading section-lead"><h3 id="scene-reconstruction-title">Scene Reconstruction</h3></div>
-        <div class="gallery-tabs" role="tablist" aria-label="重建方式">
+        <div class="gallery-tabs" data-ui role="tablist" aria-label="重建方式">
           <button type="button" role="tab" id="reconstruction-tab-gaussian" aria-controls="reconstruction-panel-gaussian" aria-selected="true" data-reconstruction-method="gaussian">单图扫描重建</button>
           <button type="button" role="tab" id="reconstruction-tab-multi" aria-controls="reconstruction-panel-multi" aria-selected="false" tabindex="-1" data-reconstruction-method="multi">多图扫描重建</button>
           <button type="button" role="tab" id="reconstruction-tab-mesh" aria-controls="visual-rendering" aria-selected="false" tabindex="-1" data-reconstruction-method="mesh">单图网格建模</button>
         </div>
         <div id="reconstruction-panel-gaussian" role="tabpanel" aria-labelledby="reconstruction-tab-gaussian" data-reconstruction-panel="gaussian">
-          <div data-school-showcase>
+          <div data-school-showcase data-ui>
         <div class="school-stage">
           <div class="school-tabs" role="tablist" aria-label="场景展示方式">
             <button type="button" role="tab" aria-selected="true" aria-controls="school-comparison" id="school-tab-comparison" data-school-mode="comparison"><span>01</span> Image comparison</button>
@@ -296,7 +296,7 @@
           <p class="scene-loading">即将上线</p>
         </div>
         <div id="visual-rendering" role="tabpanel" aria-labelledby="reconstruction-tab-mesh" data-reconstruction-panel="mesh" hidden>
-        <div class="simulation-explorer usedv6-explorer" data-usedv6-explorer>
+        <div class="simulation-explorer usedv6-explorer" data-ui data-usedv6-explorer>
           <div class="school-stage school-tabs" role="tablist" aria-label="实验室展示方式">
             <button type="button" role="tab" id="usedv6-view-image" aria-controls="usedv6-panel-image" aria-selected="true" data-simulation-view="video"><span>01</span> Image comparison</button>
             <button type="button" role="tab" id="usedv6-view-scene" aria-controls="usedv6-panel-scene" aria-selected="false" tabindex="-1" data-simulation-view="scene"><span>02</span> Interactive 3D</button>
@@ -336,7 +336,7 @@
 
     <section class="gallery chapter section-wrap" id="gallery" aria-labelledby="gallery-title" data-chapter="4">
       <div class="chapter-marker"><div class="chapter-heading"><h2 id="gallery-title">Gallery</h2></div></div>
-      <div class="gallery-tabs" role="tablist" aria-label="任务场景">
+      <div class="gallery-tabs" data-ui role="tablist" aria-label="任务场景">
         <button type="button" role="tab" id="tab-factory" aria-selected="true" aria-controls="panel-factory" data-scene="factory"><span class="gallery-tab-label">工厂</span> <span class="gallery-tab-count">06</span></button>
         <button type="button" role="tab" id="tab-lab" aria-selected="false" aria-controls="panel-lab" tabindex="-1" data-scene="lab"><span class="gallery-tab-label">实验室</span> <span class="gallery-tab-count">05</span></button>
         <!-- 暂停这四类 Gallery 标签；恢复时同时取消下方对应面板的注释。
