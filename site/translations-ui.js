@@ -1454,5 +1454,17 @@ export default {
   "RESET": {
     "zh": "重置",
     "en": "RESET"
+  },
+  "双臂取药与称量": {
+    "zh": "双臂取药与称量",
+    "en": "Dual-arm sampling and weighing"
+  },
+  "播放双臂取药与称量": {
+    "zh": "播放双臂取药与称量",
+    "en": "Play dual-arm sampling and weighing"
+  },
+  "双臂在实验室取样并送入分析天平称量": {
+    "zh": "双臂在实验室取样并送入分析天平称量",
+    "en": "Two robot arms sample granules and transfer them to an analytical balance for weighing"
   }
 };
