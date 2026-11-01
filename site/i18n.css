@@ -1,0 +1,31 @@
+.language-switch { display:inline-flex; align-items:center; gap:2px; padding:3px; border:1px solid #9aadb066; border-radius:999px; color:inherit; white-space:nowrap; }
+.language-switch button { display:grid; place-items:center; min-width:34px; min-height:32px; padding:5px 8px; border:0; border-radius:999px; background:transparent; color:inherit; font:inherit; font-size:12px; line-height:1.4; cursor:pointer; }
+.language-switch button[aria-pressed="true"] { background:#dce8e6; color:#192731; }
+.language-switch button:focus-visible { outline:2px solid #79a6a0; outline-offset:2px; }
+.site-header { grid-template-columns:minmax(120px,1fr) auto auto auto; gap:16px; }
+.site-header .language-switch { grid-column:4; grid-row:1; justify-self:end; }
+.language-mobile-demo { display:none; }
+.language-switch-floating { position:fixed; top:14px; right:16px; z-index:100; background:#f6f8f8ef; color:#192731; box-shadow:0 3px 18px #0001; }
+.language-standalone { padding-top:38px; }
+@media(max-width:850px) {
+  .site-header { grid-template-columns:minmax(0,1fr) auto auto; gap:10px; }
+  .site-header > .header-cta { display:none; }
+  .site-header .language-switch { grid-column:2; }
+  .site-header .menu-button { grid-column:3; grid-row:1; }
+  .site-header nav .language-mobile-demo { display:block; }
+}
+@media(max-width:600px) {
+  .site-header { gap:8px; }
+  .language-switch button { min-width:32px; min-height:36px; padding:5px 6px; }
+}
+@media print { .language-switch { display:none!important; } .language-standalone { padding-top:0; } }
+
+html[lang="en"] .gallery-tabs button { overflow-wrap:anywhere; hyphens:auto; }
+
+.language-standalone { overflow-wrap:anywhere; }
+.language-table-scroll { width:100%; max-width:100%; overflow-x:auto; }
+.language-standalone pre { max-width:100%; overflow:auto; }
+.language-standalone button, .language-standalone img, .language-standalone video { max-width:100%; }
+.language-standalone .ego-tabs { max-width:100%; overflow-x:auto; }
+.language-standalone .ego-tabs button { flex-shrink:0; }
+.language-standalone .ego-state { white-space:normal; max-width:100%; }
