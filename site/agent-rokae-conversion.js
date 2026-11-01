@@ -4,7 +4,7 @@ const MEDIA='assets/ego2sim/rokae6263/';
 const compactViews = [
  {main:['task','任务理解'], evidence:[]},
  {main:null,title:'场景与资产重建',evidence:[]},
- {main:['contact-ego-v3','接触约束下的三维手部'],evidence:[['hands','视频手部关键点']]},
+ {main:['contact-ego-v3','接触约束下的三维手部'],evidence:[]},
  {main:['robot-ego-v3','机器人第一视角 · Rokae／Wuji'],evidence:[]}
 ];
 const compactClocks={observation:{limit:44,label:'示范处理'},simulation:{limit:14,label:'运动学求解片段'}};
