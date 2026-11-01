@@ -24,8 +24,8 @@ export default {
     "en": "EGO2SIM · LAB TRANSFER"
   },
   "一段示范，逐步成为机器人场景。": {
-    "zh": "一段示范，逐步成为机器人场景。",
-    "en": "A demonstration, step by step, becomes a robot scene."
+    "zh": "从示范到仿真场景",
+    "en": "From demonstration to simulation"
   },
   "沿着同一段视频，查看 Agent 如何理解操作、重建两组资产、恢复手部动作，再映射到 RealMan。": {
     "zh": "沿着同一段视频，查看智能体如何理解操作、重建两组资产、恢复手部动作，再映射到 RealMan。",
@@ -53,15 +53,15 @@ export default {
   },
   "任务理解与分解": {
     "zh": "任务理解与分解",
-    "en": "Task understanding and decomposition"
+    "en": "Task breakdown"
   },
   "时间字幕 · 7 个操作阶段": {
     "zh": "时间字幕 · 7 个操作阶段",
     "en": "Timed captions · 7 task stages"
   },
   "查看演示 ↗": {
-    "zh": "查看演示 ↗",
-    "en": "View demo ↗"
+    "zh": "观看 ↗",
+    "en": "Watch ↗"
   },
   "查看阶段 2：场景与资产重建": {
     "zh": "查看阶段 2：场景与资产重建",
@@ -93,7 +93,7 @@ export default {
   },
   "人类动作与接触": {
     "zh": "人类动作与接触",
-    "en": "Human motion and contact"
+    "en": "Motion & contact"
   },
   "重投影优化 · 接触证据": {
     "zh": "重投影优化 · 接触证据",
@@ -113,7 +113,7 @@ export default {
   },
   "机器人动作重定向": {
     "zh": "机器人动作重定向",
-    "en": "Robot motion retargeting"
+    "en": "Robot retargeting"
   },
   "RealMan RM65-B + Xense": {
     "zh": "RealMan RM65-B + Xense",
@@ -133,7 +133,7 @@ export default {
   },
   "验证与反馈闭环": {
     "zh": "验证与反馈闭环",
-    "en": "Validation and feedback loop"
+    "en": "Validation & feedback"
   },
   "失败定位 → 修复 → 物理验证": {
     "zh": "失败定位 → 修复 → 物理验证",
@@ -145,23 +145,23 @@ export default {
   },
   "任务理解": {
     "zh": "任务理解",
-    "en": "Task understanding"
+    "en": "Task analysis"
   },
   "场景与资产": {
     "zh": "场景与资产",
-    "en": "Scene and assets"
+    "en": "Scene & assets"
   },
   "动作与接触": {
     "zh": "动作与接触",
-    "en": "Motion and contact"
+    "en": "Motion & contact"
   },
   "机器人重定向": {
     "zh": "机器人重定向",
-    "en": "Robot retargeting"
+    "en": "Retargeting"
   },
   "验证与反馈": {
     "zh": "验证与反馈",
-    "en": "Validation and feedback"
+    "en": "Validation"
   },
   "处理结果图层": {
     "zh": "处理结果图层",
@@ -189,7 +189,7 @@ export default {
   },
   "放大 ↗": {
     "zh": "放大 ↗",
-    "en": "Enlarge ↗"
+    "en": "Expand ↗"
   },
   "OBSERVATION → TASK GRAPH": {
     "zh": "观察 → 任务图",
@@ -269,7 +269,7 @@ export default {
   },
   "场景与约束": {
     "zh": "场景与约束",
-    "en": "Scene and constraints"
+    "en": "Scene constraints"
   },
   "运动学预检": {
     "zh": "运动学预检",
@@ -281,43 +281,43 @@ export default {
   },
   "连续物理验证": {
     "zh": "连续物理验证",
-    "en": "Continuous physics validation"
+    "en": "Physics validation"
   },
   "滴管取放、自然斜靠与简化液体转移已有连续求解；完整 CFD 与真机未验证。": {
     "zh": "滴管取放、自然斜靠与简化液体转移已有连续求解；完整 CFD 与真机未验证。",
     "en": "Continuous solves are available for picking up and placing the dropper, natural leaning, and simplified liquid transfer; full CFD and real-robot operation remain unvalidated."
   },
   "模型使用与最新接触优化 ↗": {
-    "zh": "模型使用与最新接触优化 ↗",
-    "en": "Model usage and latest contact optimization ↗"
+    "zh": "模型与接触优化 ↗",
+    "en": "Model & contacts ↗"
   },
   "连续动作与物理检查 ↗": {
-    "zh": "连续动作与物理检查 ↗",
-    "en": "Continuous motion and physics checks ↗"
+    "zh": "动作与物理检查 ↗",
+    "en": "Motion & physics ↗"
   },
   "下载本阶段 demo ↗": {
-    "zh": "下载本阶段演示 ↗",
-    "en": "Download this stage's demo ↗"
+    "zh": "下载本阶段 ↗",
+    "en": "Download video ↗"
   },
   "查看完整架构图 ↗": {
-    "zh": "查看完整架构图 ↗",
-    "en": "View full architecture diagram ↗"
+    "zh": "架构图 ↗",
+    "en": "Architecture ↗"
   },
   "5 个阶段及分项 demo · 原滴管配置 · 滴管连续物理操作": {
     "zh": "5 个阶段及分项演示 · 原滴管配置 · 滴管连续物理操作",
     "en": "5 stages and individual demos · Original dropper setup · Continuous physical dropper manipulation"
   },
   "下载转换总览（V5）↗": {
-    "zh": "下载转换总览（V5）↗",
-    "en": "Download conversion overview (V5) ↗"
+    "zh": "下载总览（V5）↗",
+    "en": "Overview (V5) ↗"
   },
   "装配来源核对 ↗": {
-    "zh": "装配来源核对 ↗",
-    "en": "Check assembly provenance ↗"
+    "zh": "装配来源 ↗",
+    "en": "Asset sources ↗"
   },
   "查看生成报告 ↗": {
-    "zh": "查看生成报告 ↗",
-    "en": "View generation report ↗"
+    "zh": "生成报告 ↗",
+    "en": "Report ↗"
   },
   "TEZOI 专注智能高精度具身仿真，探索环境、物理交互与机器人任务验证。": {
     "zh": "TEZOI 专注智能高精度具身仿真，探索环境、物理交互与机器人任务验证。",
@@ -368,8 +368,8 @@ export default {
     "en": "Scene and physics simulation for robot tasks."
   },
   "探索物理交互": {
-    "zh": "探索物理交互",
-    "en": "Explore physical interactions"
+    "zh": "物理交互",
+    "en": "Physical interaction"
   },
   "双机械臂在实验台上协同取药的仿真画面": {
     "zh": "双机械臂在实验台上协同取药的仿真画面",
@@ -388,24 +388,24 @@ export default {
     "en": "Interactive environments"
   },
   "浏览场景演示": {
-    "zh": "浏览场景演示",
-    "en": "Browse scene demos"
+    "zh": "场景演示",
+    "en": "Scenes"
   },
   "细致的物理响应": {
     "zh": "细致的物理响应",
     "en": "Detailed physical responses"
   },
   "了解研究方向": {
-    "zh": "了解研究方向",
-    "en": "Explore research areas"
+    "zh": "研究方向",
+    "en": "Research"
   },
   "从观察走向验证": {
     "zh": "从观察走向验证",
     "en": "From observation to validation"
   },
   "体验 Playground": {
-    "zh": "进入体验中心",
-    "en": "Try the Playground"
+    "zh": "体验中心",
+    "en": "Playground"
   },
   "页脚导航": {
     "zh": "页脚导航",
@@ -416,8 +416,8 @@ export default {
     "en": "© 2026 TEZOI"
   },
   "查看演示库": {
-    "zh": "查看演示库",
-    "en": "View demo library"
+    "zh": "演示库",
+    "en": "Demos"
   },
   "返回顶部": {
     "zh": "返回顶部",
@@ -461,7 +461,7 @@ export default {
   },
   "真实示范": {
     "zh": "真实示范",
-    "en": "Real-world demonstration"
+    "en": "Demonstration"
   },
   "Agent": {
     "zh": "智能体",
@@ -469,7 +469,7 @@ export default {
   },
   "场景与动作": {
     "zh": "场景与动作",
-    "en": "Scene and motion"
+    "en": "Scene & motion"
   },
   "Simulation": {
     "zh": "仿真",
@@ -477,7 +477,7 @@ export default {
   },
   "仿真运行": {
     "zh": "仿真运行",
-    "en": "Simulation run"
+    "en": "Run"
   },
   "Robotics": {
     "zh": "机器人",
@@ -485,11 +485,11 @@ export default {
   },
   "真机待验证": {
     "zh": "真机待验证",
-    "en": "Real-robot validation pending"
+    "en": "Not yet validated"
   },
   "Ego · 真实第一视角示范": {
     "zh": "第一视角 · 真实操作示范",
-    "en": "Ego · Real-world first-person demonstration"
+    "en": "Ego · Demonstration"
   },
   "第一视角操作视频，2 倍速": {
     "zh": "第一视角操作视频，2 倍速",
@@ -509,7 +509,7 @@ export default {
   },
   "Agent · 从示范构建仿真": {
     "zh": "智能体 · 从示范构建仿真",
-    "en": "Agent · Building simulation from a demonstration"
+    "en": "Agent · Build simulation"
   },
   "滴管任务 Ego2Sim 转换演示": {
     "zh": "滴管任务 Ego2Sim 转换演示",
@@ -521,7 +521,7 @@ export default {
   },
   "动作重定向": {
     "zh": "动作重定向",
-    "en": "Motion retargeting"
+    "en": "Retargeting"
   },
   "场景重建过程视频": {
     "zh": "场景重建过程视频",
@@ -533,7 +533,7 @@ export default {
   },
   "任务对象分割": {
     "zh": "任务对象分割",
-    "en": "Task object segmentation"
+    "en": "Object segmentation"
   },
   "重试分割视频": {
     "zh": "重试分割视频",
@@ -553,7 +553,7 @@ export default {
   },
   "点云与统一坐标": {
     "zh": "点云与统一坐标",
-    "en": "Point cloud and unified coordinates"
+    "en": "Point cloud & coordinates"
   },
   "重试点云视频": {
     "zh": "重试点云视频",
@@ -565,7 +565,7 @@ export default {
   },
   "三维场景与资产": {
     "zh": "三维场景与资产",
-    "en": "3D scene and assets"
+    "en": "3D assets"
   },
   "重试三维资产视频": {
     "zh": "重试三维资产视频",
@@ -597,7 +597,7 @@ export default {
   },
   "处理过程与对照": {
     "zh": "处理过程与对照",
-    "en": "Processing and comparison"
+    "en": "Process & compare"
   },
   "IMG_6263 · 资产重建与动作映射": {
     "zh": "IMG_6263 · 资产重建与动作映射",
@@ -621,11 +621,11 @@ export default {
   },
   "Video comparison": {
     "zh": "视频对比",
-    "en": "Video comparison"
+    "en": "Compare"
   },
   "Interactive 3D": {
     "zh": "交互式3D",
-    "en": "Interactive 3D"
+    "en": "3D view"
   },
   "Contact forces": {
     "zh": "接触力",
@@ -672,8 +672,8 @@ export default {
     "en": "Reset 3D view"
   },
   "重置视角": {
-    "zh": "重置视角",
-    "en": "Reset view"
+    "zh": "重置",
+    "en": "Reset"
   },
   "顶点力峰值": {
     "zh": "顶点力峰值",
@@ -701,7 +701,7 @@ export default {
   },
   "Robotics · 真机验证": {
     "zh": "机器人 · 真机验证",
-    "en": "Robotics · Real-robot validation"
+    "en": "Robotics · Validation"
   },
   "真机验证示例待补充": {
     "zh": "真机验证示例待补充",
@@ -857,15 +857,15 @@ export default {
   },
   "单图扫描重建": {
     "zh": "单图扫描重建",
-    "en": "Single-image scan reconstruction"
+    "en": "Single-image scan"
   },
   "多图扫描重建": {
     "zh": "多图扫描重建",
-    "en": "Multi-image scan reconstruction"
+    "en": "Multi-image scan"
   },
   "单图网格建模": {
     "zh": "单图网格建模",
-    "en": "Single-image mesh modeling"
+    "en": "Single-image mesh"
   },
   "场景展示方式": {
     "zh": "场景展示方式",
@@ -873,15 +873,15 @@ export default {
   },
   "Image comparison": {
     "zh": "图片对比",
-    "en": "Image comparison"
+    "en": "Compare"
   },
   "重建演示": {
     "zh": "重建演示",
-    "en": "Reconstruction demo"
+    "en": "Walkthrough"
   },
   "自由探索": {
     "zh": "自由探索",
-    "en": "Free exploration"
+    "en": "Explore"
   },
   "3D": {
     "zh": "3D",
@@ -920,8 +920,8 @@ export default {
     "en": "POINT CLOUD → 3DGS → TOUR / 02"
   },
   "进入自由探索": {
-    "zh": "进入自由探索",
-    "en": "Enter free exploration"
+    "zh": "自由探索",
+    "en": "Explore"
   },
   "导航": {
     "zh": "导航",
@@ -948,32 +948,32 @@ export default {
     "en": "Fly"
   },
   "重置位置": {
-    "zh": "重置位置",
-    "en": "Reset position"
+    "zh": "重置",
+    "en": "Reset"
   },
   "全屏": {
     "zh": "全屏",
-    "en": "Full screen"
+    "en": "Fullscreen"
   },
   "3D 场景 · 49.8 MB": {
     "zh": "3D 场景 · 49.8 MB",
     "en": "3D scene · 49.8 MB"
   },
   "进入三维场景 ↗": {
-    "zh": "进入三维场景 ↗",
-    "en": "Enter 3D scene ↗"
+    "zh": "进入 3D ↗",
+    "en": "Explore 3D ↗"
   },
   "INTERACTIVE / 03": {
     "zh": "交互 / 03",
     "en": "INTERACTIVE / 03"
   },
   "查看实拍原图": {
-    "zh": "查看实拍原图",
-    "en": "View original photograph"
+    "zh": "实拍原图",
+    "en": "Original photo"
   },
   "查看重建原图": {
-    "zh": "查看重建原图",
-    "en": "View original reconstruction image"
+    "zh": "重建原图",
+    "en": "Rendered image"
   },
   "即将上线": {
     "zh": "即将上线",
@@ -1008,12 +1008,12 @@ export default {
     "en": "Real photograph display ratio"
   },
   "查看原图": {
-    "zh": "查看原图",
-    "en": "View original image"
+    "zh": "原图",
+    "en": "Original image"
   },
   "查看仿真渲染": {
-    "zh": "查看仿真渲染",
-    "en": "View simulation render"
+    "zh": "仿真渲染",
+    "en": "Rendered image"
   },
   "放大实验室三维场景": {
     "zh": "放大实验室三维场景",
@@ -1216,16 +1216,16 @@ export default {
     "en": "This round checks free holding, natural leaning, and simplified liquid transfer; deformable offsets and model limitations remain."
   },
   "点云、坐标与接触检查 ↗": {
-    "zh": "点云、坐标与接触检查 ↗",
-    "en": "Point cloud, coordinate, and contact checks ↗"
+    "zh": "点云与接触检查 ↗",
+    "en": "Geometry checks ↗"
   },
   "5 个独立阶段 demo · 原滴管配置 · 运动学转换展示": {
     "zh": "5 个独立阶段演示 · 原滴管配置 · 运动学转换展示",
     "en": "5 separate stage demos · Original dropper setup · Kinematic conversion demonstration"
   },
   "下载转换总览 ↗": {
-    "zh": "下载转换总览 ↗",
-    "en": "Download conversion overview ↗"
+    "zh": "下载总览 ↗",
+    "en": "Download overview ↗"
   },
   "TEZOI Blog，内容即将更新。": {
     "zh": "TEZOI 动态，内容即将更新。",
