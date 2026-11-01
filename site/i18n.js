@@ -1,6 +1,6 @@
 import { createTranslator, resolveLanguage, localizeHref } from './i18n-core.js';
-import ui from './translations-ui.js?v=laboratory-unified-20261101';
-import runtime from './translations-runtime.js?v=website-audit-20261101';
+import ui from './translations-ui.js?v=physical-titles-20261102';
+import runtime from './translations-runtime.js?v=physical-titles-20261102';
 import extra from './translations-runtime-extra.js';
 import reports1 from './translations-reports1.js';
 import reports2 from './translations-reports2.js';

@@ -823,21 +823,21 @@ export default {
     "zh": "播放凝胶触觉与接触力分布完整视频",
     "en": "Play full gel tactile sensing and contact force distribution video"
   },
-  "播放PET水瓶挤压完整视频": {
-    "zh": "播放PET水瓶挤压完整视频",
-    "en": "Play full PET water bottle squeezing video"
+  "播放液体接触完整视频": {
+    "zh": "播放液体接触完整视频",
+    "en": "Play full liquid contact video"
   },
   "Franka FR3": {
     "zh": "Franka FR3",
     "en": "Franka FR3"
   },
-  "播放海绵吸水与换位挤水完整视频": {
-    "zh": "播放海绵吸水与换位挤水完整视频",
-    "en": "Play full sponge absorption and repositioned squeezing video"
+  "播放液体吸附完整视频": {
+    "zh": "播放液体吸附完整视频",
+    "en": "Play full liquid absorption video"
   },
-  "播放双臂毛毯对折完整视频": {
-    "zh": "播放双臂毛毯对折完整视频",
-    "en": "Play full dual-arm blanket folding video"
+  "播放柔性接触完整视频": {
+    "zh": "播放柔性接触完整视频",
+    "en": "Play full soft contact video"
   },
   "Dual Franka FR3": {
     "zh": "双 Franka FR3",

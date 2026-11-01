@@ -743,17 +743,17 @@ export default {
     "zh": "凝胶形变与接触力",
     "en": "Gel deformation and contact forces"
   },
-  "双臂毛毯对折": {
-    "zh": "双臂毛毯对折",
-    "en": "Dual-arm blanket folding"
+  "柔性接触": {
+    "zh": "柔性接触",
+    "en": "Soft contact"
   },
-  "水瓶挤压": {
-    "zh": "水瓶挤压",
-    "en": "Water bottle squeezing"
+  "液体接触": {
+    "zh": "液体接触",
+    "en": "Liquid contact"
   },
-  "海绵吸水与挤水": {
-    "zh": "海绵吸水与挤水",
-    "en": "Sponge absorption & squeezing"
+  "液体吸附": {
+    "zh": "液体吸附",
+    "en": "Liquid absorption"
   },
   "微滑反馈抓取": {
     "zh": "微滑反馈抓取",
