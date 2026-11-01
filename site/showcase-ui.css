@@ -29,7 +29,7 @@ h2, h3, h4, h5, h6 { text-wrap: balance; }
 .site-header nav .language-mobile-demo { display: none; }
 .header-cta { min-height: 44px; }
 .language-switch { padding: 3px; border-color: #8baba15c; }
-.language-switch button { min-height: 40px; min-width: 40px; }
+.language-switch button { min-height: 44px; min-width: 44px; }
 .site-header .language-switch button { min-height: 44px; min-width: 44px; }
 .menu-button { min-width: 44px; min-height: 44px; border-radius: 50%; }
 .menu-button:hover { background: #8eaaa51a; }
@@ -122,6 +122,8 @@ h2, h3, h4, h5, h6 { text-wrap: balance; }
 .ego-compact-footer { margin-top: 24px; padding-top: 16px; gap: 12px; line-height: 1.6; }
 .ego-evidence summary { min-height: 44px; display: flex; align-items: center; gap: 8px; }
 .ego-subviews button { min-height: 44px; border-radius: 10px; }
+.ego-phase-list button { min-width: 44px; min-height: 44px; padding: 8px 10px; border-radius: 8px; }
+.ego-loop button { min-width: 44px; min-height: 44px; }
 
 /* Video collections use a quiet shared card, with the title attached to the image. */
 .embodied-grid, .gallery-grid { gap: 28px; }
@@ -166,6 +168,7 @@ dialog { border-radius: 22px; padding: 24px; box-shadow: 0 24px 100px #10291f40;
 .company-story, .research-study { gap: 48px; }
 .page-figure { overflow: hidden; border-radius: var(--ui-radius); background: #edf3f2; }
 .page-figure img { border-radius: 0; }
+.page-figure figcaption { margin: 0; padding: 12px 16px 16px; }
 .page-topics { gap: 24px; }
 .page-topics article { padding: 24px; border: 1px solid var(--ui-line); border-radius: var(--ui-radius); background: #fff; }
 .page-topics h2 { font-size: 22px; line-height: 1.4; }
@@ -208,6 +211,7 @@ dialog { border-radius: 22px; padding: 24px; box-shadow: 0 24px 100px #10291f40;
   .ego-reconstruction-grid { gap: 16px; }
   .ego-controls { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto 44px; gap: 8px; padding: 8px; }
   .ego-controls button { padding: 0; }
+  .ego-controls button:first-child { width: 44px; min-width: 44px; }
   .ego-controls button:last-child { font-size: 11px; overflow-wrap: anywhere; }
   .ego-controls output { font-size: 11px; white-space: nowrap; }
   .ego-compact-footer { gap: 8px; font-size: 11px; }
