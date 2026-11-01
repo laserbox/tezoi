@@ -5,6 +5,7 @@ export function bindComparisonDrag(input) {
   // The input stays focusable, but cannot compete for native touch gestures.
   input.style.pointerEvents = 'none';
   surface.style.touchAction = 'pan-y';
+  surface.style.cursor = 'ew-resize';
   let gesture;
   const update = (clientX) => {
     if (input.disabled) return;

@@ -1,4 +1,4 @@
-import { bindComparisonDrag } from './comparison-drag.js?v=touch-20261101';
+import { bindComparisonDrag } from './comparison-drag.js?v=website-audit-20261101';
 import { icon } from './icons.js?v=mobile-polish-20261023';
 // One camera and timeline, with a draggable reveal of the contact-force view.
 export function mountContactComparison(root) {

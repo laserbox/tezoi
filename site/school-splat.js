@@ -1,4 +1,5 @@
-import { bindComparisonDrag } from './comparison-drag.js?v=touch-20261101';
+import { importViewerModule } from './viewer-module.js?v=website-audit-20261101';
+import { bindComparisonDrag } from './comparison-drag.js?v=website-audit-20261101';
 import { mountReconstructionMethods } from './reconstruction-methods.js?v=methods-20261101';
 const root = document.querySelector('[data-school-showcase]');
 
@@ -11,6 +12,7 @@ if (root) {
   const enterInteractive = root.querySelector('[data-school-enter-interactive]');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let viewer;
+  let reloadRequired = false;
   let stageVisible = false;
   const methodPanel = root.closest('[data-reconstruction-panel]');
   let methodActive = !methodPanel?.hidden;
@@ -129,17 +131,18 @@ if (root) {
   window.addEventListener('pageshow', event => {
     if (event.persisted && canRender() && activeMode() === 'interactive') viewer?.start();
   });
-  button.addEventListener('click', () => loadModel());
+  button.addEventListener('click', () => reloadRequired ? window.location.reload() : loadModel());
   async function loadModel() {
     viewer?.dispose(); viewer = null;
     button.disabled = true;
     status.textContent = '正在加载三维场景，请稍候…';
     try {
-      const { mountReconstruction } = await import('./reconstruction-viewer.js?v=webgs-sog-20261031');
+      const { mountReconstruction } = await importViewerModule('./reconstruction-viewer.js?v=webgs-sog-20261031');
       viewer = await mountReconstruction(root, {
         onStatus: message => { status.textContent = message; },
         onError: error => {
-          status.textContent = `三维场景不可用：${error.message}`;
+          console.error('3DGS 运行失败', error);
+          status.textContent = '三维场景暂时无法加载。';
           overlay.hidden = false;
           button.textContent = '重新加载';
           button.disabled = false;
@@ -153,8 +156,9 @@ if (root) {
         viewer.dispose();
         viewer = null;
       }
-      status.textContent = `三维场景加载失败：${error.message} 请使用支持 WebGPU 的桌面浏览器。`;
-      button.textContent = '重新加载';
+      reloadRequired = error?.code === 'VIEWER_MODULE_LOAD_FAILED';
+      status.textContent = reloadRequired ? '三维组件加载失败，请刷新页面重试。' : '三维场景暂时无法加载。';
+      button.textContent = reloadRequired ? '刷新页面' : '重新加载';
       button.disabled = false;
     }
   }

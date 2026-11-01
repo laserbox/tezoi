@@ -6,7 +6,7 @@ export function mountRealSimWorkflow(root, { onStageChange = () => {} } = {}) {
   const tablist = root.querySelector('[data-workflow-tabs]');
   const egoVideo = root.querySelector('[data-ego-video]');
   const pause = () => root.querySelectorAll('video').forEach(video => video.pause());
-  const compact = window.matchMedia('(max-width: 800px)');
+  const compact = window.matchMedia('(max-width: 850px)');
   let active = Math.max(0, tabs.findIndex(tab => tab.dataset.workflowStage === (root.dataset.activeStage || 'simulation')));
 
   function select(index, focus = false) {

@@ -1662,5 +1662,8 @@ export default {
   "1 段视频": {
     "zh": "1 段视频",
     "en": "1 video"
-  }
+  },
+  "刷新页面": {"zh":"刷新页面","en":"Refresh page"},
+  "三维组件加载失败，请刷新页面重试。": {"zh":"三维组件加载失败，请刷新页面重试。","en":"Unable to load the viewer. Refresh the page to retry."},
+  "三维场景暂时无法加载。": {"zh":"三维场景暂时无法加载。","en":"Unable to load the 3D scene."}
 };
