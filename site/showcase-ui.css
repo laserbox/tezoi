@@ -318,7 +318,7 @@ dialog { border-radius: 22px; padding: 24px; box-shadow: 0 24px 100px #0c1f3c4a;
   .ego-compact .ego-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: visible; gap: 8px 16px; }
   .ego-compact .ego-tabs button { min-height: 64px; padding: 10px 12px; font-size: 14px; }
   .ego-reconstruction-grid { gap: 16px; }
-  .ego-controls { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto 44px; gap: 8px; padding: 8px; }
+  .ego-controls { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto 64px; gap: 8px; padding: 8px; }
   .ego-controls button { padding: 0; }
   .ego-controls button:first-child { width: 44px; min-width: 44px; }
   .ego-controls button:last-child { font-size: 11px; overflow-wrap: anywhere; }
