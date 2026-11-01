@@ -22,10 +22,16 @@ $$('[data-workflow-target]').forEach(link => link.addEventListener('click', () =
   if (link.dataset.workflowTarget === 'simulation') simulationExplorer?.selectView('video');
 }));
 mountSceneComparison($('[data-scene-comparison]'));
-mountSimulationExplorer($('[data-usedv6-explorer]'), {
+const usedv6Explorer = mountSimulationExplorer($('[data-usedv6-explorer]'), {
   comparisonLabel: '照片对比',
   loadViewer: root => import('./studio1-viewer.js?v=studio1-baked-20261029b').then(module => module.mountStudio1Viewer(root)),
 });
+
+const meshMethodPanel = $('[data-usedv6-explorer]')?.closest('[data-reconstruction-panel]');
+if (meshMethodPanel) {
+  usedv6Explorer?.setActive(!meshMethodPanel.hidden);
+  meshMethodPanel.addEventListener('reconstruction-visibility', event => usedv6Explorer?.setActive(event.detail.active));
+}
 
 const tabs = $$('[data-scene]');
 function selectScene(tab) {
