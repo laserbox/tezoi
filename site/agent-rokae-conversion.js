@@ -1,3 +1,4 @@
+import { mountPreviewControls } from './preview-controls.js?v=reconstruction-controls-20261102';
 // IMG_6263 preprocessing and kinematic mapping. No simulation is invoked.
 const MEDIA='assets/ego2sim/rokae6263/';
 const compactViews = [
@@ -20,8 +21,9 @@ function mountCompactAgent(root) {
  const previewVisibility = new WeakMap();
  const previewObserver = new IntersectionObserver(entries => {
   for (const entry of entries) {
-   previewVisibility.set(entry.target, entry.isIntersecting);
-   if (!entry.isIntersecting) entry.target.pause();
+   const video = entry.target.matches('video') ? entry.target : entry.target.querySelector('video');
+   previewVisibility.set(video, entry.isIntersecting);
+   if (!entry.isIntersecting) video.pause();
   }
  }, {threshold:.05});
  const failures = new Set();
@@ -162,9 +164,13 @@ function mountCompactAgent(root) {
      error.hidden = false; retry.hidden = false;
     }
    });
-   video.focus({preventScroll:true});
+   (card.querySelector('[data-preview-play]') || video).focus({preventScroll:true});
   });
-  previewObserver.observe(video);
+  if (!evidence) mountPreviewControls(video, {
+   canPlay: () => previewAllowed(video, ownerStage, false),
+   onError: () => { if (current()) { error.hidden = false; retry.hidden = false; } },
+  });
+  previewObserver.observe(evidence ? video : card);
  }
  function loadEvidence() {
   if (!active || !inView || document.hidden || !$('evidence-panel').open) return;
@@ -206,6 +212,7 @@ function mountCompactAgent(root) {
   if (stage === 1) for (const video of previews) {
    if (!video.hasAttribute('src')) {
     const name = video.dataset.egoPreview;
+    video.preload = 'metadata';
     video.poster = `${MEDIA}${name}.jpg?v=rokae6263-ego-v3`;
     video.src = `${MEDIA}${name}.mp4?v=rokae6263-ego-v3`;
    }
