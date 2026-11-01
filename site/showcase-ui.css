@@ -52,7 +52,7 @@ button, input, select, textarea { font-family: inherit; }
 .school-tabs button span, .ego-tabs button span {
   font-variant-numeric: lining-nums tabular-nums; font-weight: var(--ui-weight-medium);
 }
-.footer-navigation, .footer-bottom, .ego-compact-footer { line-height: 1.6; }
+.footer-bottom, .ego-compact-footer { line-height: 1.6; }
 .section-wrap { max-width: 1440px; }
 h2, h3, h4, h5, h6 { text-wrap: balance; }
 .chapter { --chapter-space: 88px; }
@@ -256,9 +256,6 @@ dialog { border-radius: 22px; padding: 24px; box-shadow: 0 24px 100px #10291f40;
 .journal-entry { gap: 40px; padding-block: 36px; }
 .journal-entry summary { min-height: 56px; }
 .journal-entry h2 { font-size: clamp(24px, 2.5vw, 32px); font-weight: var(--ui-weight-medium); line-height: 1.35; }
-.footer-main { padding-bottom: 36px; }
-.footer-navigation a { min-height: 44px; border-radius: 10px; }
-.footer-bottom { gap: 24px; }
 .ego-standalone .ego-demo-header { min-height: 80px; height: auto; gap: 20px; padding-block: 16px; }
 .ego-standalone .ego-demo-gallery { gap: 16px; }
 .ego-standalone .ego-demo-gallery button { border-radius: 16px; }
@@ -353,8 +350,6 @@ dialog { border-radius: 22px; padding: 24px; box-shadow: 0 24px 100px #10291f40;
   .page-topics article { padding: 24px; }
   .journal-entry { gap: 16px; padding-block: 28px; }
   .journal-entry h2 { font-size: 24px; }
-  .footer-main { gap: 28px; padding-bottom: 32px; }
-  .footer-bottom { gap: 8px 20px; }
   dialog { padding: 16px; border-radius: 18px; }
 }
 @media (max-width: 360px) {
