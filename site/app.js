@@ -1,3 +1,4 @@
+import { mountVideoDialog } from './video-dialog.js?v=video-dialog-20261102';
 import { importViewerModule } from './viewer-module.js?v=website-audit-20261101';
 import { icon } from './icons.js?v=mobile-polish-20261023';
 import { mountPhysicsCarousel } from './physics-carousel.js?v=smooth-rotation-20261102';
@@ -62,7 +63,7 @@ tabs.forEach((tab, i) => {
 });
 
 const videos = {
-  "hero-full": {"src":"assets/homepage-hero.mp4?v=hero-v8-20261031","title":"TEZOI 仿真演示","muted":false},
+  "hero-full": {"poster":"assets/homepage-hero.jpg","src":"assets/homepage-hero.mp4?v=hero-v8-20261031","title":"TEZOI 仿真演示","muted":false},
   "gallery-panda-mixing": {"src":"assets/gallery-panda-mixing.mp4","title":"离心管开盖与滴加混匀"},
   "gallery-soft-bag": {"src":"assets/gallery-soft-bag.mp4?v=soft-bag-realism-20261102","title":"软袋开袋、加液与夹封"},
   "gallery-pigment-dilution": {"src":"assets/gallery-pigment-dilution.mp4?v=20261031","title":"色素稀释"},
@@ -95,39 +96,25 @@ const videos = {
   "gallery-matterix-liquid": {"src":"assets/gallery-matterix-liquid.mp4?v=20261031","title":"实验室液体操作"},
 };
 const dialog = $('#video-dialog');
-const player = $('#demo-player');
-let previousFocus;
-$$('[data-video]').forEach((button) => button.addEventListener('click', () => {
-  previousFocus = button;
-  const video = videos[button.dataset.video];
-  $('#video-title').textContent = video.title;
-  player.src = video.src;
-  if (typeof video.muted === 'boolean') player.muted = video.muted;
-  dialog.showModal();
-  heroVideo?.setActive(false);
-  realSimWorkflow?.pause();
-  agentConversion?.pause?.();
-  contactComparison?.pause();
-  simulationExplorer?.pause();
-  document.body.classList.add('modal-open');
-  updateMaterialMotion();
-  player.play().catch(() => { /* Native controls remain usable if autoplay is blocked. */ });
+const videoDialog = mountVideoDialog(dialog, {
+  onOpen() {
+    heroVideo?.setActive(false);
+    realSimWorkflow?.pause();
+    agentConversion?.pause?.();
+    contactComparison?.pause();
+    simulationExplorer?.pause();
+    document.body.classList.add('modal-open');
+    updateMaterialMotion();
+  },
+  onClose() {
+    heroVideo?.setActive(true);
+    document.body.classList.remove('modal-open');
+    updateMaterialMotion();
+  },
+});
+$$('[data-video]').forEach(button => button.addEventListener('click', () => {
+  videoDialog.open(videos[button.dataset.video], button);
 }));
-$('#close-video').addEventListener('click', () => dialog.close());
-dialog.addEventListener('click', (event) => {
-  if (event.target !== dialog) return;
-  const bounds = dialog.getBoundingClientRect();
-  if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
-});
-dialog.addEventListener('close', () => {
-  heroVideo?.setActive(true);
-  player.pause();
-  player.removeAttribute('src');
-  player.load();
-  document.body.classList.remove('modal-open');
-  updateMaterialMotion();
-  previousFocus?.focus();
-});
 
 // Material and embodied studies move only while visible.
 // Opening a large player also stops every preview.
