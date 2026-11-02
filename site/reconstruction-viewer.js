@@ -1,6 +1,6 @@
 import { GaussianRenderer } from './assets/photara-webgs/releases/d2a872a/renderer.js';
 import { PlyLoader } from './assets/photara-webgs/releases/d2a872a/loader.js';
-import { StudioControls } from './assets/photara-webgs/studio-controls.js';
+import { StudioControls } from './assets/photara-webgs/studio-controls.js?v=selected-camera-20261102';
 
 /** Full Photara model, loaded only after the visitor chooses to enter. */
 export async function mountReconstruction(root, { onStatus, onError, source }) {
@@ -9,7 +9,7 @@ export async function mountReconstruction(root, { onStatus, onError, source }) {
   const panel = host.closest('[data-school-panel]');
   const canvas = document.createElement('canvas');
   canvas.tabIndex = 0;
-  canvas.setAttribute('aria-label', '三维重建场景：左键环绕，中键平移，按住右键和 WASD/QE 移动');
+  canvas.setAttribute('aria-label', '三维重建场景：双击设置环绕中心，左键环绕，中键平移，按住右键和 WASD/QE 移动');
   host.replaceChildren(canvas);
   const abort = new AbortController(), loader = new PlyLoader();
   let renderer, controls, resize, frame = 0, last = 0, active = false, disposed = false;
@@ -40,7 +40,7 @@ export async function mountReconstruction(root, { onStatus, onError, source }) {
     controls?.dispose(); renderer?.dispose(); canvas.remove(); navigation.hidden = true;
   }
   try {
-    const response = await fetch(new URL('./assets/reconstruction/scene.json', import.meta.url), { signal: abort.signal });
+    const response = await fetch(new URL('./assets/reconstruction/scene.json?v=selected-camera-20261102', import.meta.url), { signal: abort.signal });
     if (!response.ok) throw new Error(`场景配置 HTTP ${response.status}`);
     const scene = await response.json();
     renderer = await GaussianRenderer.create(canvas, { onError: error => { stop(); onError(error); } });
@@ -83,10 +83,61 @@ export async function mountReconstruction(root, { onStatus, onError, source }) {
     await renderer.setModel(model); loader.dispose();
     await renderer.device.queue.onSubmittedWorkDone();
     const listen = (target, event, fn) => target.addEventListener(event, fn, { signal: abort.signal });
-    listen(root.querySelector('[data-school-navigation-mode]'), 'change', event => {
-      controls.mode = event.target.value; controls.keys.clear(); invalidate();
+    let picking = false;
+    listen(canvas, 'dblclick', async event => {
+      if (event.button !== 0 || picking || !active || disposed) return;
+      event.preventDefault();
+      const box = canvas.getBoundingClientRect();
+      if (box.width < 1 || box.height < 1) return;
+      picking = true;
+      const pose = () => JSON.stringify([controls.target, controls.distance, controls.yaw, controls.pitch, controls.roll]);
+      const before = pose();
+      try {
+        // Pick in render pixels, including when output resolution is capped.
+        const scale = Math.min(1, 1440 / box.width);
+        const width = Math.max(1, Math.round(box.width * scale));
+        const height = Math.max(1, Math.round(box.height * scale));
+        renderer.render(controls.camera(width, height));
+        const point = await renderer.pick((event.clientX - box.left) * width / box.width, (event.clientY - box.top) * height / box.height);
+        // Ignore stale readbacks if the visitor moved or left the viewer.
+        if (!disposed && active && pose() === before && point) controls.focus(point);
+      } catch (error) {
+        if (!disposed) console.warn('双击聚焦失败', error);
+      } finally { picking = false; }
     });
-    controls.mode = root.querySelector('[data-school-navigation-mode]').value;
+    const modeButtons = [...root.querySelectorAll('[data-school-navigation-mode]')];
+    for (const button of modeButtons) listen(button, 'click', () => {
+      controls.mode = button.dataset.schoolNavigationMode;
+      modeButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+      controls.keys.clear(); invalidate();
+      canvas.focus({ preventScroll: true });
+    });
+    controls.mode = modeButtons.find(button => button.getAttribute('aria-pressed') === 'true').dataset.schoolNavigationMode;
+    const speed = root.querySelector('[data-school-speed]');
+    const speedValue = root.querySelector('[data-school-speed-value]');
+    const syncSpeed = () => {
+      controls.speed = Number(speed.value);
+      const label = `${Number(speed.value)}×`;
+      speedValue.textContent = label;
+      speed.setAttribute('aria-valuetext', label);
+      controls.keys.clear();
+      invalidate();
+    };
+    syncSpeed();
+    listen(speed, 'input', syncSpeed);
+    listen(root.querySelector('[data-school-export-camera]'), 'click', () => {
+      const box = host.getBoundingClientRect();
+      const camera = controls.camera(Math.max(1, Math.round(box.width)), Math.max(1, Math.round(box.height)));
+      const saved = {
+        ...camera, name: 'selected-tour-view', position: controls.basis().eye,
+        target: [...controls.target], navigationMode: controls.mode, speed: controls.speed,
+      };
+      const url = URL.createObjectURL(new Blob([JSON.stringify(saved, null, 2)], { type: 'application/json' }));
+      const link = document.createElement('a');
+      link.href = url; link.download = 'tezoi-camera-view.json';
+      document.body.append(link); link.click(); link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
     listen(root.querySelector('[data-school-reset]'), 'click', () => { controls.reset(); invalidate(); canvas.focus({ preventScroll: true }); });
     listen(root.querySelector('[data-school-fullscreen]'), 'click', async () => {
       try {

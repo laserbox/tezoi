@@ -11,8 +11,8 @@
   <script src="site-shell.js?v=website-audit-20261101" type="module"></script>
   <script src="app.js?v=module-detail-20261102" type="module"></script>
   <link rel="stylesheet" href="ego2sim.css?v=rokae6263-v1">
-  <link rel="stylesheet" href="school-splat.css?v=image-comparison-20261031">
-  <script type="module" src="school-splat.js?v=webgs-d2a872a"></script>
+  <link rel="stylesheet" href="school-splat.css?v=selected-camera-20261102">
+  <script type="module" src="school-splat.js?v=selected-camera-20261102"></script>
 
 <link rel="stylesheet" href="./i18n.css?v=bilingual-20261101" data-tezoi-i18n>
 <script src="./i18n-bootstrap.js?v=first-paint-20261102" data-tezoi-i18n></script>
@@ -280,8 +280,16 @@
           <div class="school-screen school-interactive" id="school-interactive" role="tabpanel" aria-labelledby="school-tab-interactive" data-school-panel="interactive" hidden>
             <div class="school-canvas" data-school-canvas></div>
             <div class="school-navigation" data-school-navigation hidden>
-              <label>导航 <select data-school-navigation-mode aria-label="相机导航模式"><option value="turntable">Turntable</option><option value="trackball">Trackball</option><option value="first_person">First person</option><option value="fly">Fly</option></select></label>
-              <button type="button" data-school-reset>重置位置</button><button type="button" data-school-fullscreen>全屏</button>
+              <div class="school-navigation-modes" role="group" aria-label="相机导航模式">
+                <button type="button" data-school-navigation-mode="turntable" aria-pressed="true" aria-label="转台环绕，双击场景设置中心" data-tooltip="转台环绕 · 双击场景设置中心"><svg viewBox="0 0 20 20" aria-hidden="true"><ellipse cx="10" cy="11" rx="7" ry="4"/><path d="m13 4 3 3-4 1M10 4v9"/></svg></button>
+                <button type="button" data-school-navigation-mode="trackball" aria-pressed="false" aria-label="自由旋转" data-tooltip="自由旋转"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7"/><ellipse cx="10" cy="10" rx="3" ry="7"/><path d="M3 10h14"/></svg></button>
+                <button type="button" data-school-navigation-mode="first_person" aria-pressed="false" aria-label="第一人称" data-tooltip="第一人称"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5" r="2"/><path d="m6 17 1-6 3-3 3 3 1 6M7 11h6M10 8v9"/></svg></button>
+                <button type="button" data-school-navigation-mode="fly" aria-pressed="false" aria-label="自由飞行" data-tooltip="自由飞行"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m3 9 14-6-6 14-2-6-6-2Zm6 2 8-8"/></svg></button>
+              </div>
+              <label class="school-speed" data-tooltip="移动速度 · 拖动调节" aria-label="移动速度"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15a7 7 0 1 1 14 0M10 11l4-4M4 12h1M10 4v1M15 12h1"/><circle cx="10" cy="12" r="1.5"/></svg><input type="range" min="0.1" max="4" step="0.1" value="1" data-school-speed aria-label="相机移动速度" aria-valuetext="1×"><output data-school-speed-value>1×</output></label>
+              <button type="button" data-school-export-camera aria-label="导出当前视角" data-tooltip="导出当前视角"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h3l2-2h4l2 2h3v10H3Z"/><circle cx="10" cy="11" r="3"/></svg></button>
+              <button type="button" data-school-reset aria-label="重置位置" data-tooltip="重置位置"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 8a6 6 0 1 1 0 5M4 3v5h5"/></svg></button>
+              <button type="button" data-school-fullscreen aria-label="切换全屏" data-tooltip="切换全屏"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 3H3v4M13 3h4v4M17 13v4h-4M7 17H3v-4"/></svg></button>
             </div>
             <div class="school-viewer-overlay" data-school-overlay><p data-school-status role="status">3D 场景 · 49.8 MB</p><button type="button" data-school-load>进入三维场景 ↗</button></div>
             <div class="school-screen-label"><span class="school-live-dot"></span> INTERACTIVE / 03</div>

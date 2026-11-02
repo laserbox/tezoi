@@ -133,11 +133,19 @@ if (root) {
   });
   button.addEventListener('click', () => reloadRequired ? window.location.reload() : loadModel());
   async function loadModel() {
+    if (window.location.protocol === 'file:') {
+      status.textContent = '三维场景需要通过本地服务器打开，请使用 http://localhost:4176/，不能直接打开 HTML 文件。';
+      return;
+    }
+    if (!window.isSecureContext || !navigator.gpu) {
+      status.textContent = '当前浏览器未启用 WebGPU，请使用支持 WebGPU 的 Chrome 或 Edge，并通过 localhost 或 HTTPS 打开。';
+      return;
+    }
     viewer?.dispose(); viewer = null;
     button.disabled = true;
     status.textContent = '正在加载三维场景，请稍候…';
     try {
-      const { mountReconstruction } = await importViewerModule('./reconstruction-viewer.js?v=webgs-d2a872a');
+      const { mountReconstruction } = await importViewerModule('./reconstruction-viewer.js?v=selected-camera-20261102');
       viewer = await mountReconstruction(root, {
         onStatus: message => { status.textContent = message; },
         onError: error => {

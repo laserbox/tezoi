@@ -23,7 +23,15 @@ export class StudioControls {
     canvas.onkeyup=e=>this.keys.delete(e.key.length===1?e.key.toLowerCase():e.key);this.onBlur=()=>{this.keys.clear();this.drag=null;};window.addEventListener('blur',this.onBlur);
   }
   dispose(){window.removeEventListener('blur',this.onBlur);this.keys.clear();this.drag=null;}
-  reset(){const m=this.initial.worldToCamera,f=[m[2],m[6],m[10]];this.yaw=Math.atan2(-f[0],-f[2]);this.pitch=Math.asin(f[1]);this.roll=0;this.distance=1;this.target=add(this.initial.position,f,this.distance);this.keys.clear();}
+  reset(){const m=this.initial.worldToCamera,f=[m[2],m[6],m[10]];this.yaw=Math.atan2(-f[0],-f[2]);this.pitch=Math.asin(Math.max(-1,Math.min(1,f[1])));this.roll=0;const target=this.initial.target;this.distance=target?Math.max(.001,Math.hypot(...add(target,this.initial.position,-1))):1;this.target=target?[...target]:add(this.initial.position,f,this.distance);this.keys.clear();this.drag=null;}
+  focus(point){
+    if(!Array.isArray(point)||point.length!==3||!point.every(Number.isFinite))return false;
+    const eye=this.basis().eye,delta=add(point,eye,-1),distance=Math.hypot(...delta);
+    if(distance<.001)return false;
+    const f=delta.map(v=>v/distance);
+    this.target=[...point];this.distance=distance;this.yaw=Math.atan2(-f[0],-f[2]);this.pitch=Math.asin(Math.max(-1,Math.min(1,f[1])));this.roll=0;
+    this.keys.clear();this.drag=null;this.invalidate();return true;
+  }
   levelRight(f){const r=cross(f,[0,-1,0]);return dot(r,r)>1e-8?norm(r):[-Math.cos(this.yaw),0,Math.sin(this.yaw)];}
   basis(){const c=Math.cos(this.pitch),f=[-c*Math.sin(this.yaw),Math.sin(this.pitch),-c*Math.cos(this.yaw)],level=this.levelRight(f),r=add(level.map(v=>v*Math.cos(this.roll)),cross(level,f),Math.sin(this.roll));return{f,r,up:cross(r,f),eye:add(this.target,f,-this.distance)};}
   update(dt){if(this.drag?.button!==2)return false;const b=this.basis(),first=this.mode==='first_person',f=first?[-Math.sin(this.yaw),0,-Math.cos(this.yaw)]:b.f,r=first?this.levelRight(f):b.r,up=first?[0,-1,0]:b.up;let movement=[0,0,0];
