@@ -1,11 +1,11 @@
 import { importViewerModule } from './viewer-module.js?v=website-audit-20261101';
 import { icon } from './icons.js?v=mobile-polish-20261023';
 import { mountHeroVideo } from './hero-video.js?v=watch-full-20261029';
-import { mountAgentConversion } from './agent-rokae-conversion.js?v=inline-playback-20261102';
+import { mountAgentConversion } from './agent-rokae-conversion.js?v=module-detail-20261102';
 import { mountRealSimWorkflow } from './real-sim-workflow.js?v=website-audit-20261101';
 import { mountSceneComparison } from './scene-comparison.js?v=website-audit-20261101';
-import { mountContactComparison } from './contact-comparison.js?v=deep-audit-20261101';
-import { mountSimulationExplorer } from './simulation-explorer.js?v=website-audit-20261101';
+import { mountContactComparison } from './contact-comparison.js?v=module-detail-20261102';
+import { mountSimulationExplorer } from './simulation-explorer.js?v=module-detail-20261102';
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];

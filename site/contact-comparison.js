@@ -1,3 +1,4 @@
+import { paintPlaybackProgress } from './playback-progress.js?v=module-detail-20261102';
 import { bindComparisonDrag } from './comparison-drag.js?v=website-audit-20261101';
 import { icon } from './icons.js?v=mobile-polish-20261023';
 // One camera and timeline, with a draggable reveal of the contact-force view.
@@ -34,6 +35,7 @@ export function mountContactComparison(root) {
   };
   function updateClock(time = simulation.currentTime) {
     timeline.value = String(time);
+    paintPlaybackProgress(timeline);
     timeline.setAttribute('aria-valuetext', `${formatTime(time)}，共 ${formatTime(duration)}`);
     clock.textContent = `${formatTime(time)} / ${formatTime(duration)}`;
   }
@@ -241,5 +243,6 @@ export function mountContactComparison(root) {
     if (!entry.isIntersecting) pause();
   }, { threshold: .15 });
   observer.observe(root);
+  paintPlaybackProgress(timeline);
   return { pause };
 }

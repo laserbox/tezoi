@@ -1,4 +1,5 @@
-import { mountPreviewControls } from './preview-controls.js?v=inline-playback-20261102';
+import { paintPlaybackProgress } from './playback-progress.js?v=module-detail-20261102';
+import { mountPreviewControls } from './preview-controls.js?v=module-detail-20261102';
 // IMG_6263 preprocessing and kinematic mapping. No simulation is invoked.
 const MEDIA='assets/ego2sim/rokae6263/';
 const compactViews = [
@@ -44,6 +45,7 @@ function mountCompactAgent(root) {
   const settings = compactClocks[clock];
   scrub.max = settings.limit;
   scrub.value = time;
+  paintPlaybackProgress(scrub);
   scrub.setAttribute('aria-label', `${settings.label}时间`);
   scrub.setAttribute('aria-valuetext', `${time.toFixed(1)} 秒，共 ${settings.limit.toFixed(1)} 秒`);
   setText('time', `${time.toFixed(1).padStart(4,'0')} / ${settings.limit.toFixed(1)} s`);
