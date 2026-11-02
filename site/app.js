@@ -81,7 +81,7 @@ const videos = {
   "tactile": {"src":"assets/ipc-tactile.mp4","title":"凝胶形变与接触力"},
   "haoxiang-cloth": {"src":"assets/haoxiang-cloth.mp4?v=physical-robotbed-v20","title":"柔性接触"},
   "haoxiang-shell": {"src":"assets/haoxiang-shell.mp4?v=physical-robotbed-v20","title":"液体接触"},
-  "haoxiang-porous": {"src":"assets/haoxiang-porous.mp4?v=physical-robotbed-v20","title":"液体吸附"},
+  "haoxiang-porous": {"src":"assets/haoxiang-porous.mp4?v=kitchen-20261102","title":"液体吸附"},
   "haoxiang-safe-grasp": {"src":"assets/haoxiang-safe-grasp.mp4","title":"微滑反馈抓取"},
   "haoxiang-bolt-dashboard": {"src":"assets/haoxiang-bolt-dashboard.mp4","title":"多模态触觉感知"},
   "haoxiang-allegro-vbts": {"src":"assets/haoxiang-allegro-vbts.mp4","title":"Allegro 触觉抓取"},
