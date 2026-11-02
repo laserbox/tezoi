@@ -385,3 +385,90 @@ dialog::backdrop { background: #000b; backdrop-filter: none; } /* taste-skill-ig
   .embodied-grid { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
   .embodied-card h4 { font-size: 18px; }
 }
+
+/* Small content labels share the Interactive 3D outline vocabulary.
+   CSS masks stay decorative and survive runtime text/locale updates. */
+:root {
+  --label-icon-cube: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m10%202%207%204v8l-7%204-7-4V6Zm-7%204%207%204%207-4M10%2010v8%22%2F%3E%3C%2Fsvg%3E");
+  --label-icon-compare: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%222.5%22%20y%3D%223.5%22%20width%3D%2215%22%20height%3D%2213%22%20rx%3D%221.5%22%2F%3E%3Cpath%20d%3D%22M10%202v16M4.5%2012l2.5-3%203%203M10%2013l3-4%202.5%203%22%2F%3E%3C%2Fsvg%3E");
+  --label-icon-scan: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M7%203H3v4m10-4h4v4M3%2013v4h4m6%200h4v-4M3%2010h14%22%2F%3E%3Cpath%20d%3D%22m7%208%203-2%203%202v5l-3%202-3-2Z%22%2F%3E%3C%2Fsvg%3E");
+  --label-icon-images: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%226%22%20y%3D%226%22%20width%3D%2211%22%20height%3D%2211%22%20rx%3D%221.5%22%2F%3E%3Cpath%20d%3D%22M13%203H4a1%201%200%200%200-1%201v9m5%201%203-3%204%204%22%2F%3E%3Ccircle%20cx%3D%2213.5%22%20cy%3D%229.5%22%20r%3D%22.75%22%2F%3E%3C%2Fsvg%3E");
+  --label-icon-film: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%222.5%22%20y%3D%223.5%22%20width%3D%2215%22%20height%3D%2213%22%20rx%3D%221.5%22%2F%3E%3Cpath%20d%3D%22M6%203.5v13m8-13v13M2.5%207H6m-3.5%206H6m8-6h3.5M14%2013h3.5m-9-6%203%203-3%203Z%22%2F%3E%3C%2Fsvg%3E");
+  --label-icon-camera: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%222.5%22%20y%3D%225.5%22%20width%3D%2215%22%20height%3D%2211%22%20rx%3D%222%22%2F%3E%3Cpath%20d%3D%22m6%205.5%201-3h6l1%203%22%2F%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%2211%22%20r%3D%223%22%2F%3E%3C%2Fsvg%3E");
+  --label-icon-flow: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%222%22%20y%3D%223%22%20width%3D%225%22%20height%3D%225%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2213%22%20y%3D%2212%22%20width%3D%225%22%20height%3D%225%22%20rx%3D%221%22%2F%3E%3Cpath%20d%3D%22M7%205.5h6a2%202%200%200%201%202%202V10m-2-2%202%202%202-2M5%2010v4a1%201%200%200%200%201%201h4m-2-2%202%202-2%202%22%2F%3E%3C%2Fsvg%3E");
+  --label-icon-robot: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%226%22%20width%3D%2214%22%20height%3D%2210%22%20rx%3D%222%22%2F%3E%3Cpath%20d%3D%22M10%206V3m-4%207h1m6%200h1m-7%203h6M1%209v4m18-4v4%22%2F%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%222.5%22%20r%3D%22.75%22%2F%3E%3C%2Fsvg%3E");
+  --label-icon-list: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%224%22%20y%3D%223%22%20width%3D%2212%22%20height%3D%2215%22%20rx%3D%221.5%22%2F%3E%3Cpath%20d%3D%22M7%207h6m-6%204h6m-6%204h3%22%2F%3E%3C%2Fsvg%3E");
+  --label-icon-layers: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m2%207%208-4%208%204-8%204Zm0%204%208%204%208-4M2%2015l8%204%208-4%22%2F%3E%3C%2Fsvg%3E");
+  --label-icon-droplet: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M10%202C8%205%204%209%204%2012a6%206%200%200%200%2012%200c0-3-4-7-6-10Z%22%2F%3E%3Cpath%20d%3D%22M7%2012a3%203%200%200%200%203%203%22%2F%3E%3C%2Fsvg%3E");
+  --label-icon-contact: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%2015h14M6%206l4%204%204-4M10%202v8m-3%203%203-3%203%203%22%2F%3E%3C%2Fsvg%3E");
+  --label-icon-waves: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M2%205c3-4%205%204%208%200s5%204%208%200M2%2010c3-4%205%204%208%200s5%204%208%200M2%2015c3-4%205%204%208%200s5%204%208%200%22%2F%3E%3C%2Fsvg%3E");
+  --label-icon-factory: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2017V8L8%205v5l5-3v10Zm10.5-7h4.5v7M4.5%2013h1m3%200h1M15%203h2v7%22%2F%3E%3C%2Fsvg%3E");
+  --label-icon-flask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M7%202h6M8%202v6l-4%207a2%202%200%200%200%202%203h8a2%202%200%200%200%202-3l-4-7V2M6%2012h8%22%2F%3E%3C%2Fsvg%3E");
+}
+:is(.workflow-number, .ego-tabs button > span:first-child,
+    .school-tabs button > span:first-child, .gallery-tabs button,
+    .simulation-view-tabs button:not(:has(svg)), .ego-subviews button,
+    .workflow-pane-heading h4, .compare-heading h4, .embodied-card h4,
+    .gallery-card h4, .ego-preview-card h6, .ego-evidence-card h6,
+    .benchmark-methods h4, .page-topics h2)::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  background: currentColor;
+  -webkit-mask: var(--label-icon, var(--label-icon-cube)) center / contain no-repeat;
+  mask: var(--label-icon, var(--label-icon-cube)) center / contain no-repeat;
+  vertical-align: -.15em;
+}
+.workflow-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 40px;
+  height: 32px;
+  flex: 0 0 auto;
+}
+:is(.workflow-pane-heading h4, .compare-heading h4, .embodied-card h4,
+    .gallery-card h4, .ego-preview-card h6, .ego-evidence-card h6,
+    .benchmark-methods h4, .page-topics h2)::before { margin-right: 8px; }
+.ego-subviews button::before { margin-right: 6px; }
+:is(.ego-tabs, .school-tabs) button > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 5px;
+}
+.school-tabs button { min-height: 68px; }
+.simulation-view-tabs svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+[data-workflow-stage='source'], .workflow-pane-heading { --label-icon: var(--label-icon-camera); }
+[data-workflow-stage='agent'] { --label-icon: var(--label-icon-flow); }
+[data-workflow-stage='validation'], #workflow-panel-validation .workflow-pane-heading { --label-icon: var(--label-icon-robot); }
+[data-ego-step='0'] { --label-icon: var(--label-icon-list); }
+[data-ego-step='2'] { --label-icon: var(--label-icon-contact); }
+[data-ego-step='3'] { --label-icon: var(--label-icon-robot); }
+[data-reconstruction-method='gaussian'] { --label-icon: var(--label-icon-scan); }
+[data-reconstruction-method='multi'] { --label-icon: var(--label-icon-images); }
+[data-school-mode='comparison'], [data-simulation-view='video'] { --label-icon: var(--label-icon-compare); }
+[data-school-mode='evolution'] { --label-icon: var(--label-icon-film); }
+[data-scene='factory'] { --label-icon: var(--label-icon-factory); }
+[data-scene='lab'] { --label-icon: var(--label-icon-flask); }
+.embodied-card:nth-child(1) { --label-icon: var(--label-icon-droplet); }
+.embodied-card:nth-child(2) { --label-icon: var(--label-icon-contact); }
+.embodied-card:nth-child(3) { --label-icon: var(--label-icon-waves); }
+.ego-preview-card:has([data-ego-preview^='segmentation']) { --label-icon: var(--label-icon-scan); }
+.ego-preview-card:has([data-ego-preview='depth']) { --label-icon: var(--label-icon-layers); }
+.ego-preview-card:has([data-ego-preview^='mapping']) { --label-icon: var(--label-icon-flow); }
+.gallery-card { --label-icon: var(--label-icon-film); }
+@media (max-width: 600px) {
+  [data-reconstruction-methods] > .gallery-tabs button { flex-direction: column; gap: 6px; }
+  html[lang='en'] [data-reconstruction-methods] > .gallery-tabs button:last-child { min-height: 60px; }
+}
