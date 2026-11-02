@@ -552,3 +552,22 @@ body[data-page='home'] #gallery .gallery-card h4 { font-size: clamp(17px, 1.3vw,
 @media (max-width: 850px) {
   body[data-page='home'] #scene-reconstruction { grid-template-columns: minmax(0, 1fr); gap: 24px; }
 }
+
+/* Detail pass: retain the existing layout, surfaces, geometry and type scale. */
+::selection { color: var(--ink); background: var(--ui-accent-soft); }
+.menu-button span { transition: transform 160ms ease; }
+.menu-button[aria-expanded='true'] span:first-child { transform: translateY(3.5px) rotate(45deg); }
+.menu-button[aria-expanded='true'] span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+.workflow-step { transition: color 160ms ease, background-color 160ms ease; }
+.school-tabs button[aria-selected='true']:hover,
+.ego-compact .ego-tabs button[aria-selected='true']:hover { color: var(--ink); background: var(--ui-highlight); }
+.gallery-image:focus-visible .gallery-play,
+.embodied-film:focus-visible .material-inline-toggle { color: var(--ink); background: var(--paper); }
+#close-video:hover { background: #d7dddb; }
+@media (max-width: 850px) {
+  .workflow-step { gap: 4px; }
+  .workflow-step small { margin-top: 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-button span, .workflow-step { transition: none; }
+}

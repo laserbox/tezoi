@@ -10,7 +10,7 @@ const sitePath = new URL('./', import.meta.url).pathname;
 const textState = new WeakMap();
 const attributeState = new WeakMap();
 const hrefState = new WeakMap();
-const attributes = ['title', 'alt', 'aria-label', 'aria-valuetext', 'placeholder'];
+const attributes = ['title', 'alt', 'aria-label', 'aria-valuetext', 'placeholder', 'data-tooltip'];
 let remembered;
 try { remembered = localStorage.getItem('tezoi-language'); } catch { /* Storage is optional. */ }
 let language = resolveLanguage(location.search, remembered);
