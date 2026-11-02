@@ -442,10 +442,10 @@ body[data-page='home'] :is(#playground, #showcase, #gallery) {
 }
 body[data-page='home'] :is(#playground, #showcase, #gallery) > .chapter-marker h2,
 body[data-page='home'] #playground > .section-wrap > .chapter-marker h2 {
-  font-size: clamp(56px, 6.2vw, 96px);
+  font-size: clamp(44px, 4.6vw, 64px);
   font-weight: 600;
-  line-height: 1.04;
-  letter-spacing: -.045em;
+  line-height: 1.08;
+  letter-spacing: -.03em;
 }
 body[data-page='home'] #playground {
   color: var(--ink);
@@ -522,7 +522,7 @@ body[data-page='home'] .site-footer { padding-top: 24px; background: var(--chapt
   body[data-page='home'] :is(#playground, #showcase, #gallery) { --chapter-space: 64px; }
   body[data-page='home'] :is(#showcase, #gallery) > .chapter-marker h2,
   body[data-page='home'] #playground > .section-wrap > .chapter-marker h2 {
-    font-size: clamp(40px, 11vw, 54px);
+    font-size: clamp(32px, 8.8vw, 38px);
   }
   body[data-page='home'] #playground > .section-wrap { gap: 20px; }
   body[data-page='home'] #playground .workflow-intro { margin-bottom: 8px; }
