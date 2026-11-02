@@ -63,31 +63,33 @@ controls.className = 'language-switch';
 controls.setAttribute('role', 'group');
 controls.setAttribute('data-i18n-skip', '');
 controls.innerHTML = '<button type="button" data-language="zh" lang="zh-CN">中</button><button type="button" data-language="en" lang="en">EN</button>';
-const header = document.querySelector('.site-header');
-if (header) {
-  header.append(controls);
-  const demo = header.querySelector('.header-cta');
-  const nav = header.querySelector('#primary-nav');
-  if (demo && nav) {
-    const mobileDemo = document.createElement('a');
-    mobileDemo.className = 'language-mobile-demo';
-    mobileDemo.href = demo.getAttribute('href');
-    mobileDemo.textContent = demo.textContent.trim();
-    mobileDemo.addEventListener('click', () => {
-      const menu = header.querySelector('.menu-button');
-      if (menu?.getAttribute('aria-expanded') === 'true') menu.click();
-    });
-    nav.append(mobileDemo);
-  }
-} else {
-  controls.classList.add('language-switch-floating');
-  document.body.classList.add('language-standalone');
-  document.body.prepend(controls);
-  for (const table of document.querySelectorAll('table')) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'language-table-scroll';
-    table.before(wrapper);
-    wrapper.append(table);
+function mountControls() {
+  const header = document.querySelector('.site-header');
+  if (header) {
+    header.append(controls);
+    const demo = header.querySelector('.header-cta');
+    const nav = header.querySelector('#primary-nav');
+    if (demo && nav) {
+      const mobileDemo = document.createElement('a');
+      mobileDemo.className = 'language-mobile-demo';
+      mobileDemo.href = demo.getAttribute('href');
+      mobileDemo.textContent = demo.textContent.trim();
+      mobileDemo.addEventListener('click', () => {
+        const menu = header.querySelector('.menu-button');
+        if (menu?.getAttribute('aria-expanded') === 'true') menu.click();
+      });
+      nav.append(mobileDemo);
+    }
+  } else {
+    controls.classList.add('language-switch-floating');
+    document.body.classList.add('language-standalone');
+    document.body.prepend(controls);
+    for (const table of document.querySelectorAll('table')) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'language-table-scroll';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
   }
 }
 
@@ -128,4 +130,26 @@ controls.addEventListener('click', event => {
   if (button) setLanguage(button.dataset.language);
 });
 window.addEventListener('popstate', () => setLanguage(resolveLanguage(location.search, language), false));
-setLanguage(language);
+// Wait for complete text nodes: translating while the HTML parser is appending
+// a streamed text node can mix a translated prefix with an untranslated suffix.
+const root = document.documentElement;
+let reveal = () => {};
+function start() {
+  if (document.readyState === 'loading') return;
+  document.removeEventListener('readystatechange', start);
+  try {
+    mountControls();
+    setLanguage(language);
+  } finally {
+    reveal();
+  }
+}
+if (document.readyState === 'loading') {
+  const display = root.style.getPropertyValue('display');
+  const priority = root.style.getPropertyPriority('display');
+  reveal = () => display ? root.style.setProperty('display', display, priority) : root.style.removeProperty('display');
+  // The early bundle is already loaded. Reveal at parser completion, before
+  // unrelated deferred modules finish; no timer or network-dependent overlay.
+  document.addEventListener('readystatechange', start);
+  root.style.setProperty('display', 'none', 'important');
+} else start();
