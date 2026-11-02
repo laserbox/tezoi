@@ -1,5 +1,6 @@
 import { importViewerModule } from './viewer-module.js?v=website-audit-20261101';
 import { icon } from './icons.js?v=mobile-polish-20261023';
+import { mountPhysicsCarousel } from './physics-carousel.js?v=rotation-20261102';
 import { mountHeroVideo } from './hero-video.js?v=watch-full-20261029';
 import { mountAgentConversion } from './agent-rokae-conversion.js?v=module-detail-20261102';
 import { mountRealSimWorkflow } from './real-sim-workflow.js?v=website-audit-20261101';
@@ -130,13 +131,15 @@ dialog.addEventListener('close', () => {
 
 // Material and embodied studies move only while visible.
 // Opening a large player also stops every preview.
-const materialPreviews = $$('[data-material-preview]');
+const physicsCarousel = mountPhysicsCarousel($('#embodied-studies'));
+const materialPreviews = $$('[data-material-preview]').filter(video => !video.closest('[data-physics-carousel]'));
 const visiblePreviews = new Set();
 let manualPreviewPlayback = new WeakMap();
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 const motionToggles = $$('.motion-toggle');
 let materialPaused = motionPreference.matches;
 function updateMaterialMotion() {
+  physicsCarousel?.setSuspended(dialog.open);
   motionToggles.forEach((toggle) => {
     toggle.setAttribute('aria-pressed', String(materialPaused));
     toggle.setAttribute('aria-label', materialPaused ? '播放动态' : '暂停动态');
@@ -149,7 +152,7 @@ function updateMaterialMotion() {
   }
 }
 // These three studies play in place; Gallery keeps its separate modal player.
-$$('[data-inline-video]').forEach((button) => {
+$$('[data-inline-video]').filter(button => !button.closest('[data-physics-carousel]')).forEach((button) => {
   const preview = button.querySelector('video');
   const title = button.closest('article').querySelector('h4');
   if (title?.id) button.setAttribute('aria-describedby', title.id);
