@@ -1,4 +1,4 @@
-import { mountPreviewControls } from './preview-controls.js?v=reconstruction-controls-20261102';
+import { mountPreviewControls } from './preview-controls.js?v=inline-playback-20261102';
 // IMG_6263 preprocessing and kinematic mapping. No simulation is invoked.
 const MEDIA='assets/ego2sim/rokae6263/';
 const compactViews = [
@@ -13,7 +13,6 @@ function mountCompactAgent(root) {
  const $ = name => root.querySelector(`[data-ego-${name}]`);
  const output = $('output'), scrub = $('scrub');
  const tabs = [...root.querySelectorAll('[data-ego-step]')];
- const viewer = root.querySelector('.ego-viewer');
  const positions = {observation:0,simulation:0};
  const previews = [...root.querySelectorAll('[data-ego-preview]')];
  let evidenceVideos = [];
@@ -166,8 +165,8 @@ function mountCompactAgent(root) {
    });
    (card.querySelector('[data-preview-play]') || video).focus({preventScroll:true});
   });
-  if (!evidence) mountPreviewControls(video, {
-   canPlay: () => previewAllowed(video, ownerStage, false),
+  mountPreviewControls(video, {
+   canPlay: () => previewAllowed(video, ownerStage, evidence),
    onError: () => { if (current()) { error.hidden = false; retry.hidden = false; } },
   });
   previewObserver.observe(evidence ? video : card);
@@ -184,7 +183,7 @@ function mountCompactAgent(root) {
   for (const [id, label] of view.evidence) {
    const card = document.createElement('figure');
    card.className = 'ego-preview-card';
-   card.innerHTML = '<video controls playsinline muted preload="none"></video><figcaption><h6></h6></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden></button>';
+   card.innerHTML = '<video playsinline muted preload="none"></video><figcaption><h6></h6></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden></button>';
    const video = card.querySelector('video');
    video.muted = true;
    video.dataset.egoEvidence = id;
@@ -245,11 +244,6 @@ function mountCompactAgent(root) {
  $('evidence-panel').addEventListener('toggle', () => {
   if ($('evidence-panel').open) loadEvidence();
   else evidenceVideos.forEach(video => video.pause());
- });
- $('fullscreen').addEventListener('click', () => {
-  if (!compactViews[stage].main) return;
-  if (viewer.requestFullscreen) viewer.requestFullscreen()?.catch(() => {});
-  else output.webkitEnterFullscreen?.();
  });
  $('retry').addEventListener('click', () => {
   for (const video of failures) load(video, video.dataset.media, true);

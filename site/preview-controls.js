@@ -12,14 +12,12 @@ export function mountPreviewControls(video, { canPlay, onError }) {
   controls.className = 'ego-controls ego-preview-controls';
   controls.setAttribute('role', 'group');
   controls.setAttribute('aria-labelledby', title.id);
-  controls.innerHTML = '<button type="button" data-preview-play aria-label="播放演示">播放</button><input data-preview-scrub type="range" min="0" max="0" step="0.01" value="0" disabled><output data-preview-time>00.0 / --.- s</output><button type="button" data-preview-fullscreen aria-label="全屏查看处理结果">放大 ↗</button>';
+  controls.innerHTML = '<button type="button" data-preview-play aria-label="播放演示">播放</button><input data-preview-scrub type="range" min="0" max="0" step="0.01" value="0" disabled><output data-preview-time>00.0 / --.- s</output>';
   video.after(controls);
   const play = controls.querySelector('[data-preview-play]');
   const scrub = controls.querySelector('[data-preview-scrub]');
   const time = controls.querySelector('[data-preview-time]');
-  const fullscreen = controls.querySelector('[data-preview-fullscreen]');
   play.setAttribute('aria-describedby', title.id);
-  fullscreen.setAttribute('aria-describedby', title.id);
   scrub.setAttribute('aria-label', `${video.getAttribute('aria-label')}时间`);
 
   function update() {
@@ -35,7 +33,6 @@ export function mountPreviewControls(video, { canPlay, onError }) {
     if (duration) scrub.setAttribute('aria-valuetext', `${position.toFixed(1)} 秒，共 ${duration.toFixed(1)} 秒`);
     else scrub.removeAttribute('aria-valuetext');
     time.textContent = `${position.toFixed(1).padStart(4, '0')} / ${duration ? duration.toFixed(1) : '--.-'} s`;
-    fullscreen.disabled = !video.hasAttribute('src');
   }
   play.addEventListener('click', () => {
     if (!canPlay()) return;
@@ -51,10 +48,6 @@ export function mountPreviewControls(video, { canPlay, onError }) {
     video.pause();
     video.currentTime = Math.max(0, Math.min(video.duration, Number(scrub.value)));
     update();
-  });
-  fullscreen.addEventListener('click', () => {
-    if (card.requestFullscreen) card.requestFullscreen()?.catch(() => {});
-    else video.webkitEnterFullscreen?.();
   });
   for (const event of ['loadstart', 'loadedmetadata', 'durationchange', 'timeupdate', 'play', 'pause', 'ended', 'emptied', 'error']) video.addEventListener(event, update);
   update();

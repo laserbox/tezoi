@@ -1,7 +1,7 @@
 import { importViewerModule } from './viewer-module.js?v=website-audit-20261101';
 import { icon } from './icons.js?v=mobile-polish-20261023';
 import { mountHeroVideo } from './hero-video.js?v=watch-full-20261029';
-import { mountAgentConversion } from './agent-rokae-conversion.js?v=contact-primary-20261102';
+import { mountAgentConversion } from './agent-rokae-conversion.js?v=inline-playback-20261102';
 import { mountRealSimWorkflow } from './real-sim-workflow.js?v=website-audit-20261101';
 import { mountSceneComparison } from './scene-comparison.js?v=website-audit-20261101';
 import { mountContactComparison } from './contact-comparison.js?v=deep-audit-20261101';
@@ -132,6 +132,7 @@ dialog.addEventListener('close', () => {
 // Opening a large player also stops every preview.
 const materialPreviews = $$('[data-material-preview]');
 const visiblePreviews = new Set();
+let manualPreviewPlayback = new WeakMap();
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 const motionToggles = $$('.motion-toggle');
 let materialPaused = motionPreference.matches;
@@ -142,11 +143,32 @@ function updateMaterialMotion() {
     toggle.innerHTML = `<span class="motion-toggle-label">${materialPaused ? '播放动态' : '暂停动态'}</span>${icon(materialPaused ? 'play' : 'pause')}`;
   });
   for (const preview of materialPreviews) {
-    if (!materialPaused && !document.hidden && !dialog.open && !preview.closest('[hidden]') && visiblePreviews.has(preview)) {
-      preview.play().catch(() => { /* The user can still open the native player. */ });
+    if ((manualPreviewPlayback.get(preview) ?? !materialPaused) && !document.hidden && !dialog.open && !preview.closest('[hidden]') && visiblePreviews.has(preview)) {
+      preview.play().catch(() => { /* The inline play button remains available to retry. */ });
     } else preview.pause();
   }
 }
+// These three studies play in place; Gallery keeps its separate modal player.
+$$('[data-inline-video]').forEach((button) => {
+  const preview = button.querySelector('video');
+  const title = button.closest('article').querySelector('h4');
+  if (title?.id) button.setAttribute('aria-describedby', title.id);
+  const sync = () => {
+    button.setAttribute('aria-label', preview.paused ? '播放演示' : '暂停演示');
+    button.setAttribute('aria-pressed', String(!preview.paused));
+    button.querySelector('.material-inline-toggle').innerHTML = icon(preview.paused ? 'play' : 'pause');
+  };
+  button.addEventListener('click', () => {
+    const shouldPlay = preview.paused;
+    if (shouldPlay && preview.error) preview.load();
+    manualPreviewPlayback.set(preview, shouldPlay);
+    updateMaterialMotion();
+  });
+  preview.addEventListener('play', sync);
+  preview.addEventListener('pause', sync);
+  preview.addEventListener('error', sync);
+  sync();
+});
 const materialObserver = new IntersectionObserver((entries) => {
   for (const entry of entries) {
     if (entry.isIntersecting) visiblePreviews.add(entry.target);
@@ -157,10 +179,11 @@ const materialObserver = new IntersectionObserver((entries) => {
 materialPreviews.forEach((preview) => materialObserver.observe(preview));
 motionToggles.forEach((toggle) => toggle.addEventListener('click', () => {
   materialPaused = !materialPaused;
+  manualPreviewPlayback = new WeakMap();
   updateMaterialMotion();
 }));
 motionPreference.addEventListener('change', (event) => {
-  if (event.matches) materialPaused = true;
+  if (event.matches) { materialPaused = true; manualPreviewPlayback = new WeakMap(); }
   updateMaterialMotion();
 });
 document.addEventListener('visibilitychange', updateMaterialMotion);
