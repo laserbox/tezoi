@@ -1,3 +1,4 @@
+import { paintPlaybackProgress } from './playback-progress.js?v=module-detail-20261102';
 // Real, precomputed demo artifacts. No inference or physical simulation is run in the browser.
 const MEDIA='assets/ego2sim/';
 const CORRECTION_PENDING=false;
@@ -66,6 +67,7 @@ function mountCompactAgent(root) {
   const settings = compactClocks[clock];
   scrub.max = settings.limit;
   scrub.value = time;
+  paintPlaybackProgress(scrub);
   scrub.setAttribute('aria-label', `${settings.label}时间`);
   scrub.setAttribute('aria-valuetext', `${time.toFixed(1)} 秒，共 ${settings.limit.toFixed(1)} 秒`);
   setText('time', `${time.toFixed(1).padStart(4,'0')} / ${settings.limit.toFixed(1)} s`);
@@ -340,7 +342,7 @@ function mountDetailedAgent(root){
  function seekVideo(video,t){const duration=video.duration;if(!Number.isFinite(duration))return;const target=video.dataset.media==='assets'?t%duration:Math.min(t,duration-.05);if(Math.abs(video.currentTime-target)>.15)video.currentTime=Math.max(0,target);}
  function update(){
   const i=Math.max(0,phases.findIndex(p=>time>=p.start&&time<p.end)),p=phases[i];
-  setText('caption',p.caption);setText('phase-index',String(i+1).padStart(2,'0')+' / 07');setText('phase-window',`${p.start.toFixed(1)}–${p.end.toFixed(1)} s`);setText('time',`${time.toFixed(1).padStart(4,'0')} / ${native()?'35.0':'43.9'} s`);$('scrub').value=time;
+  setText('caption',p.caption);setText('phase-index',String(i+1).padStart(2,'0')+' / 07');setText('phase-window',`${p.start.toFixed(1)}–${p.end.toFixed(1)} s`);setText('time',`${time.toFixed(1).padStart(4,'0')} / ${native()?'35.0':'43.9'} s`);$('scrub').value=time;paintPlaybackProgress($('scrub'));
   root.querySelectorAll('[data-phase]').forEach((b,j)=>b.setAttribute('aria-current',String(i===j)));
   if(stage===4&&!native()){setText('caption','早期几何修复记录 · 物理结果请切换「接触力与验收」');setText('phase-index','HISTORY');setText('phase-window','原观测时钟');}
   $('play').textContent=want?'暂停':'播放';$('play').setAttribute('aria-label',want?'暂停同步演示':'播放同步演示');

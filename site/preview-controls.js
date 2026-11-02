@@ -1,3 +1,4 @@
+import { paintPlaybackProgress } from './playback-progress.js?v=module-detail-20261102';
 // Reconstruction cards share the Agent's playback bar while keeping their own timelines.
 let nextLabel = 0;
 export function mountPreviewControls(video, { canPlay, onError }) {
@@ -30,6 +31,7 @@ export function mountPreviewControls(video, { canPlay, onError }) {
     scrub.disabled = !duration || Boolean(video.error);
     scrub.max = String(duration);
     scrub.value = String(position);
+    paintPlaybackProgress(scrub);
     if (duration) scrub.setAttribute('aria-valuetext', `${position.toFixed(1)} 秒，共 ${duration.toFixed(1)} 秒`);
     else scrub.removeAttribute('aria-valuetext');
     time.textContent = `${position.toFixed(1).padStart(4, '0')} / ${duration ? duration.toFixed(1) : '--.-'} s`;
