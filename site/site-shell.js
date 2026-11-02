@@ -3,6 +3,7 @@ const header = document.querySelector('.site-header');
 const menu = header.querySelector('.menu-button');
 const navigation = header.querySelector('#primary-nav');
 const page = document.body.dataset.page;
+const mobileNavigation = window.matchMedia('(max-width: 850px)');
 
 document.querySelectorAll('[data-site-page]').forEach((link) => {
   if (link.dataset.sitePage === page) link.setAttribute('aria-current', 'page');
@@ -23,6 +24,14 @@ menu.addEventListener('click', () => {
   if (open) navigation.querySelector('a')?.focus({ preventScroll: true });
 });
 navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+// This is a navigation disclosure, not a modal: let outside actions continue.
+document.addEventListener('pointerdown', (event) => {
+  if (!header.contains(event.target)) closeMenu();
+});
+header.addEventListener('focusout', (event) => {
+  if (event.relatedTarget && !header.contains(event.relatedTarget)) closeMenu();
+});
+mobileNavigation.addEventListener('change', closeMenu);
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') {
     closeMenu();
