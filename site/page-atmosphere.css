@@ -1,0 +1,31 @@
+/* Compact chapter rhythm and the existing laboratory's real outline. */
+body { isolation: isolate; }
+.page-atmosphere { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.page-atmosphere img { position: absolute; right: -18%; top: 18%; width: min(125vw, 1700px); max-width: none; height: auto; opacity: var(--atmosphere-opacity,.10); transform: translate3d(0,var(--atmosphere-offset,0px),0); }
+.page-atmosphere-motion { position: absolute; inset: 0; }
+.page-atmosphere img { transition: opacity 600ms ease; }
+body[data-page='home'] :is(#playground,#showcase,#gallery,.site-footer) { background: transparent; }
+body[data-page='home'] :is(#playground,#showcase,#gallery) { --chapter-space: 64px; }
+body[data-page='home'] #playground > .section-wrap { gap: 32px 40px; }
+body[data-page='home'] #showcase > .chapter-marker { margin-bottom: 36px; }
+body[data-page='home'] #showcase .subchapter + .subchapter { margin-top: 56px; }
+body[data-page='home'] #gallery { gap: 32px; }
+.interior-page main, .interior-page .site-footer { background: transparent; }
+@media (prefers-reduced-motion: no-preference) {
+  .page-atmosphere-motion { animation: atmosphere-drift 48s ease-in-out infinite alternate; }
+}
+@keyframes atmosphere-drift { from { transform: translate3d(-12px,10px,0); } to { transform: translate3d(10px,-10px,0); } }
+@media (max-width:1050px) {
+  body[data-page='home'] :is(#playground,#showcase,#gallery) { --chapter-space: 52px; }
+}
+@media (max-width:600px) {
+  .page-atmosphere img { top: 30%; right: -72%; width: 185vw; opacity: var(--atmosphere-opacity,.08); }
+  body[data-page='home'] :is(#playground,#showcase,#gallery) { --chapter-space: 40px; }
+  body[data-page='home'] #playground > .section-wrap { gap: 24px; }
+  body[data-page='home'] #showcase > .chapter-marker { margin-bottom: 28px; }
+  body[data-page='home'] #showcase .subchapter + .subchapter { margin-top: 40px; }
+  body[data-page='home'] #gallery { gap: 24px; }
+}
+html[data-page-hidden] .page-atmosphere-motion { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) { .page-atmosphere img { transition: none; } }
