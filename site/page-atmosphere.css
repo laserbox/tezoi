@@ -1,9 +1,10 @@
-/* Compact chapter rhythm and the existing laboratory's real outline. */
+/* Quiet projections of robot motion, contact and reconstructed surfaces. */
 body { isolation: isolate; }
-.page-atmosphere { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
-.page-atmosphere img { position: absolute; right: -18%; top: 18%; width: min(125vw, 1700px); max-width: none; height: auto; opacity: var(--atmosphere-opacity,.10); transform: translate3d(0,var(--atmosphere-offset,0px),0); }
+.page-atmosphere { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; opacity: var(--atmosphere-opacity,.10); transition: opacity 600ms ease; }
+.page-atmosphere img { position: absolute; right: -14%; top: 7%; width: min(110vw, 1550px); max-width: none; height: auto; opacity: 0; transform: translate3d(0,var(--atmosphere-offset,0px),0); transition: opacity 900ms ease; }
+.page-atmosphere img.is-active { opacity: 1; }
 .page-atmosphere-motion { position: absolute; inset: 0; }
-.page-atmosphere img { transition: opacity 600ms ease; }
+
 body[data-page='home'] :is(#playground,#showcase,#gallery,.site-footer) { background: transparent; }
 body[data-page='home'] :is(#playground,#showcase,#gallery) { --chapter-space: 64px; }
 body[data-page='home'] #playground > .section-wrap { gap: 32px 40px; }
@@ -19,7 +20,7 @@ body[data-page='home'] #gallery { gap: 32px; }
   body[data-page='home'] :is(#playground,#showcase,#gallery) { --chapter-space: 52px; }
 }
 @media (max-width:600px) {
-  .page-atmosphere img { top: 30%; right: -72%; width: 185vw; opacity: var(--atmosphere-opacity,.08); }
+  .page-atmosphere img { top: 8%; right: -46%; width: 160vw; }
   body[data-page='home'] :is(#playground,#showcase,#gallery) { --chapter-space: 40px; }
   body[data-page='home'] #playground > .section-wrap { gap: 24px; }
   body[data-page='home'] #showcase > .chapter-marker { margin-bottom: 28px; }
@@ -28,4 +29,4 @@ body[data-page='home'] #gallery { gap: 32px; }
 }
 html[data-page-hidden] .page-atmosphere-motion { animation-play-state: paused; }
 
-@media (prefers-reduced-motion: reduce) { .page-atmosphere img { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .page-atmosphere, .page-atmosphere img { transition: none; } }
