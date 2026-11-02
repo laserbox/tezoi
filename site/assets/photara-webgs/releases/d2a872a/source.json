@@ -1,0 +1,17 @@
+{
+  "source": "photara-webgs",
+  "commit": "d2a872a5e78b8e7bb999bb88af100a5bd3d6a397",
+  "files": [
+    "renderer.js",
+    "camera.js",
+    "model.js",
+    "ply.js",
+    "sog.js",
+    "loader.js",
+    "ply-worker.js",
+    "gpu-storage.js",
+    "spatial-blocks.js",
+    "reconstruction.js"
+  ],
+  "integration": "TEZOI Scene Reconstruction"
+}

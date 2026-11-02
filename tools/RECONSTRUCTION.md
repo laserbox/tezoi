@@ -47,3 +47,26 @@ SOG v1/v3, ZIP64, encrypted bundles, streamed LOD and 2DGS are rejected.
 Renderer files were copied from local `photara-webgs/src` on 2026-10-31.
 `studio-controls.js` ports Studio's camera equations; refresh it deliberately
 when updating the renderer. No CDN scripts or runtime npm dependencies are used.
+
+
+## WebGS runtime update
+
+The explorer now uses the committed WebGS runtime in
+`site/assets/photara-webgs/releases/d2a872a/` (full provenance in `source.json`).
+Versioned paths keep worker, JS modules and WGSL from mixing with cached older files.
+The TEZOI Studio controls and website UI remain separate from the WebGS demo UI.
+
+The loader explicitly selects packed SOG SH, avoiding canonical SH expansion.
+The renderer enables tight GUT bounds, stable visible compaction, indirect draw,
+exact Float32 SH palette storage and automatic spatial-block culling by default.
+Stochastic rendering is not enabled. For this 3M-point scene the projection-buffer
+precheck now requires 288,000,000 bytes rather than the old expanded 576 MB SH bound;
+`setModel` still validates all actual allocations against device limits.
+
+
+Integration QA: full 3,000,000-point scene loads with `shLayout:packed`, palette
+GPU storage and 11,719 spatial blocks. Requested model buffers total 565,804,032
+bytes (including spatial indices). No page errors were observed. Navigation,
+reset, hidden-tab pause/resume, single model download and 390px viewport overflow
+checks passed. The local file selector remains absent. This update is local and
+has not been published.

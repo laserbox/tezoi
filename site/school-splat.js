@@ -137,7 +137,7 @@ if (root) {
     button.disabled = true;
     status.textContent = '正在加载三维场景，请稍候…';
     try {
-      const { mountReconstruction } = await importViewerModule('./reconstruction-viewer.js?v=webgs-sog-20261031');
+      const { mountReconstruction } = await importViewerModule('./reconstruction-viewer.js?v=webgs-d2a872a');
       viewer = await mountReconstruction(root, {
         onStatus: message => { status.textContent = message; },
         onError: error => {

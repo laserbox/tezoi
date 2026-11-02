@@ -1,5 +1,5 @@
-import { GaussianRenderer } from './assets/photara-webgs/renderer.js';
-import { PlyLoader } from './assets/photara-webgs/loader.js';
+import { GaussianRenderer } from './assets/photara-webgs/releases/d2a872a/renderer.js';
+import { PlyLoader } from './assets/photara-webgs/releases/d2a872a/loader.js';
 import { StudioControls } from './assets/photara-webgs/studio-controls.js';
 
 /** Full Photara model, loaded only after the visitor chooses to enter. */
@@ -44,9 +44,9 @@ export async function mountReconstruction(root, { onStatus, onError, source }) {
     if (!response.ok) throw new Error(`场景配置 HTTP ${response.status}`);
     const scene = await response.json();
     renderer = await GaussianRenderer.create(canvas, { onError: error => { stop(); onError(error); } });
-    const required = source ? 0 : scene.count * 16 * 3 * 4;
+    const required = source ? 0 : scene.count * 96;
     if (Math.min(renderer.device.limits.maxStorageBufferBindingSize, renderer.device.limits.maxBufferSize) < required) {
-      throw new Error('此设备的 GPU 单缓冲区容量不足，完整场景需要至少 550 MiB');
+      throw new Error('此设备的 GPU 单缓冲区容量不足，完整场景的投影缓冲区需要约 275 MiB');
     }
     controls = new StudioControls(canvas, scene.initialCamera, invalidate);
     controls.sceneRadius = scene.navigationRadius;
@@ -75,7 +75,7 @@ export async function mountReconstruction(root, { onStatus, onError, source }) {
       buffer = bytes.buffer; baseUrl = modelResponse.url;
     }
     onStatus('正在解析模型并上传 GPU，请稍候…');
-    const model = await loader.parse(buffer, { name: source?.name || 'TEZOI · Scene Reconstruction', baseUrl });
+    const model = await loader.parse(buffer, { name: source?.name || 'TEZOI · Scene Reconstruction', baseUrl, shLayout: 'packed' });
     if (!source) {
       model.renderMethod = scene.renderMethod || model.renderMethod;
       model.filterMode = scene.filterMode || model.filterMode;
