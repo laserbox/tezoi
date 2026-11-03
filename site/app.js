@@ -64,7 +64,7 @@ tabs.forEach((tab, i) => {
 
 const videos = {
   "hero-full": {"poster":"assets/homepage-hero.jpg","src":"assets/homepage-hero.mp4?v=hero-v8-20261031","title":"TEZOI 仿真演示","muted":false},
-  "gallery-panda-mixing": {"src":"assets/gallery-panda-mixing.mp4","title":"离心管开盖与滴加混匀"},
+  "gallery-panda-mixing": {"src":"assets/gallery-panda-mixing.mp4?v=full-task-20261103","title":"离心管开盖与滴加混匀"},
   "gallery-soft-bag": {"src":"assets/gallery-soft-bag.mp4?v=soft-bag-realism-20261102","title":"软袋开袋、加液与夹封"},
   "gallery-pigment-dilution": {"src":"assets/gallery-pigment-dilution.mp4?v=20261031","title":"色素稀释"},
   "gallery-go2-walk": {"src":"assets/gallery-go2-walk.mp4","title":"Go2 行走"},
