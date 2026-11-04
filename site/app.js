@@ -74,7 +74,7 @@ const videos = {
   "gallery-rubber-ring": {"src":"assets/gallery-rubber-ring.mp4?v=no-ui-792aa48f","title":"双臂橡胶圈装配"},
   "gallery-ram-insertion": {"src":"assets/gallery-ram-insertion-hd.mp4","title":"双臂内存条插装"},
   "gallery-m12-nut": {"src":"assets/playground-m12-simulation-1080.mp4","title":"指尖拧紧 M12 螺母"},
-  "gallery-bottle-packing": {"src":"assets/gallery-bottle-packing.mp4","title":"水瓶装盒与托盘放置"},
+  "gallery-bottle-packing": {"src":"assets/gallery-bottle-packing.mp4?v=76e3cbb7d715","title":"水瓶装盒与托盘放置"},
   "gallery-g1-box": {"src":"assets/gallery-g1-box.mp4","title":"G1 人形机器人搬箱"},
   "rigid": {"src":"assets/ipc-rigid-v2.mp4","title":"连锁接触与动量传递"},
   "soft": {"src":"assets/ipc-soft-v2.mp4","title":"弹性形变与卸载恢复"},
