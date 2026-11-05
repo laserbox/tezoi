@@ -1,5 +1,5 @@
-import { GaussianRenderer } from './assets/photara-webgs/releases/d2a872a/renderer.js';
-import { PlyLoader } from './assets/photara-webgs/releases/d2a872a/loader.js';
+import { GaussianRenderer } from './assets/photara-webgs/releases/f05490c/renderer.js';
+import { PlyLoader } from './assets/photara-webgs/releases/f05490c/loader.js';
 import { StudioControls } from './assets/photara-webgs/studio-controls.js?v=selected-camera-20261102';
 
 /** Full Photara model, loaded only after the visitor chooses to enter. */

@@ -1,0 +1,31 @@
+{
+  "source": "photara-webgs",
+  "commit": "f05490cfc15852d9b63a7b059e3ba0bb3ad4c8a5",
+  "syncedOn": "2026-11-05",
+  "files": [
+    "renderer.js",
+    "camera.js",
+    "model.js",
+    "ply.js",
+    "sog.js",
+    "loader.js",
+    "ply-worker.js",
+    "gpu-storage.js",
+    "spatial-blocks.js",
+    "reconstruction.js",
+    "i18n.js"
+  ],
+  "shaders": [
+    "shaders/blocks.wgsl",
+    "shaders/common.wgsl",
+    "shaders/compact.wgsl",
+    "shaders/draw.wgsl",
+    "shaders/pick.wgsl",
+    "shaders/project.wgsl",
+    "shaders/radix.wgsl",
+    "shaders/rays.wgsl",
+    "shaders/reconstruct.wgsl",
+    "shaders/stochastic.wgsl"
+  ],
+  "integration": "TEZOI Scene Reconstruction"
+}

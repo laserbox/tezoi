@@ -44,7 +44,7 @@ SH degree 0–3. A configured URL may point to an unbundled `meta.json`; set `by
 to the JSON byte size in that case. Companions are fetched relative to its URL.
 SOG v1/v3, ZIP64, encrypted bundles, streamed LOD and 2DGS are rejected.
 
-Renderer files were copied from local `photara-webgs/src` on 2026-10-31.
+Renderer files were copied from local `photara-webgs/src` on 2026-11-05.
 `studio-controls.js` ports Studio's camera equations; refresh it deliberately
 when updating the renderer. No CDN scripts or runtime npm dependencies are used.
 
@@ -52,7 +52,7 @@ when updating the renderer. No CDN scripts or runtime npm dependencies are used.
 ## WebGS runtime update
 
 The explorer now uses the committed WebGS runtime in
-`site/assets/photara-webgs/releases/d2a872a/` (full provenance in `source.json`).
+`site/assets/photara-webgs/releases/f05490c/` (full provenance in `source.json`).
 Versioned paths keep worker, JS modules and WGSL from mixing with cached older files.
 The TEZOI Studio controls and website UI remain separate from the WebGS demo UI.
 
@@ -63,10 +63,27 @@ Stochastic rendering is not enabled. For this 3M-point scene the projection-buff
 precheck now requires 288,000,000 bytes rather than the old expanded 576 MB SH bound;
 `setModel` still validates all actual allocations against device limits.
 
+The 2026-11-05 sync includes the upstream EWA screen-footprint cap for 3DGS:
+`sqrt(8 * lambda_max)` is limited to `min(1024, width, height)`, preserving the
+ellipse orientation and axis ratio. Mip compensation uses the uncapped filtered
+covariance. Central cameras use radial distance sorting for both GS and GUT;
+orthographic cameras retain camera-Z sorting. The runtime JS, worker dependencies,
+and all WGSL shaders are copied together without local renderer modifications.
+The upstream `i18n.js` dependency is included; website navigation remains in
+`studio-controls.js`. Both website module URLs are bumped when switching releases.
 
-Integration QA: full 3,000,000-point scene loads with `shLayout:packed`, palette
+
+Previous release integration QA: full 3,000,000-point scene loads with `shLayout:packed`, palette
 GPU storage and 11,719 spatial blocks. Requested model buffers total 565,804,032
 bytes (including spatial indices). No page errors were observed. Navigation,
 reset, hidden-tab pause/resume, single model download and 390px viewport overflow
 checks passed. The local file selector remains absent. This update is local and
 has not been published.
+
+2026-11-05 sync validation: all vendored JS and WGSL files match the local
+upstream source byte for byte (SHA-256). All 32 upstream Node tests pass.
+The upstream browser GPU suite also passes in headless Edge with runtime modules
+and shaders served from this website's `f05490c` directory, including EWA footprint
+caps, radial/Z ordering, pixel oracles, picking and worker loading. No GPU or
+page errors were reported. The full 3M-point website scene was not reloaded as
+part of this sync. Changes remain local and have not been published.
