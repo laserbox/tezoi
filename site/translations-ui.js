@@ -1,4 +1,8 @@
 export default {
+  "触觉仿真": {
+    "zh": "触觉仿真",
+    "en": "Tactile simulation"
+  },
   "双臂毛绒玩具装箱与封胶": {
     "zh": "双臂毛绒玩具装箱与封胶",
     "en": "Plush packing & sealing"
