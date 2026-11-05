@@ -83,6 +83,9 @@ export function mountPhysicsCarousel(root) {
     revision++;
     pending = null;
     cards.forEach(card => card.video.pause());
+    // Seeking alone leaves the decoded frame on screen. A fresh media selection
+    // restores the native poster and resets the outgoing playhead without changing src.
+    cards[active].video.load();
     active = index;
     advancePending = false;
     if (manual) wanted = true;
