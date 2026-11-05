@@ -1,5 +1,5 @@
 import { createTranslator, resolveLanguage, localizeHref } from './i18n-core.js';
-import ui from './translations-ui.js?v=soft-bag-realism-20261102';
+import ui from './translations-ui.js?v=physics-tactile-20261106';
 import runtime from './translations-runtime.js?v=physical-titles-20261102';
 import extra from './translations-runtime-extra.js';
 import reports1 from './translations-reports1.js';
