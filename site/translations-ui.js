@@ -1,4 +1,16 @@
 export default {
+  "双臂毛绒玩具装箱与封胶": {
+    "zh": "双臂毛绒玩具装箱与封胶",
+    "en": "Plush packing & sealing"
+  },
+  "播放双臂毛绒玩具装箱与封胶": {
+    "zh": "播放双臂毛绒玩具装箱与封胶",
+    "en": "Play plush packing & sealing"
+  },
+  "双UR机械臂将毛绒玩具装入纸箱并沿箱顶接缝贴胶封装": {
+    "zh": "双UR机械臂将毛绒玩具装入纸箱并沿箱顶接缝贴胶封装",
+    "en": "Two UR arms pack plush toys and tape the box seam"
+  },
   "TEZOI · Ego2Sim Lab Transfer": {
     "zh": "TEZOI · Ego2Sim 实验室迁移",
     "en": "TEZOI · Ego2Sim Lab Transfer"
