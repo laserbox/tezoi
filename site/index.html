@@ -9,13 +9,13 @@
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=compact-footer-20261102">
   <script src="site-shell.js?v=impeccable-viewing-20261102" type="module"></script>
-  <script src="app.js?v=user-packing-20261106" type="module"></script>
+  <script src="app.js?v=dropper-150534-20261106" type="module"></script>
   <link rel="stylesheet" href="ego2sim.css?v=rokae6263-v1">
   <link rel="stylesheet" href="school-splat.css?v=selected-camera-20261102">
   <script type="module" src="school-splat.js?v=webgs-f05490c"></script>
 
 <link rel="stylesheet" href="./i18n.css?v=bilingual-20261101" data-tezoi-i18n>
-<script src="./i18n-bootstrap.js?v=physics-tactile-20261106" data-tezoi-i18n></script>
+<script src="./i18n-bootstrap.js?v=dropper-150534-20261106" data-tezoi-i18n></script>
 <link rel="stylesheet" href="./showcase-ui.css?v=physics-tactile-20261106" data-tezoi-ui>
 <link rel="stylesheet" href="page-atmosphere.css?v=coherent-atmosphere-20261102">
 <script src="page-atmosphere.js?v=coherent-atmosphere-20261102" type="module"></script>
@@ -101,25 +101,24 @@
             </section>
             <section class="workflow-panel" id="workflow-panel-simulation" data-workflow-panel="simulation" role="tabpanel" aria-labelledby="workflow-tab-simulation">
               <div class="simulation-explorer" data-simulation-explorer>
-                <div class="compare-heading section-lead"><div><h4 id="contact-compare-title">M12 螺母旋拧</h4><p class="project-meta">Franka</p></div></div>
+                <div class="compare-heading section-lead"><div><h4 id="contact-compare-title">滴管取液与摇杯混合</h4><p class="project-meta">ROKAE · WUJI</p></div></div>
                 <div class="simulation-view-tabs" role="tablist" aria-label="仿真展示方式">
                   <button type="button" role="tab" id="simulation-view-video" aria-controls="simulation-panel-video" aria-selected="true" data-simulation-view="video">Video comparison</button>
                   <button type="button" role="tab" id="simulation-view-scene" aria-controls="simulation-panel-scene" aria-selected="false" tabindex="-1" data-simulation-view="scene"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m10 2 7 4v8l-7 4-7-4V6Zm-7 4 7 4 7-4M10 10v8"/></svg>Interactive 3D</button>
                 </div>
                 <div id="simulation-panel-video" data-simulation-panel="video" role="tabpanel" aria-labelledby="simulation-view-video">
-                <article class="contact-comparison" data-contact-comparison data-start="18" aria-labelledby="contact-compare-title">
+                <article class="contact-comparison" data-contact-comparison data-start="0" aria-labelledby="contact-compare-title">
                   <div class="playback-surface">
                   <div class="compare-stage" style="--split:50%">
-                    <video class="compare-video" data-compare-simulation muted playsinline preload="none" poster="assets/playground-m12-simulation-1080-cover.png" src="assets/playground-m12-simulation-1080.mp4" aria-hidden="true" tabindex="-1"></video>
-                    <video class="compare-video compare-force-video" data-compare-forces muted playsinline preload="none" poster="assets/playground-m12-forces-1080.jpg?v=20261101" src="assets/playground-m12-forces-1080.mp4?v=20261101" aria-hidden="true" tabindex="-1"></video>
-                    <span class="compare-view-label compare-simulation-label">Simulation</span><span class="compare-view-label compare-forces-label">Contact forces</span>
+                    <video class="compare-video" data-compare-simulation muted playsinline preload="none" poster="assets/dropper-color-1080.jpg" src="assets/dropper-color-1080.mp4" aria-hidden="true" tabindex="-1"></video>
+                    <video class="compare-video compare-force-video" data-compare-forces muted playsinline preload="none" poster="assets/dropper-contact-1080.jpg" src="assets/dropper-contact-1080.mp4" aria-hidden="true" tabindex="-1"></video>
                     <input class="compare-split" data-compare-split type="range" min="0" max="100" step="1" value="50" aria-label="左右对比位置" aria-valuetext="仿真画面 50%，接触力热点 50%">
                     <div class="compare-divider" aria-hidden="true"><span class="compare-knob"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10h14M6 7l-3 3 3 3M14 7l3 3-3 3"/></svg></span></div>
                   </div>
                   <div class="compare-controls playback-bar" role="group" aria-label="视频对比播放控制">
                     <button class="compare-play" type="button" data-compare-play aria-label="播放对比"><span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span><span data-compare-play-label>播放对比</span></button>
-                    <input class="compare-timeline" data-compare-timeline type="range" min="0" max="76.88" step="0.04" value="18" aria-label="对比播放进度" aria-valuetext="00:18，共 01:17" disabled>
-                    <output class="compare-time" data-compare-time aria-live="off">00:18 / 01:17</output>
+                    <input class="compare-timeline" data-compare-timeline type="range" min="0" max="65.366667" step="0.033333333" value="0" aria-label="对比播放进度" aria-valuetext="00:00，共 01:05" disabled>
+                    <output class="compare-time" data-compare-time aria-live="off">00:00 / 01:05</output>
                     <button class="compare-restart" type="button" data-compare-restart aria-label="从头播放对比" disabled><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 8a6 6 0 1 1 0 5M4 3v5h5"/></svg><span>重新播放</span></button>
                   </div>
                   </div>
@@ -140,7 +139,7 @@
                     <div class="scene-loading"><p data-scene-status role="status">正在加载三维场景…</p><button type="button" data-scene-retry hidden>重新加载</button></div>
                   </div>
                   <div class="scene-contact-legend" data-contact-legend hidden>
-                      <div class="scene-contact-summary"><span>顶点力峰值</span><strong data-contact-peak>0 N</strong></div>
+                      <div class="scene-contact-summary"><span>接触点力峰值</span><strong data-contact-peak>0 N</strong></div>
                       <div class="scene-contact-gradient" aria-hidden="true"></div>
                       <div class="scene-contact-scale"><span>0 N</span><span data-contact-cap></span></div>
                       <button type="button" data-contact-focus>聚焦接触 <span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 15 15 5M5 5h10v10"/></svg></span></button>
@@ -148,8 +147,8 @@
                   </div>
                   <div class="scene-controls playback-bar playback-bar--scene" role="group" aria-label="三维轨迹播放控制">
                     <button class="compare-play" type="button" data-scene-play disabled aria-label="播放三维轨迹" aria-pressed="false"><span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span><span>播放轨迹</span></button>
-                    <input class="compare-timeline" data-scene-timeline type="range" min="0" max="76.88" value="18" step="0.04" disabled aria-label="三维轨迹进度">
-                    <output class="compare-time" data-scene-time aria-live="off">00:18 / 01:17</output>
+                    <input class="compare-timeline" data-scene-timeline type="range" min="0" max="65.366667" value="0" step="0.033333333" disabled aria-label="三维轨迹进度">
+                    <output class="compare-time" data-scene-time aria-live="off">00:00 / 01:05</output>
                   </div>
                   </div>
 

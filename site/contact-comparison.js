@@ -178,6 +178,10 @@ export function mountContactComparison(root) {
     starting = true;
     try {
       await seekPair(simulation.currentTime);
+      // At a zero start the metadata seek is a no-op. Wait for both decoded
+      // pictures before play so initial buffering cannot interrupt play().
+      await Promise.all(media.map(video => video.readyState >= 3
+        ? Promise.resolve() : once(video, 'canplay')));
       if (!desiredPlaying || token !== intent) return;
       await Promise.all(media.map((video) => video.play()));
       if (!desiredPlaying || token !== intent) { stopMedia(); return; }
@@ -220,15 +224,17 @@ export function mountContactComparison(root) {
     const position = Number(split.value);
     stage.style.setProperty('--split', `${position}%`);
     split.setAttribute('aria-valuetext', `仿真画面 ${position}%，接触力热点 ${100 - position}%`);
-    get('.compare-simulation-label').hidden = position < 15;
-    get('.compare-forces-label').hidden = position > 85;
+    const simulationLabel = get('.compare-simulation-label');
+    const forcesLabel = get('.compare-forces-label');
+    if (simulationLabel) simulationLabel.hidden = position < 15;
+    if (forcesLabel) forcesLabel.hidden = position > 85;
   });
   simulation.addEventListener('timeupdate', () => { if (ready && !simulation.seeking) updateClock(); });
   simulation.addEventListener('ended', () => { pause(); seekPair(duration).catch(showError); });
   media.forEach((video) => {
     video.addEventListener('error', showError);
     video.addEventListener('waiting', () => {
-      if (!desiredPlaying || !ready || media.some((item) => item.seeking)) return;
+      if (!desiredPlaying || !ready || starting || media.some((item) => item.seeking)) return;
       buffering = true;
       stopMedia();
       status.textContent = '正在缓冲对比画面…';

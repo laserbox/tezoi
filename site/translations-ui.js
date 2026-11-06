@@ -1,4 +1,22 @@
 export default {
+
+  "滴管取液与摇杯混合": {
+    "zh": "滴管取液与摇杯混合",
+    "en": "Dropper transfer & cup mixing"
+  },
+  "接触点力峰值": {
+    "zh": "接触点力峰值",
+    "en": "Peak contact force"
+  },
+  "右 1 N · 左 8 N+": {
+    "zh": "右 1 N · 左 8 N+",
+    "en": "R 1 N · L 8 N+"
+  },
+  "滴管仿真三维场景，拖动旋转，滚轮或加减键缩放，方向键平移，Shift 加方向键旋转": {
+    "zh": "滴管仿真三维场景，拖动旋转，滚轮或加减键缩放，方向键平移，Shift 加方向键旋转",
+    "en": "Dropper simulation 3D replay: drag to rotate, scroll or use plus/minus to zoom, arrow keys to pan, Shift + arrows to rotate"
+  }
+,
   "触觉仿真": {
     "zh": "触觉仿真",
     "en": "Tactile simulation"

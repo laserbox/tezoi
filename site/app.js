@@ -6,8 +6,8 @@ import { mountHeroVideo } from './hero-video.js?v=watch-full-20261029';
 import { mountAgentConversion } from './agent-rokae-conversion.js?v=module-detail-20261102';
 import { mountRealSimWorkflow } from './real-sim-workflow.js?v=website-audit-20261101';
 import { mountSceneComparison } from './scene-comparison.js?v=website-audit-20261101';
-import { mountContactComparison } from './contact-comparison.js?v=module-detail-20261102';
-import { mountSimulationExplorer } from './simulation-explorer.js?v=module-detail-20261102';
+import { mountContactComparison } from './contact-comparison.js?v=dropper-150534-20261106';
+import { mountSimulationExplorer } from './simulation-explorer.js?v=dropper-150534-20261106';
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];

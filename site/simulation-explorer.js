@@ -1,7 +1,7 @@
 import { importViewerModule } from './viewer-module.js?v=website-audit-20261101';
 // Keep the comparison and its real 3D viewer in one stage.
 export function mountSimulationExplorer(root, {
-  loadViewer = element => importViewerModule('./simulation-viewer.js?v=module-detail-20261102').then(module => module.mountSceneViewer(element)),
+  loadViewer = element => importViewerModule('./simulation-viewer.js?v=dropper-150534-20261106').then(module => module.mountSceneViewer(element)),
   onPause = () => {},
   reloadPage = () => window.location.reload(),
   comparisonLabel = '视频对比',
