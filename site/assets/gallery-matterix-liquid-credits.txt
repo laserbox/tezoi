@@ -1,0 +1,10 @@
+Laboratory liquid operation — scene asset attribution
+
+Laboratory environment: AGIBOT / GenieSimAssets
+Source: https://huggingface.co/datasets/agibot-world/GenieSimAssets
+Revision: 12f41e388a953cc2aeb0fe5b8eb516750c8321d9
+License: Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+Adaptations: laboratory composition, lighting, camera placement, and rendering in NVIDIA Isaac Sim. Liquid surface reconstruction and shading have been revised; the original simulated motion and color progression are retained.
+No endorsement by AGIBOT or NVIDIA is implied.

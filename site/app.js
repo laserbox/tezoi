@@ -94,7 +94,7 @@ const videos = {
   "haoxiang-basket-bunny": {"src":"assets/haoxiang-basket-bunny.mp4","title":"软体物体抓取"},
   "haoxiang-washroom-hang": {"src":"assets/haoxiang-washroom-hang.mp4","title":"双手衣物悬挂"},
   "haoxiang-go2-drape": {"src":"assets/haoxiang-go2-drape.mp4","title":"Go2 布料接触"},
-  "gallery-matterix-liquid": {"src":"assets/gallery-matterix-liquid.mp4?v=20261031","title":"实验室液体操作"},
+  "gallery-matterix-liquid": {"src":"assets/gallery-matterix-liquid.mp4?v=liquid-revised-20261106","title":"实验室液体操作"},
 };
 const dialog = $('#video-dialog');
 const videoDialog = mountVideoDialog(dialog, {
