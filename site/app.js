@@ -63,7 +63,7 @@ tabs.forEach((tab, i) => {
 });
 
 const videos = {
-  "gallery-plush-packing": {"src":"assets/gallery-plush-packing.mp4?v=7f029650e6b0","title":"双臂毛绒玩具装箱与封胶"},
+  "gallery-plush-packing": {"src":"assets/gallery-plush-packing.mp4?v=d315954eb12e","title":"双臂毛绒玩具装箱与封胶"},
   "hero-full": {"poster":"assets/homepage-hero.jpg","src":"assets/homepage-hero.mp4?v=hero-v8-20261031","title":"TEZOI 仿真演示","muted":false},
   "gallery-panda-mixing": {"src":"assets/gallery-panda-mixing.mp4?v=full-task-20261103","title":"离心管开盖与滴加混匀"},
   "gallery-soft-bag": {"src":"assets/gallery-soft-bag.mp4?v=soft-bag-realism-20261102","title":"软袋开袋、加液与夹封"},
