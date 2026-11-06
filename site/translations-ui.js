@@ -1,4 +1,8 @@
 export default {
+  "刚体接触": {
+    "zh": "刚体接触",
+    "en": "Rigid contact"
+  },
 
   "滴管取液与摇杯混合": {
     "zh": "滴管取液与摇杯混合",
