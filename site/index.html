@@ -9,13 +9,13 @@
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=compact-footer-20261102">
   <script src="site-shell.js?v=impeccable-viewing-20261102" type="module"></script>
-  <script src="app.js?v=dropper-150534-20261106" type="module"></script>
+  <script src="app.js?v=rigid-contact-20261106" type="module"></script>
   <link rel="stylesheet" href="ego2sim.css?v=rokae6263-v1">
   <link rel="stylesheet" href="school-splat.css?v=selected-camera-20261102">
   <script type="module" src="school-splat.js?v=webgs-f05490c"></script>
 
 <link rel="stylesheet" href="./i18n.css?v=bilingual-20261101" data-tezoi-i18n>
-<script src="./i18n-bootstrap.js?v=dropper-150534-20261106" data-tezoi-i18n></script>
+<script src="./i18n-bootstrap.js?v=rigid-contact-20261106" data-tezoi-i18n></script>
 <link rel="stylesheet" href="./showcase-ui.css?v=physics-tactile-20261106" data-tezoi-ui>
 <link rel="stylesheet" href="page-atmosphere.css?v=coherent-atmosphere-20261102">
 <script src="page-atmosphere.js?v=coherent-atmosphere-20261102" type="module"></script>
@@ -233,12 +233,12 @@
               </button>
               <h4 id="embodied-shell-title">液体接触</h4>
             </article>
-            <article class="embodied-card" aria-labelledby="embodied-porous-title">
+            <article class="embodied-card" aria-labelledby="embodied-rigid-title">
               <button type="button" class="embodied-film" data-inline-video aria-label="播放演示">
-                <video data-material-preview muted loop playsinline preload="none" src="assets/haoxiang-porous.mp4?v=kitchen-20261102" poster="assets/haoxiang-porous.jpg?v=porous-16c631845635" aria-hidden="true" tabindex="-1"></video>
+                <video data-material-preview muted playsinline preload="none" src="assets/playground-m12-simulation-1080.mp4?v=6e12102a1cc8" poster="assets/playground-m12-simulation-1080-cover.png?v=792dea8ada62" aria-hidden="true" tabindex="-1"></video>
                 <span class="material-inline-toggle" aria-hidden="true">▶</span>
               </button>
-              <h4 id="embodied-porous-title">液体吸附</h4>
+              <h4 id="embodied-rigid-title">刚体接触</h4>
             </article>
             <article class="embodied-card" aria-labelledby="embodied-cloth-title">
               <button type="button" class="embodied-film" data-inline-video aria-label="播放演示">
@@ -352,7 +352,7 @@
     <section class="gallery chapter section-wrap" id="gallery" aria-labelledby="gallery-title" data-chapter="4">
       <div class="chapter-marker"><div class="chapter-heading"><h2 id="gallery-title">Gallery</h2></div></div>
       <div class="gallery-tabs" data-ui role="tablist" aria-label="任务场景">
-        <button type="button" role="tab" id="tab-factory" aria-selected="true" aria-controls="panel-factory" data-scene="factory"><span class="gallery-tab-label">工厂</span> <span class="gallery-tab-count">07</span></button>
+        <button type="button" role="tab" id="tab-factory" aria-selected="true" aria-controls="panel-factory" data-scene="factory"><span class="gallery-tab-label">工厂</span> <span class="gallery-tab-count">06</span></button>
         <button type="button" role="tab" id="tab-lab" aria-selected="false" aria-controls="panel-lab" tabindex="-1" data-scene="lab"><span class="gallery-tab-label">实验室</span> <span class="gallery-tab-count">05</span></button>
         <!-- 暂停这四类 Gallery 标签；恢复时同时取消下方对应面板的注释。
         <button type="button" role="tab" id="tab-tactile" aria-selected="false" aria-controls="panel-tactile" tabindex="-1" data-scene="tactile"><span class="gallery-tab-label">触觉</span> <span class="gallery-tab-count">05</span></button>
@@ -370,10 +370,6 @@
           <article class="gallery-card">
             <button type="button" class="gallery-image" data-video="gallery-ram-insertion" aria-label="播放双臂内存条插装"><img src="assets/gallery-ram-insertion-hd.jpg" alt="双 UR5e 将内存条对准主板插槽并协同按压" loading="lazy" width="2560" height="1440"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
             <div class="gallery-card-copy"><h4>双臂内存条插装</h4></div>
-          </article>
-          <article class="gallery-card">
-            <button type="button" class="gallery-image" data-video="gallery-m12-nut" aria-label="播放指尖拧紧 M12 螺母"><img src="assets/playground-m12-simulation-1080-cover.png" alt="Franka 指尖在螺杆上操作 M12 螺母" loading="lazy" width="1920" height="1080"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
-            <div class="gallery-card-copy"><h4>指尖拧紧 M12 螺母</h4></div>
           </article>
           <article class="gallery-card">
             <button type="button" class="gallery-image" data-video="gallery-bottle-packing" aria-label="播放水瓶装盒与托盘放置"><img src="assets/gallery-bottle-packing.jpg?v=ed7f62d23c33" alt="双 UR5e 在包装工位将水瓶装盒并折叠纸盒上盖" loading="lazy" width="2560" height="1440"><span class="gallery-play" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 9 6-9 6Z" fill="currentColor" stroke="none"/></svg></span></button>
