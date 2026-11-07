@@ -1,4 +1,6 @@
 export default {
+  "黄瓜切片": { "zh": "黄瓜切片", "en": "Cucumber slicing" },
+  "播放机械臂切黄瓜演示": { "zh": "播放机械臂切黄瓜演示", "en": "Play robotic cucumber slicing demo" },
   "VIDEO → OBJECT EVENTS → TASK GRAPH": {
     "zh": "视频 → 物体事件 → 任务图",
     "en": "VIDEO → OBJECT EVENTS → TASK GRAPH"
