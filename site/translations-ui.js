@@ -407,7 +407,7 @@ export default {
   },
   "探索物理交互": {
     "zh": "物理交互",
-    "en": "Physical interaction"
+    "en": "Physical Interaction"
   },
   "双机械臂在实验台上协同取药的仿真画面": {
     "zh": "双机械臂在实验台上协同取药的仿真画面",
@@ -491,7 +491,7 @@ export default {
   },
   "Ego": {
     "zh": "第一视角",
-    "en": "Ego"
+    "en": "Egocentric"
   },
   "真实示范": {
     "zh": "真实示范",
@@ -511,7 +511,7 @@ export default {
   },
   "仿真运行": {
     "zh": "仿真运行",
-    "en": "Run"
+    "en": "Physics rollout"
   },
   "Robotics": {
     "zh": "机器人",
