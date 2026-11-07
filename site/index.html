@@ -15,10 +15,10 @@
   <script type="module" src="school-splat.js?v=webgs-f05490c"></script>
 
 <link rel="stylesheet" href="./i18n.css?v=bilingual-20261101" data-tezoi-i18n>
-<script src="./i18n-bootstrap.js?v=review-fixes-20261108" data-tezoi-i18n></script>
-<link rel="stylesheet" href="./showcase-ui.css?v=review-fixes-20261108" data-tezoi-ui>
-<link rel="stylesheet" href="page-atmosphere.css?v=coherent-atmosphere-20261102">
-<script src="page-atmosphere.js?v=coherent-atmosphere-20261102" type="module"></script>
+<script src="./i18n-bootstrap.js?v=design-20261108" data-tezoi-i18n></script>
+<link rel="stylesheet" href="./showcase-ui.css?v=design-20261108" data-tezoi-ui>
+<link rel="stylesheet" href="page-atmosphere.css?v=design-20261108">
+<script src="page-atmosphere.js?v=design-20261108" type="module"></script>
 <link rel="stylesheet" href="agent-pipeline.css?v=publish-r12">
 </head>
 <body data-page="home">
@@ -278,9 +278,9 @@
           <div data-school-showcase data-ui>
         <div class="school-stage">
           <div class="school-tabs" role="tablist" aria-label="场景展示方式">
-            <button type="button" role="tab" aria-selected="true" aria-controls="school-comparison" id="school-tab-comparison" data-school-mode="comparison"><span>01</span> Image comparison</button>
-            <button type="button" role="tab" aria-selected="false" aria-controls="school-evolution" id="school-tab-evolution" data-school-mode="evolution" tabindex="-1"><span>02</span> 重建演示</button>
-            <button type="button" role="tab" aria-selected="false" aria-controls="school-interactive" id="school-tab-interactive" data-school-mode="interactive" tabindex="-1"><span>03</span> Interactive 3D</button>
+            <button type="button" role="tab" aria-selected="true" aria-controls="school-comparison" id="school-tab-comparison" data-school-mode="comparison">Image comparison</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="school-evolution" id="school-tab-evolution" data-school-mode="evolution" tabindex="-1">重建演示</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="school-interactive" id="school-tab-interactive" data-school-mode="interactive" tabindex="-1">Interactive 3D</button>
           </div>
           <div class="school-screen school-image-comparison" id="school-comparison" role="tabpanel" aria-labelledby="school-tab-comparison" data-school-panel="comparison" style="--school-split:50%">
             <img src="assets/school-reconstruction-render.png?v=3dgut-mip2d-20261031" alt="实验室同视角的 3DGUT / mip2d 三维高斯重建结果" width="1600" height="900" loading="lazy" decoding="async">
@@ -323,8 +323,8 @@
         <div id="visual-rendering" role="tabpanel" aria-labelledby="reconstruction-tab-mesh" data-reconstruction-panel="mesh" hidden>
         <div class="simulation-explorer usedv6-explorer" data-ui data-usedv6-explorer>
           <div class="school-stage school-tabs" role="tablist" aria-label="实验室展示方式">
-            <button type="button" role="tab" id="usedv6-view-image" aria-controls="usedv6-panel-image" aria-selected="true" data-simulation-view="video"><span>01</span> Image comparison</button>
-            <button type="button" role="tab" id="usedv6-view-scene" aria-controls="usedv6-panel-scene" aria-selected="false" tabindex="-1" data-simulation-view="scene"><span>02</span> Interactive 3D</button>
+            <button type="button" role="tab" id="usedv6-view-image" aria-controls="usedv6-panel-image" aria-selected="true" data-simulation-view="video">Image comparison</button>
+            <button type="button" role="tab" id="usedv6-view-scene" aria-controls="usedv6-panel-scene" aria-selected="false" tabindex="-1" data-simulation-view="scene">Interactive 3D</button>
           </div>
           <div id="usedv6-panel-image" data-simulation-panel="video" role="tabpanel" aria-labelledby="usedv6-view-image">
             <article class="scene-comparison" data-scene-comparison data-state="loading" aria-label="实验室真实照片与 Real2Sim 场景对比">
@@ -362,13 +362,13 @@
     <section class="gallery chapter section-wrap" id="gallery" aria-labelledby="gallery-title" data-chapter="4">
       <div class="chapter-marker"><div class="chapter-heading"><h2 id="gallery-title">Gallery</h2></div></div>
       <div class="gallery-tabs" data-ui role="tablist" aria-label="任务场景">
-        <button type="button" role="tab" id="tab-factory" aria-selected="true" aria-controls="panel-factory" data-scene="factory"><span class="gallery-tab-label">工厂</span> <span class="gallery-tab-count">06</span></button>
-        <button type="button" role="tab" id="tab-lab" aria-selected="false" aria-controls="panel-lab" tabindex="-1" data-scene="lab"><span class="gallery-tab-label">实验室</span> <span class="gallery-tab-count">05</span></button>
+        <button type="button" role="tab" id="tab-factory" aria-selected="true" aria-controls="panel-factory" data-scene="factory"><span class="gallery-tab-label">工厂</span> <span class="gallery-tab-count">6</span></button>
+        <button type="button" role="tab" id="tab-lab" aria-selected="false" aria-controls="panel-lab" tabindex="-1" data-scene="lab"><span class="gallery-tab-label">实验室</span> <span class="gallery-tab-count">5</span></button>
         <!-- 暂停这四类 Gallery 标签；恢复时同时取消下方对应面板的注释。
-        <button type="button" role="tab" id="tab-tactile" aria-selected="false" aria-controls="panel-tactile" tabindex="-1" data-scene="tactile"><span class="gallery-tab-label">触觉</span> <span class="gallery-tab-count">05</span></button>
-        <button type="button" role="tab" id="tab-soft" aria-selected="false" aria-controls="panel-soft" tabindex="-1" data-scene="soft"><span class="gallery-tab-label">软材料</span> <span class="gallery-tab-count">02</span></button>
-        <button type="button" role="tab" id="tab-cloth" aria-selected="false" aria-controls="panel-cloth" tabindex="-1" data-scene="cloth"><span class="gallery-tab-label">布料</span> <span class="gallery-tab-count">02</span></button>
-        <button type="button" role="tab" id="tab-motion" aria-selected="false" aria-controls="panel-motion" tabindex="-1" data-scene="motion"><span class="gallery-tab-label">运动控制</span> <span class="gallery-tab-count">02</span></button>
+        <button type="button" role="tab" id="tab-tactile" aria-selected="false" aria-controls="panel-tactile" tabindex="-1" data-scene="tactile"><span class="gallery-tab-label">触觉</span> <span class="gallery-tab-count">5</span></button>
+        <button type="button" role="tab" id="tab-soft" aria-selected="false" aria-controls="panel-soft" tabindex="-1" data-scene="soft"><span class="gallery-tab-label">软材料</span> <span class="gallery-tab-count">2</span></button>
+        <button type="button" role="tab" id="tab-cloth" aria-selected="false" aria-controls="panel-cloth" tabindex="-1" data-scene="cloth"><span class="gallery-tab-label">布料</span> <span class="gallery-tab-count">2</span></button>
+        <button type="button" role="tab" id="tab-motion" aria-selected="false" aria-controls="panel-motion" tabindex="-1" data-scene="motion"><span class="gallery-tab-label">运动控制</span> <span class="gallery-tab-count">2</span></button>
         -->
       </div>
       <div id="panel-factory" role="tabpanel" aria-labelledby="tab-factory" data-scene-panel="factory">

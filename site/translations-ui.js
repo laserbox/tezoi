@@ -938,7 +938,7 @@ export default {
     "en": "Real photo"
   },
   "重建 / 3DGS": {
-    "zh": "重建 / 3DGS",
+    "zh": "三维高斯重建",
     "en": "3DGS reconstruction"
   },
   "实拍照片显示比例": {
@@ -954,8 +954,8 @@ export default {
     "en": "Reconstruction demo showing a point cloud growing into a 3D Gaussian scene, followed by a continuous walkthrough"
   },
   "POINT CLOUD → 3DGS → TOUR / 02": {
-    "zh": "点云 → 3DGS → 漫游 / 02",
-    "en": "POINT CLOUD → 3DGS → TOUR / 02"
+    "zh": "从点云重建到漫游",
+    "en": "Point cloud to walkthrough"
   },
   "进入自由探索": {
     "zh": "自由探索",
@@ -1002,8 +1002,8 @@ export default {
     "en": "Explore 3D ↗"
   },
   "INTERACTIVE / 03": {
-    "zh": "交互 / 03",
-    "en": "INTERACTIVE / 03"
+    "zh": "交互式三维",
+    "en": "Interactive 3D"
   },
   "查看实拍原图": {
     "zh": "实拍原图",
