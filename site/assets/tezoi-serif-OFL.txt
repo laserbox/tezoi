@@ -1,4 +1,9 @@
-Copyright 2014 The Source Serif 4 Project Authors (https://github.com/adobe-fonts/source-serif)
+Copyright 2014 - 2021 Adobe Systems Incorporated (http://www.adobe.com/), with Reserved Font Name ‘Source’.
+Source is a trademark of Adobe in the United States and/or other countries.
+
+Tezoi Serif is a Modified Version of Source Serif 4 (version 4.004): a Latin
+subset delivered as WOFF for the TEZOI website and renamed because “Source”
+is a Reserved Font Name. It is not affiliated with or endorsed by Adobe.
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:
