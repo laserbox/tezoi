@@ -717,8 +717,9 @@ body.interior-page > .site-footer { width: 100%; }
   --sim: #216762;
   --sim-on-dark: #7dc4b6;
 }
-:is(.page-intro, #ts#ts) h1,
-:is(.chapter-heading, #ts#ts) h2 { font-size: var(--t-display); font-weight: 600; line-height: 1.02; letter-spacing: -0.04em; }
+:is(.page-intro, #ts#ts) h1 { font-size: var(--t-display); font-weight: 600; line-height: 1.02; letter-spacing: -0.04em; }
+/* The homepage has two heading tiers: five peer section titles and item titles. */
+:is(.chapter-heading, #ts#ts) h2,
 :is(.subchapter-heading, #ts#ts) h3,
 :is(.page-copy, #ts#ts) h2 { font-size: var(--t-section); font-weight: 500; line-height: 1.1; letter-spacing: -0.025em; }
 :is(.page-topics, #ts#ts) h2 { font-size: var(--t-title); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
@@ -747,3 +748,15 @@ body.interior-page > .site-footer { width: 100%; }
 #scene-reconstruction :is(.school-image-label-left, .scene-comparison-label-real) { color: var(--paper); background: var(--ink); }
 #scene-reconstruction :is(.school-image-label-right, .scene-comparison-label-sim) { color: #fff; background: var(--sim); }
 .school-live-dot { display: none; }
+
+/* ---- Section titles collapse into the header (page-sections.js) ------------
+   "Features" was only an umbrella over three sections; it stays for screen
+   readers. As a section title scrolls under the header, its name appears
+   beside the logo instead of a separate tier of oversized chapter words. */
+body[data-page='home'] #showcase > .chapter-marker { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.section-indicator { position: absolute; top: 50%; left: var(--indicator-left, 210px); display: flex; align-items: center; gap: 14px; max-width: var(--indicator-room, 40vw); color: inherit; font-size: var(--t-body); font-weight: 500; line-height: 1; white-space: nowrap; opacity: 0; pointer-events: none; translate: 0 calc(-50% + 1px); transition: opacity 180ms ease; }
+.section-indicator::before { content: ''; flex: 0 0 1px; height: 18px; background: currentColor; opacity: .28; }
+.section-indicator-label { overflow: hidden; text-overflow: ellipsis; }
+.section-indicator.is-visible { opacity: 1; }
+@media (max-width: 899px) { .section-indicator { display: none; } }
+@media (prefers-reduced-motion: reduce) { .section-indicator { transition: none; } }
