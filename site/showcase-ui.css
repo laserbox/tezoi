@@ -1,4 +1,6 @@
 /* TEZOI — real-to-sim as the visual motif: matched planes, exact type, unframed evidence. */
+@font-face { font-family: 'Libre Franklin'; src: url('assets/tezoi-libre-franklin.woff') format('woff'); font-style: normal; font-weight: 100 900; font-display: swap; }
+@font-face { font-family: 'Tezoi Serif'; src: url('assets/tezoi-serif.woff') format('woff'); font-style: normal; font-weight: 200 900; font-display: swap; }
 :root {
   --paper: #f1f2f1;
   --ink: #181c1e;
@@ -24,8 +26,8 @@
   --ui-label-radius: 2px;
   --player-fill: #f2f4f3;
   --player-track: #586064;
-  --ui-font-latin: 'Tezoi Kaiti', KaiTi, STKaiti, serif;
-  --ui-font-cjk: 'Tezoi Kaiti', KaiTi, STKaiti, serif;
+  --ui-font-latin: 'Libre Franklin', Arial, sans-serif;
+  --ui-font-cjk: 'Libre Franklin', 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif;
   --ui-weight-body: 400;
   --ui-weight-medium: 500;
   --ui-weight-heading: 700;
@@ -39,7 +41,6 @@
 }
 :root[lang|='zh'] { font-family: var(--ui-font-cjk); }
 button, input, select, textarea { font-family: inherit; }
-:root .ep { font-family: var(--ui-font-latin); }
 .language-switch button { min-width: 44px; min-height: 44px; }
 :root[lang|='zh'] :is(h1,h2,h3,h4,h5,h6) { letter-spacing: 0; }
 h1,h2,h3,h4,h5,h6 { text-wrap: balance; }
@@ -221,7 +222,7 @@ button:disabled { cursor: default; }
 .page-intro h1 { font-size: clamp(52px,6.4vw,92px); font-weight: 700; line-height: 1.02; letter-spacing: -.05em; }
 .page-intro::after { display: none; }
 .page-copy h2 { font-size: clamp(32px,3.2vw,46px); font-weight: 600; line-height: 1.16; }
-:root[lang='en'] .page-copy p, :root[lang='en'] .journal-body p { font-family: var(--ui-font-latin); font-size: 20px; line-height: 1.55; }
+:root[lang='en'] .page-copy p, :root[lang='en'] .journal-body p { font-family: 'Tezoi Serif', Georgia, serif; font-size: 20px; line-height: 1.55; }
 .company-story, .research-study { gap: 56px; border: 0; }
 .page-figure, .page-figure img { overflow: hidden; border: 0; border-radius: 2px; background: var(--ui-soft); box-shadow: none; } /* taste-skill-ignore: explicitly clears legacy shadows or blur; no decorative effect */
 .page-figure figcaption { margin: 0; padding: 12px 0; color: var(--muted); background: var(--paper); font-size: 14px; }
