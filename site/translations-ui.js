@@ -517,6 +517,10 @@ export default {
     "zh": "机器人",
     "en": "Robotics"
   },
+  "实机记录": { "zh": "实机记录", "en": "Real robot recording" },
+  "下载实机视频": { "zh": "下载实机视频", "en": "Download robot recording" },
+  "00:09 起 · 静音 · 背景人物已移除": { "zh": "00:09 起 · 静音 · 背景人物已移除", "en": "From 00:09 · Silent · Background person removed" },
+  "机器人实机记录，原片九秒起，静音，背景人物已移除": { "zh": "机器人实机记录，原片九秒起，静音，背景人物已移除", "en": "Real robot recording from nine seconds, silent, background person removed" },
   "真机待验证": {
     "zh": "真机待验证",
     "en": "Not yet validated"

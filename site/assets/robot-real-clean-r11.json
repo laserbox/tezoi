@@ -1,0 +1,18 @@
+{
+  "revision": "robot-real-r11",
+  "source": "IMG_0755.MOV",
+  "source_sha256": "e544cf247701c66667cde08369d76831e1519aafdbf7c748fa04cd26b9206203",
+  "source_start_seconds": 9,
+  "duration_seconds": 47.9,
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "frames": 1437,
+  "audio_streams": 0,
+  "video_sha256": "40851e1a791a86462138af551d9431986a5c08027933a4c54614dfd1e90c0755",
+  "background_edit": "Person, motion-capture suit, gloves and body-worn equipment removed using one generated clean plate and subpixel camera tracking. Table-edge silhouette repaired.",
+  "action_edit": "None; original robot and task interior retained prior to standard SDR delivery encoding.",
+  "evidence_status": "Edited presentation of a supplied real-robot recording, not untouched experimental footage and not a new simulation or VLA acceptance result.",
+  "image_edit_mode": "built-in image_gen",
+  "physical_experiment_started": false
+}

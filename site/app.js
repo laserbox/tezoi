@@ -4,7 +4,7 @@ import { icon } from './icons.js?v=mobile-polish-20261023';
 import { mountPhysicsCarousel } from './physics-carousel.js?v=poster-reset-20261106';
 import { mountHeroVideo } from './hero-video.js?v=watch-full-20261029';
 import { mountAgentConversion } from './agent-rokae-conversion.js?v=module-detail-20261102';
-import { mountRealSimWorkflow } from './real-sim-workflow.js?v=website-audit-20261101';
+import { mountRealSimWorkflow } from './real-sim-workflow.js?v=robot-real-r11';
 import { mountSceneComparison } from './scene-comparison.js?v=website-audit-20261101';
 import { mountContactComparison } from './contact-comparison.js?v=dropper-150534-20261106';
 import { mountSimulationExplorer } from './simulation-explorer.js?v=dropper-150534-20261106';
@@ -208,9 +208,12 @@ materialTabs.forEach((tab, i) => {
 // Legacy report links can change only the fragment without reloading the page.
 function syncAgentLink() {
   if (location.hash !== '#ego2sim') return;
-  realSimWorkflow?.selectStage('agent');
-  agentConversion?.setActive(true);
-  document.querySelector('#workflow-panel-agent')?.scrollIntoView({ block: 'start' });
+  const requested = new URLSearchParams(location.search).get('workflow');
+  const stage = ['source', 'agent', 'simulation', 'validation'].includes(requested) ? requested : 'agent';
+  realSimWorkflow?.selectStage(stage);
+  agentConversion?.setActive(stage === 'agent');
+  simulationExplorer?.setActive(stage === 'simulation');
+  document.querySelector(`#workflow-panel-${stage}`)?.scrollIntoView({ block: 'start' });
 }
 window.addEventListener('hashchange', syncAgentLink);
 syncAgentLink();

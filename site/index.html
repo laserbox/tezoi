@@ -9,13 +9,13 @@
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=compact-footer-20261102">
   <script src="site-shell.js?v=impeccable-viewing-20261102" type="module"></script>
-  <script src="app.js?v=rigid-contact-20261106" type="module"></script>
+  <script src="app.js?v=robot-real-r11" type="module"></script>
   <link rel="stylesheet" href="ego2sim.css?v=rokae6263-v1">
   <link rel="stylesheet" href="school-splat.css?v=selected-camera-20261102">
   <script type="module" src="school-splat.js?v=webgs-f05490c"></script>
 
 <link rel="stylesheet" href="./i18n.css?v=bilingual-20261101" data-tezoi-i18n>
-<script src="./i18n-bootstrap.js?v=rigid-contact-20261106" data-tezoi-i18n></script>
+<script src="./i18n-bootstrap.js?v=robot-real-r11" data-tezoi-i18n></script>
 <link rel="stylesheet" href="./showcase-ui.css?v=physics-tactile-20261106" data-tezoi-ui>
 <link rel="stylesheet" href="page-atmosphere.css?v=coherent-atmosphere-20261102">
 <script src="page-atmosphere.js?v=coherent-atmosphere-20261102" type="module"></script>
@@ -55,7 +55,7 @@
               <button class="workflow-step" type="button" role="tab" id="workflow-tab-source" aria-controls="workflow-panel-source" aria-selected="false" tabindex="-1" data-workflow-stage="source"><span class="workflow-number" aria-hidden="true">01</span><span><strong>Ego</strong><small>真实示范</small></span></button>
               <button class="workflow-step" type="button" role="tab" id="workflow-tab-agent" aria-controls="workflow-panel-agent" aria-selected="false" tabindex="-1" data-workflow-stage="agent"><span class="workflow-number" aria-hidden="true">02</span><span><strong>Agent</strong><small>场景与动作</small></span></button>
               <button class="workflow-step" type="button" role="tab" id="workflow-tab-simulation" aria-controls="workflow-panel-simulation" aria-selected="true" data-workflow-stage="simulation"><span class="workflow-number" aria-hidden="true">03</span><span><strong>Simulation</strong><small>仿真运行</small></span></button>
-              <button class="workflow-step" type="button" role="tab" id="workflow-tab-validation" aria-controls="workflow-panel-validation" aria-selected="false" tabindex="-1" data-workflow-stage="validation"><span class="workflow-number" aria-hidden="true">04</span><span><strong>Robotics</strong><small>真机待验证</small></span></button>
+              <button class="workflow-step" type="button" role="tab" id="workflow-tab-validation" aria-controls="workflow-panel-validation" aria-selected="false" tabindex="-1" data-workflow-stage="validation"><span class="workflow-number" aria-hidden="true">04</span><span><strong>Robotics</strong><small>实机记录</small></span></button>
             </div>
           </aside>
           <div class="workflow-main">
@@ -158,10 +158,13 @@
             </section>
             <section class="workflow-panel" id="workflow-panel-validation" data-workflow-panel="validation" role="tabpanel" aria-labelledby="workflow-tab-validation" hidden>
               <div class="workflow-pane-heading"><h4>Robotics · 真机验证</h4></div>
-              <div class="workflow-media-placeholder workflow-validation-placeholder">
-                <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="12" width="38" height="28" rx="5"/><circle cx="24" cy="26" r="8"/><path d="m16 12 3-5h10l3 5"/></svg>
-                <p>真机验证示例待补充</p>
-              </div>
+              <figure class="workflow-ego-media">
+                <video data-validation-video data-source-revision="robot-real-r11" controls muted playsinline preload="metadata" poster="assets/robot-real-clean-r11.jpg" width="1920" height="1080" aria-label="机器人实机记录，原片九秒起，静音，背景人物已移除">
+                  <source src="assets/robot-real-clean-r11.mp4" type="video/mp4">
+                  您的浏览器不支持视频播放。<a href="assets/robot-real-clean-r11.mp4" download>下载实机视频</a>。
+                </video>
+                <figcaption>00:09 起 · 静音 · 背景人物已移除</figcaption>
+              </figure>
 
             </section>
           </div>
