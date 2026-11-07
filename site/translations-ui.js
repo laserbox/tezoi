@@ -1,8 +1,4 @@
 export default {
-  "ROKAE 机械臂与 WUJI 灵巧手": {
-    "zh": "ROKAE 机械臂与 WUJI 灵巧手",
-    "en": "ROKAE arm with WUJI hand"
-  },
   "刚体仿真": {
     "zh": "刚体仿真",
     "en": "Rigid-body simulation"
@@ -499,7 +495,7 @@ export default {
   },
   "真实示范": {
     "zh": "真实示范",
-    "en": "Human demo"
+    "en": "Demonstration"
   },
   "Agent": {
     "zh": "智能体",

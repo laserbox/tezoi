@@ -570,7 +570,7 @@ body[data-page='home'] #playground .real-sim-workflow { grid-column: 1 / -1; }
 body[data-page='home'] #playground .workflow-step { color: var(--ink); }
 body[data-page='home'] #playground .workflow-step small { color: var(--muted); }
 body[data-page='home'] #playground .workflow-step:hover,
-body[data-page='home'] #playground .workflow-step[aria-selected='true'] { background: var(--ui-soft); }
+body[data-page='home'] #playground .workflow-step[aria-selected='true'] { background: #d4ded7; }
 body[data-page='home'] #playground .workflow-step[aria-selected='true'] .workflow-number {
   color: var(--ui-night-text);
   background: var(--ink);
@@ -721,33 +721,29 @@ body.interior-page > .site-footer { width: 100%; }
 :is(.chapter-heading, #ts#ts) h2 { font-size: var(--t-display); font-weight: 600; line-height: 1.02; letter-spacing: -0.04em; }
 :is(.subchapter-heading, #ts#ts) h3,
 :is(.page-copy, #ts#ts) h2 { font-size: var(--t-section); font-weight: 500; line-height: 1.1; letter-spacing: -0.025em; }
-:is(.compare-heading, .workflow-pane-heading, .page-topics, #ts#ts) :is(h2, h4) { font-size: var(--t-title); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
+:is(.page-topics, #ts#ts) h2 { font-size: var(--t-title); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
 :is([data-physics-carousel], #ts#ts) .embodied-card:first-child h4 { font-size: var(--t-title); font-weight: 500; line-height: 1.25; }
 :is(.gallery-card, #ts#ts) h4 { font-size: var(--t-card); line-height: 1.35; }
 :is(.page-intro, .page-copy, #ts#ts) p { font-family: var(--ui-font-latin); font-size: var(--t-card); line-height: 1.5; }
 :is([data-physics-carousel], #ts#ts) .embodied-card:not(:first-child) h4,
-:is(.workflow-step, #ts#ts) strong,
 :is(.page-link, #ts#ts) { font-size: var(--t-body); }
 :is(.site-header, #ts#ts) :is(nav a, .language-switch button),
 :is(.hero-watch, #ts#ts),
-:is(.simulation-view-tabs, .school-tabs, .gallery-tabs, #ts#ts) button,
+:is(.school-tabs, .gallery-tabs, #ts#ts) button,
 :is(.page-figure, #ts#ts) figcaption { font-size: var(--t-control); }
-:is(.workflow-step, #ts#ts) small,
-:is(.workflow-number, .project-meta, .compare-time, .gallery-tab-count, #ts#ts),
+:is(.gallery-tab-count, #ts#ts),
 :is(#scene-reconstruction, #ts#ts) :is(.school-image-label, .scene-comparison-label, .school-screen-label),
 :is(.footer-bottom, #ts#ts) :is(span, a) { font-size: var(--t-small); }
 :is(.school-image-divider, #ts#ts) > span { font-size: var(--t-title); }
 @media (max-width: 600px) {
-  :is([data-physics-carousel], #ts#ts) .embodied-card:not(:first-child) h4,
-  :is(.workflow-step, #ts#ts) strong { font-size: var(--t-control); }
+  :is([data-physics-carousel], #ts#ts) .embodied-card:not(:first-child) h4 { font-size: var(--t-control); }
   :is(.gallery-card, #ts#ts) h4 { font-size: var(--t-body); }
 }
 
 /* ---- Colour carries one meaning: simulation --------------------------------
    Ink and greys for everything real or neutral (including selected states);
-   simulation teal only where simulated content is named or marked. */
+   simulation teal only where simulated content is named or marked.
+   The Playground is left as is while collaborators update its content. */
 #scene-reconstruction :is(.school-image-label-left, .scene-comparison-label-real) { color: var(--paper); background: var(--ink); }
 #scene-reconstruction :is(.school-image-label-right, .scene-comparison-label-sim) { color: #fff; background: var(--sim); }
-body[data-page='home'] #playground .workflow-step[data-workflow-stage='simulation'] .workflow-number { color: var(--sim); outline: 1px solid var(--sim); outline-offset: -1px; }
-body[data-page='home'] #playground .workflow-step[data-workflow-stage='simulation'][aria-selected='true'] .workflow-number { color: #fff; background: var(--sim); }
 .school-live-dot { display: none; }
