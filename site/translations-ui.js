@@ -1,7 +1,7 @@
 export default {
-  "刚体接触": {
-    "zh": "刚体接触",
-    "en": "Rigid contact"
+  "刚体仿真": {
+    "zh": "刚体仿真",
+    "en": "Rigid-body simulation"
   },
 
   "滴管取液与摇杯混合": {
