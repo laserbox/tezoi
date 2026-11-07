@@ -1,20 +1,24 @@
-// Background: a faint finite-element membrane, the kind of triangulated mesh a
-// soft-body solver works on. A few contact points press dimples into it; they
-// drift with scroll (slower than the page) so the membrane deforms only when
-// the reader moves. Nothing animates on its own. Purely decorative: aria-hidden,
-// no pointer events, never captures input.
+// Background: a sheet of cloth that falls onto a sphere and drapes over it.
+// The cloth is simulated once, on load and off the main thread, with a
+// mass-spring model (Verlet integration, distance constraints, sphere and floor
+// contact). On the homepage
+// scrolling scrubs through the stored result, so the page scroll is the
+// simulation's timeline; other pages show the cloth at rest. Purely decorative:
+// aria-hidden, no pointer events, never captures input.
 const canvas = document.createElement('canvas');
 canvas.className = 'page-atmosphere';
 canvas.setAttribute('aria-hidden', 'true');
 document.body.prepend(canvas);
 const context = canvas.getContext('2d');
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-const style = getComputedStyle(document.documentElement);
-const ink = style.getPropertyValue('--ink').trim() || '#181c1e';
-const sim = style.getPropertyValue('--sim').trim() || '#216762';
-const PARALLAX = 0.55;
+const ink = getComputedStyle(document.documentElement).getPropertyValue('--ink').trim() || '#181c1e';
+const scrubbed = document.body.dataset.page === 'home';
 
-// Deterministic per page, so every page has its own but stable layout.
+const N = 34;            // particles per side
+const SIZE = 1.9;        // cloth width, world units
+const RADIUS = 0.5;      // sphere at the origin
+const FLOOR = -2.4;      // far below: the corners hang free
+
 function random(seed) {
   let state = [...seed].reduce((h, c) => Math.imul(h ^ c.charCodeAt(0), 2654435761) >>> 0, 2166136261);
   return () => {
@@ -26,154 +30,216 @@ function random(seed) {
   };
 }
 
-let mesh = null;
-let contacts = [];
+// Deterministic: the same seed and steps give the same drape on every visit.
+function simulate() {
+  const next = random('tezoi-cloth');
+  const count = N * N;
+  const pos = new Float32Array(count * 3);
+  const step = SIZE / (N - 1);
+  const yaw = 0.32;
+  for (let i = 0; i < N; i++) {
+    for (let j = 0; j < N; j++) {
+      const x0 = (j - (N - 1) / 2) * step;
+      const z0 = (i - (N - 1) / 2) * step;
+      const k = (i * N + j) * 3;
+      pos[k] = x0 * Math.cos(yaw) - z0 * Math.sin(yaw) + 0.06;
+      pos[k + 1] = 0.95 + x0 * 0.07 + (next() - 0.5) * 0.004;
+      pos[k + 2] = x0 * Math.sin(yaw) + z0 * Math.cos(yaw) - 0.03;
+    }
+  }
+  const prev = pos.slice();
+  const links = [];
+  const link = (a, b, stiffness) => links.push(a, b, Math.hypot(pos[a * 3] - pos[b * 3], pos[a * 3 + 1] - pos[b * 3 + 1], pos[a * 3 + 2] - pos[b * 3 + 2]), stiffness);
+  for (let i = 0; i < N; i++) {
+    for (let j = 0; j < N; j++) {
+      const a = i * N + j;
+      if (j + 1 < N) link(a, a + 1, 1);
+      if (i + 1 < N) link(a, a + N, 1);
+      if (i + 1 < N && j + 1 < N) { link(a, a + N + 1, 0.9); link(a + 1, a + N, 0.9); }
+      if (j + 2 < N) link(a, a + 2, 0.25);
+      if (i + 2 < N) link(a, a + 2 * N, 0.25);
+    }
+  }
+  const frames = [pos.slice()];
+  const dt = 1 / 60;
+  const gravity = -3.2 * dt * dt;
+  for (let s = 1; s <= 216; s++) {
+    for (let p = 0; p < count; p++) {
+      for (let c = 0; c < 3; c++) {
+        const k = p * 3 + c;
+        const velocity = (pos[k] - prev[k]) * 0.986;
+        prev[k] = pos[k];
+        pos[k] += velocity + (c === 1 ? gravity : 0);
+      }
+    }
+    for (let iteration = 0; iteration < 8; iteration++) {
+      for (let l = 0; l < links.length; l += 4) {
+        const a = links[l] * 3;
+        const b = links[l + 1] * 3;
+        const dx = pos[b] - pos[a];
+        const dy = pos[b + 1] - pos[a + 1];
+        const dz = pos[b + 2] - pos[a + 2];
+        const length = Math.hypot(dx, dy, dz) || 1e-6;
+        const push = (length - links[l + 2]) / length * 0.5 * links[l + 3];
+        pos[a] += dx * push; pos[a + 1] += dy * push; pos[a + 2] += dz * push;
+        pos[b] -= dx * push; pos[b + 1] -= dy * push; pos[b + 2] -= dz * push;
+      }
+      for (let p = 0; p < count; p++) {
+        const k = p * 3;
+        const distance = Math.hypot(pos[k], pos[k + 1], pos[k + 2]);
+        const surface = RADIUS + 0.015;
+        if (distance < surface) {
+          const scale = surface / (distance || 1e-6);
+          pos[k] *= scale; pos[k + 1] *= scale; pos[k + 2] *= scale;
+          // Friction: the cloth grips the sphere instead of sliding off.
+          for (let c = 0; c < 3; c++) prev[k + c] += (pos[k + c] - prev[k + c]) * 0.6;
+        }
+        if (pos[k + 1] < FLOOR) {
+          pos[k + 1] = FLOOR;
+          prev[k] += (pos[k] - prev[k]) * 0.5;
+          prev[k + 2] += (pos[k + 2] - prev[k + 2]) * 0.5;
+        }
+      }
+    }
+    if (s % 3 === 0) frames.push(pos.slice());
+  }
+  return frames;
+}
+
+let frames = null;
+function ready(result) {
+  frames = result;
+  canvas.classList.add('is-ready');
+  schedule();
+}
+try {
+  const source = `const N=${N},SIZE=${SIZE},RADIUS=${RADIUS},FLOOR=${FLOOR};\n${random}\n${simulate}\n` +
+    'const f=simulate();postMessage(f,f.map(x=>x.buffer));';
+  const worker = new Worker(URL.createObjectURL(new Blob([source], { type: 'text/javascript' })));
+  worker.onmessage = event => { ready(event.data); worker.terminate(); };
+  worker.onerror = () => { worker.terminate(); setTimeout(() => ready(simulate()), 0); };
+} catch {
+  setTimeout(() => ready(simulate()), 0);
+}
+const current = new Float32Array(N * N * 3);
+const screen = new Float32Array(N * N * 2);
+const triangles = [];
+for (let i = 0; i + 1 < N; i++) {
+  for (let j = 0; j + 1 < N; j++) {
+    const a = i * N + j;
+    triangles.push(a, a + 1, a + N, a + N, a + 1, a + N + 1);
+  }
+}
+const light = (() => { const v = [-0.35, 0.85, 0.42]; const m = Math.hypot(...v); return v.map(c => c / m); })();
+
+let view = null;
 let frame = 0;
 
-function build() {
-  const width = innerWidth;
-  const height = innerHeight;
+function measure() {
+  // 100lvh in CSS: the canvas keeps the largest viewport height, so the mobile
+  // address bar showing or hiding never resizes or re-lays the drawing.
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+  if (view && view.width === width && view.height === height) return;
   const ratio = Math.min(devicePixelRatio || 1, 2);
   canvas.width = Math.round(width * ratio);
   canvas.height = Math.round(height * ratio);
   context.setTransform(ratio, 0, 0, ratio, 0, 0);
+  // Phones place the cloth by width alone, so even a browser that resizes the
+  // canvas with its toolbar only extends the drawing; the cloth never moves.
+  if (view && view.width === width && width < 900) { view.height = height; return; }
+  const wide = width >= 900;
+  view = {
+    width,
+    height,
+    // The sheet is larger than the screen: the page sits on a field of folds.
+    cx: width * (wide ? 0.6 : 0.55),
+    cy: wide ? height * 0.4 : width * 0.9,
+    unit: wide ? Math.min(width * 0.62, height * 1.05) : width * 0.95,
+    runway: wide ? height : width * 2.1,
+  };
+}
 
-  const compact = width < 700;
-  const spacing = compact ? 40 : 54;
-  const rowHeight = spacing * Math.sqrt(3) / 2;
-  const next = random(`${document.body.dataset.page || 'page'}:${compact ? 's' : 'l'}`);
-  const columns = Math.ceil(width / spacing) + 3;
-  const rows = Math.ceil(height / rowHeight) + 3;
-  const nodes = [];
-  for (let row = 0; row < rows; row++) {
-    for (let column = 0; column < columns; column++) {
-      nodes.push({
-        x: (column - 1 + (row % 2) * 0.5) * spacing + (next() - 0.5) * spacing * 0.32,
-        y: (row - 1) * rowHeight + (next() - 0.5) * rowHeight * 0.32,
-      });
-    }
-  }
-  const edges = [];
-  const at = (row, column) => row * columns + column;
-  for (let row = 0; row < rows; row++) {
-    for (let column = 0; column < columns; column++) {
-      if (column + 1 < columns) edges.push([at(row, column), at(row, column + 1)]);
-      if (row + 1 < rows) {
-        const shift = row % 2;
-        edges.push([at(row, column), at(row + 1, column)]);
-        const diagonal = column + (shift ? 1 : -1);
-        if (diagonal >= 0 && diagonal < columns) edges.push([at(row, column), at(row + 1, diagonal)]);
-      }
-    }
-  }
-  mesh = { nodes, edges, moved: nodes.map(node => ({ ...node, strain: 0, near: 0 })) };
-
-  // Contacts live in a slower "background space" so they drift behind the page.
-  const travel = Math.max(height, (document.documentElement.scrollHeight - height) * PARALLAX + height);
-  const step = compact ? 520 : 640;
-  contacts = [];
-  for (let y = height * 0.42; y < travel + step; y += step * (0.8 + next() * 0.4)) {
-    // Contacts stay in the open space on the right; the left edge is the text column.
-    contacts.push({
-      x: width * (compact ? 0.62 + next() * 0.3 : 0.68 + next() * 0.26),
-      y,
-      radius: (compact ? 110 : 170) * (0.8 + next() * 0.45),
-      depth: (compact ? 14 : 24) * (0.8 + next() * 0.4),
-    });
-  }
+function progress() {
+  if (!scrubbed || reduced.matches) return 1;
+  // Measured from the top in a fixed runway, never from the page length or the
+  // live viewport height, so late-loading media and toolbars cannot jolt it.
+  const runway = view.runway;
+  return Math.min(1, Math.max(0, (scrollY - runway * 0.45) / (runway * 2.6)));
 }
 
 function render() {
   frame = 0;
-  if (!mesh) build();
-  const width = innerWidth;
-  const height = innerHeight;
-  const offset = reduced.matches ? 0 : scrollY * PARALLAX;
-  const active = contacts
-    .map(contact => ({ ...contact, sy: contact.y - offset }))
-    .filter(contact => contact.sy > -contact.radius * 2 && contact.sy < height + contact.radius * 2);
+  if (!frames) return;
+  measure();
+  const { width, height, cx, cy, unit } = view;
+  const position = progress() * (frames.length - 1);
+  const index = Math.floor(position);
+  const from = frames[index];
+  const to = frames[Math.min(frames.length - 1, index + 1)];
+  const blend = position - index;
+  for (let k = 0; k < current.length; k++) current[k] = from[k] + (to[k] - from[k]) * blend;
 
-  for (let i = 0; i < mesh.nodes.length; i++) {
-    const node = mesh.nodes[i];
-    const moved = mesh.moved[i];
-    let dx = 0;
-    let dy = 0;
-    let strain = 0;
-    let near = 0;
-    for (const contact of active) {
-      const rx = node.x - contact.x;
-      const ry = node.y - contact.sy;
-      const distance = Math.hypot(rx, ry) || 1;
-      const u = distance / contact.radius;
-      near = Math.max(near, Math.exp(-u * u / 1.2));
-      if (u > 2.4) continue;
-      // Radial pinch toward the contact, peaking just inside its radius.
-      const pull = contact.depth * u * Math.exp(-u * u) * 1.65;
-      dx -= (rx / distance) * pull;
-      dy -= (ry / distance) * pull;
-      strain = Math.max(strain, Math.exp(-u * u * 1.4));
-    }
-    moved.x = node.x + dx;
-    moved.y = node.y + dy;
-    moved.strain = strain;
-    moved.near = near;
+  // Camera: turned a little to the side and looking slightly down.
+  const yaw = -0.5;
+  const pitch = 0.42;
+  const distance = 5.2;
+  const cosYaw = Math.cos(yaw), sinYaw = Math.sin(yaw), cosPitch = Math.cos(pitch), sinPitch = Math.sin(pitch);
+  for (let p = 0; p < N * N; p++) {
+    const x = current[p * 3], y = current[p * 3 + 1], z = current[p * 3 + 2];
+    const x1 = x * cosYaw + z * sinYaw;
+    const z1 = -x * sinYaw + z * cosYaw;
+    const y2 = y * cosPitch - z1 * sinPitch;
+    const z2 = y * sinPitch + z1 * cosPitch;
+    const scale = unit * distance / (distance - z2);
+    screen[p * 2] = cx + x1 * scale;
+    screen[p * 2 + 1] = cy - y2 * scale;
   }
 
   context.clearRect(0, 0, width, height);
-  // The membrane is barely there at rest and gathers definition around each
-  // contact. On wide screens it also recedes behind the left text column and
-  // fills the open space to the right. Edges are batched into a few alpha levels.
-  const levels = 8;
-  const bands = Array.from({ length: levels }, () => []);
-  const wide = width >= 900;
-  const smooth = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
-  for (const [a, b] of mesh.edges) {
-    const A = mesh.moved[a];
-    const B = mesh.moved[b];
-    const x = (A.x + B.x) / 2;
-    const field = wide ? 0.35 + 0.65 * smooth(width * 0.3, width * 0.8, x) : 0.7;
-    const alpha = field * (0.03 + 0.1 * (A.near + B.near) / 2 + 0.11 * (A.strain + B.strain) / 2);
-    bands[Math.min(levels - 1, Math.round(alpha / 0.22 * (levels - 1)))].push(a, b);
-  }
-  context.lineWidth = 1;
+  context.fillStyle = ink;
   context.strokeStyle = ink;
+  // Folds turned away from the light read darker; batched into a few levels.
+  const levels = 10;
+  const bands = Array.from({ length: levels }, () => []);
+  for (let t = 0; t < triangles.length; t += 3) {
+    const a = triangles[t] * 3, b = triangles[t + 1] * 3, c = triangles[t + 2] * 3;
+    const ux = current[b] - current[a], uy = current[b + 1] - current[a + 1], uz = current[b + 2] - current[a + 2];
+    const vx = current[c] - current[a], vy = current[c + 1] - current[a + 1], vz = current[c + 2] - current[a + 2];
+    const nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+    const shade = Math.abs(nx * light[0] + ny * light[1] + nz * light[2]) / (Math.hypot(nx, ny, nz) || 1);
+    bands[Math.min(levels - 1, Math.floor((1 - shade) * levels))].push(triangles[t], triangles[t + 1], triangles[t + 2]);
+  }
   bands.forEach((band, level) => {
     if (!band.length) return;
-    context.globalAlpha = Math.max(0.012, level / (levels - 1) * 0.22);
+    context.globalAlpha = 0.006 + level / (levels - 1) * 0.026;
     context.beginPath();
-    for (let i = 0; i < band.length; i += 2) {
-      const a = mesh.moved[band[i]];
-      const b = mesh.moved[band[i + 1]];
-      context.moveTo(a.x, a.y);
-      context.lineTo(b.x, b.y);
+    for (let i = 0; i < band.length; i += 3) {
+      context.moveTo(screen[band[i] * 2], screen[band[i] * 2 + 1]);
+      context.lineTo(screen[band[i + 1] * 2], screen[band[i + 1] * 2 + 1]);
+      context.lineTo(screen[band[i + 2] * 2], screen[band[i + 2] * 2 + 1]);
+      context.closePath();
     }
-    context.stroke();
-  });
-
-  // Contact markers carry the simulation colour.
-  context.strokeStyle = sim;
-  context.fillStyle = sim;
-  for (const contact of active) {
-    context.globalAlpha = 0.7;
-    context.beginPath();
-    context.arc(contact.x, contact.sy, 2.5, 0, Math.PI * 2);
     context.fill();
-    context.globalAlpha = 0.45;
-    context.beginPath();
-    context.arc(contact.x, contact.sy, 9, 0, Math.PI * 2);
-    context.stroke();
+  });
+  // The weave: rows and columns of the particle grid.
+  context.globalAlpha = 0.075;
+  context.lineWidth = 0.75;
+  context.beginPath();
+  for (let i = 0; i < N; i++) {
+    for (let j = 0; j < N; j++) {
+      const p = (i * N + j) * 2;
+      if (j + 1 < N) { context.moveTo(screen[p], screen[p + 1]); context.lineTo(screen[p + 2], screen[p + 3]); }
+      if (i + 1 < N) { context.moveTo(screen[p], screen[p + 1]); context.lineTo(screen[p + N * 2], screen[p + N * 2 + 1]); }
+    }
   }
+  context.stroke();
   context.globalAlpha = 1;
 }
 
 function schedule() { if (!frame && !document.hidden) frame = requestAnimationFrame(render); }
-function rebuild() { mesh = null; schedule(); }
-addEventListener('scroll', () => { if (!reduced.matches) schedule(); }, { passive: true });
-addEventListener('resize', rebuild, { passive: true });
+addEventListener('scroll', () => { if (scrubbed && !reduced.matches) schedule(); }, { passive: true });
+addEventListener('resize', schedule, { passive: true });
 reduced.addEventListener('change', schedule);
 document.addEventListener('visibilitychange', schedule);
-// Page height settles once media and fonts load; contacts follow it.
-addEventListener('load', rebuild);
-document.fonts?.ready.then(rebuild);
-new ResizeObserver(() => rebuild()).observe(document.body);
 schedule();
