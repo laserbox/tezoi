@@ -9,7 +9,7 @@
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=compact-footer-20261102">
   <script src="site-shell.js?v=impeccable-viewing-20261102" type="module"></script>
-  <script src="app.js?v=robot-real-r11" type="module"></script>
+  <script src="app.js?v=publish-r12" type="module"></script>
   <link rel="stylesheet" href="ego2sim.css?v=rokae6263-v1">
   <link rel="stylesheet" href="school-splat.css?v=selected-camera-20261102">
   <script type="module" src="school-splat.js?v=webgs-f05490c"></script>
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="./showcase-ui.css?v=physics-tactile-20261106" data-tezoi-ui>
 <link rel="stylesheet" href="page-atmosphere.css?v=coherent-atmosphere-20261102">
 <script src="page-atmosphere.js?v=coherent-atmosphere-20261102" type="module"></script>
+<link rel="stylesheet" href="agent-pipeline.css?v=publish-r12">
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">跳到正文</a>
@@ -62,11 +63,11 @@
             <section class="workflow-panel" id="workflow-panel-source" data-workflow-panel="source" role="tabpanel" aria-labelledby="workflow-tab-source" hidden>
               <div class="workflow-pane-heading"><h4>Ego · 真实第一视角示范</h4></div>
               <figure class="workflow-ego-media">
-                <video data-ego-video controls muted playsinline preload="none" poster="assets/ego-img-6263-clean-equipment-2x.jpg" width="1920" height="1080" aria-label="第一视角操作视频，2 倍速">
-                  <source src="assets/ego-img-6263-clean-equipment-2x.mp4" type="video/mp4">
-                  您的浏览器不支持视频播放。<a href="assets/ego-img-6263-clean-equipment-2x.mp4">下载 Ego 视频</a>。
+                <video data-ego-video data-source-revision="original-r10" controls muted playsinline preload="metadata" poster="pipeline/media/ego-original-r10.jpg" width="1920" height="1080" aria-label="第一视角原始拍摄，保留现场设备与完整画幅">
+                  <source src="pipeline/media/ego-original-web-r12.mp4" type="video/mp4">
+                  您的浏览器不支持视频播放。<a href="pipeline/media/ego-original-web-r12.mp4">下载 Ego 视频</a>。
                 </video>
-                <figcaption>第一视角操作视频 · 2 倍速 · 电脑及旁侧设备已作背景修补</figcaption>
+                <figcaption>IMG_6263 · 原始观测片段</figcaption>
               </figure>
             </section>
             <section class="workflow-panel" id="workflow-panel-agent" data-workflow-panel="agent" role="tabpanel" aria-labelledby="workflow-tab-agent" hidden>
@@ -88,7 +89,7 @@
     </section>
     <div data-ego-main-player>
     <div class="ego-viewer">
-      <figure><video data-ego-output playsinline muted preload="metadata" poster="assets/ego2sim/rokae6263/task.jpg?v=rokae6263-v1" aria-label="任务理解演示"></video></figure>
+      <figure><video data-ego-output playsinline muted preload="metadata" poster="pipeline/media/ego-continuous.jpg" aria-label="任务理解演示"></video></figure>
 
     </div>
     <div class="ego-controls"><button type="button" data-ego-play aria-label="播放演示">播放</button><input data-ego-scrub type="range" min="0" max="43.83" step="0.01" value="0" aria-label="示教回放时间"><output data-ego-time>00.0 / 43.8 s</output></div>

@@ -1,0 +1,1 @@
+{"stage":"02_scene","source":"IMG_6263","method":"Existing SAM3/DA3 outputs, Ego2Sim backprojection and original CAD.","artifacts":["perception-frames.json","ego-scene.json","ego-scene.bin"],"metric_calibrated":false}

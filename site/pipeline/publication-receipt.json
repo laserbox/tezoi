@@ -1,0 +1,97 @@
+{
+  "revision": "publish-r12",
+  "created_utc": "2026-11-07T02:27:20.468768+00:00",
+  "binary_checks": [
+    {
+      "file": "contact-surface.bin",
+      "sha256": "3d92afb2f1e8bbb7109604d38c4468cee75fce5e5e73537c795af55a59890f09",
+      "bytes": 752640,
+      "byte_identical": true
+    },
+    {
+      "file": "contact-temporal-surface.bin",
+      "sha256": "c9591205970d17e8eb7989bd9fb961a84470ab52ba36e10dfb4ca91915bc86c1",
+      "bytes": 3769472,
+      "byte_identical": true
+    },
+    {
+      "file": "ego-scene.bin",
+      "sha256": "6906f2fa335f0a485591dc7396a8651da2d8069aedf9d418c1f19e492b12d69b",
+      "bytes": 4075848,
+      "byte_identical": true
+    },
+    {
+      "file": "human-template.bin",
+      "sha256": "c44bf1108328f382fc806a633bf905c9af1a0644404c308bd4433cd47c2ad1f4",
+      "bytes": 3660216,
+      "byte_identical": true
+    },
+    {
+      "file": "human-temporal.bin",
+      "sha256": "5163fb76e312d54d3e2c13f6ee32367c486fafd3708d04fb1eb786f14110026a",
+      "bytes": 11662316,
+      "byte_identical": true
+    },
+    {
+      "file": "robot-geometry.bin",
+      "sha256": "bcc874576f282758af7ecfd05355f66db08c86d2c7a97f5d03407d30819dec4b",
+      "bytes": 16221280,
+      "byte_identical": true
+    },
+    {
+      "file": "robot-states-30hz.bin",
+      "sha256": "3088abc35c0d3833d90c20e2bf78a3733bbc6fa59a1ca08d96a2f44a266383de",
+      "bytes": 99006968,
+      "byte_identical": true
+    }
+  ],
+  "all_source_meshes_trajectories_contact_arrays_unchanged": true,
+  "source_video": {
+    "source_file": "ego-original-r10.mp4",
+    "source_sha256": "c92ecf5e69980f871edce275c03cc0b819bdd7894ae28414764a0b7065af6647",
+    "web_file": "ego-original-web-r12.mp4",
+    "web_sha256": "3eae729364ada5f4298f78eaa9dde0ae61b8a17121cc7e3bb80e7ec8019cd708",
+    "frames": 3056,
+    "width": 1920,
+    "height": 1080,
+    "audio_streams": 0,
+    "max_timestamp_difference_seconds": 0.0,
+    "source_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1920,
+          "height": 1080,
+          "nb_frames": "3056"
+        }
+      ],
+      "format": {
+        "duration": "101.905000",
+        "size": "194791064"
+      }
+    },
+    "web_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1920,
+          "height": 1080,
+          "nb_frames": "3056"
+        }
+      ],
+      "format": {
+        "duration": "101.905000",
+        "size": "63567498"
+      }
+    },
+    "changes": "H.264 web delivery encode only; no background edits, crop, time scaling or generated frames. Source original remains local."
+  },
+  "caption_removed": true,
+  "robot_physics_recomputed": false,
+  "current_public_simulation_preserved": true,
+  "lazy_robot_loading": "Large robot buffers load only when the Agent panel is opened."
+}

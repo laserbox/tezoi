@@ -3,7 +3,7 @@ name: Deploy TEZOI website
 on:
   push:
     branches: [main]
-    paths: ['site/**', '.github/workflows/pages.yml']
+    paths: ['site/**', 'scripts/prepare_pages.py', '.github/workflows/pages.yml']
   workflow_dispatch:
 
 permissions:
@@ -30,10 +30,12 @@ jobs:
           persist-credentials: false
       - name: Configure GitHub Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+      - name: Package current website
+        run: python3 scripts/prepare_pages.py site _site
       - name: Upload website only
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:
-          path: site
+          path: _site
       - name: Deploy website
         id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5

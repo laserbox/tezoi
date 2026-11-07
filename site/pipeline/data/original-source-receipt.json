@@ -1,0 +1,57 @@
+{
+  "status": "original_source_local_review_ready",
+  "preview": "http://127.0.0.1:8773/?lang=zh&workflow=source&preview=source-r10#ego2sim",
+  "source": "IMG_6263",
+  "video": "media/ego-original-r10.mp4",
+  "duration_s": 101.905,
+  "background_cleanup": false,
+  "inpainting": false,
+  "original_video_packets_identical": true,
+  "source_sha256": "72d2c3bfeaf3e093fef2afb002c0aec374950fb9b25614899f34863a291f56fc",
+  "output_sha256": "c92ecf5e69980f871edce275c03cc0b819bdd7894ae28414764a0b7065af6647",
+  "report": "review.json",
+  "web_delivery": {
+    "source_file": "ego-original-r10.mp4",
+    "source_sha256": "c92ecf5e69980f871edce275c03cc0b819bdd7894ae28414764a0b7065af6647",
+    "web_file": "ego-original-web-r12.mp4",
+    "web_sha256": "3eae729364ada5f4298f78eaa9dde0ae61b8a17121cc7e3bb80e7ec8019cd708",
+    "frames": 3056,
+    "width": 1920,
+    "height": 1080,
+    "audio_streams": 0,
+    "max_timestamp_difference_seconds": 0.0,
+    "source_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1920,
+          "height": 1080,
+          "nb_frames": "3056"
+        }
+      ],
+      "format": {
+        "duration": "101.905000",
+        "size": "194791064"
+      }
+    },
+    "web_probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_type": "video",
+          "width": 1920,
+          "height": 1080,
+          "nb_frames": "3056"
+        }
+      ],
+      "format": {
+        "duration": "101.905000",
+        "size": "63567498"
+      }
+    },
+    "changes": "H.264 web delivery encode only; no background edits, crop, time scaling or generated frames. Source original remains local."
+  }
+}

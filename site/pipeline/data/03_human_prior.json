@@ -1,0 +1,1 @@
+{"stage":"03_contact","source":"IMG_6263","method":"Source-matched MANO surface, HaWoR-initialized refined poses and raw HACO inference probabilities.","artifacts":["human.json","human-template.bin","learned-hand-receipt.json","contact-surface.json"],"probability_is_force":false}

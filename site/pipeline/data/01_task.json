@@ -1,0 +1,1 @@
+{"stage":"01_task","source":"IMG_6263","method":"Original Ego video and source action annotations; no new VLM inference.","artifacts":["perception-frames.json"],"events":[{"start":0,"end":3,"name":"观察"},{"start":3,"end":9,"name":"捏取"},{"start":9,"end":22,"name":"对准烧杯"},{"start":22,"end":28,"name":"放回滴管"},{"start":28,"end":39,"name":"移动烧杯"},{"start":39,"end":44,"name":"放回"}]}

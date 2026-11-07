@@ -1,0 +1,1 @@
+Three.js r170 / OrbitControls — MIT, Copyright 2010–2024 Three.js Authors. Retained local upstream files.
