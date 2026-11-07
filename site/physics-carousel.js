@@ -94,7 +94,12 @@ export function mountPhysicsCarousel(root) {
     sync();
     // DOM moves can drop focus, notably in Safari. Keep the same selected control.
     if (root.contains(focus)) focus.focus({ preventScroll: true });
-    if (manual) cards[active].button.scrollIntoView({ block: 'nearest', behavior: preference.matches ? 'auto' : 'smooth' });
+    if (manual) {
+      // Stop a smooth scroll still in flight (keyboard focus on an off-screen thumbnail
+      // starts one) so it cannot carry the promoted film back out of view.
+      window.scrollTo?.({ top: window.scrollY, left: window.scrollX, behavior: 'instant' });
+      cards[active].button.scrollIntoView({ block: 'nearest', behavior: preference.matches ? 'auto' : 'smooth' });
+    }
     moveFrom(before);
     update();
   }
