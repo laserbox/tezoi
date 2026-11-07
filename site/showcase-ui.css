@@ -651,7 +651,7 @@ body[data-page='home'] #gallery .gallery-card h4 { font-size: clamp(17px, 1.3vw,
 }
 
 /* One active film, three previews: a vertical rail on desktop, a filmstrip below on mobile. */
-body[data-page='home'] [data-physics-carousel] { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px 20px; align-items: start; }
+body[data-page='home'] [data-physics-carousel] { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 20px; align-items: start; }
 body[data-page='home'] [data-physics-carousel] .embodied-card:first-child { grid-column: 1 / -1; }
 body[data-page='home'] [data-physics-carousel] .embodied-card:not(:first-child) h4 { padding-top: 10px; font-size: 16px; line-height: 1.4; }
 body[data-page='home'] [data-physics-carousel] .embodied-card:not(:first-child) .material-inline-toggle { width: 28px; height: 28px; bottom: 8px; right: 8px; }

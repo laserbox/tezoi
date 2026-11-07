@@ -1,7 +1,7 @@
 import { mountVideoDialog } from './video-dialog.js?v=video-dialog-20261102';
 import { importViewerModule } from './viewer-module.js?v=website-audit-20261101';
 import { icon } from './icons.js?v=mobile-polish-20261023';
-import { mountPhysicsCarousel } from './physics-carousel.js?v=poster-reset-20261106';
+import { mountPhysicsCarousel } from './physics-carousel.js?v=physics-names-20261108';
 import { mountHeroVideo } from './hero-video.js?v=watch-full-20261029';
 import { mountAgentConversion } from './agent-rokae-conversion.js?v=publish-r12';
 import { mountRealSimWorkflow } from './real-sim-workflow.js?v=robot-real-r11';
@@ -81,8 +81,8 @@ const videos = {
   "cables": {"src":"assets/ipc-cables.mp4","title":"线束弯曲与接触"},
   "fluid": {"src":"assets/ipc-fluid.mp4","title":"液体流动与流固接触"},
   "tactile": {"src":"assets/ipc-tactile.mp4","title":"凝胶形变与接触力"},
-  "haoxiang-cloth": {"src":"assets/haoxiang-cloth.mp4?v=physical-robotbed-v20","title":"柔性接触"},
-  "haoxiang-shell": {"src":"assets/haoxiang-shell.mp4?v=physical-robotbed-v20","title":"液体接触"},
+  "haoxiang-cloth": {"src":"assets/haoxiang-cloth.mp4?v=physical-robotbed-v20","title":"柔性仿真"},
+  "haoxiang-shell": {"src":"assets/haoxiang-shell.mp4?v=physical-robotbed-v20","title":"液体仿真"},
   "haoxiang-safe-grasp": {"src":"assets/haoxiang-safe-grasp.mp4","title":"微滑反馈抓取"},
   "haoxiang-bolt-dashboard": {"src":"assets/haoxiang-bolt-dashboard.mp4","title":"多模态触觉感知"},
   "haoxiang-allegro-vbts": {"src":"assets/haoxiang-allegro-vbts.mp4","title":"Allegro 触觉抓取"},

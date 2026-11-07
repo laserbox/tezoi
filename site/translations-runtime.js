@@ -1,5 +1,5 @@
 export default {
-  "黄瓜切片": { "zh": "黄瓜切片", "en": "Cucumber slicing" },
+  "切割仿真": { "zh": "切割仿真", "en": "Cutting simulation" },
   "播放机械臂切黄瓜演示": { "zh": "播放机械臂切黄瓜演示", "en": "Play robotic cucumber slicing demo" },
   "VIDEO → OBJECT EVENTS → TASK GRAPH": {
     "zh": "视频 → 物体事件 → 任务图",
@@ -745,13 +745,13 @@ export default {
     "zh": "凝胶形变与接触力",
     "en": "Gel deformation and contact forces"
   },
-  "柔性接触": {
-    "zh": "柔性接触",
-    "en": "Soft contact"
+  "柔性仿真": {
+    "zh": "柔性仿真",
+    "en": "Soft-body simulation"
   },
-  "液体接触": {
-    "zh": "液体接触",
-    "en": "Liquid contact"
+  "液体仿真": {
+    "zh": "液体仿真",
+    "en": "Liquid simulation"
   },
   "液体吸附": {
     "zh": "液体吸附",
