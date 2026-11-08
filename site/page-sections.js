@@ -5,7 +5,8 @@
 const header = document.querySelector('.site-header');
 const brand = header?.querySelector('.brand');
 const nav = header?.querySelector('nav');
-const titles = [...document.querySelectorAll('#playground-title, #showcase .subchapter-heading h3, #gallery-title')];
+// The Playground follows the hero without a title, so it has no name here.
+const titles = [...document.querySelectorAll('#showcase .subchapter-heading h3, #gallery-title')];
 
 if (header && brand && titles.length) {
   const indicator = document.createElement('span');
