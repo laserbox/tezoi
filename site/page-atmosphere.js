@@ -1,8 +1,10 @@
 // Background: a sheet of soft cloth that falls onto a sphere and drapes over it.
 // The cloth is simulated once, on load and off the main thread, with a
-// mass-spring model (Verlet integration, distance constraints, sphere and floor
-// contact, and self-collision so folds never pass through each other). On the homepage scrolling scrubs through the stored result, so the
-// page scroll is the simulation's timeline; other pages show the cloth at rest.
+// mass-spring model: Verlet integration in small substeps, distance
+// constraints, air drag across the cloth's face, sphere friction and
+// self-collision so folds never pass through each other. On the homepage the
+// scroll scrubs through the stored result (eased, so it moves continuously);
+// other pages show the cloth at rest.
 // It is drawn with WebGL: smooth normals, soft wrapped light and a faint sheen,
 // front layer only, so folds read as fabric rather than a mesh.
 // Purely decorative: aria-hidden, no pointer events, never captures input.
@@ -18,6 +20,17 @@ const S = 2;             // drawn at S× the resolution, smoothly interpolated
 const SIZE = 1.9;        // cloth width, world units
 const RADIUS = 0.5;      // sphere at the origin
 const FLOOR = -2.4;      // far below: the corners hang free
+const GRAVITY = 9.8;     // world units are metres: a 1.9 m sheet over a 1 m ball
+const DAMPING = 0.996;   // light: the air drag below does the real work
+const DRAG_MIDDLE = 0.14;
+const DRAG_EDGE = 0.04;
+const AIR = 0.35;        // m/s of slow, turning air
+const AIR_UNTIL = 1.2;   // s: it fades out over the 0.6 s before this
+const GRIP = 0.85;       // friction on the ball: the drape stays where it lands
+const SUBSTEPS = 3;      // per 1/60 s step
+const ITERATIONS = 6;    // constraint passes per substep
+const STEPS = 150;       // 2.5 s at 60 Hz: falls by 0.6 s, drapes by 1.4 s, then rests
+const FRAME_EVERY = 2;   // stored every 1/30 s
 
 function random(seed) {
   let state = [...seed].reduce((h, c) => Math.imul(h ^ c.charCodeAt(0), 2654435761) >>> 0, 2166136261);
@@ -43,7 +56,8 @@ function simulate() {
       const z0 = (i - (N - 1) / 2) * step;
       const k = (i * N + j) * 3;
       pos[k] = x0 * Math.cos(yaw) - z0 * Math.sin(yaw) + 0.06;
-      pos[k + 1] = 0.95 + x0 * 0.07 + (next() - 0.5) * 0.002;
+      // A real sheet is never perfectly flat: a slight, uneven wave.
+      pos[k + 1] = 0.95 + x0 * 0.07 + 0.02 * Math.sin(2.1 * x0 + 0.6) * Math.cos(1.6 * z0 - 0.3) + (next() - 0.5) * 0.002;
       pos[k + 2] = x0 * Math.sin(yaw) + z0 * Math.cos(yaw) - 0.03;
     }
   }
@@ -97,21 +111,54 @@ function simulate() {
       }
     }
   }
-  const frames = [pos.slice()];
-  const dt = 1 / 60;
-  const gravity = -3.2 * dt * dt;
-  const surface = RADIUS + 0.02;
-  for (let s = 1; s <= 216; s++) {
-    for (let p = 0; p < count; p++) {
-      for (let c = 0; c < 3; c++) {
-        const k = p * 3 + c;
-        const velocity = (pos[k] - prev[k]) * 0.985;
-        prev[k] = pos[k];
-        pos[k] += velocity + (c === 1 ? gravity : 0);
+  // Air drag acts on motion across the cloth's face, and more in the middle
+  // than at the free edges where the air slips past: like a dropped sheet, the
+  // edges lead and the middle billows, instead of the sheet falling as a board.
+  const drag = new Float32Array(count);
+  for (let i = 0; i < N; i++) {
+    for (let j = 0; j < N; j++) drag[i * N + j] = DRAG_EDGE + (DRAG_MIDDLE - DRAG_EDGE) * Math.min(1, Math.min(i, j, N - 1 - i, N - 1 - j) / 7);
+  }
+  const normal = new Float32Array(count * 3);
+  const damping = DAMPING ** (1 / SUBSTEPS);
+  function faceNormals() {
+    for (let i = 0; i < N; i++) {
+      for (let j = 0; j < N; j++) {
+        const l = (i * N + Math.max(0, j - 1)) * 3, r = (i * N + Math.min(N - 1, j + 1)) * 3;
+        const u = (Math.max(0, i - 1) * N + j) * 3, d = (Math.min(N - 1, i + 1) * N + j) * 3;
+        const ax = pos[r] - pos[l], ay = pos[r + 1] - pos[l + 1], az = pos[r + 2] - pos[l + 2];
+        const bx = pos[d] - pos[u], by = pos[d + 1] - pos[u + 1], bz = pos[d + 2] - pos[u + 2];
+        const nx = ay * bz - az * by, ny = az * bx - ax * bz, nz = ax * by - ay * bx;
+        const m = Math.sqrt(nx * nx + ny * ny + nz * nz) || 1;
+        const k = (i * N + j) * 3;
+        normal[k] = nx / m; normal[k + 1] = ny / m; normal[k + 2] = nz / m;
       }
     }
-    for (let iteration = 0; iteration < 10; iteration++) {
-      if (iteration % 4 === 3) separate();
+  }
+  const frames = [pos.slice()];
+  const dt = 1 / 60 / SUBSTEPS;
+  const gravity = -GRAVITY * dt * dt;
+  const surface = RADIUS + 0.02;
+  // Small substeps keep the cloth nearly inextensible far better than more
+  // passes of one big step; without them it sags under its own hanging weight.
+  for (let s = 1; s <= STEPS * SUBSTEPS; s++) {
+    const time = s * dt;
+    // The air settles once the sheet has landed, so the drape comes to rest.
+    const air = AIR * Math.max(0, Math.min(1, (AIR_UNTIL - time) / 0.6));
+    faceNormals();
+    for (let p = 0; p < count; p++) {
+      const k = p * 3;
+      // Slow, gently turning air, so the folds are not mirror images.
+      const wx = air * Math.sin(1.7 * pos[k + 2] + 1.1 * time + 0.4) * dt;
+      const wy = air * 0.35 * Math.sin(2.1 * pos[k] + 1.7 * pos[k + 2] + 2.3 * time) * dt;
+      const wz = air * Math.cos(1.3 * pos[k] - 0.8 * time) * dt;
+      let vx = (pos[k] - prev[k]) * damping, vy = (pos[k + 1] - prev[k + 1]) * damping, vz = (pos[k + 2] - prev[k + 2]) * damping;
+      const nx = normal[k], ny = normal[k + 1], nz = normal[k + 2];
+      const across = ((vx - wx) * nx + (vy - wy) * ny + (vz - wz) * nz) * drag[p] / SUBSTEPS;
+      vx -= nx * across; vy -= ny * across; vz -= nz * across;
+      prev[k] = pos[k]; prev[k + 1] = pos[k + 1]; prev[k + 2] = pos[k + 2];
+      pos[k] += vx; pos[k + 1] += vy + gravity; pos[k + 2] += vz;
+    }
+    for (let iteration = 0; iteration < ITERATIONS; iteration++) {
       for (let l = 0; l < links.length; l += 4) {
         const a = links[l];
         const b = links[l + 1];
@@ -130,7 +177,7 @@ function simulate() {
           const scale = surface / (distance || 1e-6);
           pos[k] *= scale; pos[k + 1] *= scale; pos[k + 2] *= scale;
           // Friction: the cloth grips the sphere instead of sliding off.
-          for (let c = 0; c < 3; c++) prev[k + c] += (pos[k + c] - prev[k + c]) * 0.6;
+          for (let c = 0; c < 3; c++) prev[k + c] += (pos[k + c] - prev[k + c]) * GRIP;
         }
         if (pos[k + 1] < FLOOR) {
           pos[k + 1] = FLOOR;
@@ -140,7 +187,7 @@ function simulate() {
       }
     }
     separate();
-    if (s % 3 === 0) frames.push(pos.slice());
+    if (s % (FRAME_EVERY * SUBSTEPS) === 0) frames.push(pos.slice());
   }
   return frames;
 }
@@ -152,6 +199,8 @@ let frames = null;
 let resources = null;
 let view = null;
 let frame = 0;
+let shown = null;        // the timeline position currently drawn
+let lastTime = 0;
 const M = (N - 1) * S + 1;   // drawn grid
 const current = new Float32Array(N * N * 3);
 const rows = new Float32Array(N * M * 3);
@@ -329,12 +378,20 @@ function refine() {
   }
 }
 
-function render() {
+function render(now) {
   frame = 0;
   if (!frames || !resources || gl.isContextLost()) return;
   measure();
   const { width, height, cx, cy, unit } = view;
-  const position = progress() * (frames.length - 1);
+  // The cloth follows the scroll with a little inertia (about 0.2 s) instead of
+  // jumping a whole wheel notch at once, so it always moves continuously.
+  const target = progress();
+  if (shown === null || !scrubbed || reduced.matches) shown = target;
+  else shown += (target - shown) * (1 - Math.exp(-Math.min(1 / 30, (now - lastTime) / 1000) / 0.18));
+  lastTime = now;
+  if (Math.abs(target - shown) < 0.0004) shown = target;
+  else schedule();
+  const position = shown * (frames.length - 1);
   const index = Math.floor(position);
   const from = frames[index];
   const to = frames[Math.min(frames.length - 1, index + 1)];
@@ -375,7 +432,7 @@ if (gl) {
     canvas.addEventListener('webglcontextlost', event => { event.preventDefault(); resources = null; canvas.classList.remove('is-ready'); });
     canvas.addEventListener('webglcontextrestored', () => { setup(); schedule(); });
     try {
-      const source = `const N=${N},SIZE=${SIZE},RADIUS=${RADIUS},FLOOR=${FLOOR};\n${random}\n${simulate}\n` +
+      const source = `const N=${N},SIZE=${SIZE},RADIUS=${RADIUS},FLOOR=${FLOOR},GRAVITY=${GRAVITY},DAMPING=${DAMPING},DRAG_MIDDLE=${DRAG_MIDDLE},DRAG_EDGE=${DRAG_EDGE},AIR=${AIR},AIR_UNTIL=${AIR_UNTIL},GRIP=${GRIP},SUBSTEPS=${SUBSTEPS},ITERATIONS=${ITERATIONS},STEPS=${STEPS},FRAME_EVERY=${FRAME_EVERY};\n${random}\n${simulate}\n` +
         'const f=simulate();postMessage(f,f.map(x=>x.buffer));';
       const worker = new Worker(URL.createObjectURL(new Blob([source], { type: 'text/javascript' })));
       worker.onmessage = event => { ready(event.data); worker.terminate(); };
