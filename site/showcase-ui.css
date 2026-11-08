@@ -806,10 +806,10 @@ body[data-page='home'] :is(#showcase > .chapter-marker, #playground > .section-w
 }
 
 /* ---- Corners ------------------------------------------------------------------
-   Square corners everywhere outside the Playground, as in the header, the hero
-   and the physics captions: frames, films and images, tabs, labels, buttons and
-   the video dialog. Only the round drag handles on the comparison sliders stay
-   round. The Playground keeps its own corners while collaborators edit it. */
-:is(#embodied-contact, #scene-reconstruction, #gallery, #video-dialog, #physical-contact, #benchmark, #ts#ts) :not(.school-image-divider > span, .scene-comparison-handle),
+   Square corners everywhere, as in the header, the hero and the physics
+   captions: frames, panels, films and images, tabs, labels, buttons and the
+   video dialog. Only true circles stay round: the drag handles on comparison
+   sliders and the dot and finger markers in the Ego2Sim panel. */
+:is(#playground, #embodied-contact, #scene-reconstruction, #gallery, #video-dialog, #physical-contact, #benchmark, #ts#ts) :not(.school-image-divider > span, .scene-comparison-handle, .compare-knob, .ep-wordmark i, .ep-near, .ep-inward, .ep-finger-id, .ep-pad-dot, .scene-contact-toggle > span),
 :is(#video-dialog, #benchmark, .skip-link, .page-figure, #ts#ts),
 :is(.page-figure, #ts#ts) img { border-radius: 0; }
