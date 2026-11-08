@@ -885,14 +885,6 @@ export default {
     "zh": "此设备的 GPU 单缓冲区容量不足，完整场景需要至少 550 MiB",
     "en": "This device’s GPU has insufficient capacity for a single buffer. The full scene requires at least 550 MiB."
   },
-  "模型文件超过 1 GiB 大小限制": {
-    "zh": "模型文件超过 1 GiB 大小限制",
-    "en": "The model file exceeds the 1 GiB size limit"
-  },
-  "正在读取模型文件…": {
-    "zh": "正在读取模型文件…",
-    "en": "Reading model file…"
-  },
   "正在下载完整场景：0%（约 {0} MB）": {
     "zh": "正在下载完整场景：0%（约 {0} MB）",
     "en": "Downloading full scene: 0% (approximately {0} MB)"
@@ -901,29 +893,9 @@ export default {
     "zh": "模型下载 HTTP {0}",
     "en": "Model download HTTP {0}"
   },
-  "模型大小与配置不一致": {
-    "zh": "模型大小与配置不一致",
-    "en": "Model size does not match the configuration"
-  },
   "正在下载完整场景：{0}%（约 {1} MB）": {
     "zh": "正在下载完整场景：{0}%（约 {1} MB）",
     "en": "Downloading full scene: {0}% (approximately {1} MB)"
-  },
-  "模型下载不完整": {
-    "zh": "模型下载不完整",
-    "en": "Model download incomplete"
-  },
-  "正在解析模型并上传 GPU，请稍候…": {
-    "zh": "正在解析模型并上传 GPU，请稍候…",
-    "en": "Parsing model and uploading to GPU. Please wait…"
-  },
-  "TEZOI · Scene Reconstruction": {
-    "zh": "TEZOI · 场景重建",
-    "en": "TEZOI · Scene Reconstruction"
-  },
-  "当前浏览器未允许全屏，可继续在页面内探索。": {
-    "zh": "当前浏览器未允许全屏，可继续在页面内探索。",
-    "en": "This browser did not allow fullscreen. You can continue exploring within the page."
   },
   "Media could not be loaded": {
     "zh": "媒体无法加载",
@@ -961,17 +933,9 @@ export default {
     "zh": "实拍 {0}%，重建 {1}%",
     "en": "Real photo {0}%, reconstruction {1}%"
   },
-  "正在加载三维场景，请稍候…": {
-    "zh": "正在加载三维场景，请稍候…",
-    "en": "Loading 3D scene. Please wait…"
-  },
   "三维场景不可用：{0}": {
     "zh": "三维场景不可用：{0}",
     "en": "3D scene unavailable: {0}"
-  },
-  "3DGS 加载失败": {
-    "zh": "3DGS 加载失败",
-    "en": "3DGS failed to load"
   },
   "三维场景加载失败：{0} 请使用支持 WebGPU 的桌面浏览器。": {
     "zh": "三维场景加载失败：{0} 请使用支持 WebGPU 的桌面浏览器。",
@@ -1666,6 +1630,5 @@ export default {
     "en": "1 video"
   },
   "刷新页面": {"zh":"刷新页面","en":"Refresh page"},
-  "三维组件加载失败，请刷新页面重试。": {"zh":"三维组件加载失败，请刷新页面重试。","en":"Unable to load the viewer. Refresh the page to retry."},
-  "三维场景暂时无法加载。": {"zh":"三维场景暂时无法加载。","en":"Unable to load the 3D scene."}
+  "三维组件加载失败，请刷新页面重试。": {"zh":"三维组件加载失败，请刷新页面重试。","en":"Unable to load the viewer. Refresh the page to retry."}
 };

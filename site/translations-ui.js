@@ -893,9 +893,9 @@ export default {
     "zh": "重建方式",
     "en": "Reconstruction method"
   },
-  "单图扫描重建": {
-    "zh": "单图扫描重建",
-    "en": "Single-image scan"
+  "场景展示": {
+    "zh": "场景展示",
+    "en": "Scene showcase"
   },
   "多图扫描重建": {
     "zh": "多图扫描重建",
@@ -916,10 +916,6 @@ export default {
   "重建演示": {
     "zh": "重建演示",
     "en": "Walkthrough"
-  },
-  "自由探索": {
-    "zh": "自由探索",
-    "en": "Explore"
   },
   "3D": {
     "zh": "3D",
@@ -965,10 +961,6 @@ export default {
     "zh": "导航",
     "en": "Navigation"
   },
-  "相机导航模式": {
-    "zh": "相机导航模式",
-    "en": "Camera navigation mode"
-  },
   "Turntable": {
     "zh": "转台",
     "en": "Turntable"
@@ -981,29 +973,9 @@ export default {
     "zh": "第一人称",
     "en": "First person"
   },
-  "Fly": {
-    "zh": "飞行",
-    "en": "Fly"
-  },
-  "重置位置": {
-    "zh": "重置",
-    "en": "Reset"
-  },
   "全屏": {
     "zh": "全屏",
     "en": "Fullscreen"
-  },
-  "3D 场景 · 49.8 MB": {
-    "zh": "3D 场景 · 49.8 MB",
-    "en": "3D scene · 49.8 MB"
-  },
-  "进入三维场景": {
-    "zh": "进入 3D",
-    "en": "Explore 3D"
-  },
-  "INTERACTIVE / 03": {
-    "zh": "交互式三维",
-    "en": "Interactive 3D"
   },
   "查看实拍原图": {
     "zh": "实拍原图",
