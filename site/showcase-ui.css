@@ -995,3 +995,38 @@ body[data-page='home'] #playground :is(.workflow-pane-heading, .compare-heading)
   .hero-watch > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .hero-watch > .hero-watch-expand { display: block; }
 }
+
+/* ---- Company page: the statement leads ------------------------------------------
+   The page name is set like the home page's section names, so the statement is the
+   largest line. Each focus area says what it is in one sentence and links to the
+   home page section that shows it. */
+body[data-page='company'] .page-intro { padding-bottom: 0; }
+body[data-page='company'] :is(.page-intro, #ts#ts) h1 { font-size: var(--t-section-name); font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; }
+body[data-page='company'] .company-story { padding-block: 40px 72px; }
+body[data-page='company'] :is(.page-copy, #ts#ts) h2 { font-size: clamp(40px, 5.2vw, 76px); font-weight: 600; line-height: 1.12; letter-spacing: -0.03em; }
+body[data-page='company'] :is(.page-copy, #ts#ts) p { margin-top: 24px; color: var(--muted); font-size: clamp(17px, 1.5vw, 21px); }
+body[data-page='company'] .page-topics { gap: 40px; padding-top: 32px; border-top: 1px solid var(--control-edge); }
+body[data-page='company'] .page-topics p { max-width: 30em; margin-top: 12px; color: var(--muted); font-size: var(--t-body); line-height: 1.65; }
+body[data-page='company'] .page-link { margin-top: 12px; text-decoration: underline; text-decoration-color: var(--control-edge); text-underline-offset: 6px; }
+body[data-page='company'] .page-link:hover { text-decoration-color: currentColor; }
+@media (max-width: 600px) {
+  body[data-page='company'] .company-story { padding-block: 28px 48px; }
+  body[data-page='company'] .page-topics { gap: 32px; }
+}
+
+/* ---- Home page refinements ------------------------------------------------------
+   Hero: the film's own caption owns the lower left; the full-video button and the
+   pause button sit together at the lower right at one height. */
+.hero-bottom, [data-hero-media] .hero-bottom { grid-template-columns: minmax(0, 1fr) auto auto; }
+@media (min-width: 601px) {
+  :is(.hero-watch, #ts#ts) { min-height: 48px; padding: 12px 22px; }
+  .hero-toggle { width: 48px; height: 48px; }
+}
+/* Language switch: the same paper-and-edge control as the tabs, so the header's
+   heaviest mark is the logo rather than a solid block. */
+:is(.site-header, #ts#ts) .language-switch { padding: 3px; gap: 2px; background: var(--paper); box-shadow: inset 0 0 0 1px var(--control-edge); }
+:is(.site-header, #ts#ts) .language-switch button { min-width: 38px; min-height: 38px; padding: 4px 8px; }
+/* Phones: with two gallery categories the count fits beside its name. */
+@media (max-width: 600px) {
+  #gallery .gallery-tabs:not(:has(button:nth-child(4))) button { flex-direction: row; gap: 8px; min-height: 48px; }
+}

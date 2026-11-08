@@ -441,6 +441,18 @@ export default {
     "zh": "从观察走向验证",
     "en": "From observation to validation"
   },
+  "用实拍照片重建实验室和工位，变成机器人可以进入、可以操作的仿真场景。": {
+    "zh": "用实拍照片重建实验室和工位，变成机器人可以进入、可以操作的仿真场景。",
+    "en": "Labs and workstations rebuilt from real photos into simulated scenes a robot can enter and work in."
+  },
+  "刚体、柔性物体、液体、触觉与切割，都算到接触和受力这一层。": {
+    "zh": "刚体、柔性物体、液体、触觉与切割，都算到接触和受力这一层。",
+    "en": "Rigid bodies, soft materials, liquids, touch and cutting, simulated down to contact and force."
+  },
+  "从人的第一视角示范出发，在仿真里学成机器人轨迹，再回到真机上验证。": {
+    "zh": "从人的第一视角示范出发，在仿真里学成机器人轨迹，再回到真机上验证。",
+    "en": "From a person's first-person demonstration to robot trajectories learned in simulation, then checked on a real robot."
+  },
   "页脚导航": {
     "zh": "页脚导航",
     "en": "Footer navigation"
