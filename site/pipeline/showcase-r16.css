@@ -1,0 +1,27 @@
+@import url('./showcase-r15.css');
+
+/* One shared feedback loop sits above, and stays independent of, all four tabs. */
+.visual-focus>.feedback-loop{margin:0 0 21px;padding:12px 17px 9px}
+.visual-focus>.feedback-loop .fl-map{height:116px}
+.visual-focus>.feedback-loop .fl-nodes{height:70px}
+.visual-focus>.feedback-loop .fl-state{margin-top:9px;min-height:26px}
+.visual-focus .fl-heading button{border:1px solid #365b48;border-radius:5px;padding:6px 9px;min-width:90px;text-align:center}
+.visual-focus .fl-heading button:hover{background:#284637;color:#e2f5e9}
+.visual-focus .fl-node[data-lit=true]{border-color:#addfc0;background:#2a4a3a;box-shadow:0 0 19px #8cd9ad18}
+.visual-focus .fl-trace{opacity:0;stroke:#d6f3df;stroke-width:3.2;stroke-linecap:round;stroke-dasharray:3 97;animation:fl-travel 1.6s linear infinite}
+.visual-focus .fl-trace-back{stroke:#efd0a4;stroke-width:2.1;stroke-dasharray:3 97}
+.visual-focus .feedback-loop[data-loop-step="1"] .fl-trace-tools,
+.visual-focus .feedback-loop[data-loop-step="5"] .fl-trace-tools,
+.visual-focus .feedback-loop[data-loop-step="2"] .fl-trace-check,
+.visual-focus .feedback-loop[data-loop-step="3"] .fl-trace-back,
+.visual-focus .feedback-loop[data-loop-step="4"] .fl-trace-back{opacity:1}
+.visual-focus .feedback-loop .fl-return{stroke-dasharray:none;animation:none;color:#6c9b83}
+.visual-focus .feedback-loop .fl-return-label{color:#9dbda9}
+.visual-focus .feedback-loop[data-loop-step="3"] .fl-return,
+.visual-focus .feedback-loop[data-loop-step="4"] .fl-return,
+.visual-focus .feedback-loop[data-loop-step="3"] .fl-return-label,
+.visual-focus .feedback-loop[data-loop-step="4"] .fl-return-label{color:#ddb584}
+.visual-focus .feedback-loop[data-loop-playing="false"] .fl-trace{animation-play-state:paused;opacity:0}
+@keyframes fl-travel{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+@media(max-width:600px){.visual-focus>.feedback-loop{margin:0 0 17px;padding:9px 8px 8px}.visual-focus>.feedback-loop .fl-map{height:104px}.visual-focus>.feedback-loop .fl-nodes{height:63px}.visual-focus .fl-heading button{min-width:75px;padding:6px 7px;font-size:9px}.visual-focus .fl-node b{font-size:10px}.visual-focus .fl-node small{display:none}.visual-focus>.feedback-loop .fl-state{margin-top:7px}.visual-focus .fl-state code{max-width:52%}}
+@media(prefers-reduced-motion:reduce){.visual-focus .fl-trace{animation:none!important;opacity:0!important}}

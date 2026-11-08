@@ -1,0 +1,30 @@
+{
+  "revision": "showcase-r16",
+  "parent_provenance": "visual-focus-r15.json",
+  "updated_utc": "2026-11-08T02:09:37.393610+00:00",
+  "presentation": {
+    "placement": "shared feedback panel above the four stage tabs",
+    "default": "automatically loop six illustrative phases while the panel is visible",
+    "period_s": 9.6,
+    "phase_s": 1.6,
+    "controls": "pause/resume, preserved across stage changes",
+    "visibility": "suspend when hidden, offscreen or the workflow is inactive; resume on return",
+    "reduced_motion": "start paused, allow explicit play; no flowing-particle animation",
+    "stage_selection": "manual; animation never switches the selected stage or seeks a video",
+    "screen_reader": "no repeating live-region announcements"
+  },
+  "reference": {
+    "url": "https://robot-agent-exploration.com/#method",
+    "adapted_pattern": "phase highlights and moving edge indicators, with an independent pause control",
+    "copied_site_assets": false
+  },
+  "scope": "architecture illustration based on the existing server verify/feedback/cache rules; no live job dispatch or completed repair claim",
+  "new_inference": false,
+  "new_physics": false,
+  "new_media": false,
+  "implementation_sha256": {
+    "pipeline/showcase-r16.js": "bb506ef8ae0127b5001f44073f9d0d4cd47270f183e8b1fffa7cbfffb8e98d4c",
+    "pipeline/showcase-r16.css": "5522bf112cf0e4a2873d590d33e1aa0be68136d3fd4eb3699016e6579c2cc65a",
+    "pipeline/feedback-loop-r16.js": "4d1e619d8100b993b5c7cb99d3675060f7308a3284be28e0cc438b6b4ddc518f"
+  }
+}
