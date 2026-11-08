@@ -185,6 +185,8 @@ button:focus-visible, a:focus-visible, select:focus-visible { outline: 3px solid
 #scene-reconstruction :is(.school-image-divider > span,.scene-comparison-handle), .compare-knob { width: 48px; height: 48px; border: 1px solid #394246; border-radius: 50%; color: var(--ink); background: #fff; box-shadow: none; backdrop-filter: none; } /* taste-skill-ignore: explicitly clears legacy shadows or blur; no decorative effect */
 .school-viewer-overlay, .school-viewer-overlay p { color: var(--ui-night-muted); }
 .school-viewer-overlay button, .school-endcta button, .scene-loading button, .scene-comparison-feedback button { min-height: 44px; padding: 11px 18px; border: 0; border-radius: 4px; color: var(--ink); background: var(--ui-highlight); }
+.school-viewer-overlay button, .school-endcta button { display: inline-flex; align-items: center; gap: 6px; }
+:is(.school-viewer-overlay, .school-endcta) button > .ui-icon { flex: none; width: 1.15em; height: 1.15em; }
 .school-navigation { gap: 8px; padding: 8px; border: 0; border-radius: 4px; background: var(--ui-night); backdrop-filter: none; } /* taste-skill-ignore: explicitly clears legacy shadows or blur; no decorative effect */
 .school-navigation button, .school-navigation select, .scene-zoom, .scene-reset, .scene-contact-toggle { min-height: 44px; min-width: 44px; border-radius: 4px; }
 .scene-camera-controls { gap: 6px; }
@@ -735,7 +737,6 @@ body.interior-page > .site-footer { width: 100%; }
 :is(.gallery-tab-count, #ts#ts),
 :is(#scene-reconstruction, #ts#ts) :is(.school-image-label, .scene-comparison-label, .school-screen-label),
 :is(.footer-bottom, #ts#ts) :is(span, a) { font-size: var(--t-small); }
-:is(.school-image-divider, #ts#ts) > span { font-size: var(--t-title); }
 @media (max-width: 600px) {
   :is([data-physics-carousel], #ts#ts) .embodied-card:not(:first-child) h4 { font-size: var(--t-control); }
   :is(.gallery-card, #ts#ts) h4 { font-size: var(--t-body); }
