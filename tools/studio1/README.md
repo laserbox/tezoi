@@ -16,9 +16,18 @@ Example on this machine:
   -- 'C:\Users\WINDOWS\AppData\Local\Temp\tezoi-studio1-final' 4096 512
 ```
 
-Copy `studio1-baked.glb` and `studio1-baked.json` from the output directory to
-`site/assets/studio1-v9-web/`. The GLB embeds the PNG; the separate PNG is kept
-in the build output only. Update the version strings in the manifest and site
+Before publishing, re-encode the embedded lighting PNG as JPEG (quality 95,
+full-resolution colour; the bake has no transparency the viewer uses). This
+shrinks the GLB from about 24 MB to 9 MB with a measured PSNR of 46 dB on the
+texture and under 1/255 average difference on screen:
+
+```sh
+uv run --no-project --with pillow python tools/glb_jpeg_textures.py OUT/studio1-baked.glb site/assets/studio1-v9-web/studio1-baked.glb 95
+```
+
+Copy `studio1-baked.json` from the output directory to
+`site/assets/studio1-v9-web/`. The separate PNG is kept in the build output
+only. Update the version strings in the manifest and site
 references when replacing the model so browsers reload it.
 
 The viewer displays the baked texture as an unlit material. Static baked
