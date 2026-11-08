@@ -104,7 +104,9 @@ export function mountAgentConversion(root) {
       if(isCloud){
         cloudPending??=import('./scene-r13.js').then(m=>m.createSceneCloud(root.querySelector('.ps-cloud')));
         cloudPending.then(instance=>{cloud=instance;if(token!==revision)return;cloud.resize();root.dataset.pipelineReady='true';
-          root.querySelector('.ps-code code').textContent=`const scene = {\n  source: "IMG_6263",\n  frame: 102,\n  segmentation: "SAM",\n  depth: "DA3.relative",\n  points: ${cloud.meta.points},\n  handMask: "exclude",\n  metricScale: null,\n  assets: "1030.saved",\n  newSolve: false,\n} satisfies SceneInput;`;
+          const code=root.querySelector('.ps-code code');code.replaceChildren();
+          const text=`const scene = {\n  source: "IMG_6263",\n  frame: 102,\n  segmentation: "SAM",\n  depth: "DA3.relative",\n  points: ${cloud.meta.points},\n  handMask: "exclude",\n  metricScale: null,\n  assets: "1030.saved",\n  newSolve: false,\n} satisfies SceneInput;`;
+          for(const part of text.split(/("[^"]*"|\b(?:const|satisfies|null|false|SceneInput|\d+)\b)/g)){const span=document.createElement('span');span.textContent=part;span.style.color=part.startsWith('"')?'#b5d89b':/^(const|satisfies)$/.test(part)?'#b9a5e4':/^(null|false|\d+)$/.test(part)?'#e5ba84':part==='SceneInput'?'#7cd6d5':'#c4d9d3';code.append(span);}
         }).catch(()=>{if(token===revision)error.hidden=false;});
       }else{
         sceneImage.onload=()=>{if(token===revision)root.dataset.pipelineReady='true';};

@@ -1,7 +1,7 @@
 {
   "file": "scene-frame102-r13.bin",
-  "sha256": "a19d042d839786ee23954de352308a3e5ed7373ed945ac3141d956aff340f0b8",
-  "points": 4025,
+  "sha256": "7d70e1cc54742c3c2a6c4eecf71f584640ea18d1182cdcf10a91285287fab4e1",
+  "points": 16210,
   "stride": 6,
   "source": "IMG_6263",
   "frame": 102,
@@ -17,13 +17,13 @@
   ],
   "roundtrip_px": 2.842170943040401e-14,
   "normalization": {
-    "median_depth": 0.9859477877616882
+    "median_depth": 0.9865231513977051
   },
   "depth_sha256": "184dca5a07cfc2b568b60af2c75881c9ddec35f3977a4bdcdb8fafafb10695c2",
   "sam_sha256": "08f1ba13847b8bfe5ce5127150e9abac5d239cb1b65c27fe20803f1bb379dd74",
   "center": [
-    0.07219197174419492,
-    0.03276330303187856,
+    0.07240454877835382,
+    0.03234015038183084,
     1.0
   ],
   "camera": "source pinhole orientation; interactive orbit for inspection"
