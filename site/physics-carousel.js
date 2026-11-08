@@ -25,6 +25,7 @@ export function mountPhysicsCarousel(root) {
     motions.forEach(animation => animation.cancel());
     motions = [];
     cards.forEach(card => { card.node.style.zIndex = ''; });
+    root.classList.remove('is-moving');
   }
   function positions() {
     if (preference.matches || page.hidden || suspended || !cards[0].button.animate) return null;
@@ -33,6 +34,7 @@ export function mountPhysicsCarousel(root) {
   function moveFrom(before) {
     if (!before) return;
     const token = ++motionRevision;
+    root.classList.add('is-moving');
     const timing = { duration: 520, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'both' };
     cards.forEach((card, i) => {
       const film = card.button.getBoundingClientRect();
@@ -156,8 +158,8 @@ export function mountPhysicsCarousel(root) {
     card.video.addEventListener('pause', sync);
     card.video.addEventListener('error', sync);
   });
-  // A thin line along the bottom of the large film shows how far it has played;
-  // when it reaches the end the next demo takes its place.
+  // A thin line under the large film shows how far it has played; when it
+  // reaches the end the next demo takes its place.
   let frame = 0;
   function paintProgress() {
     frame = 0;
@@ -176,7 +178,7 @@ export function mountPhysicsCarousel(root) {
     track.setAttribute('aria-hidden', 'true');
     card.progress = page.createElement('span');
     track.append(card.progress);
-    card.button.append(track);
+    card.node.append(track);
     ['play', 'seeked', 'loadedmetadata', 'emptied', 'ended'].forEach(type => card.video.addEventListener(type, scheduleProgress));
   });
   const observer = new IntersectionObserver(entries => {
