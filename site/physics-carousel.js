@@ -1,5 +1,3 @@
-import { icon } from './icons.js?v=mobile-polish-20261023';
-
 // Keep the real media nodes: promotion changes their positions, never their sources.
 export function mountPhysicsCarousel(root) {
   if (!root) return null;
@@ -50,10 +48,6 @@ export function mountPhysicsCarousel(root) {
         { transform: `translate(${before[i].title.left - title.left}px,${before[i].title.top - title.top}px)` },
         { transform: 'translate(0px,0px)' },
       ], timing));
-      // Controls return after the frame has almost settled, rather than scaling up.
-      motions.push(card.button.querySelector('.material-inline-toggle').animate([
-        { opacity: 0 }, { opacity: 1 },
-      ], { duration: 160, delay: 360, easing: 'ease-out', fill: 'both' }));
     });
     Promise.allSettled(motions.map(animation => animation.finished)).then(() => {
       if (token === motionRevision) settleMotion();
@@ -69,7 +63,9 @@ export function mountPhysicsCarousel(root) {
       card.button.setAttribute('aria-pressed', String(playing));
       card.button.setAttribute('aria-label', playing ? '暂停演示' : '播放演示');
       card.button.setAttribute('aria-describedby', card.title.id);
-      card.button.querySelector('.material-inline-toggle').innerHTML = icon(playing ? 'pause' : 'play');
+      // The centre play button shows only on the active film when it is paused
+      // and will stay paused (not merely about to start after a swap).
+      card.button.dataset.paused = String(i === active && card.video.paused && !(wanted && eligible()));
     });
   }
   function reset(video) {
@@ -126,7 +122,10 @@ export function mountPhysicsCarousel(root) {
     Promise.resolve(playing).then(() => {
       // A late play result may belong to a video that has already become a thumbnail.
       if (video !== cards[active].video || !eligible()) video.pause();
-    }).catch(() => { /* Keep the existing inline button available for an explicit retry. */ })
+    }).catch(error => {
+      // Autoplay refused by the browser: show the play button for an explicit start.
+      if (error?.name === 'NotAllowedError') wanted = false;
+    })
       .finally(() => { if (pending?.token === token) pending = null; sync(); });
   }
   cards.forEach((card, i) => {

@@ -5,7 +5,7 @@
 const header = document.querySelector('.site-header');
 const brand = header?.querySelector('.brand');
 const nav = header?.querySelector('nav');
-// The Playground follows the hero without a title, so it has no name here.
+// The pipeline section (#playground) sits right under the hero, so the header shows no name for it.
 const titles = [...document.querySelectorAll('#showcase .subchapter-heading h3, #gallery-title')];
 
 if (header && brand && titles.length) {

@@ -441,10 +441,6 @@ export default {
     "zh": "从观察走向验证",
     "en": "From observation to validation"
   },
-  "体验 Playground": {
-    "zh": "体验中心",
-    "en": "Playground"
-  },
   "页脚导航": {
     "zh": "页脚导航",
     "en": "Footer navigation"
@@ -477,9 +473,9 @@ export default {
     "zh": "观看完整视频",
     "en": "Watch Full Video"
   },
-  "Playground": {
-    "zh": "体验中心",
-    "en": "Playground"
+  "Pipeline": {
+    "zh": "全流程",
+    "en": "Pipeline"
   },
   "从 Ego 到验证": {
     "zh": "从第一视角到验证",

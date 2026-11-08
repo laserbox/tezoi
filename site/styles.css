@@ -33,7 +33,6 @@ button { color: inherit; cursor: pointer; -webkit-appearance: none; appearance: 
 .ui-icon { display: inline-block; flex: none; width: 18px; height: 18px; vertical-align: middle; pointer-events: none; }
 .button-play, .compare-play > span:first-child { display: inline-flex; align-items: center; justify-content: center; }
 .cta-arrow .ui-icon, .compare-knob .ui-icon { width: 20px; height: 20px; }
-.gallery-play .ui-icon { width: 16px; height: 16px; }
 a { color: inherit; text-decoration: none; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button:focus-visible, a:focus-visible { outline: 3px solid #79a6a0; outline-offset: 5px; }
@@ -234,8 +233,6 @@ h4 { font-size: var(--type-group); font-weight: 400; letter-spacing: -.025em; li
 .gallery-motion-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .gallery-image { display: block; flex-shrink: 0; border: 0; padding: 0; width: 100%; aspect-ratio: 16/9; position: relative; overflow: hidden; border-radius: 12px; background: #e3e9eb; }
 .gallery-image img { display: block; width: 100%; height: 100%; object-fit: contain; background: #e3e9eb; }
-.gallery-play { position: absolute; right: 18px; bottom: 18px; display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid #ffffff66; border-radius: 50%; background: #203a43b3; backdrop-filter: blur(12px); color: white; font-size: 10px; transition: background .2s; }
-button:hover .gallery-play { background: #203a43e6; }
 .gallery-card { display: flex; flex-direction: column; align-items: stretch; min-width: 0; }
 .gallery-card-copy { margin-top: 17px; }
 .gallery-card h4 { font-size: 20px; font-weight: 400; margin: 0; letter-spacing: -.025em; line-height: 1.4; }
@@ -354,7 +351,6 @@ body.modal-open { overflow: hidden; }
   .physics-empty { aspect-ratio: 1.5; }
   .physics-grid .empty-media.physics-empty { aspect-ratio: 2.2; }
   .sample-media, .feature-video { border-radius: 16px; }
-  .gallery-play { width: 42px; height: 42px; right: 15px; bottom: 15px; }
   .playground { --chapter-space: 55px; margin: 8px; border-radius: 21px; }
   .playground > .section-wrap, .benchmark > .section-wrap { padding-inline: 16px; }
   .compare-stage { border-radius: 16px; }
