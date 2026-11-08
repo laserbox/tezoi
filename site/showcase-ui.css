@@ -873,3 +873,20 @@ body[data-page='home'] #playground :is(.workflow-pane-heading, .compare-heading)
 :is(#playground, #ts#ts) .ps-playback input[type='range']::-moz-range-track { height: 3px; background: var(--player-track); }
 :is(#playground, #ts#ts) .ps-playback input[type='range']::-moz-range-progress { height: 3px; background: var(--player-fill); }
 :is(#playground, #ts#ts) .ps-playback input[type='range']::-moz-range-thumb { width: 10px; height: 10px; border: 2px solid var(--ui-night); border-radius: 50%; background: var(--player-fill); }
+
+/* ---- Enlarge -------------------------------------------------------------------
+   Each Pipeline bar ends with an enlarge button, a plain icon like restart, that
+   opens the Gallery's large player. The simulation comparison moves into the
+   dialog whole (split stage and bar), sized so stage and bar fit the screen. */
+:is(#playground, #video-dialog, #ts#ts) .playback-bar.has-expand { grid-template-columns: 44px minmax(32px, 1fr) auto 44px 44px; }
+:is(#playground, #ts#ts) .playback-bar .pipeline-expand { color: var(--ui-night-text); background: transparent; }
+:is(#playground, #ts#ts) .playback-bar .pipeline-expand:hover { background: var(--ui-night-raised); }
+#video-dialog.is-node { width: min(1160px, calc(100vw - 64px), calc((100svh - 230px) * 1.777778)); }
+#video-dialog.is-node .video-stage { background: var(--ui-night); }
+#video-dialog .playback-surface { background: transparent; }
+:is(#video-dialog, #ts#ts) .playback-bar { min-height: 0; padding: 12px 16px 16px; gap: 10px; background: transparent; }
+:is(#video-dialog, #ts#ts) .playback-bar.has-expand { grid-template-columns: 44px minmax(32px, 1fr) auto 44px; }
+#video-dialog .pipeline-expand { display: none; }
+@media (max-width: 600px) {
+  :is(#playground, #ts#ts) .playback-bar.has-expand { gap: 6px; }
+}

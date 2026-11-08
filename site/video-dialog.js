@@ -5,7 +5,18 @@ export function mountVideoDialog(dialog, { onOpen = () => {}, onClose = () => {}
   const loading = dialog.querySelector('[data-video-loading]');
   const error = dialog.querySelector('[data-video-error]');
   const retry = dialog.querySelector('[data-video-retry]');
+  const stage = dialog.querySelector('.video-stage');
   let trigger, closing, generation = 0;
+  // A page element shown in the dialog instead of the player (the simulation
+  // comparison); it goes back to its place when the dialog closes.
+  let moved = null;
+  function restore() {
+    if (!moved) return;
+    moved.home.replaceWith(moved.node);
+    moved = null;
+    player.hidden = false;
+    dialog.classList.remove('is-node');
+  }
 
   function close() {
     if (!dialog.open || closing) return;
@@ -61,6 +72,7 @@ export function mountVideoDialog(dialog, { onOpen = () => {}, onClose = () => {}
     closing?.cancel(); closing = null;
     player.pause(); player.removeAttribute('src'); player.removeAttribute('poster'); player.load();
     state('idle'); dialog.style.removeProperty('--video-ratio');
+    restore();
     onClose(); trigger?.focus(); trigger = null;
   });
   state('idle');
@@ -70,6 +82,17 @@ export function mountVideoDialog(dialog, { onOpen = () => {}, onClose = () => {}
       generation++; trigger = source;
       closing?.cancel(); closing = null;
       title.textContent = video.title;
+      if (video.node) {
+        restore();
+        const home = document.createComment('');
+        video.node.before(home);
+        moved = { node: video.node, home };
+        player.hidden = true;
+        dialog.classList.add('is-node');
+        stage.prepend(video.node);
+        state('ready'); dialog.showModal(); onOpen(); video.onShow?.();
+        return;
+      }
       player.poster = source?.querySelector('img')?.getAttribute('src') || video.poster || '';
       player.muted = Boolean(video.muted);
       player.src = video.src;

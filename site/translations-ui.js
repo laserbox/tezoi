@@ -485,6 +485,10 @@ export default {
     "zh": "从头播放",
     "en": "Play from start"
   },
+  "放大播放": {
+    "zh": "放大播放",
+    "en": "Enlarge"
+  },
   "视频播放控制": {
     "zh": "视频播放控制",
     "en": "Video playback controls"

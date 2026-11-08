@@ -1,4 +1,4 @@
-import { icon } from './icons.js?v=mobile-polish-20261023';
+import { icon } from './icons.js?v=expand-20261108';
 import { paintPlaybackProgress } from './playback-progress.js?v=module-detail-20261102';
 
 // One playback bar across the Pipeline section, the one the simulation pane
@@ -8,7 +8,20 @@ import { paintPlaybackProgress } from './playback-progress.js?v=module-detail-20
 //  - The Ego2Sim pane builds its own player (pipeline/showcase-*.js); it is left
 //    in place and only tagged, so the stylesheet can draw it the same way: the
 //    play button gets a state and an icon, the timeline paints its progress.
+// Every bar also has an enlarge button that opens the Gallery's large player
+// (app.js listens for 'tezoi:enlarge-video'); the simulation comparison moves
+// into that dialog whole, with its split and its own bar.
 const root = document.querySelector('#playground');
+
+const enlarge = detail => document.dispatchEvent(new CustomEvent('tezoi:enlarge-video', { detail }));
+function enlargeButton() {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'pipeline-expand';
+  button.setAttribute('aria-label', '放大播放');
+  button.innerHTML = icon('expand');
+  return button;
+}
 
 const clock = seconds => {
   const s = Math.max(0, Math.floor(Number.isFinite(seconds) ? seconds : 0));
@@ -30,6 +43,14 @@ function mountBar(video) {
     + `<button class="compare-restart" type="button" aria-label="从头播放" disabled>${icon('replay')}</button>`;
   video.after(bar);
   const [play, timeline, time, restart] = bar.children;
+  const expand = enlargeButton();
+  bar.append(expand);
+  bar.classList.add('has-expand');
+  expand.addEventListener('click', () => {
+    video.pause();
+    const heading = video.closest('.workflow-panel')?.querySelector('.workflow-pane-heading h4');
+    enlarge({ src: video.currentSrc || video.querySelector('source')?.src, poster: video.poster, title: heading?.textContent.trim() || video.getAttribute('aria-label') || '', source: expand });
+  });
 
   function render() {
     const duration = Number.isFinite(video.duration) ? video.duration : 0;
@@ -68,6 +89,8 @@ function mountBar(video) {
 function tagShowcase(playback) {
   const play = playback.querySelector('[data-ps-play]');
   const scrub = playback.querySelector('[data-ps-scrub]');
+  const full = playback.querySelector('[data-ps-full]');
+  if (full && full.getAttribute('aria-label') !== '放大播放' && full.getAttribute('aria-label') !== 'Enlarge') full.setAttribute('aria-label', '放大播放');
   if (play) {
     const playing = /暂停|pause/i.test(play.textContent);
     if (play.dataset.state !== (playing ? 'playing' : 'paused')) play.dataset.state = playing ? 'playing' : 'paused';
@@ -75,8 +98,47 @@ function tagShowcase(playback) {
   if (scrub) paintPlaybackProgress(scrub);
 }
 
+// The simulation comparison: its bar gets the enlarge button; the whole surface
+// (split stage and bar) is shown in the dialog and returns when it closes.
+function mountComparison(comparison) {
+  const surface = comparison?.querySelector('.playback-surface');
+  const bar = surface?.querySelector('.compare-controls');
+  if (!bar || bar.querySelector('.pipeline-expand')) return;
+  const expand = enlargeButton();
+  bar.append(expand);
+  bar.classList.add('has-expand');
+  const play = bar.querySelector('[data-compare-play]');
+  expand.addEventListener('click', () => enlarge({
+    title: document.getElementById(comparison.getAttribute('aria-labelledby'))?.textContent.trim() || '',
+    node: surface,
+    source: expand,
+    // Opening pauses every page player, and the comparison pauses itself once its
+    // (now empty) page slot looks hidden; after that settles, start it in the dialog.
+    onShow: () => setTimeout(() => {
+      const film = surface.querySelector('[data-compare-simulation]');
+      if (film?.paused && play && !play.disabled && surface.closest('#video-dialog')) play.click();
+    }, 350),
+  }));
+}
+
+// The Ego2Sim player's own fullscreen button opens the same dialog with the
+// stage's current video; stages that show an image or point cloud keep their
+// own fullscreen.
+function enlargeShowcase(event) {
+  const full = event.target.closest?.('[data-ps-full]');
+  if (!full) return;
+  const video = full.closest('#workflow-panel-agent')?.querySelector('[data-pipeline-video]');
+  if (!video || video.hidden || !video.getClientRects().length || !(video.currentSrc || video.src)) return;
+  event.preventDefault();
+  event.stopPropagation();
+  video.pause();
+  enlarge({ src: video.currentSrc || video.src, poster: video.poster, title: video.getAttribute('aria-label') || '', source: full });
+}
+
 if (root) {
   root.querySelectorAll('[data-ego-video], [data-validation-video]').forEach(mountBar);
+  mountComparison(root.querySelector('[data-contact-comparison]'));
+  root.addEventListener('click', enlargeShowcase, true);
   const sweep = () => root.querySelectorAll('.ps-playback').forEach(tagShowcase);
   let queued = 0;
   const schedule = () => { if (!queued) queued = requestAnimationFrame(() => { queued = 0; sweep(); }); };
