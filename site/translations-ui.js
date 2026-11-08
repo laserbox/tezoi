@@ -1,7 +1,7 @@
 export default {
   "刚体仿真": {
     "zh": "刚体仿真",
-    "en": "Rigid-body simulation"
+    "en": "Rigid body"
   },
 
   "滴管取液与摇杯混合": {
@@ -23,7 +23,7 @@ export default {
 ,
   "触觉仿真": {
     "zh": "触觉仿真",
-    "en": "Tactile simulation"
+    "en": "Tactile"
   },
   "双臂毛绒玩具装箱与封胶": {
     "zh": "双臂毛绒玩具装箱与封胶",
