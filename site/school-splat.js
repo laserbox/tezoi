@@ -1,4 +1,3 @@
-import { importViewerModule } from './viewer-module.js?v=website-audit-20261101';
 import { bindComparisonDrag } from './comparison-drag.js?v=website-audit-20261101';
 import { mountReconstructionMethods } from './reconstruction-methods.js?v=methods-20261101';
 const root = document.querySelector('[data-school-showcase]');
@@ -8,19 +7,13 @@ if (root) {
   const panels = [...root.querySelectorAll('[data-school-panel]')];
   const stage = root.querySelector('.school-stage');
   const introVideo = root.querySelector('[data-school-intro-video]');
-  const introCta = root.querySelector('[data-school-intro-cta]');
-  const enterInteractive = root.querySelector('[data-school-enter-interactive]');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let viewer;
-  let reloadRequired = false;
   let stageVisible = false;
   const methodPanel = root.closest('[data-reconstruction-panel]');
   let methodActive = !methodPanel?.hidden;
-  const canRender = () => methodActive && stageVisible && !document.hidden;
+  const canPlay = () => methodActive && stageVisible && !document.hidden;
   function syncMethod() {
-    if (canRender() && activeMode() === 'interactive') viewer?.start();
-    else viewer?.stop();
-    if (!canRender()) introVideo.pause();
+    if (!canPlay()) introVideo.pause();
     else if (activeMode() === 'evolution' && !reduceMotion.matches) playIntro();
   }
   methodPanel?.addEventListener('reconstruction-visibility', event => {
@@ -54,11 +47,7 @@ if (root) {
       panel.hidden = panel.dataset.schoolPanel !== mode;
       panel.querySelectorAll('video').forEach(video => video.pause());
     });
-    if (viewer) {
-      if (mode === 'interactive' && canRender()) viewer.start();
-      else viewer.stop();
-    }
-    if (mode === 'evolution' && canRender() && !reduceMotion.matches) {
+    if (mode === 'evolution' && canPlay() && !reduceMotion.matches) {
       playIntro();
     }
   }
@@ -79,37 +68,10 @@ if (root) {
     });
   });
 
-  introVideo.addEventListener('play', () => {
-    introCta.hidden = true;
-    root.classList.remove('is-intro-complete');
-  });
-  introVideo.addEventListener('ended', () => {
-    introCta.hidden = false;
-    root.classList.add('is-intro-complete');
-  });
-  introVideo.addEventListener('timeupdate', () => {
-    if (!introCta.hidden && !introVideo.ended) introCta.hidden = true;
-  });
-
-  enterInteractive?.addEventListener('click', () => {
-    const interactiveTab = tabs.find(tab => tab.dataset.schoolMode === 'interactive');
-    select(interactiveTab);
-    interactiveTab.focus();
-    stage.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'center' });
-  });
-
   // The reconstruction film starts only when it can actually be seen.
   const stageObserver = new IntersectionObserver(entries => {
     stageVisible = entries.some(entry => entry.isIntersecting);
-    if (viewer) {
-      if (canRender() && activeMode() === 'interactive') viewer.start();
-      else viewer.stop();
-    }
-    if (canRender()) {
-      if (activeMode() === 'evolution' && !reduceMotion.matches) playIntro();
-    } else {
-      introVideo.pause();
-    }
+    syncMethod();
   }, { threshold: 0.45 });
   stageObserver.observe(stage);
 
@@ -120,56 +82,6 @@ if (root) {
       introVideo.pause();
     }
   });
-
-  const button = root.querySelector('[data-school-load]');
-  const status = root.querySelector('[data-school-status]');
-  const overlay = root.querySelector('[data-school-overlay]');
-  window.addEventListener('pagehide', event => {
-    if (event.persisted) viewer?.stop();
-    else { viewer?.dispose(); viewer = null; }
-  });
-  window.addEventListener('pageshow', event => {
-    if (event.persisted && canRender() && activeMode() === 'interactive') viewer?.start();
-  });
-  button.addEventListener('click', () => reloadRequired ? window.location.reload() : loadModel());
-  async function loadModel() {
-    if (window.location.protocol === 'file:') {
-      status.textContent = '三维场景需要通过本地服务器打开，请使用 http://localhost:4176/，不能直接打开 HTML 文件。';
-      return;
-    }
-    if (!window.isSecureContext || !navigator.gpu) {
-      status.textContent = '当前浏览器未启用 WebGPU，请使用支持 WebGPU 的 Chrome 或 Edge，并通过 localhost 或 HTTPS 打开。';
-      return;
-    }
-    viewer?.dispose(); viewer = null;
-    button.disabled = true;
-    status.textContent = '正在加载三维场景，请稍候…';
-    try {
-      const { mountReconstruction } = await importViewerModule('./reconstruction-viewer.js?v=webgs-f05490c');
-      viewer = await mountReconstruction(root, {
-        onStatus: message => { status.textContent = message; },
-        onError: error => {
-          console.error('3DGS 运行失败', error);
-          status.textContent = '三维场景暂时无法加载。';
-          overlay.hidden = false;
-          button.textContent = '重新加载';
-          button.disabled = false;
-        },
-      });
-      overlay.hidden = true;
-      if (activeMode() === 'interactive' && canRender()) viewer.start();
-    } catch (error) {
-      console.error('3DGS 加载失败', error);
-      if (viewer) {
-        viewer.dispose();
-        viewer = null;
-      }
-      reloadRequired = error?.code === 'VIEWER_MODULE_LOAD_FAILED';
-      status.textContent = reloadRequired ? '三维组件加载失败，请刷新页面重试。' : '三维场景暂时无法加载。';
-      button.textContent = reloadRequired ? '刷新页面' : '重新加载';
-      button.disabled = false;
-    }
-  }
 }
 
 mountReconstructionMethods(document.querySelector('[data-reconstruction-methods]'));

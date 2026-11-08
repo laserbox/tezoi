@@ -1,5 +1,11 @@
 # Full-model reconstruction explorer
 
+> **Removed from the homepage on 2026-11-08.** The 场景展示 tab keeps only the image
+> comparison and the walkthrough film. The viewer (`site/reconstruction-viewer.js`), the
+> vendored renderer (`site/assets/photara-webgs/`) and the scene (`site/assets/reconstruction/`)
+> were deleted from `site/`; restore them from git history (the parent of the commit that
+> removed them) if the explorer comes back. The notes below describe the old setup.
+
 The homepage's **Scene Reconstruction → 03 自由探索** uses the vendored Photara
 WebGPU renderer in `site/assets/photara-webgs/`. The two video tabs are unchanged.
 The model is fetched only after the visitor presses Enter. It preserves all
