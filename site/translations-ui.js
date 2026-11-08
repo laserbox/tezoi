@@ -477,6 +477,30 @@ export default {
     "zh": "全流程",
     "en": "Pipeline"
   },
+  "播放进度": {
+    "zh": "播放进度",
+    "en": "Playback position"
+  },
+  "从头播放": {
+    "zh": "从头播放",
+    "en": "Play from start"
+  },
+  "放大播放": {
+    "zh": "放大播放",
+    "en": "Enlarge"
+  },
+  "静音": {
+    "zh": "静音",
+    "en": "Mute"
+  },
+  "取消静音": {
+    "zh": "取消静音",
+    "en": "Unmute"
+  },
+  "视频播放控制": {
+    "zh": "视频播放控制",
+    "en": "Video playback controls"
+  },
   "从 Ego 到验证": {
     "zh": "从第一视角到验证",
     "en": "From Ego to validation"

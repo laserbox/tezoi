@@ -1,4 +1,4 @@
-import { mountVideoDialog } from './video-dialog.js?v=video-dialog-20261102';
+import { mountVideoDialog } from './video-dialog.js?v=float-player-20261108';
 import { importViewerModule } from './viewer-module.js?v=website-audit-20261101';
 import { icon } from './icons.js?v=mobile-polish-20261023';
 import { mountPhysicsCarousel } from './physics-carousel.js?v=centre-play-20261108';
@@ -114,6 +114,8 @@ const videoDialog = mountVideoDialog(dialog, {
 $$('[data-video]').forEach(button => button.addEventListener('click', () => {
   videoDialog.open(videos[button.dataset.video], button);
 }));
+// Pipeline players ask for the same large player (pipeline-player.js).
+document.addEventListener('tezoi:enlarge-video', event => videoDialog.open(event.detail, event.detail.source));
 
 // Material and embodied studies move only while visible.
 // Opening a large player also stops every preview.
