@@ -477,6 +477,18 @@ export default {
     "zh": "全流程",
     "en": "Pipeline"
   },
+  "真机验证": {
+    "zh": "真机验证",
+    "en": "Validation"
+  },
+  "轨迹学习": {
+    "zh": "轨迹学习",
+    "en": "Trajectories"
+  },
+  "仿真探索": {
+    "zh": "仿真探索",
+    "en": "Exploration"
+  },
   "播放进度": {
     "zh": "播放进度",
     "en": "Playback position"
@@ -515,7 +527,7 @@ export default {
   },
   "真实示范": {
     "zh": "真实示范",
-    "en": "Demonstration"
+    "en": "Demo"
   },
   "Agent": {
     "zh": "智能体",
