@@ -1,0 +1,252 @@
+{
+  "revision": "showcase-r15",
+  "parent_provenance": "tools-r14.json",
+  "server_read_only_audit": {
+    "checked_utc": "2026-11-08T01:48:56.697784+00:00",
+    "read_only": true,
+    "sources": {
+      "ego2sim/unified/core/pipeline.py": {
+        "sha256": "463079a491cdc45d06e000bcf0815a6aa7479af030a2d5fd060ff450b4d36278",
+        "bytes": 8634
+      },
+      "ego2sim/unified/core/toolkit.py": {
+        "sha256": "a09c1003b5354f6f7c92338387d1a0c02ce51bcc52936010703062346dac78d9",
+        "bytes": 9025
+      },
+      "ego2sim/unified/core/cache.py": {
+        "sha256": "5f4e2e1000318b55b4c6e3c41879d95926b86cac1d0bc98d2054201bf73f9caf",
+        "bytes": 6494
+      },
+      "ego2sim/unified/core/optimize.py": {
+        "sha256": "d94bf943c4e91c988d33eaea03cab199a9eee495eae70f44940bc543e18861ea",
+        "bytes": 1723
+      },
+      "ego2sim/unified/verification/verify.py": {
+        "sha256": "361452867a1ad1b96f06ee11987237fdaf573adf419c0ed00d87b4076ee7b112",
+        "bytes": 6289
+      },
+      "ego2sim/unified/verification/feedback.py": {
+        "sha256": "a803a8287fc6e0a2c29377e42e5b93739164f885aca27675444c66dc888fc900",
+        "bytes": 5887
+      }
+    },
+    "existing_feedback": [
+      {
+        "path": "runs/egodex-yam-box-final-20261016/feedback/report.json",
+        "sha256": "b151821ceac3cc7c4a2c720a018a1c2ff32a237fc86f9271a372e58cc0c7b39b",
+        "engineering_chain_passed": true,
+        "feedback": [
+          {
+            "code": "ROBOT_SPEED_LIMIT",
+            "module": "hands_actions/robot_retarget",
+            "evidence": "motion/robot-report.json",
+            "max_joint_speed_rad_s": 12.344264901523285,
+            "required_time_scale": 12.344264901523285,
+            "action": "Retiming is a different execution; preserve this source-clock baseline, then rerun native deformation with an explicit slower clock. URDF velocity values are not certified motor limits."
+          },
+          {
+            "code": "TCP_CAPTURE_IS_NOT_FINGER_CONTACT",
+            "module": "interaction/robot_contact",
+            "evidence": "physics/report.json:contact_reassociation_events",
+            "maximum_accepted_tcp_surface_distance_m": 0.04957729776405972,
+            "action": "The inherited TCP capture radius is a contact hypothesis. Verify official fingertip-to-cloth contact and closing force; never report accepted patch constraints as successful robot grasps."
+          },
+          {
+            "code": "ROBOT_TOOL_CONTACT_PROXY",
+            "module": "simulation/robot_contact",
+            "evidence": "scene/scene.json:robot.collision_scope",
+            "action": "Current native execution uses FK tool-contact proxies and pinch constraints; full arm/environment collision and frictional finger grasp remain unverified."
+          },
+          {
+            "code": "ALIGNMENT_OR_CONTACT_REVIEW",
+            "module": "hands_actions/interaction",
+            "evidence": "physics/report.json:contact_reassociation_events",
+            "rejected_capture_events": 2,
+            "depth_corrected_events": 0,
+            "frames": [
+              496,
+              499
+            ],
+            "max_support_correction_m": 0.0,
+            "action": "Review hand depth, contact mode, surface/layer correspondence and release timing before material tuning"
+          },
+          {
+            "code": "OCCLUDED_BACKGROUND_UNOBSERVED",
+            "module": "environment",
+            "evidence": "environment/report.json:hidden_geometry_complete=false",
+            "action": "Add observed viewpoints or explicit geometry hypotheses; do not label invented surfaces as observations"
+          },
+          {
+            "code": "DEFORMATION_3D_UNVERIFIED",
+            "module": "verification_data",
+            "evidence": "verify/report.json:independent_3d_truth=false",
+            "action": "Keep metric null until public synchronized depth/multiview reference is available"
+          },
+          {
+            "code": "CONTACT_HYPOTHESIS_NOT_FRICTION_GRASP",
+            "module": "contacts",
+            "evidence": "contacts/report.json:friction_grasp=false",
+            "action": "Validate contact geometry and release before changing material; preserve full-interval replay"
+          }
+        ],
+        "repair_order": [
+          "hand_asset_alignment",
+          "contact_mode_layer_release",
+          "material_parameters",
+          "appearance"
+        ],
+        "autonomous_agent_scheduler": false
+      },
+      {
+        "path": "runs/egodex-fold-modular-20261016/feedback/report.json",
+        "sha256": "233c6dfbf59f5af420e8db76eaa5a49821c20bce45714a9f588872309d27e085",
+        "engineering_chain_passed": true,
+        "feedback": [
+          {
+            "code": "ALIGNMENT_OR_CONTACT_REVIEW",
+            "module": "hands_actions/interaction",
+            "evidence": "physics/report.json:contact_reassociation_events",
+            "rejected_capture_events": 1,
+            "depth_corrected_events": 0,
+            "frames": [
+              420
+            ],
+            "max_support_correction_m": 0.031944068169891704,
+            "action": "Review hand depth, contact mode, surface/layer correspondence and release timing before material tuning"
+          },
+          {
+            "code": "OCCLUDED_BACKGROUND_UNOBSERVED",
+            "module": "environment",
+            "evidence": "environment/report.json:hidden_geometry_complete=false",
+            "action": "Add observed viewpoints or explicit geometry hypotheses; do not label invented surfaces as observations"
+          },
+          {
+            "code": "DEFORMATION_3D_UNVERIFIED",
+            "module": "verification_data",
+            "evidence": "verify/report.json:independent_3d_truth=false",
+            "action": "Keep metric null until public synchronized depth/multiview reference is available"
+          },
+          {
+            "code": "CONTACT_HYPOTHESIS_NOT_FRICTION_GRASP",
+            "module": "contacts",
+            "evidence": "contacts/report.json:friction_grasp=false",
+            "action": "Validate contact geometry and release before changing material; preserve full-interval replay"
+          }
+        ],
+        "repair_order": [
+          "hand_asset_alignment",
+          "contact_mode_layer_release",
+          "material_parameters",
+          "appearance"
+        ],
+        "autonomous_agent_scheduler": false
+      },
+      {
+        "path": "runs/egodex-fold-sam3-prior/feedback/report.json",
+        "sha256": "c4cacf9eb21d08fd44d71382765a850a7cc2dba6ada86bfe53ef79380b183565",
+        "engineering_chain_passed": true,
+        "feedback": [
+          {
+            "code": "OCCLUDED_BACKGROUND_UNOBSERVED",
+            "module": "environment",
+            "evidence": "environment/report.json:hidden_geometry_complete=false",
+            "action": "Add observed viewpoints or explicit geometry hypotheses; do not label invented surfaces as observations"
+          },
+          {
+            "code": "DEFORMATION_3D_UNVERIFIED",
+            "module": "verification_data",
+            "evidence": "verify/report.json:independent_3d_truth=false",
+            "action": "Keep metric null until public synchronized depth/multiview reference is available"
+          },
+          {
+            "code": "CONTACT_HYPOTHESIS_NOT_FRICTION_GRASP",
+            "module": "contacts",
+            "evidence": "contacts/report.json:friction_grasp=false",
+            "action": "Validate contact geometry and release before changing material; preserve full-interval replay"
+          }
+        ],
+        "repair_order": null,
+        "autonomous_agent_scheduler": false
+      }
+    ]
+  },
+  "task": {
+    "presentation": "one continuous original video, no keyframe cards",
+    "asset": "media/ego-continuous.mp4",
+    "duration_s": 44,
+    "sha256": "22b9462db83b8e5ec168da4c874994c785b95212988134666aa5f9914cadc34c",
+    "source": "IMG_6263",
+    "vlm_task_annotations_retained": "01_task.json",
+    "new_vlm_inference": false
+  },
+  "scene": {
+    "primary": [
+      "SAM3 masks",
+      "DA3 relative depth",
+      "saved scene 1030 assets"
+    ],
+    "same_frame_comparison": "mask/depth wipe at source time 17 s",
+    "point_cloud": "optional geometry inspection; relative coordinates, not metric calibration, TSDF fusion, complete reconstruction or a finished asset",
+    "point_cloud_artifact": "scene-frame102-r13.json"
+  },
+  "hand": {
+    "source": "IMG_6263",
+    "default_time_s": 12,
+    "closeup": "fixed display-only 1.65x crop around the hand; no camera pose or geometry change",
+    "original_hand_preserved": true,
+    "estimated_geometry": true,
+    "contact_is_probability_not_force": true,
+    "new_contact_render": false,
+    "visualization": "Existing same-frame overlays with a fixed close-up and separate pose, mesh, probability, continuous playback and geometry inspection views"
+  },
+  "feedback_loop": {
+    "presentation": "interactive architecture demonstration, not a live job or executed repair",
+    "server_flow": [
+      "verify/report.json",
+      "typed feedback queue",
+      "Coding Agent edits target module/config",
+      "stage-local fingerprints invalidate dependent outputs",
+      "rerun affected stages and verify again"
+    ],
+    "repair_order": [
+      "hand_asset_alignment",
+      "contact_mode_layer_release",
+      "material_parameters",
+      "appearance"
+    ],
+    "frozen": [
+      "source video",
+      "reference labels",
+      "verification rules"
+    ],
+    "autonomous_agent_scheduler": false,
+    "physical_repair_automated": false,
+    "bounded_appearance_loop": "optimize.py runs appearance trials, rechecks accepted settings and verifies native physics cache reuse",
+    "demonstrated_routes": [
+      {
+        "code": "OCCLUDED_BACKGROUND_UNOBSERVED",
+        "target": "environment",
+        "display": "scene reconstruction"
+      },
+      {
+        "code": "ALIGNMENT_OR_CONTACT_REVIEW",
+        "target": "hands_actions/interaction",
+        "display": "hand/object alignment and contacts"
+      },
+      {
+        "code": "ROBOT_SPEED_LIMIT",
+        "target": "hands_actions/robot_retarget",
+        "display": "robot retiming candidate"
+      }
+    ],
+    "existing_run_scope": "Saved examples in the audit are cloth / YAM development runs; their engineering flags are not dropper physical success."
+  },
+  "new_physics": false,
+  "new_inference": false,
+  "implementation_sha256": {
+    "pipeline/showcase-r15.js": "6a550fccd127f38fd1c92d67875e729414107a6d5d3a21f39001d881c9fe0d35",
+    "pipeline/showcase-r15.css": "78b0171f8a6ddd2a9d344ecf0fdd9801fa1c5e9be242fcb378d9768b1a34e36d",
+    "pipeline/feedback-loop-r15.js": "a9b7c7e3f0ecfa30cba0506ed8307ecf0c3ee5abf1561ed4f609010caf2e213d"
+  },
+  "checked_utc": "2026-11-08T02:00:24.920915+00:00"
+}
