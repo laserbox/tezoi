@@ -755,25 +755,28 @@ body[data-page='home'] #showcase > .chapter-marker { position: absolute; width: 
 @media (prefers-reduced-motion: reduce) { .section-indicator { transition: none; } }
 
 /* ---- Physics demo titles sit inside their films -----------------------------
-   Each title is a square paper label with ink text in the film's bottom-left
-   corner, the same as the hero's watch button and the centre play button.
+   Each title is a square paper label with ink text set flush into the film's
+   bottom-left corner, the same as the hero's watch button and the play button.
    The heading stays where it is in the document (after the film button) and lets
    the pointer through, so the whole film remains one target. */
 :is([data-physics-carousel], #ts#ts) .embodied-card { position: relative; }
 :is([data-physics-carousel], #ts#ts) .embodied-card h4 {
   box-sizing: border-box; border: 0; border-radius: 0;
   color: var(--ink); background: var(--paper); box-shadow: none;
-  position: absolute; left: 14px; bottom: 14px; z-index: 1;
-  max-width: calc(100% - 28px); height: 44px; margin: 0; padding: 0 14px;
+  position: absolute; left: 0; bottom: 0; z-index: 1;
+  max-width: 100%; height: 44px; margin: 0; padding: 0 14px;
   font-size: var(--t-card); font-weight: 500; line-height: 44px; letter-spacing: .01em;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   pointer-events: none;
 }
 :is([data-physics-carousel], #ts#ts) .embodied-card:first-child h4 { font-size: var(--t-card); line-height: 44px; }
 :is([data-physics-carousel], #ts#ts) .embodied-card:not(:first-child) h4 {
-  left: 8px; bottom: 8px; max-width: calc(100% - 16px); height: 28px; padding: 0 8px;
+  left: 0; bottom: 0; max-width: 100%; height: 28px; padding: 0 8px;
   font-size: var(--t-small); line-height: 28px;
 }
+/* The picture overfills its frame by 1px on every side, so neither sub-pixel
+   rounding (Safari) nor a poster's dark last row can show as a line at an edge. */
+:is([data-physics-carousel], #ts#ts) .embodied-film video { position: absolute; inset: -1px; width: calc(100% + 2px); height: calc(100% + 2px); max-width: none; max-height: none; object-fit: cover; }
 /* Play control: no corner buttons. Clicking the active film pauses it, and only
    then a square play button, like the hero's watch button, appears in the
    middle; clicking again plays and it goes. Previews show none. */
@@ -790,8 +793,8 @@ body[data-page='home'] #showcase > .chapter-marker { position: absolute; width: 
 @media (prefers-reduced-motion: reduce) { .embodied-film .film-play { transition: none; } }
 @media (max-width: 600px) {
   /* Phones: a smaller caption and play button; the whole film is the tap target. */
-  :is([data-physics-carousel], #ts#ts) .embodied-card:first-child h4 { left: 10px; bottom: 10px; max-width: calc(100% - 20px); height: 30px; padding: 0 10px; font-size: var(--t-control); line-height: 30px; }
-  :is([data-physics-carousel], #ts#ts) .embodied-card:not(:first-child) h4 { left: 6px; bottom: 6px; max-width: calc(100% - 12px); height: 22px; padding: 0 6px; line-height: 22px; }
+  :is([data-physics-carousel], #ts#ts) .embodied-card:first-child h4 { left: 0; bottom: 0; max-width: 100%; height: 30px; padding: 0 10px; font-size: var(--t-control); line-height: 30px; }
+  :is([data-physics-carousel], #ts#ts) .embodied-card:not(:first-child) h4 { left: 0; bottom: 0; max-width: 100%; height: 22px; padding: 0 6px; line-height: 22px; }
   .embodied-film .film-play { width: 48px; height: 48px; margin: -24px 0 0 -24px; }
   .embodied-film .film-play .ui-icon { width: 18px; height: 18px; }
 }
