@@ -1,20 +1,20 @@
-// Background: a sheet of cloth that falls onto a sphere and drapes over it.
+// Background: a sheet of soft cloth that falls onto a sphere and drapes over it.
 // The cloth is simulated once, on load and off the main thread, with a
 // mass-spring model (Verlet integration, distance constraints, sphere and floor
-// contact). On the homepage
-// scrolling scrubs through the stored result, so the page scroll is the
-// simulation's timeline; other pages show the cloth at rest. Purely decorative:
-// aria-hidden, no pointer events, never captures input.
+// contact, and self-collision so folds never pass through each other). On the homepage scrolling scrubs through the stored result, so the
+// page scroll is the simulation's timeline; other pages show the cloth at rest.
+// It is drawn with WebGL: smooth normals, soft wrapped light and a faint sheen,
+// front layer only, so folds read as fabric rather than a mesh.
+// Purely decorative: aria-hidden, no pointer events, never captures input.
 const canvas = document.createElement('canvas');
 canvas.className = 'page-atmosphere';
 canvas.setAttribute('aria-hidden', 'true');
 document.body.prepend(canvas);
-const context = canvas.getContext('2d');
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-const ink = getComputedStyle(document.documentElement).getPropertyValue('--ink').trim() || '#181c1e';
 const scrubbed = document.body.dataset.page === 'home';
 
-const N = 34;            // particles per side
+const N = 40;            // particles per side (simulation)
+const S = 2;             // drawn at S× the resolution, smoothly interpolated
 const SIZE = 1.9;        // cloth width, world units
 const RADIUS = 0.5;      // sphere at the origin
 const FLOOR = -2.4;      // far below: the corners hang free
@@ -43,51 +43,89 @@ function simulate() {
       const z0 = (i - (N - 1) / 2) * step;
       const k = (i * N + j) * 3;
       pos[k] = x0 * Math.cos(yaw) - z0 * Math.sin(yaw) + 0.06;
-      pos[k + 1] = 0.95 + x0 * 0.07 + (next() - 0.5) * 0.004;
+      pos[k + 1] = 0.95 + x0 * 0.07 + (next() - 0.5) * 0.002;
       pos[k + 2] = x0 * Math.sin(yaw) + z0 * Math.cos(yaw) - 0.03;
     }
   }
   const prev = pos.slice();
-  const links = [];
-  const link = (a, b, stiffness) => links.push(a, b, Math.hypot(pos[a * 3] - pos[b * 3], pos[a * 3 + 1] - pos[b * 3 + 1], pos[a * 3 + 2] - pos[b * 3 + 2]), stiffness);
+  const list = [];
+  const link = (a, b, stiffness) => list.push(a * 3, b * 3, Math.hypot(pos[a * 3] - pos[b * 3], pos[a * 3 + 1] - pos[b * 3 + 1], pos[a * 3 + 2] - pos[b * 3 + 2]), stiffness);
   for (let i = 0; i < N; i++) {
     for (let j = 0; j < N; j++) {
       const a = i * N + j;
       if (j + 1 < N) link(a, a + 1, 1);
       if (i + 1 < N) link(a, a + N, 1);
-      if (i + 1 < N && j + 1 < N) { link(a, a + N + 1, 0.9); link(a + 1, a + N, 0.9); }
-      if (j + 2 < N) link(a, a + 2, 0.25);
-      if (i + 2 < N) link(a, a + 2 * N, 0.25);
+      if (i + 1 < N && j + 1 < N) { link(a, a + N + 1, 0.8); link(a + 1, a + N, 0.8); }
+      // Bending: soft, so the sheet falls into broad, rounded folds.
+      if (j + 2 < N) link(a, a + 2, 0.18);
+      if (i + 2 < N) link(a, a + 2 * N, 0.18);
+    }
+  }
+  const links = Float64Array.from(list);
+  // Self-collision: particles of different parts of the sheet keep a cloth
+  // thickness apart (spatial hash, 27 neighbouring cells).
+  const thickness = step * 0.9;
+  const cellCount = 4096;
+  const head = new Int32Array(cellCount);
+  const chain = new Int32Array(count);
+  const cellOf = (x, y, z) => ((Math.floor(x / thickness) * 73856093) ^ (Math.floor(y / thickness) * 19349663) ^ (Math.floor(z / thickness) * 83492791)) & (cellCount - 1);
+  function separate() {
+    head.fill(-1);
+    for (let p = 0; p < count; p++) {
+      const c = cellOf(pos[p * 3], pos[p * 3 + 1], pos[p * 3 + 2]);
+      chain[p] = head[c];
+      head[c] = p;
+    }
+    for (let p = 0; p < count; p++) {
+      const k = p * 3;
+      const pi = (p / N) | 0, pj = p % N;
+      const gx = Math.floor(pos[k] / thickness), gy = Math.floor(pos[k + 1] / thickness), gz = Math.floor(pos[k + 2] / thickness);
+      for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) for (let dz = -1; dz <= 1; dz++) {
+        for (let q = head[(((gx + dx) * 73856093) ^ ((gy + dy) * 19349663) ^ ((gz + dz) * 83492791)) & (cellCount - 1)]; q !== -1; q = chain[q]) {
+          if (q <= p) continue;
+          const qi = (q / N) | 0, qj = q % N;
+          if (Math.abs(qi - pi) <= 1 && Math.abs(qj - pj) <= 1) continue;
+          const m = q * 3;
+          const ex = pos[m] - pos[k], ey = pos[m + 1] - pos[k + 1], ez = pos[m + 2] - pos[k + 2];
+          const d2 = ex * ex + ey * ey + ez * ez;
+          if (d2 >= thickness * thickness || d2 === 0) continue;
+          const d = Math.sqrt(d2);
+          const push = (thickness - d) / d * 0.5;
+          pos[k] -= ex * push; pos[k + 1] -= ey * push; pos[k + 2] -= ez * push;
+          pos[m] += ex * push; pos[m + 1] += ey * push; pos[m + 2] += ez * push;
+        }
+      }
     }
   }
   const frames = [pos.slice()];
   const dt = 1 / 60;
   const gravity = -3.2 * dt * dt;
+  const surface = RADIUS + 0.02;
   for (let s = 1; s <= 216; s++) {
     for (let p = 0; p < count; p++) {
       for (let c = 0; c < 3; c++) {
         const k = p * 3 + c;
-        const velocity = (pos[k] - prev[k]) * 0.986;
+        const velocity = (pos[k] - prev[k]) * 0.985;
         prev[k] = pos[k];
         pos[k] += velocity + (c === 1 ? gravity : 0);
       }
     }
-    for (let iteration = 0; iteration < 8; iteration++) {
+    for (let iteration = 0; iteration < 10; iteration++) {
+      if (iteration % 4 === 3) separate();
       for (let l = 0; l < links.length; l += 4) {
-        const a = links[l] * 3;
-        const b = links[l + 1] * 3;
+        const a = links[l];
+        const b = links[l + 1];
         const dx = pos[b] - pos[a];
         const dy = pos[b + 1] - pos[a + 1];
         const dz = pos[b + 2] - pos[a + 2];
-        const length = Math.hypot(dx, dy, dz) || 1e-6;
+        const length = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1e-6;
         const push = (length - links[l + 2]) / length * 0.5 * links[l + 3];
         pos[a] += dx * push; pos[a + 1] += dy * push; pos[a + 2] += dz * push;
         pos[b] -= dx * push; pos[b + 1] -= dy * push; pos[b + 2] -= dz * push;
       }
       for (let p = 0; p < count; p++) {
         const k = p * 3;
-        const distance = Math.hypot(pos[k], pos[k + 1], pos[k + 2]);
-        const surface = RADIUS + 0.015;
+        const distance = Math.sqrt(pos[k] * pos[k] + pos[k + 1] * pos[k + 1] + pos[k + 2] * pos[k + 2]);
         if (distance < surface) {
           const scale = surface / (distance || 1e-6);
           pos[k] *= scale; pos[k + 1] *= scale; pos[k + 2] *= scale;
@@ -101,39 +139,140 @@ function simulate() {
         }
       }
     }
+    separate();
     if (s % 3 === 0) frames.push(pos.slice());
   }
   return frames;
 }
 
-let frames = null;
-function ready(result) {
-  frames = result;
-  canvas.classList.add('is-ready');
-  schedule();
-}
-try {
-  const source = `const N=${N},SIZE=${SIZE},RADIUS=${RADIUS},FLOOR=${FLOOR};\n${random}\n${simulate}\n` +
-    'const f=simulate();postMessage(f,f.map(x=>x.buffer));';
-  const worker = new Worker(URL.createObjectURL(new Blob([source], { type: 'text/javascript' })));
-  worker.onmessage = event => { ready(event.data); worker.terminate(); };
-  worker.onerror = () => { worker.terminate(); setTimeout(() => ready(simulate()), 0); };
-} catch {
-  setTimeout(() => ready(simulate()), 0);
-}
-const current = new Float32Array(N * N * 3);
-const screen = new Float32Array(N * N * 2);
-const triangles = [];
-for (let i = 0; i + 1 < N; i++) {
-  for (let j = 0; j + 1 < N; j++) {
-    const a = i * N + j;
-    triangles.push(a, a + 1, a + N, a + N, a + 1, a + N + 1);
-  }
-}
-const light = (() => { const v = [-0.35, 0.85, 0.42]; const m = Math.hypot(...v); return v.map(c => c / m); })();
+// Hardware only: a software-rendered context would stall the page for a decoration.
+const gl = canvas.getContext('webgl', { alpha: true, antialias: true, depth: true, premultipliedAlpha: true, powerPreference: 'low-power', failIfMajorPerformanceCaveat: true });
 
+let frames = null;
+let resources = null;
 let view = null;
 let frame = 0;
+const M = (N - 1) * S + 1;   // drawn grid
+const current = new Float32Array(N * N * 3);
+const rows = new Float32Array(N * M * 3);
+const fine = new Float32Array(M * M * 3);
+const normals = new Float32Array(M * M * 3);
+const indices = new Uint16Array((M - 1) * (M - 1) * 6);
+for (let i = 0, t = 0; i + 1 < M; i++) {
+  for (let j = 0; j + 1 < M; j++, t += 6) {
+    const a = i * M + j;
+    indices.set([a, a + 1, a + M, a + M, a + 1, a + M + 1], t);
+  }
+}
+// Catmull-Rom weights for each drawn point between two simulated ones.
+const taps = Array.from({ length: S }, (_, f) => {
+  const t = f / S, t2 = t * t, t3 = t2 * t;
+  return [(-t3 + 2 * t2 - t) / 2, (3 * t3 - 5 * t2 + 2) / 2, (-3 * t3 + 4 * t2 + t) / 2, (t3 - t2) / 2];
+});
+// One axis of the smooth upsampling: `count` lines of `n` points to `m` points.
+function upsample(source, target, lines, n, stride, lineStride, outStride, outLineStride) {
+  for (let line = 0; line < lines; line++) {
+    for (let o = 0; o < (n - 1) * S + 1; o++) {
+      const c = Math.min(n - 2, Math.floor(o / S));
+      const w = taps[o - c * S] ?? [0, 0, 1, 0];
+      const at = d => line * lineStride + Math.min(n - 1, Math.max(0, c + d)) * stride;
+      const p0 = at(-1), p1 = at(0), p2 = at(1), p3 = at(2);
+      const out = line * outLineStride + o * outStride;
+      for (let k = 0; k < 3; k++) target[out + k] = w[0] * source[p0 + k] + w[1] * source[p1 + k] + w[2] * source[p2 + k] + w[3] * source[p3 + k];
+    }
+  }
+}
+
+// Camera: turned a little to the side and looking slightly down. The cloth is
+// projected exactly as the page layout asks: centre (cx, cy), `unit` pixels per
+// world unit at the sphere, perspective from `DISTANCE` units away.
+const YAW = -0.5;
+const PITCH = 0.42;
+const DISTANCE = 5.2;
+
+const VERTEX = `
+attribute vec3 position;
+attribute vec3 normal;
+uniform vec2 center;
+uniform vec2 scale;
+uniform vec4 turn;
+varying vec3 vNormal;
+varying vec3 vView;
+vec3 toCamera(vec3 p) {
+  float x1 = p.x * turn.x + p.z * turn.y;
+  float z1 = -p.x * turn.y + p.z * turn.x;
+  return vec3(x1, p.y * turn.z - z1 * turn.w, p.y * turn.w + z1 * turn.z);
+}
+void main() {
+  vec3 p = toCamera(position);
+  float w = (${DISTANCE.toFixed(2)} - p.z) / ${DISTANCE.toFixed(2)};
+  gl_Position = vec4(center * w + p.xy * scale, -p.z * 0.2 * w, w);
+  vNormal = toCamera(normal);
+  vView = vec3(-p.xy, ${DISTANCE.toFixed(2)} - p.z);
+}`;
+
+// Shadows tint the page with ink, the sheen lifts it towards white; flat, lit
+// cloth adds almost nothing, so the drape shows only through its folds.
+const FRAGMENT = `
+precision mediump float;
+uniform vec3 ink;
+uniform vec3 light;
+varying vec3 vNormal;
+varying vec3 vView;
+void main() {
+  vec3 n = normalize(vNormal);
+  vec3 v = normalize(vView);
+  if (dot(n, v) < 0.0) n = -n;
+  float diffuse = clamp((dot(n, light) + 0.45) / 1.45, 0.0, 1.0);
+  float shade = 1.0 - diffuse;
+  float sheen = pow(max(dot(n, normalize(light + v)), 0.0), 18.0);
+  float grazing = pow(1.0 - max(dot(n, v), 0.0), 2.5);
+  float dark = 0.016 + shade * shade * 0.11 + grazing * 0.035;
+  float lift = sheen * 0.42 + 0.05;
+  vec4 colour = vec4(ink * dark, dark);
+  colour = colour * (1.0 - lift) + vec4(lift);
+  gl_FragColor = colour;
+}`;
+
+function compile(type, source) {
+  const shader = gl.createShader(type);
+  gl.shaderSource(shader, source);
+  gl.compileShader(shader);
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(shader));
+  return shader;
+}
+
+function setup() {
+  const program = gl.createProgram();
+  gl.attachShader(program, compile(gl.VERTEX_SHADER, VERTEX));
+  gl.attachShader(program, compile(gl.FRAGMENT_SHADER, FRAGMENT));
+  gl.linkProgram(program);
+  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(program));
+  gl.useProgram(program);
+  const buffer = (data, target, usage) => { const b = gl.createBuffer(); gl.bindBuffer(target, b); gl.bufferData(target, data, usage); return b; };
+  const position = buffer(fine, gl.ARRAY_BUFFER, gl.DYNAMIC_DRAW);
+  const normal = buffer(normals, gl.ARRAY_BUFFER, gl.DYNAMIC_DRAW);
+  buffer(indices, gl.ELEMENT_ARRAY_BUFFER, gl.STATIC_DRAW);
+  const attribute = (name, b) => {
+    const location = gl.getAttribLocation(program, name);
+    gl.bindBuffer(gl.ARRAY_BUFFER, b);
+    gl.enableVertexAttribArray(location);
+    gl.vertexAttribPointer(location, 3, gl.FLOAT, false, 0, 0);
+  };
+  attribute('position', position);
+  attribute('normal', normal);
+  const uniform = name => gl.getUniformLocation(program, name);
+  const inkColour = (getComputedStyle(document.documentElement).getPropertyValue('--ink').trim() || '#181c1e').match(/\w\w/g).map(h => parseInt(h, 16) / 255);
+  gl.uniform3fv(uniform('ink'), inkColour);
+  const lightDirection = [-0.45, 0.8, 0.4];
+  const m = Math.hypot(...lightDirection);
+  gl.uniform3fv(uniform('light'), lightDirection.map(c => c / m));
+  gl.uniform4f(uniform('turn'), Math.cos(YAW), Math.sin(YAW), Math.cos(PITCH), Math.sin(PITCH));
+  gl.enable(gl.DEPTH_TEST);
+  gl.clearColor(0, 0, 0, 0);
+  resources = { position, normal, center: uniform('center'), scale: uniform('scale') };
+  view = null;
+}
 
 function measure() {
   // 100lvh in CSS: the canvas keeps the largest viewport height, so the mobile
@@ -141,10 +280,12 @@ function measure() {
   const width = canvas.clientWidth;
   const height = canvas.clientHeight;
   if (view && view.width === width && view.height === height) return;
-  const ratio = Math.min(devicePixelRatio || 1, 2);
+  // A soft, faint drape needs no retina detail: cap the drawing buffer at about
+  // 2.4 million pixels so large and dense screens do not pay for invisible sharpness.
+  const ratio = Math.min(devicePixelRatio || 1, 2, Math.sqrt(2.4e6 / Math.max(1, width * height)));
   canvas.width = Math.round(width * ratio);
   canvas.height = Math.round(height * ratio);
-  context.setTransform(ratio, 0, 0, ratio, 0, 0);
+  gl.viewport(0, 0, canvas.width, canvas.height);
   // Phones place the cloth by width alone, so even a browser that resizes the
   // canvas with its toolbar only extends the drawing; the cloth never moves.
   if (view && view.width === width && width < 900) { view.height = height; return; }
@@ -168,9 +309,29 @@ function progress() {
   return Math.min(1, Math.max(0, (scrollY - runway * 0.45) / (runway * 2.6)));
 }
 
+function refine() {
+  // Smooth surface first: rows, then columns, through the simulated points.
+  upsample(current, rows, N, N, 3, N * 3, 3, M * 3);
+  upsample(rows, fine, M, N, M * 3, 3, M * 3, 3);
+  // Per-vertex normals from the grid neighbours: the light varies smoothly
+  // across each triangle instead of in flat facets.
+  for (let i = 0; i < M; i++) {
+    for (let j = 0; j < M; j++) {
+      const l = (i * M + Math.max(0, j - 1)) * 3, r = (i * M + Math.min(M - 1, j + 1)) * 3;
+      const u = (Math.max(0, i - 1) * M + j) * 3, d = (Math.min(M - 1, i + 1) * M + j) * 3;
+      const ax = fine[r] - fine[l], ay = fine[r + 1] - fine[l + 1], az = fine[r + 2] - fine[l + 2];
+      const bx = fine[d] - fine[u], by = fine[d + 1] - fine[u + 1], bz = fine[d + 2] - fine[u + 2];
+      const k = (i * M + j) * 3;
+      normals[k] = ay * bz - az * by;
+      normals[k + 1] = az * bx - ax * bz;
+      normals[k + 2] = ax * by - ay * bx;
+    }
+  }
+}
+
 function render() {
   frame = 0;
-  if (!frames) return;
+  if (!frames || !resources || gl.isContextLost()) return;
   measure();
   const { width, height, cx, cy, unit } = view;
   const position = progress() * (frames.length - 1);
@@ -179,67 +340,55 @@ function render() {
   const to = frames[Math.min(frames.length - 1, index + 1)];
   const blend = position - index;
   for (let k = 0; k < current.length; k++) current[k] = from[k] + (to[k] - from[k]) * blend;
-
-  // Camera: turned a little to the side and looking slightly down.
-  const yaw = -0.5;
-  const pitch = 0.42;
-  const distance = 5.2;
-  const cosYaw = Math.cos(yaw), sinYaw = Math.sin(yaw), cosPitch = Math.cos(pitch), sinPitch = Math.sin(pitch);
-  for (let p = 0; p < N * N; p++) {
-    const x = current[p * 3], y = current[p * 3 + 1], z = current[p * 3 + 2];
-    const x1 = x * cosYaw + z * sinYaw;
-    const z1 = -x * sinYaw + z * cosYaw;
-    const y2 = y * cosPitch - z1 * sinPitch;
-    const z2 = y * sinPitch + z1 * cosPitch;
-    const scale = unit * distance / (distance - z2);
-    screen[p * 2] = cx + x1 * scale;
-    screen[p * 2 + 1] = cy - y2 * scale;
-  }
-
-  context.clearRect(0, 0, width, height);
-  context.fillStyle = ink;
-  context.strokeStyle = ink;
-  // Folds turned away from the light read darker; batched into a few levels.
-  const levels = 10;
-  const bands = Array.from({ length: levels }, () => []);
-  for (let t = 0; t < triangles.length; t += 3) {
-    const a = triangles[t] * 3, b = triangles[t + 1] * 3, c = triangles[t + 2] * 3;
-    const ux = current[b] - current[a], uy = current[b + 1] - current[a + 1], uz = current[b + 2] - current[a + 2];
-    const vx = current[c] - current[a], vy = current[c + 1] - current[a + 1], vz = current[c + 2] - current[a + 2];
-    const nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
-    const shade = Math.abs(nx * light[0] + ny * light[1] + nz * light[2]) / (Math.hypot(nx, ny, nz) || 1);
-    bands[Math.min(levels - 1, Math.floor((1 - shade) * levels))].push(triangles[t], triangles[t + 1], triangles[t + 2]);
-  }
-  bands.forEach((band, level) => {
-    if (!band.length) return;
-    context.globalAlpha = 0.006 + level / (levels - 1) * 0.026;
-    context.beginPath();
-    for (let i = 0; i < band.length; i += 3) {
-      context.moveTo(screen[band[i] * 2], screen[band[i] * 2 + 1]);
-      context.lineTo(screen[band[i + 1] * 2], screen[band[i + 1] * 2 + 1]);
-      context.lineTo(screen[band[i + 2] * 2], screen[band[i + 2] * 2 + 1]);
-      context.closePath();
-    }
-    context.fill();
-  });
-  // The weave: rows and columns of the particle grid.
-  context.globalAlpha = 0.075;
-  context.lineWidth = 0.75;
-  context.beginPath();
-  for (let i = 0; i < N; i++) {
-    for (let j = 0; j < N; j++) {
-      const p = (i * N + j) * 2;
-      if (j + 1 < N) { context.moveTo(screen[p], screen[p + 1]); context.lineTo(screen[p + 2], screen[p + 3]); }
-      if (i + 1 < N) { context.moveTo(screen[p], screen[p + 1]); context.lineTo(screen[p + N * 2], screen[p + N * 2 + 1]); }
-    }
-  }
-  context.stroke();
-  context.globalAlpha = 1;
+  refine();
+  gl.bindBuffer(gl.ARRAY_BUFFER, resources.position);
+  gl.bufferSubData(gl.ARRAY_BUFFER, 0, fine);
+  gl.bindBuffer(gl.ARRAY_BUFFER, resources.normal);
+  gl.bufferSubData(gl.ARRAY_BUFFER, 0, normals);
+  gl.uniform2f(resources.center, 2 * cx / width - 1, 1 - 2 * cy / height);
+  gl.uniform2f(resources.scale, 2 * unit / width, 2 * unit / height);
+  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+  // Depth first, then colour on the nearest surface only: folds behind the
+  // front layer never show through it.
+  gl.colorMask(false, false, false, false);
+  gl.depthMask(true);
+  gl.depthFunc(gl.LESS);
+  gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
+  gl.colorMask(true, true, true, true);
+  gl.depthMask(false);
+  gl.depthFunc(gl.LEQUAL);
+  gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
+  gl.depthMask(true);
+  canvas.classList.add('is-ready');
 }
 
 function schedule() { if (!frame && !document.hidden) frame = requestAnimationFrame(render); }
-addEventListener('scroll', () => { if (scrubbed && !reduced.matches) schedule(); }, { passive: true });
-addEventListener('resize', schedule, { passive: true });
-reduced.addEventListener('change', schedule);
-document.addEventListener('visibilitychange', schedule);
-schedule();
+
+function ready(result) {
+  frames = result;
+  schedule();
+}
+
+if (gl) {
+  try {
+    setup();
+    canvas.addEventListener('webglcontextlost', event => { event.preventDefault(); resources = null; canvas.classList.remove('is-ready'); });
+    canvas.addEventListener('webglcontextrestored', () => { setup(); schedule(); });
+    try {
+      const source = `const N=${N},SIZE=${SIZE},RADIUS=${RADIUS},FLOOR=${FLOOR};\n${random}\n${simulate}\n` +
+        'const f=simulate();postMessage(f,f.map(x=>x.buffer));';
+      const worker = new Worker(URL.createObjectURL(new Blob([source], { type: 'text/javascript' })));
+      worker.onmessage = event => { ready(event.data); worker.terminate(); };
+      worker.onerror = () => { worker.terminate(); setTimeout(() => ready(simulate()), 0); };
+    } catch {
+      setTimeout(() => ready(simulate()), 0);
+    }
+    addEventListener('scroll', () => { if (scrubbed && !reduced.matches) schedule(); }, { passive: true });
+    addEventListener('resize', schedule, { passive: true });
+    reduced.addEventListener('change', schedule);
+    document.addEventListener('visibilitychange', schedule);
+  } catch {
+    // No usable WebGL: the page simply has no background.
+    resources = null;
+  }
+}
