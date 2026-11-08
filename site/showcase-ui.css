@@ -204,11 +204,7 @@ button:disabled { cursor: default; }
 .gallery-card-copy { margin: 0; padding: 14px 0 0; }
 .gallery-card h4, .embodied-card h4 { margin: 0; color: var(--ink); font-size: 21px; font-weight: 500; line-height: 1.4; letter-spacing: -.015em; }
 .embodied-card h4 { padding: 14px 0 0; }
-.embodied-film .material-inline-toggle { width: 44px; height: 44px; border: 0; border-radius: 4px; color: var(--paper); background: var(--ink); box-shadow: none; backdrop-filter: none; } /* taste-skill-ignore: explicitly clears legacy shadows or blur; no decorative effect */
-.embodied-film:hover .material-inline-toggle { color: var(--ink); background: var(--paper); }
-.embodied-film[aria-pressed='true'] .material-inline-toggle { color: var(--ink); background: var(--paper); }
 
-.embodied-film .material-inline-toggle { position: absolute; bottom: 14px; right: 14px; display: grid; place-items: center; }
 .embodied-film { cursor: pointer; }
 
 /* Reading pages: the typography carries the change in hierarchy. */
@@ -368,7 +364,6 @@ button:disabled { cursor: default; }
 .scene-camera-controls button:hover { background: #374146; }
 .scene-camera-controls button:disabled { opacity: 1; color: #9ba6ab; background: #25292c; }
 .scene-contact-toggle { border: 1px solid #485156; } /* taste-skill-ignore: actual contact-visibility toggle boundary */
-.material-inline-toggle { transition: background-color 140ms ease, color 140ms ease; }
 .gallery-image:focus-visible, .embodied-film:focus-visible { outline: 3px solid var(--ink); outline-offset: 5px; }
 :where(.compare-stage,.school-image-compare,.scene-comparison-stage):focus-within :is(.compare-knob,.school-image-divider > span,.scene-comparison-handle) { outline: 2px solid var(--ink); outline-offset: 3px; }
 
@@ -643,8 +638,6 @@ body[data-page='home'] #gallery .gallery-card h4 { font-size: clamp(17px, 1.3vw,
 body[data-page='home'] [data-physics-carousel] { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 20px; align-items: start; }
 body[data-page='home'] [data-physics-carousel] .embodied-card:first-child { grid-column: 1 / -1; }
 body[data-page='home'] [data-physics-carousel] .embodied-card:not(:first-child) h4 { padding-top: 10px; font-size: 16px; line-height: 1.4; }
-body[data-page='home'] [data-physics-carousel] .embodied-card:not(:first-child) .material-inline-toggle { width: 28px; height: 28px; bottom: 8px; right: 8px; }
-body[data-page='home'] [data-physics-carousel] .embodied-card:not(:first-child) .material-inline-toggle .ui-icon { width: 14px; height: 14px; }
 @media (min-width: 1100px) {
   /* The rail of four previews ends exactly where the active film ends. Its width
      follows the section (20% of it, less the gaps it must fit) so each preview
@@ -677,7 +670,6 @@ body[data-page='home'] [data-physics-carousel] .embodied-card:not(:first-child) 
 .workflow-step { transition: color 160ms ease, background-color 160ms ease; }
 .school-tabs button[aria-selected='true']:hover,
 .ego-compact .ego-tabs button[aria-selected='true']:hover { color: var(--ink); background: var(--ui-highlight); }
-.embodied-film:focus-visible .material-inline-toggle { color: var(--ink); background: var(--paper); }
 @media (max-width: 850px) {
   .workflow-step { gap: 4px; }
   .workflow-step small { margin-top: 4px; }
@@ -765,45 +757,48 @@ body[data-page='home'] #showcase > .chapter-marker { position: absolute; width: 
 /* ---- Physics demo titles sit inside their films -----------------------------
    Each title sits on a smoked-glass label in the film's bottom-left corner: the
    film behind it is blurred and slightly saturated, under a hairline highlight.
-   The play button in the bottom-right is the same glass and height, so the two
-   read as one caption bar, whether it shows play or pause.
    The heading stays where it is in the document (after the film button) and lets
    the pointer through, so the whole film remains one target. */
 :is([data-physics-carousel], #ts#ts) .embodied-card { position: relative; }
-:is([data-physics-carousel], #ts#ts) :is(.embodied-card h4, .embodied-film .material-inline-toggle) {
+:is([data-physics-carousel], #ts#ts) .embodied-card h4 {
   box-sizing: border-box; border: 1px solid rgb(255 255 255 / .2); border-radius: 0;
   color: #fff; background: rgb(20 23 24 / .36);
   -webkit-backdrop-filter: blur(14px) saturate(1.6); backdrop-filter: blur(14px) saturate(1.6);
   box-shadow: inset 0 1px 0 rgb(255 255 255 / .14), 0 6px 18px rgb(0 0 0 / .14);
-}
-/* Play and pause are the same glass; hover or keyboard focus only deepens it. */
-:is([data-physics-carousel], #ts#ts) :is(.embodied-film:hover, .embodied-film:focus-visible) .material-inline-toggle {
-  background: rgb(20 23 24 / .56); border-color: rgb(255 255 255 / .34);
-}
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  :is([data-physics-carousel], #ts#ts) :is(.embodied-card h4, .embodied-film .material-inline-toggle) { background: rgb(20 23 24 / .72); }
-}
-:is([data-physics-carousel], #ts#ts) .embodied-film .material-inline-toggle { z-index: 1; }
-:is([data-physics-carousel], #ts#ts) .embodied-card h4 {
   position: absolute; left: 14px; bottom: 14px; z-index: 1;
-  max-width: calc(100% - 80px); height: 44px; margin: 0; padding: 0 14px;
+  max-width: calc(100% - 28px); height: 44px; margin: 0; padding: 0 14px;
   font-size: var(--t-card); font-weight: 500; line-height: 42px; letter-spacing: .01em;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   pointer-events: none;
 }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :is([data-physics-carousel], #ts#ts) .embodied-card h4 { background: rgb(20 23 24 / .72); }
+}
 :is([data-physics-carousel], #ts#ts) .embodied-card:first-child h4 { font-size: var(--t-card); line-height: 42px; }
 :is([data-physics-carousel], #ts#ts) .embodied-card:not(:first-child) h4 {
-  left: 8px; bottom: 8px; max-width: calc(100% - 50px); height: 28px; padding: 0 8px;
+  left: 8px; bottom: 8px; max-width: calc(100% - 16px); height: 28px; padding: 0 8px;
   font-size: var(--t-small); line-height: 26px;
 }
+/* Play control: no corner buttons. Clicking the active film pauses it, and only
+   then a square play button, like the hero's watch button, appears in the
+   middle; clicking again plays and it goes. Previews show none. */
+.embodied-film .film-play {
+  position: absolute; left: 50%; top: 50%; z-index: 1;
+  display: grid; place-items: center; width: 64px; height: 64px; margin: -32px 0 0 -32px;
+  color: var(--ink); background: var(--paper); box-shadow: 0 10px 28px rgb(0 0 0 / .16);
+  opacity: 0; transform: scale(.9); transition: opacity 180ms ease, transform 180ms ease;
+  pointer-events: none;
+}
+.embodied-film .film-play .ui-icon { width: 22px; height: 22px; }
+:is([data-physics-carousel], #ts#ts) .embodied-card:first-child .embodied-film[data-paused='true'] .film-play { opacity: 1; transform: none; }
+:is([data-physics-carousel], #ts#ts) .embodied-card:first-child .embodied-film[data-paused='true']:is(:hover, :focus-visible) .film-play { background: #fff; }
+@media (prefers-reduced-motion: reduce) { .embodied-film .film-play { transition: none; } }
 @media (max-width: 600px) {
   /* Phones: a smaller caption and play button; the whole film is the tap target. */
-  :is([data-physics-carousel], #ts#ts) .embodied-card:first-child h4 { left: 10px; bottom: 10px; max-width: calc(100% - 56px); height: 30px; padding: 0 10px; font-size: var(--t-control); line-height: 28px; }
-  :is([data-physics-carousel], #ts#ts) .embodied-card:first-child .material-inline-toggle { width: 30px; height: 30px; bottom: 10px; right: 10px; }
-  :is([data-physics-carousel], #ts#ts) .embodied-card:first-child .material-inline-toggle .ui-icon { width: 14px; height: 14px; }
-  :is([data-physics-carousel], #ts#ts) .embodied-card:not(:first-child) h4 { left: 6px; bottom: 6px; max-width: calc(100% - 36px); height: 22px; padding: 0 6px; line-height: 20px; }
-  :is([data-physics-carousel], #ts#ts) .embodied-card:not(:first-child) .material-inline-toggle { width: 22px; height: 22px; bottom: 6px; right: 6px; }
-  :is([data-physics-carousel], #ts#ts) .embodied-card:not(:first-child) .material-inline-toggle .ui-icon { width: 11px; height: 11px; }
+  :is([data-physics-carousel], #ts#ts) .embodied-card:first-child h4 { left: 10px; bottom: 10px; max-width: calc(100% - 20px); height: 30px; padding: 0 10px; font-size: var(--t-control); line-height: 28px; }
+  :is([data-physics-carousel], #ts#ts) .embodied-card:not(:first-child) h4 { left: 6px; bottom: 6px; max-width: calc(100% - 12px); height: 22px; padding: 0 6px; line-height: 20px; }
+  .embodied-film .film-play { width: 48px; height: 48px; margin: -24px 0 0 -24px; }
+  .embodied-film .film-play .ui-icon { width: 18px; height: 18px; }
 }
 
 /* ---- Corners ------------------------------------------------------------------
