@@ -66,7 +66,7 @@ const videos = {
   "gallery-plush-packing": {"src":"assets/gallery-plush-packing.mp4?v=d315954eb12e","title":"双臂毛绒玩具装箱与封胶"},
   "hero-full": {"poster":"assets/homepage-hero.jpg","src":"assets/homepage-hero.mp4?v=hero-v8-20261031","title":"TEZOI 仿真演示","muted":false},
   "gallery-panda-mixing": {"src":"assets/gallery-panda-mixing.mp4?v=full-task-20261103","title":"离心管开盖与滴加混匀"},
-  "gallery-soft-bag": {"src":"assets/gallery-soft-bag.mp4?v=soft-bag-realism-20261102","title":"软袋开袋、加液与夹封"},
+  "gallery-soft-bag": {"src":"assets/gallery-soft-bag.mp4?v=soft-bag-newton-20261108","title":"软袋开袋、加液与夹封"},
   "gallery-pigment-dilution": {"src":"assets/gallery-pigment-dilution.mp4?v=20261031","title":"色素稀释"},
   "gallery-go2-walk": {"src":"assets/gallery-go2-walk.mp4","title":"Go2 行走"},
   "gallery-g1-dance": {"src":"assets/gallery-g1-dance.mp4","title":"G1 舞蹈"},
