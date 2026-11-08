@@ -477,6 +477,30 @@ export default {
     "zh": "全流程",
     "en": "Pipeline"
   },
+  "人类示范": {
+    "zh": "人类示范",
+    "en": "Demo"
+  },
+  "Ego video": {
+    "zh": "第一视角视频",
+    "en": "Ego video"
+  },
+  "仿真场景": {
+    "zh": "仿真场景",
+    "en": "Sim scene"
+  },
+  "智能体构建": {
+    "zh": "智能体构建",
+    "en": "By the agent"
+  },
+  "物理推演": {
+    "zh": "物理推演",
+    "en": "Rollout"
+  },
+  "真机执行": {
+    "zh": "真机执行",
+    "en": "Robot run"
+  },
   "播放进度": {
     "zh": "播放进度",
     "en": "Playback position"
@@ -531,13 +555,13 @@ export default {
   },
   "仿真运行": {
     "zh": "仿真运行",
-    "en": "Physics rollout"
+    "en": "In simulation"
   },
   "Robotics": {
     "zh": "机器人",
     "en": "Robotics"
   },
-  "实机记录": { "zh": "实机记录", "en": "Real robot recording" },
+  "实机记录": { "zh": "实机记录", "en": "Real robot" },
   "下载实机视频": { "zh": "下载实机视频", "en": "Download robot recording" },
   "00:09 起 · 静音 · 背景人物已移除": { "zh": "00:09 起 · 静音 · 背景人物已移除", "en": "From 00:09 · Silent · Background person removed" },
   "机器人实机记录，原片九秒起，静音，背景人物已移除": { "zh": "机器人实机记录，原片九秒起，静音，背景人物已移除", "en": "Real robot recording from nine seconds, silent, background person removed" },
