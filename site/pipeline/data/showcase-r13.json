@@ -1,0 +1,163 @@
+{
+  "revision": "showcase-r13",
+  "date": "2026-11-08",
+  "files": [
+    {
+      "path": "media/r13/human-ego.mp4",
+      "duration_s": 9,
+      "sha256": "1e553a50ab3a240c61543506a7c95d82d456367fbd9689c18c24f605d9035742",
+      "poster_sha256": "c2406852b40704e36f64047835f6a16e912b4c5f5bd4525ecc9495e0e3fa7c31",
+      "audio": false
+    },
+    {
+      "path": "media/r13/hand-pose.mp4",
+      "duration_s": 9,
+      "sha256": "9ce13bb341c04d8e71a37b78add56ebfac902a072287704d76955f75202990fa",
+      "poster_sha256": "0f9ba04a298e699daf38a7ed78f014a1bb04c0d1c14f2d8145aabb899bf93afc",
+      "audio": false
+    },
+    {
+      "path": "media/r13/hand-prior.mp4",
+      "duration_s": 9,
+      "sha256": "98a40e0861d662c02c66405b06b06f1202d15239ba3661611c70407917b78250",
+      "poster_sha256": "310dbf4bfd0bdafe031108b2fc4359c0a05d473bb46510156b36056062bdb310",
+      "audio": false
+    },
+    {
+      "path": "media/r13/robot-ego.mp4",
+      "duration_s": 11.5,
+      "sha256": "03d6d025780a70347815305531a6908209f0717d9ac6c843ab094f5fbb922473",
+      "poster_sha256": "c72e1d61395f488c6754fc4e697f70250b0dde19eacd6984a331a9531cb9bae2",
+      "audio": false
+    },
+    {
+      "path": "media/r13/robot-third.mp4",
+      "duration_s": 16.5,
+      "sha256": "94030e4e96b1d433245219b7bb6d82e500c7715171e5236db3c4e4767a36b0f8",
+      "poster_sha256": "d53c505c7eb347b452a48383cb314e0f4add9ecdb274f7681f392e8a559a4f9d",
+      "audio": false
+    },
+    {
+      "path": "media/r13/real-validation.mp4",
+      "duration_s": 16,
+      "sha256": "3d2788096efac84c6a7208d0f998f6e6d40673958d654b6e9c53853323e33134",
+      "poster_sha256": "3e7e9001c616e3b6f47b9e41825a2054df9f61f60481c1a3b11d3f89ef6ab3a2",
+      "audio": false
+    }
+  ],
+  "scene_data": {
+    "file": "scene-frame102-r13.bin",
+    "sha256": "a19d042d839786ee23954de352308a3e5ed7373ed945ac3141d956aff340f0b8",
+    "points": 4025,
+    "stride": 6,
+    "source": "IMG_6263",
+    "frame": 102,
+    "time_s": 17,
+    "depth": "Depth Anything / DA3 saved relative depth",
+    "metric_calibrated": false,
+    "hand_masked": true,
+    "crop_hd": [
+      550,
+      270,
+      1200,
+      675
+    ],
+    "roundtrip_px": 2.842170943040401e-14,
+    "normalization": {
+      "median_depth": 0.9859477877616882
+    },
+    "depth_sha256": "184dca5a07cfc2b568b60af2c75881c9ddec35f3977a4bdcdb8fafafb10695c2",
+    "sam_sha256": "08f1ba13847b8bfe5ce5127150e9abac5d239cb1b65c27fe20803f1bb379dd74",
+    "center": [
+      0.07219197174419492,
+      0.03276330303187856,
+      1.0
+    ],
+    "camera": "source pinhole orientation; interactive orbit for inspection"
+  },
+  "human": {
+    "source": "IMG_6263",
+    "observation_interval_s": [
+      8,
+      17
+    ],
+    "display_fps": 30,
+    "estimated_K": [
+      [
+        2452.08544921875,
+        0,
+        960
+      ],
+      [
+        0,
+        2004.3995646687297,
+        540
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ],
+    "fixed_crop_xywh": [
+      550,
+      270,
+      1200,
+      675
+    ],
+    "mesh": "existing HaWoR-initialized, refined temporal MANO",
+    "haco": "nearest saved raw 6 Hz probabilities; no force inference",
+    "original_hand_preserved": true,
+    "valid_geometry_frames": 270,
+    "min_camera_z_m": 1.1856498718261719,
+    "geometry_sha256": "5163fb76e312d54d3e2c13f6ee32367c486fafd3708d04fb1eb786f14110026a",
+    "validity_limit": "Finite/front-of-camera checks only; original HaWoR pred_valid flags were not provided in this exported artifact."
+  },
+  "scene": {
+    "source_frame_time_s": 17,
+    "segmentation": "existing SAM",
+    "depth": "existing Depth Anything relative depth",
+    "assets": "existing 1030 CAD and materials",
+    "pointcloud": "same-frame saved depth backprojection; interactive inspection",
+    "code": "typed artifact contract visualization, not a recorded live agent execution"
+  },
+  "robot": {
+    "source": "IMG_0756",
+    "ego_saved_interval_s": [
+      9,
+      32
+    ],
+    "overview_saved_interval_s": [
+      32,
+      65
+    ],
+    "baked_speed": 2,
+    "render": "1030 saved-state render from R5",
+    "new_physics": false,
+    "same_source_as_human": false
+  },
+  "real": {
+    "source": "IMG_0755.MOV",
+    "raw_interval_s": [
+      9,
+      25
+    ],
+    "start_poster": "exact first decoded frame of clip, raw 9 s",
+    "prior_person_cleanup": true,
+    "new_cleanup": false,
+    "audio": false,
+    "speed": 1
+  },
+  "egosmith": {
+    "reference": "https://github.com/egosteer/egosmith",
+    "applied": "same-frame K projection, source-time binding, geometry validity checks, occlusion-aware presentation",
+    "not_run": [
+      "new HaWoR inference",
+      "DPVO",
+      "Any4D",
+      "EgoSmith pipeline"
+    ],
+    "proposed": "separate camera and hand motion; estimate camera metric scale using depth; reject invalid/occluded trajectories before any interpolation"
+  },
+  "physics_acceptance_changed": false
+}

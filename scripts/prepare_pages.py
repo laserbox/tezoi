@@ -13,6 +13,7 @@ if target.exists() or source == target or source in target.parents:
 # files in Git preserves previous experiments without shipping them to Pages.
 archived = {
     "agent-conversion.js",
+    "pipeline/media/ego-original-web-r12.mp4",
     "assets/ego2sim",
     "assets/ego-img-6263-clean-2x.mp4",
     "assets/ego-img-6263-edit-2x.mp4",

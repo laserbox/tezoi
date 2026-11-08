@@ -9,7 +9,7 @@
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=compact-footer-20261102">
   <script src="site-shell.js?v=impeccable-viewing-20261102" type="module"></script>
-  <script src="app.js?v=physics-names-20261108" type="module"></script>
+  <script src="app.js?v=showcase-r13" type="module"></script>
   <link rel="stylesheet" href="ego2sim.css?v=rokae6263-v1">
   <link rel="stylesheet" href="school-splat.css?v=selected-camera-20261102">
   <script type="module" src="school-splat.js?v=webgs-f05490c"></script>
@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="page-atmosphere.css?v=cloth-20261108">
 <script src="page-atmosphere.js?v=cloth-20261108" type="module"></script>
 <script src="page-sections.js?v=section-heads-20261108" type="module"></script>
-<link rel="stylesheet" href="agent-pipeline.css?v=publish-r12">
+<link rel="stylesheet" href="pipeline/showcase-r13.css?v=20261108">
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">跳到正文</a>
@@ -64,42 +64,14 @@
             <section class="workflow-panel" id="workflow-panel-source" data-workflow-panel="source" role="tabpanel" aria-labelledby="workflow-tab-source" hidden>
               <div class="workflow-pane-heading"><h4>Ego · 真实第一视角示范</h4></div>
               <figure class="workflow-ego-media">
-                <video data-ego-video data-source-revision="original-r10" controls muted playsinline preload="metadata" poster="pipeline/media/ego-original-r10.jpg" width="1920" height="1080" aria-label="第一视角原始拍摄，保留现场设备与完整画幅">
-                  <source src="pipeline/media/ego-original-web-r12.mp4" type="video/mp4">
-                  您的浏览器不支持视频播放。<a href="pipeline/media/ego-original-web-r12.mp4">下载 Ego 视频</a>。
+                <video data-ego-video data-source-revision="current-r13" controls muted playsinline preload="metadata" poster="pipeline/media/r13/human-ego.jpg" width="1920" height="1080" aria-label="第一视角真实示范，与当前手部重建片段对应">
+                  <source src="pipeline/media/r13/human-ego.mp4" type="video/mp4">
+                  您的浏览器不支持视频播放。<a href="pipeline/media/r13/human-ego.mp4">下载 Ego 视频</a>。
                 </video>
-                <figcaption>IMG_6263 · 原始观测片段</figcaption>
               </figure>
             </section>
             <section class="workflow-panel" id="workflow-panel-agent" data-workflow-panel="agent" role="tabpanel" aria-labelledby="workflow-tab-agent" hidden>
-              <div class="ego-lab ego-compact" data-agent-conversion data-ego-compact aria-label="滴管任务 Ego2Sim 转换演示">
-  <div class="ego-tabs" role="tablist" aria-label="Ego2Sim 转换阶段">
-    <button type="button" role="tab" id="ego-tab-0" aria-selected="true" aria-controls="ego-stage" data-ego-step="0" tabindex="0"><span>01</span>任务理解</button>
-    <button type="button" role="tab" id="ego-tab-1" aria-selected="false" aria-controls="ego-stage" data-ego-step="1" tabindex="-1"><span>02</span>场景重建</button>
-    <button type="button" role="tab" id="ego-tab-2" aria-selected="false" aria-controls="ego-stage" data-ego-step="2" tabindex="-1"><span>03</span>三维接触</button>
-    <button type="button" role="tab" id="ego-tab-3" aria-selected="false" aria-controls="ego-stage" data-ego-step="3" tabindex="-1"><span>04</span>动作重定向</button>
-  </div>
-  <div id="ego-stage" data-ego-stage role="tabpanel" aria-labelledby="ego-tab-0">
-    <section class="ego-reconstruction" data-ego-reconstruction aria-label="场景重建过程视频" hidden>
-      <div class="ego-reconstruction-grid">
-        <figure class="ego-preview-card"><video data-ego-preview="segmentation" controls playsinline muted preload="none" aria-label="任务对象分割视频"></video><figcaption><h6>任务对象分割</h6></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试分割视频</button></figure>
-        <figure class="ego-preview-card"><video data-ego-preview="depth" controls playsinline muted preload="none" aria-label="相对深度估计视频"></video><figcaption><h6>相对深度</h6></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试深度视频</button></figure>
-        <figure class="ego-preview-card"><video data-ego-preview="mapping-ego-v3" controls playsinline muted preload="none" aria-label="点云与统一坐标视频"></video><figcaption><h6>点云与统一坐标</h6></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试点云视频</button></figure>
-        <figure class="ego-preview-card"><video data-ego-preview="assets" controls playsinline muted loop preload="none" aria-label="三维场景与资产预览视频"></video><figcaption><h6>三维场景与资产</h6></figcaption><p class="ego-preview-error" data-ego-preview-error role="status" hidden>视频加载失败，请重试。</p><button type="button" data-ego-preview-retry hidden>重试三维资产视频</button></figure>
-      </div>
-    </section>
-    <div data-ego-main-player>
-    <div class="ego-viewer">
-      <figure><video data-ego-output playsinline muted preload="metadata" poster="pipeline/media/ego-continuous.jpg" aria-label="任务理解演示"></video></figure>
-
-    </div>
-    <div class="ego-controls"><button type="button" data-ego-play aria-label="播放演示">播放</button><input data-ego-scrub type="range" min="0" max="43.83" step="0.01" value="0" aria-label="示教回放时间"><output data-ego-time>00.0 / 43.8 s</output></div>
-    <div class="ego-media-status"><p data-ego-method role="status" hidden></p><button type="button" data-ego-retry hidden>重试加载</button></div>
-    </div>
-
-    <details class="ego-evidence" data-ego-evidence-panel hidden><summary>演示 <span data-ego-evidence-count></span></summary><div class="ego-evidence-grid" data-ego-layers></div></details>
-  </div>
-</div>
+              <div data-agent-conversion aria-label="Ego2Sim 处理流程"></div>
             </section>
             <section class="workflow-panel" id="workflow-panel-simulation" data-workflow-panel="simulation" role="tabpanel" aria-labelledby="workflow-tab-simulation">
               <div class="simulation-explorer" data-simulation-explorer>
@@ -161,9 +133,9 @@
             <section class="workflow-panel" id="workflow-panel-validation" data-workflow-panel="validation" role="tabpanel" aria-labelledby="workflow-tab-validation" hidden>
               <div class="workflow-pane-heading"><h4>Robotics · 真机验证</h4></div>
               <figure class="workflow-ego-media">
-                <video data-validation-video data-source-revision="robot-real-r11" controls muted playsinline preload="metadata" poster="assets/robot-real-clean-r11.jpg" width="1920" height="1080" aria-label="机器人实机记录，原片九秒起，静音，背景人物已移除">
-                  <source src="assets/robot-real-clean-r11.mp4" type="video/mp4">
-                  您的浏览器不支持视频播放。<a href="assets/robot-real-clean-r11.mp4" download>下载实机视频</a>。
+                <video data-validation-video data-source-revision="current-r13" controls muted playsinline preload="metadata" poster="pipeline/media/r13/real-validation.jpg" width="1920" height="1080" aria-label="机器人真机验证：捏取、移动与滴放">
+                  <source src="pipeline/media/r13/real-validation.mp4" type="video/mp4">
+                  您的浏览器不支持视频播放。<a href="pipeline/media/r13/real-validation.mp4" download>下载实机视频</a>。
                 </video>
               </figure>
 
