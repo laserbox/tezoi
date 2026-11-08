@@ -441,21 +441,21 @@ export default {
     "zh": "从观察走向验证",
     "en": "From observation to validation"
   },
-  "用实拍照片重建实验室和工位，变成机器人可以进入、可以操作的仿真场景。": {
-    "zh": "用实拍照片重建实验室和工位，变成机器人可以进入、可以操作的仿真场景。",
-    "en": "Labs and workstations rebuilt from real photos into simulated scenes a robot can enter and work in."
+  "用照片或扫描重建真实空间，得到可供机器人操作的仿真场景。": {
+    "zh": "用照片或扫描重建真实空间，得到可供机器人操作的仿真场景。",
+    "en": "Real spaces rebuilt from photos or scans into simulated scenes robots can work in."
   },
-  "刚体、柔性物体、液体、触觉与切割，都算到接触和受力这一层。": {
-    "zh": "刚体、柔性物体、液体、触觉与切割，都算到接触和受力这一层。",
-    "en": "Rigid bodies, soft materials, liquids, touch and cutting, simulated down to contact and force."
+  "在仿真中计算机器人接触物体时产生的受力、形变与流动。": {
+    "zh": "在仿真中计算机器人接触物体时产生的受力、形变与流动。",
+    "en": "Forces, deformation and flow that arise when a robot touches an object, computed in simulation."
   },
-  "机器人在工厂和实验室里完成的整段仿真任务。": {
-    "zh": "机器人在工厂和实验室里完成的整段仿真任务。",
-    "en": "Complete robot tasks, simulated end to end in factories and labs."
+  "机器人在仿真的工厂和实验室中完成的完整任务。": {
+    "zh": "机器人在仿真的工厂和实验室中完成的完整任务。",
+    "en": "Complete tasks carried out by robots in simulated factories and labs."
   },
-  "从人的第一视角示范出发，在仿真里学成机器人轨迹，再回到真机上验证。": {
-    "zh": "从人的第一视角示范出发，在仿真里学成机器人轨迹，再回到真机上验证。",
-    "en": "From a person's first-person demonstration to robot trajectories learned in simulation, then checked on a real robot."
+  "以人的第一视角示范为起点，在仿真中学习机器人轨迹，再在真机上验证。": {
+    "zh": "以人的第一视角示范为起点，在仿真中学习机器人轨迹，再在真机上验证。",
+    "en": "We start from a person's first-person demonstration, learn robot trajectories in simulation, then validate them on a real robot."
   },
   "页脚导航": {
     "zh": "页脚导航",
