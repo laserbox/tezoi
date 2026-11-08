@@ -765,7 +765,7 @@ body[data-page='home'] :is(#showcase > .chapter-marker, #playground > .section-w
    Each title sits on a smoked-glass label in the film's bottom-left corner: the
    film behind it is blurred and slightly saturated, under a hairline highlight.
    The play button in the bottom-right is the same glass and height, so the two
-   read as one caption bar; playing or hovering turns the button to light glass.
+   read as one caption bar, whether it shows play or pause.
    The heading stays where it is in the document (after the film button) and lets
    the pointer through, so the whole film remains one target. */
 :is([data-physics-carousel], #ts#ts) .embodied-card { position: relative; }
@@ -775,8 +775,9 @@ body[data-page='home'] :is(#showcase > .chapter-marker, #playground > .section-w
   -webkit-backdrop-filter: blur(14px) saturate(1.6); backdrop-filter: blur(14px) saturate(1.6);
   box-shadow: inset 0 1px 0 rgb(255 255 255 / .14), 0 6px 18px rgb(0 0 0 / .14);
 }
-:is([data-physics-carousel], #ts#ts) :is(.embodied-film:hover, .embodied-film:focus-visible, .embodied-film[aria-pressed='true']) .material-inline-toggle {
-  color: var(--ink); background: rgb(255 255 255 / .78); border-color: rgb(255 255 255 / .6);
+/* Play and pause are the same glass; hover or keyboard focus only deepens it. */
+:is([data-physics-carousel], #ts#ts) :is(.embodied-film:hover, .embodied-film:focus-visible) .material-inline-toggle {
+  background: rgb(20 23 24 / .56); border-color: rgb(255 255 255 / .34);
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   :is([data-physics-carousel], #ts#ts) :is(.embodied-card h4, .embodied-film .material-inline-toggle) { background: rgb(20 23 24 / .72); }
