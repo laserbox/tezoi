@@ -997,9 +997,9 @@ export default {
     "zh": "3D 场景 · 49.8 MB",
     "en": "3D scene · 49.8 MB"
   },
-  "进入三维场景 ↗": {
-    "zh": "进入 3D ↗",
-    "en": "Explore 3D ↗"
+  "进入三维场景": {
+    "zh": "进入 3D",
+    "en": "Explore 3D"
   },
   "INTERACTIVE / 03": {
     "zh": "交互式三维",
