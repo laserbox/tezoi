@@ -1011,3 +1011,57 @@ body[data-page='company'] .page-link:hover { text-decoration-color: currentColor
   :is(.hero-watch, #ts#ts) { min-height: 48px; padding: 12px 22px; }
   .hero-toggle { width: 48px; height: 48px; }
 }
+
+/* ---- Section descriptions ------------------------------------------------------
+   One muted line under a section name says what the section shows. */
+.section-lede { max-width: 36em; margin: 10px 0 0; color: var(--muted); font-size: var(--t-body); font-weight: 400; line-height: 1.6; letter-spacing: 0; }
+.section-lead > .section-lede { max-width: min(100%, 40em); margin: -6px 0 0; }
+
+/* ---- Gallery hover preview (gallery-preview.js) ---------------------------------- */
+.gallery-image .gallery-preview { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 220ms ease; pointer-events: none; }
+.gallery-image.is-previewing .gallery-preview { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .gallery-image .gallery-preview { display: none; } }
+
+/* ---- Physics film progress (physics-carousel.js) --------------------------------
+   Only the large film shows it: a light track along its bottom edge, filled in ink
+   as the film plays. The paper caption sits over its left end. */
+.embodied-film .film-progress { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; display: none; height: 3px; background: rgb(241 242 241 / .5); pointer-events: none; }
+.embodied-film .film-progress > span { display: block; height: 100%; background: var(--ink); transform: scaleX(0); transform-origin: 0 50%; }
+:is([data-physics-carousel], #ts#ts) .embodied-card:first-child .film-progress { display: block; }
+
+/* ---- Comparison labels match the physics captions --------------------------------
+   Square labels set flush into the picture's top corners: the real side in paper
+   and ink, the simulated side in simulation teal. */
+:is(#scene-reconstruction, #ts#ts) :is(.school-image-label, .scene-comparison-label, .school-screen-label) {
+  top: 0; height: 32px; margin: 0; padding: 0 12px; border: 0; border-radius: 0; box-shadow: none;
+  font-size: var(--t-small); font-weight: 500; line-height: 32px; letter-spacing: .01em; white-space: nowrap;
+  backdrop-filter: none;
+}
+:is(#scene-reconstruction, #ts#ts) :is(.school-image-label-left, .scene-comparison-label-real, .school-screen-label) { left: 0; right: auto; color: var(--ink); background: var(--paper); }
+:is(#scene-reconstruction, #ts#ts) :is(.school-image-label-right, .scene-comparison-label-sim) { right: 0; left: auto; color: var(--paper); background: var(--sim); }
+@media (max-width: 600px) {
+  :is(#scene-reconstruction, #ts#ts) :is(.school-image-label, .scene-comparison-label, .school-screen-label) { height: 24px; padding: 0 8px; line-height: 24px; }
+}
+
+/* ---- Pipeline steps read as one sequence ----------------------------------------
+   A hairline joins the step numbers, through the gaps between steps: down the rail
+   on wide screens, across the row on narrow ones. Each step draws the half before
+   and after its own number, so unequal column widths still meet. */
+:is(#playground, #ts#ts) .workflow-step:not(:first-child)::before,
+:is(#playground, #ts#ts) .workflow-step:not(:last-child)::after { content: ""; position: absolute; background: color-mix(in srgb, var(--ink) 24%, var(--paper)); pointer-events: none; }
+@media (min-width: 851px) {
+  :is(#playground, #ts#ts) .workflow-step:not(:first-child)::before { left: 27.5px; top: -6px; width: 1px; height: calc(50% - 16px); }
+  :is(#playground, #ts#ts) .workflow-step:not(:last-child)::after { left: 27.5px; top: calc(50% + 22px); bottom: -6px; width: 1px; }
+}
+@media (min-width: 851px) and (max-width: 1050px) {
+  :is(#playground, #ts#ts) .workflow-step:not(:first-child)::before,
+  :is(#playground, #ts#ts) .workflow-step:not(:last-child)::after { left: 23.5px; }
+}
+@media (max-width: 850px) {
+  :is(#playground, #ts#ts) .workflow-step:not(:first-child)::before { top: 26px; left: -4px; width: calc(50% - 18px); height: 1px; }
+  :is(#playground, #ts#ts) .workflow-step:not(:last-child)::after { top: 26px; left: calc(50% + 22px); right: -4px; height: 1px; }
+}
+@media (max-width: 600px) {
+  :is(#playground, #ts#ts) .workflow-step:not(:first-child)::before { top: 25px; width: calc(50% - 17px); }
+  :is(#playground, #ts#ts) .workflow-step:not(:last-child)::after { top: 25px; left: calc(50% + 21px); }
+}

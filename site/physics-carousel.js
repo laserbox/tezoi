@@ -57,6 +57,7 @@ export function mountPhysicsCarousel(root) {
   const eligible = () => wanted && !suspended && !page.hidden && !root.closest('[hidden]') && visible.has(cards[active].button);
   function sync() {
     root.dataset.activeStudy = cards[active].title.id;
+    if (cards[0].progress) scheduleProgress();
     cards.forEach((card, i) => {
       const playing = i === active && !card.video.paused;
       card.button.setAttribute('aria-current', String(i === active));
@@ -154,6 +155,29 @@ export function mountPhysicsCarousel(root) {
     });
     card.video.addEventListener('pause', sync);
     card.video.addEventListener('error', sync);
+  });
+  // A thin line along the bottom of the large film shows how far it has played;
+  // when it reaches the end the next demo takes its place.
+  let frame = 0;
+  function paintProgress() {
+    frame = 0;
+    cards.forEach((card, i) => {
+      const { duration, currentTime } = card.video;
+      const share = i === active && duration > 0 ? Math.min(1, currentTime / duration) : 0;
+      card.progress.style.transform = `scaleX(${share})`;
+    });
+    const video = cards[active].video;
+    if (!video.paused && !video.ended) frame = requestAnimationFrame(paintProgress);
+  }
+  const scheduleProgress = () => { if (!frame) frame = requestAnimationFrame(paintProgress); };
+  cards.forEach(card => {
+    const track = page.createElement('span');
+    track.className = 'film-progress';
+    track.setAttribute('aria-hidden', 'true');
+    card.progress = page.createElement('span');
+    track.append(card.progress);
+    card.button.append(track);
+    ['play', 'seeked', 'loadedmetadata', 'emptied', 'ended'].forEach(type => card.video.addEventListener(type, scheduleProgress));
   });
   const observer = new IntersectionObserver(entries => {
     for (const entry of entries) {

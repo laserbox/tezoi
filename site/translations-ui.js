@@ -449,6 +449,10 @@ export default {
     "zh": "刚体、柔性物体、液体、触觉与切割，都算到接触和受力这一层。",
     "en": "Rigid bodies, soft materials, liquids, touch and cutting, simulated down to contact and force."
   },
+  "机器人在工厂和实验室里完成的整段仿真任务。": {
+    "zh": "机器人在工厂和实验室里完成的整段仿真任务。",
+    "en": "Complete robot tasks, simulated end to end in factories and labs."
+  },
   "从人的第一视角示范出发，在仿真里学成机器人轨迹，再回到真机上验证。": {
     "zh": "从人的第一视角示范出发，在仿真里学成机器人轨迹，再回到真机上验证。",
     "en": "From a person's first-person demonstration to robot trajectories learned in simulation, then checked on a real robot."
