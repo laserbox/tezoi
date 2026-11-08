@@ -16,7 +16,7 @@
   <script type="module" src="school-splat.js?v=no-3d-20261108"></script>
 
 <link rel="stylesheet" href="./i18n.css?v=bilingual-20261101" data-tezoi-i18n>
-<script src="./i18n-bootstrap.js?v=float-player-20261108" data-tezoi-i18n></script>
+<script src="./i18n-bootstrap.js?v=stage-names-v2-20261108" data-tezoi-i18n></script>
 <link rel="stylesheet" href="./showcase-ui.css?v=pipeline-on-page-20261108" data-tezoi-ui>
 <link rel="stylesheet" href="page-atmosphere.css?v=cloth-20261108">
 <script src="page-atmosphere.js?v=cloth-motion-20261108" type="module"></script>
@@ -56,14 +56,14 @@
           <aside class="workflow-rail">
             <div class="workflow-steps" data-workflow-tabs role="tablist" aria-label="从 Ego 到真实验证" aria-orientation="vertical">
               <button class="workflow-step" type="button" role="tab" id="workflow-tab-source" aria-controls="workflow-panel-source" aria-selected="false" tabindex="-1" data-workflow-stage="source"><span class="workflow-number" aria-hidden="true">01</span><span><strong>Ego</strong><small>真实示范</small></span></button>
-              <button class="workflow-step" type="button" role="tab" id="workflow-tab-agent" aria-controls="workflow-panel-agent" aria-selected="false" tabindex="-1" data-workflow-stage="agent"><span class="workflow-number" aria-hidden="true">02</span><span><strong>Agent</strong><small>场景与动作</small></span></button>
-              <button class="workflow-step" type="button" role="tab" id="workflow-tab-simulation" aria-controls="workflow-panel-simulation" aria-selected="true" data-workflow-stage="simulation"><span class="workflow-number" aria-hidden="true">03</span><span><strong>Simulation</strong><small>仿真运行</small></span></button>
-              <button class="workflow-step" type="button" role="tab" id="workflow-tab-validation" aria-controls="workflow-panel-validation" aria-selected="false" tabindex="-1" data-workflow-stage="validation"><span class="workflow-number" aria-hidden="true">04</span><span><strong>Robotics</strong><small>实机记录</small></span></button>
+              <button class="workflow-step" type="button" role="tab" id="workflow-tab-agent" aria-controls="workflow-panel-agent" aria-selected="false" tabindex="-1" data-workflow-stage="agent"><span class="workflow-number" aria-hidden="true">02</span><span><strong>Agent</strong><small>Real2Sim</small></span></button>
+              <button class="workflow-step" type="button" role="tab" id="workflow-tab-simulation" aria-controls="workflow-panel-simulation" aria-selected="true" data-workflow-stage="simulation"><span class="workflow-number" aria-hidden="true">03</span><span><strong>仿真探索</strong><small>轨迹学习</small></span></button>
+              <button class="workflow-step" type="button" role="tab" id="workflow-tab-validation" aria-controls="workflow-panel-validation" aria-selected="false" tabindex="-1" data-workflow-stage="validation"><span class="workflow-number" aria-hidden="true">04</span><span><strong>真机验证</strong><small>Sim2Real</small></span></button>
             </div>
           </aside>
           <div class="workflow-main">
             <section class="workflow-panel" id="workflow-panel-source" data-workflow-panel="source" role="tabpanel" aria-labelledby="workflow-tab-source" hidden>
-              <div class="workflow-pane-heading"><h4>Ego · 真实第一视角示范</h4></div>
+              <div class="workflow-pane-heading"><h4>Ego · 真实示范</h4></div>
               <figure class="workflow-ego-media">
                 <video data-ego-video data-source-revision="current-r13" controls muted playsinline preload="metadata" poster="pipeline/media/r13/human-ego.jpg" width="1920" height="1080" aria-label="第一视角真实示范，与当前手部重建片段对应">
                   <source src="pipeline/media/r13/human-ego.mp4" type="video/mp4">
@@ -132,7 +132,7 @@
               </div>
             </section>
             <section class="workflow-panel" id="workflow-panel-validation" data-workflow-panel="validation" role="tabpanel" aria-labelledby="workflow-tab-validation" hidden>
-              <div class="workflow-pane-heading"><h4>Robotics · 真机验证</h4></div>
+              <div class="workflow-pane-heading"><h4>真机验证 · Sim2Real</h4></div>
               <figure class="workflow-ego-media">
                 <video data-validation-video data-source-revision="current-r13" controls muted playsinline preload="metadata" poster="pipeline/media/r13/real-validation.jpg" width="1920" height="1080" aria-label="机器人真机验证：捏取、移动与滴放">
                   <source src="pipeline/media/r13/real-validation.mp4" type="video/mp4">
