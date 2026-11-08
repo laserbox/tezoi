@@ -1,0 +1,86 @@
+{
+  "source": "IMG_6263",
+  "method": "VLM keyframe visual review in Codex, preserving previous task intent; no external VLM API invoked",
+  "scope": "Visible objects and action phases; liquid delivery and force are not established by these frames",
+  "keyframes": [
+    {
+      "time_s": 2,
+      "frame_index": 12,
+      "image": "task-00013.jpg",
+      "label": {
+        "zh": "观察",
+        "en": "Observe"
+      },
+      "source_sha256": "e8f763308768144ca9b694449a58fb6320d7e79eec0e65dabfc1a30f4069086f"
+    },
+    {
+      "time_s": 6,
+      "frame_index": 36,
+      "image": "task-00037.jpg",
+      "label": {
+        "zh": "捏取",
+        "en": "Pinch"
+      },
+      "source_sha256": "57a4418ddb416bb4fc195ffdf2e105107a64f7c61a431a0d332f9ff0cf461882"
+    },
+    {
+      "time_s": 15,
+      "frame_index": 90,
+      "image": "task-00091.jpg",
+      "label": {
+        "zh": "对准烧杯",
+        "en": "Align"
+      },
+      "source_sha256": "5e22e9ed2128d3c43adca252e0f625dd4ce4ae8b75391ae880cc25dc92832388"
+    },
+    {
+      "time_s": 26,
+      "frame_index": 156,
+      "image": "task-00157.jpg",
+      "label": {
+        "zh": "放回滴管",
+        "en": "Return"
+      },
+      "source_sha256": "d8c7afb602ade950958f752f66db903b100b6af7e64f3151d2771a6144f07192"
+    },
+    {
+      "time_s": 34,
+      "frame_index": 204,
+      "image": "task-00205.jpg",
+      "label": {
+        "zh": "移动烧杯",
+        "en": "Move"
+      },
+      "source_sha256": "a835cf9b73a5e09da448cc088fd3ed648531146694ff09757e41ad81d59c58bb"
+    },
+    {
+      "time_s": 43.5,
+      "frame_index": 261,
+      "image": "task-00262.jpg",
+      "label": {
+        "zh": "放回",
+        "en": "Release"
+      },
+      "source_sha256": "e9ce9f6950520c5d62cb914114f0c2adc576f2e9379d29eb48a3e463cfe4c280"
+    }
+  ],
+  "objects": [
+    {
+      "zh": "滴管",
+      "en": "Pipette"
+    },
+    {
+      "zh": "烧杯",
+      "en": "Beaker"
+    },
+    {
+      "zh": "锥形瓶",
+      "en": "Flask"
+    }
+  ],
+  "goal": {
+    "zh": "捏取滴管，移至烧杯，再放回",
+    "en": "Pinch the pipette, move to the beaker, and return"
+  },
+  "timeline_source": "Existing source action annotations; displayed evidence frames visually checked 2026-11-08"
+}

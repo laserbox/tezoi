@@ -1,0 +1,389 @@
+{
+  "revision": "showcase-r14",
+  "date": "2026-11-08",
+  "scope": "Saved tool output visualization mapped to the read-only audited server pipeline. No new inference, physics or remote VLM API run.",
+  "server_pipeline": {
+    "stages": [
+      "observe",
+      "depth",
+      "masks",
+      "environment",
+      "assets",
+      "estimate_properties",
+      "properties",
+      "author",
+      "motion",
+      "contacts",
+      "scene",
+      "physics",
+      "plates",
+      "render",
+      "verify",
+      "feedback"
+    ],
+    "branches": {
+      "shared_observation": [
+        "observe"
+      ],
+      "scene_assets": [
+        "depth",
+        "masks",
+        "environment",
+        "assets",
+        "estimate_properties",
+        "properties",
+        "author"
+      ],
+      "hands_actions": [
+        "motion"
+      ],
+      "interaction_compile": [
+        "contacts",
+        "scene"
+      ],
+      "execution": [
+        "physics",
+        "plates",
+        "render"
+      ],
+      "verification_feedback": [
+        "verify",
+        "feedback"
+      ]
+    },
+    "source_files": {
+      "README.md": {
+        "sha256": "25aa9aa1f72eb84bd436bc8888d40baa1dde47a79c5183a222a96a1dd2027e08",
+        "bytes": 7486
+      },
+      "docs/VIDEO-TO-SIM.md": {
+        "sha256": "ed88983f9c705d369909c55ca77a149447be983f4d16a030b08dfa892ee8d45e",
+        "bytes": 4948
+      },
+      "ego2sim/unified/core/pipeline.py": {
+        "sha256": "463079a491cdc45d06e000bcf0815a6aa7479af030a2d5fd060ff450b4d36278",
+        "bytes": 8634
+      },
+      "ego2sim/unified/core/toolkit.py": {
+        "sha256": "a09c1003b5354f6f7c92338387d1a0c02ce51bcc52936010703062346dac78d9",
+        "bytes": 9025
+      },
+      "runs/dropper-demo-20261023/IMG_6263/vision.py": {
+        "sha256": "b1b8e9ad26d82a693de2d5e357a146c6bdaa189abe94947a1fa5e4406cea19d4",
+        "bytes": 3954
+      },
+      "runs/dropper-demo-20261023/IMG_6263/sam-results.json": {
+        "sha256": "6ab348be75316a20a48552962bda84d927003c87939dd819cdf36477ade5cb7d",
+        "bytes": 242952
+      },
+      "runs/dropper-demo-20261023/IMG_6263/depth-results.json": {
+        "sha256": "e08f6b7bdab7b0ea1338169add289ae286234479f001be7e1d310221bd6087a9",
+        "bytes": 193
+      }
+    },
+    "checked_utc": "2026-11-08T00:46:09.155308+00:00",
+    "distinction": "Unified pipeline example uses cloth / YAM with ARKit/HDF5 and stiffGIPC. The dropper perception and saved MuJoCo + Newton render are separate saved runs, not evidence that every unified module ran for this dropper."
+  },
+  "displayed_tools": [
+    {
+      "id": "frames",
+      "tool": "FFmpeg / saved frames",
+      "stage": "observe",
+      "input": "IMG_6263",
+      "output": "Original keyframes at 2, 6, 15, 26, 34, 43.5 s",
+      "artifact": "task-r14.json",
+      "status": "existing_frames"
+    },
+    {
+      "id": "vlm",
+      "tool": "VLM",
+      "stage": "task_understanding",
+      "input": "IMG_6263 original keyframes",
+      "output": "objects, task intent and visible action phases",
+      "artifact": "task-r14.json",
+      "status": "Codex multimodal review of existing annotations; no external VLM API invoked",
+      "no_claims": [
+        "measured liquid transfer",
+        "force",
+        "remote VLM model run receipt"
+      ]
+    },
+    {
+      "id": "sam",
+      "tool": "SAM3",
+      "stage": "masks",
+      "input": "IMG_6263 frame 102 at 17 s",
+      "output": "hand / beaker / flask / pipette masks",
+      "status": "existing_inference_output",
+      "sample_hz": 2
+    },
+    {
+      "id": "depth",
+      "tool": "Depth Anything 3 Small",
+      "stage": "depth",
+      "input": "IMG_6263 frame 102 at 17 s",
+      "output": "relative depth, confidence and estimated intrinsics",
+      "status": "existing_inference_output",
+      "metric_calibrated": false
+    },
+    {
+      "id": "cloud",
+      "tool": "Ego2Sim depth backprojection",
+      "stage": "environment",
+      "input": "same frame RGB, SAM3 mask, DA3 depth and K",
+      "output": "16210 colored points, original hand excluded",
+      "status": "derived_saved_output",
+      "artifact": "scene-frame102-r13.json",
+      "not": "Open3D TSDF multi-frame fusion"
+    },
+    {
+      "id": "assets",
+      "tool": "Blender / CAD",
+      "stage": "assets / author",
+      "input": "existing scene 1030",
+      "output": "saved asset and material render",
+      "status": "existing_render",
+      "same_source_as_perception": false
+    },
+    {
+      "id": "joints",
+      "tool": "HaWoR initialized temporal reconstruction",
+      "stage": "motion",
+      "input": "IMG_6263 source time 12 s",
+      "output": "21 projected hand joints on original frame",
+      "status": "existing_estimated_geometry"
+    },
+    {
+      "id": "mesh",
+      "tool": "MANO",
+      "stage": "motion",
+      "input": "same time, refined temporal MANO vertices and estimated K",
+      "output": "magenta hand mesh on original hand",
+      "status": "existing_estimated_geometry"
+    },
+    {
+      "id": "prior",
+      "tool": "HACO",
+      "stage": "contacts / prior",
+      "input": "nearest saved raw probability sample",
+      "output": "vertex contact probability, 0 to 1",
+      "status": "existing_model_output",
+      "not": "measured contact force or pressure"
+    },
+    {
+      "id": "distance",
+      "tool": "Ego2Sim surface diagnostic",
+      "stage": "contacts / inspect",
+      "input": "same temporal mesh and saved object surface",
+      "output": "nearest-surface distance and local signed normal offset",
+      "display_threshold_mm": 2,
+      "purple_local_inward_threshold_mm": -0.2,
+      "status": "existing_geometry_diagnostic",
+      "not": "strict penetration depth, force, or dynamic stability"
+    },
+    {
+      "id": "pose",
+      "tool": "HaWoR / MANO temporal geometry",
+      "stage": "motion",
+      "input": "IMG_6263 8–17 s",
+      "output": "continuous overlay over original hand",
+      "status": "existing_render"
+    },
+    {
+      "id": "robot",
+      "tool": "MuJoCo + Newton saved state / Blender rendering",
+      "stage": "physics / render",
+      "input": "IMG_0756 based saved scene 1030 run",
+      "output": "robot ego and continuous third-person / contact white-model views",
+      "status": "existing_render",
+      "new_physics": false
+    }
+  ],
+  "hand": {
+    "original_hand_preserved": true,
+    "source": "IMG_6263",
+    "static_frame_time_s": 12,
+    "geometry_fps": 30,
+    "probability_sample_hz": 6,
+    "estimated_camera": true,
+    "fixed_crop_xywh": [
+      550,
+      270,
+      1200,
+      675
+    ],
+    "input_hashes": {
+      "input": {
+        "path": "inputs.json",
+        "sha256": "eafec1ac82c00cada1e1b50974608f64f951aa7f330de12f73d68a7b81fa321f"
+      },
+      "hand": {
+        "path": "hand.npz",
+        "sha256": "e37d5dda7027b6a0bfb18c0808c238343901eb170e262ae8a1fe2de01737af53"
+      },
+      "object": {
+        "path": "objects.npz",
+        "sha256": "5d740bbea8e4cfaa1f6a1fe6fe16b256c609ee3fc758ed50243c9076e155aa46"
+      },
+      "models": {
+        "path": "model-provenance.json",
+        "sha256": "fb3895d08826a5b333b1433fb688977dd4014a06dc0109a5f793f816fa76b903"
+      },
+      "refinement": {
+        "path": "report.json",
+        "sha256": "3a50a36f3868e3fca544547dde5f71015acf8f851d4e46d1ed9faba259aaf1f4"
+      },
+      "haco_raw": {
+        "path": "predictions.npz",
+        "sha256": "e53b9f37165d797b53a16dc9d1169748b23d4b411f6ad25e0d24e8e043339bfd"
+      },
+      "haco_receipt": {
+        "path": "report.json",
+        "sha256": "2ee63552508866d8b96ef9755648674d9935b78f85737057e6e9b78f12b4d4f3"
+      }
+    },
+    "render_receipts": {
+      "joints": {
+        "t": 12,
+        "geometry_frame": 240,
+        "probability_source_frame": 72,
+        "probability_source_time": 12,
+        "valid": true,
+        "source_observation": true,
+        "mode": "joints"
+      },
+      "mesh": {
+        "t": 12,
+        "geometry_frame": 240,
+        "probability_source_frame": 72,
+        "probability_source_time": 12,
+        "valid": true,
+        "source_observation": true,
+        "mode": "mesh"
+      },
+      "prior": {
+        "t": 12,
+        "geometry_frame": 240,
+        "probability_source_frame": 72,
+        "probability_source_time": 12,
+        "valid": true,
+        "source_observation": true,
+        "mode": "prior"
+      },
+      "distance": {
+        "t": 12,
+        "geometry_frame": 240,
+        "probability_source_frame": 72,
+        "probability_source_time": 12,
+        "valid": true,
+        "source_observation": true,
+        "mode": "distance"
+      }
+    },
+    "original_pred_valid_flags_available": false,
+    "validity_check": "Finite vertices in front of camera; not a replacement for complete tracking validity."
+  },
+  "reference_mapping": [
+    {
+      "name": "EgoSmith",
+      "url": "https://github.com/egosteer/egosmith/blob/main/docs/dataset_pipeline.md",
+      "applied": "same-frame K projection, time binding, tool-specific outputs",
+      "proposed": "DPVO + Any4D camera tracking and scale alignment; tracking-validity gates before interpolation",
+      "not_run": [
+        "DPVO",
+        "Any4D",
+        "EgoSmith inference"
+      ]
+    },
+    {
+      "name": "EgoMatrix",
+      "url": "https://spikew726.github.io/EgoMatrix/",
+      "applied": "separate hand initialization, contact prior and local surface inspection",
+      "proposed": "multi-start hand/object pose refinement tied to source reprojection",
+      "not_claimed": "a new EgoMatrix solve"
+    },
+    {
+      "name": "DexAgent",
+      "url": "https://dexagent1.github.io/",
+      "applied": "tool → artifact → stage-specific inspection, grouped by actual pipeline branches",
+      "proposed": "physical property verifier and actionable error feedback",
+      "not_claimed": "an executed autonomous agent trace"
+    },
+    {
+      "name": "EgoCPT",
+      "url": "https://ego-cpt.github.io/",
+      "applied": "separate object/hand trajectories, geometry contact, and dynamics/force allocation",
+      "not_claimed": "implemented or executed EgoCPT code"
+    }
+  ],
+  "unchanged": [
+    "original CAD/materials",
+    "physics acceptance",
+    "saved trajectories",
+    "outer ego video",
+    "hardware validation from raw 9 s"
+  ],
+  "inference_rerun": false,
+  "physics_advanced": false,
+  "images": [
+    {
+      "path": "media/r14/hand-distance.jpg",
+      "bytes": 203158,
+      "sha256": "ad1c215ece0b1c816187e8533344f6abb6297f26a8706457423fe40c0da8e42c"
+    },
+    {
+      "path": "media/r14/hand-joints.jpg",
+      "bytes": 213961,
+      "sha256": "5878f3f8a1d5e52bf4dc39a5140a5aa9f03919faf9ee79a8f138b2c5041324c2"
+    },
+    {
+      "path": "media/r14/hand-mesh.jpg",
+      "bytes": 203071,
+      "sha256": "3643e7a5db6c1b3e70c7d5d4d81165766c00ed7bd5a30a582b9d880d27219b3f"
+    },
+    {
+      "path": "media/r14/hand-prior.jpg",
+      "bytes": 203504,
+      "sha256": "b7020332b60603346dc3defc819f3384479ef2a9bba280909b2f4db8a93aee51"
+    },
+    {
+      "path": "media/r14/scene-cloud.jpg",
+      "bytes": 227823,
+      "sha256": "83fa69c2f988ecaa95e15a7d7ecf2335eda971391acc27864a836e371d74491d"
+    },
+    {
+      "path": "media/r14/task-00013.jpg",
+      "bytes": 51956,
+      "sha256": "e8f763308768144ca9b694449a58fb6320d7e79eec0e65dabfc1a30f4069086f"
+    },
+    {
+      "path": "media/r14/task-00037.jpg",
+      "bytes": 49947,
+      "sha256": "57a4418ddb416bb4fc195ffdf2e105107a64f7c61a431a0d332f9ff0cf461882"
+    },
+    {
+      "path": "media/r14/task-00091.jpg",
+      "bytes": 55837,
+      "sha256": "5e22e9ed2128d3c43adca252e0f625dd4ce4ae8b75391ae880cc25dc92832388"
+    },
+    {
+      "path": "media/r14/task-00157.jpg",
+      "bytes": 50165,
+      "sha256": "d8c7afb602ade950958f752f66db903b100b6af7e64f3151d2771a6144f07192"
+    },
+    {
+      "path": "media/r14/task-00205.jpg",
+      "bytes": 52751,
+      "sha256": "a835cf9b73a5e09da448cc088fd3ed648531146694ff09757e41ad81d59c58bb"
+    },
+    {
+      "path": "media/r14/task-00262.jpg",
+      "bytes": 43595,
+      "sha256": "e9ce9f6950520c5d62cb914114f0c2adc576f2e9379d29eb48a3e463cfe4c280"
+    }
+  ],
+  "display_implementation": {
+    "showcase-r14.js": "8085a9ec9da092cd20d5e930ffc5c6794150c3dbdfe0685932c60e96090f1547",
+    "showcase-r14.css": "2d85cedddb0bf60f8636ef0693933c69d0c8eedd85512a74020467e6a5cc5eff"
+  }
+}
