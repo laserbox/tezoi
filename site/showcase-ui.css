@@ -804,3 +804,12 @@ body[data-page='home'] :is(#showcase > .chapter-marker, #playground > .section-w
   :is([data-physics-carousel], #ts#ts) .embodied-card:not(:first-child) .material-inline-toggle { width: 22px; height: 22px; bottom: 6px; right: 6px; }
   :is([data-physics-carousel], #ts#ts) .embodied-card:not(:first-child) .material-inline-toggle .ui-icon { width: 11px; height: 11px; }
 }
+
+/* ---- Corners ------------------------------------------------------------------
+   Square corners everywhere outside the Playground, as in the header, the hero
+   and the physics captions: frames, films and images, tabs, labels, buttons and
+   the video dialog. Only the round drag handles on the comparison sliders stay
+   round. The Playground keeps its own corners while collaborators edit it. */
+:is(#embodied-contact, #scene-reconstruction, #gallery, #video-dialog, #physical-contact, #benchmark, #ts#ts) :not(.school-image-divider > span, .scene-comparison-handle),
+:is(#video-dialog, #benchmark, .skip-link, .page-figure, #ts#ts),
+:is(.page-figure, #ts#ts) img { border-radius: 0; }
