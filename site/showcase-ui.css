@@ -742,15 +742,10 @@ body.interior-page > .site-footer { width: 100%; }
 /* ---- Section titles collapse into the header (page-sections.js) ------------
    "Features" was only an umbrella over three sections, and the Playground
    follows the hero directly: its numbered steps already say what it is. Both
-   titles stay for screen readers. As a section title scrolls under the
-   header, its name appears beside the logo instead of a separate tier of
+   titles stay for screen readers only. As a later section title scrolls under
+   the header, its name appears beside the logo instead of a separate tier of
    oversized chapter words. */
-body[data-page='home'] #showcase > .chapter-marker { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
-/* Kept at the top of the section in flow (zero height) so the header picks up its name
-   as soon as the Playground starts; the wrap aligns items to the end, which would
-   otherwise park an absolutely positioned title at the bottom. */
-body[data-page='home'] #playground > .section-wrap.section-wrap { row-gap: 0; } /* doubled class: page-atmosphere.css loads later with a gap */
-body[data-page='home'] #playground > .section-wrap > .chapter-marker { height: 1px; margin: 0 0 -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+body[data-page='home'] :is(#showcase > .chapter-marker, #playground > .section-wrap > .chapter-marker) { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 .section-indicator { position: absolute; top: 50%; left: var(--indicator-left, 210px); display: flex; align-items: center; gap: 14px; max-width: var(--indicator-room, 40vw); color: inherit; font-size: var(--t-body); font-weight: 500; line-height: 1; white-space: nowrap; opacity: 0; pointer-events: none; translate: 0 calc(-50% + 1px); transition: opacity 180ms ease; }
 .section-indicator::before { content: ''; flex: 0 0 1px; height: 18px; background: currentColor; opacity: .28; }
 .section-indicator-label { overflow: hidden; text-overflow: ellipsis; }
