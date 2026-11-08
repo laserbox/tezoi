@@ -1,4 +1,4 @@
-import { mountVideoDialog } from './video-dialog.js?v=enlarge-20261108';
+import { mountVideoDialog } from './video-dialog.js?v=float-player-20261108';
 import { importViewerModule } from './viewer-module.js?v=website-audit-20261101';
 import { icon } from './icons.js?v=mobile-polish-20261023';
 import { mountPhysicsCarousel } from './physics-carousel.js?v=centre-play-20261108';

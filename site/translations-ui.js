@@ -489,6 +489,14 @@ export default {
     "zh": "放大播放",
     "en": "Enlarge"
   },
+  "静音": {
+    "zh": "静音",
+    "en": "Mute"
+  },
+  "取消静音": {
+    "zh": "取消静音",
+    "en": "Unmute"
+  },
   "视频播放控制": {
     "zh": "视频播放控制",
     "en": "Video playback controls"
