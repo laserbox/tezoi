@@ -708,6 +708,9 @@ body.interior-page > .site-footer { width: 100%; }
 :root {
   --t-display: clamp(48px, calc(39.09px + 2.286vw), 72px);
   --t-section: clamp(36px, calc(31.54px + 1.143vw), 48px);
+  /* Homepage section names are labels, one step below a statement: 28px on a
+     390px phone to 36px at 1440px. */
+  --t-section-name: clamp(28px, calc(25.03px + 0.762vw), 36px);
   --t-title: 24px;
   --t-card: 18px;
   --t-body: 16px;
@@ -721,6 +724,7 @@ body.interior-page > .site-footer { width: 100%; }
 :is(.chapter-heading, #ts#ts) h2,
 :is(.subchapter-heading, #ts#ts) h3,
 :is(.page-copy, #ts#ts) h2 { font-size: var(--t-section); font-weight: 500; line-height: 1.1; letter-spacing: -0.025em; }
+body[data-page='home'] :is(.chapter-heading, .subchapter-heading, #ts#ts) :is(h2, h3) { font-size: var(--t-section-name); }
 :is(.page-topics, #ts#ts) h2 { font-size: var(--t-title); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
 :is([data-physics-carousel], #ts#ts) .embodied-card:first-child h4 { font-size: var(--t-title); font-weight: 500; line-height: 1.25; }
 :is(.gallery-card, #ts#ts) h4 { font-size: var(--t-card); line-height: 1.35; }
