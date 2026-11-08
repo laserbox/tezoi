@@ -958,3 +958,8 @@ body[data-page='home'] #playground :is(.workflow-pane-heading, .compare-heading)
 :is(#playground, #ts#ts) .workflow-panel:not(#workflow-panel-agent) .playback-bar input[type='range']::-webkit-slider-thumb { border-color: var(--paper); }
 :is(#playground, #ts#ts) .workflow-panel:not(#workflow-panel-agent) .playback-bar input[type='range']::-moz-range-thumb { border-color: var(--paper); }
 :is(#playground, #ts#ts) .workflow-panel:not(#workflow-panel-agent) .playback-bar input[type='range']:disabled { --player-fill: #a3aaa8; --player-track: #d5d9d7; }
+
+/* ---- Company page: text only for now ---------------------------------------------
+   The demo figure is gone, so the story is one column instead of text beside an
+   empty half. */
+.company-story { grid-template-columns: minmax(0, 1fr); }
