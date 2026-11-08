@@ -527,7 +527,7 @@ export default {
   },
   "真实示范": {
     "zh": "真实示范",
-    "en": "Real demo"
+    "en": "Demo"
   },
   "Agent": {
     "zh": "智能体",
