@@ -1,7 +1,7 @@
 import { mountVideoDialog } from './video-dialog.js?v=float-player-20261108';
 import { importViewerModule } from './viewer-module.js?v=website-audit-20261101';
 import { icon } from './icons.js?v=mobile-polish-20261023';
-import { mountPhysicsCarousel } from './physics-carousel.js?v=progress-20261109';
+import { mountPhysicsCarousel } from './physics-carousel.js?v=progress-below-20261109';
 import { mountHeroVideo } from './hero-video.js?v=watch-full-20261029';
 import { mountAgentConversion } from './agent-rokae-conversion.js?v=showcase-r16';
 import { mountRealSimWorkflow } from './real-sim-workflow.js?v=robot-real-r11';

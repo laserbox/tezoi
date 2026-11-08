@@ -1014,7 +1014,7 @@ body[data-page='company'] .page-link:hover { text-decoration-color: currentColor
 
 /* ---- Section descriptions ------------------------------------------------------
    One muted line under a section name says what the section shows. */
-.section-lede { max-width: 36em; margin: 10px 0 0; color: var(--muted); font-size: var(--t-body); font-weight: 400; line-height: 1.6; letter-spacing: 0; }
+.section-lede { max-width: 36em; margin: 10px 0 0; color: var(--muted); font-size: var(--t-body); font-weight: 400; line-height: 1.6; letter-spacing: 0; text-wrap: pretty; }
 .section-lead > .section-lede { max-width: min(100%, 40em); margin: -6px 0 0; }
 
 /* ---- Gallery hover preview (gallery-preview.js) ---------------------------------- */
@@ -1023,11 +1023,13 @@ body[data-page='company'] .page-link:hover { text-decoration-color: currentColor
 @media (prefers-reduced-motion: reduce) { .gallery-image .gallery-preview { display: none; } }
 
 /* ---- Physics film progress (physics-carousel.js) --------------------------------
-   Only the large film shows it: a light track along its bottom edge, filled in ink
-   as the film plays. The paper caption sits over its left end. */
-.embodied-film .film-progress { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; display: none; height: 3px; background: rgb(241 242 241 / .5); pointer-events: none; }
-.embodied-film .film-progress > span { display: block; height: 100%; background: var(--ink); transform: scaleX(0); transform-origin: 0 50%; }
+   A thin line under the large film, outside the picture: a light track that fills
+   in ink as the film plays. It hides while the films change places. */
+[data-physics-carousel] .film-progress { position: absolute; left: 0; right: 0; top: calc(100% + 10px); z-index: 1; display: none; height: 2px; background: var(--ui-track, #d0d5d3); pointer-events: none; transition: opacity 200ms ease; }
+[data-physics-carousel] .film-progress > span { display: block; height: 100%; background: var(--ink); transform: scaleX(0); transform-origin: 0 50%; }
 :is([data-physics-carousel], #ts#ts) .embodied-card:first-child .film-progress { display: block; }
+[data-physics-carousel].is-moving .film-progress { opacity: 0; transition: none; }
+@media (max-width: 600px) { [data-physics-carousel] .film-progress { top: calc(100% + 8px); } }
 
 /* ---- Comparison labels match the physics captions --------------------------------
    Square labels set flush into the picture's top corners: the real side in paper
@@ -1064,4 +1066,21 @@ body[data-page='company'] .page-link:hover { text-decoration-color: currentColor
 @media (max-width: 600px) {
   :is(#playground, #ts#ts) .workflow-step:not(:first-child)::before { top: 25px; width: calc(50% - 17px); }
   :is(#playground, #ts#ts) .workflow-step:not(:last-child)::after { top: 25px; left: calc(50% + 21px); }
+}
+
+/* ---- Section headings: name, description, then content ---------------------------
+   The name and its description sit 10px apart; the content starts 32px below the
+   description (24px on narrow screens). Where a section has options beside its
+   name, their bottom edge lines up with the description's. */
+body[data-page='home'] :is(#physical-contact, #scene-reconstruction) > .subchapter-heading.section-lead { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+body[data-page='home'] .section-lead > .section-lede { margin: 0; }
+body[data-page='home'] #gallery .chapter-heading > .section-lede { margin: 10px 0 0; }
+body[data-page='home'] #physical-contact > .subchapter-heading { margin-bottom: 32px; }
+body[data-page='home'] #physical-contact #embodied-contact { margin-top: 0; }
+body[data-page='home'] #scene-reconstruction { row-gap: 32px; }
+body[data-page='home'] :is(#scene-reconstruction, #gallery) > .gallery-tabs { align-self: end; margin: 0; }
+@media (max-width: 850px) {
+  body[data-page='home'] #physical-contact > .subchapter-heading { margin-bottom: 24px; }
+  body[data-page='home'] :is(#scene-reconstruction, #gallery, #ts#ts) { row-gap: 20px; }
+  body[data-page='home'] :is(#scene-reconstruction, #gallery, #ts#ts) > .gallery-tabs { margin-bottom: 4px; }
 }
