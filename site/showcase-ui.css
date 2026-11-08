@@ -813,7 +813,7 @@ body[data-page='home'] #showcase > .chapter-marker { position: absolute; width: 
    workflow's grid row, its top level with the panel, and the steps start below
    it. On narrow screens, where the steps run above the panel, it sits above them. */
 body[data-page='home'] #playground > .section-wrap > .real-sim-workflow { grid-row: 1; }
-body[data-page='home'] #playground > .section-wrap > .chapter-marker { grid-row: 1; grid-column: 1; align-self: start; z-index: 1; }
+body[data-page='home'] #playground > .section-wrap > .chapter-marker { grid-row: 1; grid-column: 1; align-self: start; justify-self: start; width: max-content; z-index: 1; pointer-events: none; }
 body[data-page='home'] #playground .workflow-rail { padding-top: calc(var(--t-section-name) * 1.1 + 24px); }
 /* The rail keeps its full 166px wherever it sits beside the panel, so the
    English title ("Playground") never reaches the panel. */
@@ -933,3 +933,28 @@ body[data-page='home'] #playground :is(.workflow-pane-heading, .compare-heading)
   #video-dialog .dialog-controls, :is(#video-dialog, #ts#ts) .playback-surface .playback-bar { gap: 6px; padding: 32px 8px 8px; }
   #video-dialog .dialog-controls output { font-size: 11px; }
 }
+
+/* ---- Pipeline panes sit on the page ----------------------------------------------
+   No dark board behind the panes: pictures and their bars sit straight on the
+   page beside the step rail. The view tabs take the page's tab style (as in
+   场景重建) and the bars go ink on paper. The Ego2Sim showcase keeps its own
+   board, which is content, and its light text. */
+:is(#playground, #ts#ts) .workflow-main { padding: 0; color: var(--ink); background: transparent; border-radius: 0; box-shadow: none; }
+:is(#playground, #ts#ts) #workflow-panel-agent { color: var(--ui-night-text); }
+:is(#playground, #ts#ts) .workflow-main .simulation-view-tabs { background: var(--ui-soft); }
+:is(#playground, #ts#ts) .workflow-main .simulation-view-tabs button { color: var(--ink); }
+:is(#playground, #ts#ts) .workflow-main .simulation-view-tabs button[aria-selected='true'] { color: var(--paper); background: var(--ink); }
+:is(#playground, #ts#ts) .workflow-main .simulation-view-tabs button:not([aria-selected='true']):hover { color: var(--ink); background: #d6ddda; }
+:is(#playground, #ts#ts) .workflow-main :is(.project-meta, .compare-caption, .compare-note, .scene-help, .scene-note, .workflow-ego-media figcaption) { color: var(--muted); }
+:is(#playground, #ts#ts) .workflow-main .compare-status { color: #9a4f1f; }
+:is(#playground, #ts#ts) .workflow-panel:not(#workflow-panel-agent) .playback-bar { --player-fill: var(--ink); --player-track: #c3c8c6; color: var(--ink); }
+:is(#playground, #ts#ts) .workflow-panel:not(#workflow-panel-agent) .playback-bar .compare-play { color: var(--paper); background: var(--ink); }
+:is(#playground, #ts#ts) .workflow-panel:not(#workflow-panel-agent) .playback-bar .compare-play:hover { color: var(--paper); background: #000; }
+:is(#playground, #ts#ts) .workflow-panel:not(#workflow-panel-agent) .playback-bar .compare-play:disabled { color: #8d9593; background: #dfe3e1; }
+:is(#playground, #ts#ts) .workflow-panel:not(#workflow-panel-agent) .playback-bar button:not(.compare-play) { color: var(--ink); background: transparent; }
+:is(#playground, #ts#ts) .workflow-panel:not(#workflow-panel-agent) .playback-bar button:not(.compare-play):hover { background: var(--ui-soft); }
+:is(#playground, #ts#ts) .workflow-panel:not(#workflow-panel-agent) .playback-bar button:not(.compare-play):disabled { color: #a3aaa8; background: transparent; }
+:is(#playground, #ts#ts) .workflow-panel:not(#workflow-panel-agent) .playback-bar output { color: var(--muted); }
+:is(#playground, #ts#ts) .workflow-panel:not(#workflow-panel-agent) .playback-bar input[type='range']::-webkit-slider-thumb { border-color: var(--paper); }
+:is(#playground, #ts#ts) .workflow-panel:not(#workflow-panel-agent) .playback-bar input[type='range']::-moz-range-thumb { border-color: var(--paper); }
+:is(#playground, #ts#ts) .workflow-panel:not(#workflow-panel-agent) .playback-bar input[type='range']:disabled { --player-fill: #a3aaa8; --player-track: #d5d9d7; }
