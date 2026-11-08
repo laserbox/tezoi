@@ -9,15 +9,16 @@
   <link rel="icon" href="assets/tezoi-favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=gallery-noplay-20261108">
   <script src="site-shell.js?v=impeccable-viewing-20261102" type="module"></script>
-  <script src="app.js?v=site-weight-20261108" type="module"></script>
+  <script src="app.js?v=progress-20261109" type="module"></script>
   <script src="pipeline-player.js?v=enlarge-2-20261108" type="module"></script>
+  <script src="gallery-preview.js?v=hover-20261109" type="module"></script>
   <link rel="stylesheet" href="ego2sim.css?v=rokae6263-v1">
   <link rel="stylesheet" href="school-splat.css?v=no-3d-20261108">
   <script type="module" src="school-splat.js?v=no-3d-20261108"></script>
 
 <link rel="stylesheet" href="./i18n.css?v=bilingual-20261101" data-tezoi-i18n>
-<script src="./i18n-bootstrap.js?v=company-copy-20261109" data-tezoi-i18n></script>
-<link rel="stylesheet" href="./showcase-ui.css?v=track-20261109" data-tezoi-ui>
+<script src="./i18n-bootstrap.js?v=ledes-20261109" data-tezoi-i18n></script>
+<link rel="stylesheet" href="./showcase-ui.css?v=round2-20261109" data-tezoi-ui>
 <link rel="stylesheet" href="page-atmosphere.css?v=cloth-fade-20261109">
 <script src="page-atmosphere.js?v=cloth-motion-20261108" type="module"></script>
 <script src="page-sections.js?v=playground-untitled-20261108" type="module"></script>
@@ -149,7 +150,7 @@
     <section class="showcase section-wrap chapter" id="showcase" aria-labelledby="showcase-title" data-chapter="3">
       <div class="chapter-marker"><div class="chapter-heading"><h2 id="showcase-title">Features</h2></div></div>
       <section class="subchapter physics-subchapter" id="physical-contact" aria-labelledby="physics-title">
-        <div class="subchapter-heading section-lead"><h3 id="physics-title">Physical Interaction</h3></div>
+        <div class="subchapter-heading section-lead"><h3 id="physics-title">Physical Interaction</h3><p class="section-lede">刚体、柔性物体、液体、触觉与切割，都算到接触和受力这一层。</p></div>
         <div id="material-properties" hidden>
         <div class="physics-explorer">
           <div class="material-toolbar">
@@ -242,7 +243,7 @@
         </section>
       </section>
 <section class="subchapter scene-reconstruction" id="scene-reconstruction" aria-labelledby="scene-reconstruction-title" data-reconstruction-methods>
-        <div class="subchapter-heading section-lead"><h3 id="scene-reconstruction-title">Scene Reconstruction</h3></div>
+        <div class="subchapter-heading section-lead"><h3 id="scene-reconstruction-title">Scene Reconstruction</h3><p class="section-lede">用实拍照片重建实验室和工位，变成机器人可以进入、可以操作的仿真场景。</p></div>
         <div class="gallery-tabs" data-ui role="tablist" aria-label="重建方式">
           <button type="button" role="tab" id="reconstruction-tab-gaussian" aria-controls="reconstruction-panel-gaussian" aria-selected="true" data-reconstruction-method="gaussian">场景展示</button>
           <button type="button" role="tab" id="reconstruction-tab-multi" aria-controls="reconstruction-panel-multi" aria-selected="false" tabindex="-1" data-reconstruction-method="multi">多图扫描重建</button>
@@ -315,7 +316,7 @@
     </section>
 
     <section class="gallery chapter section-wrap" id="gallery" aria-labelledby="gallery-title" data-chapter="4">
-      <div class="chapter-marker"><div class="chapter-heading"><h2 id="gallery-title">Gallery</h2></div></div>
+      <div class="chapter-marker"><div class="chapter-heading"><h2 id="gallery-title">Gallery</h2><p class="section-lede">机器人在工厂和实验室里完成的整段仿真任务。</p></div></div>
       <div class="gallery-tabs" data-ui role="tablist" aria-label="任务场景">
         <button type="button" role="tab" id="tab-factory" aria-selected="true" aria-controls="panel-factory" data-scene="factory"><span class="gallery-tab-label">工厂</span> <span class="gallery-tab-count">6</span></button>
         <button type="button" role="tab" id="tab-lab" aria-selected="false" aria-controls="panel-lab" tabindex="-1" data-scene="lab"><span class="gallery-tab-label">实验室</span> <span class="gallery-tab-count">5</span></button>
@@ -329,27 +330,27 @@
       <div id="panel-factory" role="tabpanel" aria-labelledby="tab-factory" data-scene-panel="factory">
         <div class="gallery-grid">
           <article class="gallery-card">
-            <button type="button" class="gallery-image" data-video="gallery-flexible-rj45" aria-label="播放柔性网线插入、解锁与拔出"><img src="assets/gallery-flexible-rj45.jpg?v=rj45-c32bcdf1fb34" alt="Franka 机械臂操作柔性网线与连接器" loading="lazy" width="1280" height="720"></button>
+            <button type="button" class="gallery-image" data-video="gallery-flexible-rj45" data-preview="assets/previews/gallery-flexible-rj45.mp4" aria-label="播放柔性网线插入、解锁与拔出"><img src="assets/gallery-flexible-rj45.jpg?v=rj45-c32bcdf1fb34" alt="Franka 机械臂操作柔性网线与连接器" loading="lazy" width="1280" height="720"></button>
             <div class="gallery-card-copy"><h4>柔性网线插拔</h4></div>
           </article>
           <article class="gallery-card">
-            <button type="button" class="gallery-image" data-video="gallery-ram-insertion" aria-label="播放双臂内存条插装"><img src="assets/gallery-ram-insertion-hd.jpg" alt="双 UR5e 将内存条对准主板插槽并协同按压" loading="lazy" width="2560" height="1440"></button>
+            <button type="button" class="gallery-image" data-video="gallery-ram-insertion" data-preview="assets/previews/gallery-ram-insertion.mp4" aria-label="播放双臂内存条插装"><img src="assets/gallery-ram-insertion-hd.jpg" alt="双 UR5e 将内存条对准主板插槽并协同按压" loading="lazy" width="2560" height="1440"></button>
             <div class="gallery-card-copy"><h4>双臂内存条插装</h4></div>
           </article>
           <article class="gallery-card">
-            <button type="button" class="gallery-image" data-video="gallery-bottle-packing" aria-label="播放水瓶装盒与托盘放置"><img src="assets/gallery-bottle-packing.jpg?v=ed7f62d23c33" alt="双 UR5e 在包装工位将水瓶装盒并折叠纸盒上盖" loading="lazy" width="2560" height="1440"></button>
+            <button type="button" class="gallery-image" data-video="gallery-bottle-packing" data-preview="assets/previews/gallery-bottle-packing.mp4" aria-label="播放水瓶装盒与托盘放置"><img src="assets/gallery-bottle-packing.jpg?v=ed7f62d23c33" alt="双 UR5e 在包装工位将水瓶装盒并折叠纸盒上盖" loading="lazy" width="2560" height="1440"></button>
             <div class="gallery-card-copy"><h4>水瓶装盒与托盘放置</h4></div>
           </article>
           <article class="gallery-card">
-            <button type="button" class="gallery-image" data-video="gallery-rubber-ring" aria-label="播放双臂橡胶圈装配研究演示"><img src="assets/gallery-rubber-ring.jpg?v=no-ui-473bf017" alt="两只 UR5e 夹爪拉伸橡胶圈，呈现拉伸与入槽过程" loading="lazy" width="1280" height="720"></button>
+            <button type="button" class="gallery-image" data-video="gallery-rubber-ring" data-preview="assets/previews/gallery-rubber-ring.mp4" aria-label="播放双臂橡胶圈装配研究演示"><img src="assets/gallery-rubber-ring.jpg?v=no-ui-473bf017" alt="两只 UR5e 夹爪拉伸橡胶圈，呈现拉伸与入槽过程" loading="lazy" width="1280" height="720"></button>
             <div class="gallery-card-copy"><h4>双臂橡胶圈装配</h4></div>
           </article>
           <article class="gallery-card">
-            <button type="button" class="gallery-image" data-video="gallery-g1-box" aria-label="播放 G1 人形机器人搬箱与触觉接触可视化"><img src="assets/gallery-g1-box.jpg" alt="G1 与 Revo 灵巧手在工厂货架前持箱，右侧展示仿真触觉接触" loading="lazy" width="1920" height="1080"></button>
+            <button type="button" class="gallery-image" data-video="gallery-g1-box" data-preview="assets/previews/gallery-g1-box.mp4" aria-label="播放 G1 人形机器人搬箱与触觉接触可视化"><img src="assets/gallery-g1-box.jpg" alt="G1 与 Revo 灵巧手在工厂货架前持箱，右侧展示仿真触觉接触" loading="lazy" width="1920" height="1080"></button>
             <div class="gallery-card-copy"><h4>G1 人形机器人搬箱</h4></div>
           </article>
           <article class="gallery-card">
-            <button type="button" class="gallery-image" data-video="gallery-plush-packing" aria-label="播放双臂毛绒玩具装箱与封胶"><img src="assets/gallery-plush-packing.jpg?v=3c39c5e0777c" alt="双UR机械臂将毛绒玩具装入纸箱并沿箱顶接缝贴胶封装" loading="lazy" width="1920" height="1080"></button>
+            <button type="button" class="gallery-image" data-video="gallery-plush-packing" data-preview="assets/previews/gallery-plush-packing.mp4" aria-label="播放双臂毛绒玩具装箱与封胶"><img src="assets/gallery-plush-packing.jpg?v=3c39c5e0777c" alt="双UR机械臂将毛绒玩具装入纸箱并沿箱顶接缝贴胶封装" loading="lazy" width="1920" height="1080"></button>
             <div class="gallery-card-copy"><h4>双臂毛绒玩具装箱与封胶</h4></div>
           </article>
         </div>
@@ -357,27 +358,27 @@
       <div id="panel-lab" role="tabpanel" aria-labelledby="tab-lab" data-scene-panel="lab" hidden>
         <div class="gallery-grid">
           <article class="gallery-card">
-            <button type="button" class="gallery-image" data-video="gallery-panda-mixing" aria-label="播放双 Panda 离心管开盖与滴加混匀完整仿真视频"><img src="assets/gallery-panda-mixing.jpg?v=full-task-20261103" alt="两台 Panda 机械臂在实验台上协作操作离心管和胶头滴管" loading="lazy" width="1280" height="720"></button>
+            <button type="button" class="gallery-image" data-video="gallery-panda-mixing" data-preview="assets/previews/gallery-panda-mixing.mp4" aria-label="播放双 Panda 离心管开盖与滴加混匀完整仿真视频"><img src="assets/gallery-panda-mixing.jpg?v=full-task-20261103" alt="两台 Panda 机械臂在实验台上协作操作离心管和胶头滴管" loading="lazy" width="1280" height="720"></button>
             <div class="gallery-card-copy"><h4>离心管开盖与滴加混匀</h4></div>
 
           </article>
           <article class="gallery-card">
-            <button type="button" class="gallery-image" data-video="gallery-soft-bag" aria-label="播放软袋开袋、加液与夹封仿真演示"><img src="assets/gallery-soft-bag.jpg?v=soft-bag-realism-20261102" alt="机器人双臂在实验台上展开透明软袋、持杯加液并夹封" loading="lazy" width="2560" height="1440"></button>
+            <button type="button" class="gallery-image" data-video="gallery-soft-bag" data-preview="assets/previews/gallery-soft-bag.mp4" aria-label="播放软袋开袋、加液与夹封仿真演示"><img src="assets/gallery-soft-bag.jpg?v=soft-bag-realism-20261102" alt="机器人双臂在实验台上展开透明软袋、持杯加液并夹封" loading="lazy" width="2560" height="1440"></button>
             <div class="gallery-card-copy"><h4>软袋开袋、加液与夹封</h4></div>
 
           </article>
           <article class="gallery-card">
-            <button type="button" class="gallery-image" data-video="gallery-pigment-dilution" aria-label="播放色素稀释仿真演示"><img src="assets/gallery-pigment-dilution.jpg?v=20261031" alt="单臂 UR5e 与 Robotiq 夹爪在实验台上操作滴管与不同浓度的色素溶液" loading="lazy" width="1280" height="720"></button>
+            <button type="button" class="gallery-image" data-video="gallery-pigment-dilution" data-preview="assets/previews/gallery-pigment-dilution.mp4" aria-label="播放色素稀释仿真演示"><img src="assets/gallery-pigment-dilution.jpg?v=20261031" alt="单臂 UR5e 与 Robotiq 夹爪在实验台上操作滴管与不同浓度的色素溶液" loading="lazy" width="1280" height="720"></button>
             <div class="gallery-card-copy"><h4>色素稀释</h4></div>
 
           </article>
           <article class="gallery-card">
-            <button type="button" class="gallery-image" data-video="gallery-labimus-medicine-weighing" aria-label="播放双臂取药与称量"><img src="assets/gallery-labimus-medicine-weighing.jpg?v=laboratory-unified-20261101" alt="双臂在实验室取样并送入分析天平称量" loading="lazy" width="2560" height="1440"></button>
+            <button type="button" class="gallery-image" data-video="gallery-labimus-medicine-weighing" data-preview="assets/previews/gallery-labimus-medicine-weighing.mp4" aria-label="播放双臂取药与称量"><img src="assets/gallery-labimus-medicine-weighing.jpg?v=laboratory-unified-20261101" alt="双臂在实验室取样并送入分析天平称量" loading="lazy" width="2560" height="1440"></button>
             <div class="gallery-card-copy"><h4>双臂取药与称量</h4></div>
 
           </article>
           <article class="gallery-card">
-            <button type="button" class="gallery-image" data-video="gallery-matterix-liquid" aria-label="播放两次抓杯倾倒与液体变色演示"><img src="assets/gallery-matterix-liquid.jpg?v=liquid-revised-20261106" alt="机械臂两次侧向抓杯、倾倒与放回，液体随局部混合逐步变色。" loading="lazy" width="1920" height="1080"></button>
+            <button type="button" class="gallery-image" data-video="gallery-matterix-liquid" data-preview="assets/previews/gallery-matterix-liquid.mp4" aria-label="播放两次抓杯倾倒与液体变色演示"><img src="assets/gallery-matterix-liquid.jpg?v=liquid-revised-20261106" alt="机械臂两次侧向抓杯、倾倒与放回，液体随局部混合逐步变色。" loading="lazy" width="1920" height="1080"></button>
             <div class="gallery-card-copy"><h4>实验室液体操作</h4><p style="font-size:12px"><a href="assets/gallery-matterix-liquid-credits.txt">GenieSimAssets · CC BY-NC-SA 4.0</a></p></div>
           </article>
         </div>
