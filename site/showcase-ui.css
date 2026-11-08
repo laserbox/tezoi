@@ -966,23 +966,34 @@ body[data-page='home'] #playground :is(.workflow-pane-heading, .compare-heading)
 
 /* ---- Option controls stand out from the cloth ------------------------------------
    The background cloth shades the page with the same light greys the tab tracks
-   were filled with, so the tracks sank into it. Every option control now shares
-   one look that does not depend on what lies behind it: an opaque paper track
-   drawn by a hairline ink edge, the chosen option filled with ink. The scene and
-   lab view switches drop their dark full-width bar for the same compact control,
-   and the chosen Pipeline step uses the same paper and edge. */
+   were filled with, so the tracks sank into it. Option controls now have no track
+   at all: the options are plain text and the chosen one is an ink block, which
+   reads the same over paper or cloth. On wide screens the row is only as wide as
+   its options; on phones the options share the full width. The scene and lab
+   view switches drop their dark full-width bar for the same row. */
 :root { --control-edge: color-mix(in srgb, var(--ink) 24%, var(--paper)); }
-:is(.gallery-tabs, .simulation-view-tabs, .school-tabs, #ts#ts#ts) { padding: 4px; gap: 4px; border: 0; border-radius: 0; color: var(--ink); background: var(--paper); box-shadow: inset 0 0 0 1px var(--control-edge); }
-:is(.gallery-tabs, .simulation-view-tabs, .school-tabs, #ts#ts#ts) button { color: var(--ink); background: transparent; font-weight: 400; }
+:is(.gallery-tabs, .simulation-view-tabs, .school-tabs, #ts#ts#ts) { padding: 0; gap: 4px; border: 0; border-radius: 0; color: var(--ink); background: transparent; box-shadow: none; }
+:is(.gallery-tabs, .simulation-view-tabs, .school-tabs, #ts#ts#ts) button { color: var(--ui-muted); background: transparent; font-weight: 400; }
 :is(.gallery-tabs, .simulation-view-tabs, .school-tabs, #ts#ts#ts) button[aria-selected='true'] { color: var(--paper); background: var(--ink); font-weight: 600; }
 :is(.gallery-tabs, .simulation-view-tabs, .school-tabs, #ts#ts#ts) button:not([aria-selected='true']):hover { color: var(--ink); background: var(--ui-soft); }
 :is(.gallery-tabs, .simulation-view-tabs, .school-tabs, #ts#ts#ts) button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-:is(.school-tabs, #ts#ts#ts) { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); width: min(100%, 384px); margin: 0 0 20px; overflow: visible; }
+:is(.school-tabs, #ts#ts#ts) { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); margin: 0 0 20px; overflow: visible; }
 :is(.school-tabs, #ts#ts#ts) button { justify-content: center; min-height: 44px; padding: 10px 14px; text-align: center; }
+@media (min-width: 601px) {
+  :is(.gallery-tabs, .simulation-view-tabs, .school-tabs, #ts#ts#ts) { width: max-content; max-width: 100%; }
+  :is(.simulation-view-tabs, .school-tabs, #ts#ts#ts) { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: auto; }
+  :is(.gallery-tabs, .simulation-view-tabs, .school-tabs, #ts#ts#ts) button { flex: 0 0 auto; padding-inline: 22px; }
+  /* Section-level choices stay at the right edge, beside the section name. */
+  :is([data-reconstruction-methods], #ts#ts#ts) > .gallery-tabs { justify-self: end; margin-left: auto; }
+}
+@media (max-width: 600px) {
+  :is(.gallery-tabs, .simulation-view-tabs, .school-tabs, #ts#ts#ts) { width: 100%; }
+}
 /* The scene view's dark frame now holds only the pictures, not the tab row. */
 :is([data-school-showcase], #ts#ts#ts) > .school-stage { overflow: visible; background: transparent; }
 :is([data-school-showcase], #ts#ts#ts) .school-screen { background: var(--ui-night); }
-:is(#playground, #ts#ts#ts) .workflow-step[aria-selected='true'] { background: var(--paper); box-shadow: inset 0 0 0 1px var(--control-edge); }
+/* The chosen Pipeline step is marked by its ink number and title alone. */
+:is(#playground, #ts#ts#ts) .workflow-step[aria-selected='true'] { background: transparent; box-shadow: none; }
 
 /* On phones the film's own caption sits at its lower left; the full-video
    button becomes a square enlarge control beside the pause button instead of
@@ -1022,10 +1033,6 @@ body[data-page='company'] .page-link:hover { text-decoration-color: currentColor
   :is(.hero-watch, #ts#ts) { min-height: 48px; padding: 12px 22px; }
   .hero-toggle { width: 48px; height: 48px; }
 }
-/* Language switch: the same paper-and-edge control as the tabs, so the header's
-   heaviest mark is the logo rather than a solid block. */
-:is(.site-header, #ts#ts) .language-switch { padding: 3px; gap: 2px; background: var(--paper); box-shadow: inset 0 0 0 1px var(--control-edge); }
-:is(.site-header, #ts#ts) .language-switch button { min-width: 38px; min-height: 38px; padding: 4px 8px; }
 /* Phones: with two gallery categories the count fits beside its name. */
 @media (max-width: 600px) {
   #gallery .gallery-tabs:not(:has(button:nth-child(4))) button { flex-direction: row; gap: 8px; min-height: 48px; }
