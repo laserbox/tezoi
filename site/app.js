@@ -67,7 +67,7 @@ const videos = {
   "hero-full": {"poster":"assets/tezoi-showcase-v35.jpg","src":"assets/tezoi-showcase-v35.mp4","title":"TEZOI 仿真演示","muted":false},
   "gallery-panda-mixing": {"src":"assets/gallery-panda-mixing.mp4?v=full-task-20261103","title":"离心管开盖与滴加混匀"},
   "gallery-soft-bag": {"src":"assets/gallery-soft-bag.mp4?v=soft-bag-newton-20261109","title":"软袋开袋、加液与夹封"},
-  "gallery-pigment-dilution": {"src":"assets/gallery-pigment-dilution.mp4?v=20261031","title":"色素稀释"},
+  "gallery-pigment-dilution": {"src":"assets/gallery-pigment-dilution.mp4?v=fixed-beakers-20261109","title":"色素稀释"},
   "gallery-go2-walk": {"src":"assets/gallery-go2-walk.mp4","title":"Go2 行走"},
   "gallery-g1-dance": {"src":"assets/gallery-g1-dance.mp4","title":"G1 舞蹈"},
   "gallery-labimus-medicine-weighing": {"src":"assets/gallery-labimus-medicine-weighing.mp4?v=laboratory-unified-20261101","title":"双臂取药与称量"},
