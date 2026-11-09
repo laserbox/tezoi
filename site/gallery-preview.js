@@ -31,3 +31,27 @@ for (const card of document.querySelectorAll('.gallery-image[data-preview]')) {
   card.addEventListener('pointerleave', stop);
   card.addEventListener('click', stop);
 }
+
+// Asset credits: the asterisk after a card title shows its note on hover or
+// focus (CSS); a tap toggles it, and Escape or a tap elsewhere closes it.
+const credits = [...document.querySelectorAll('[data-credit]')];
+const closeCredit = credit => {
+  credit.classList.remove('is-open');
+  credit.querySelector('.credit-mark').setAttribute('aria-expanded', 'false');
+};
+for (const credit of credits) {
+  const mark = credit.querySelector('.credit-mark');
+  mark.addEventListener('click', event => {
+    event.stopPropagation();
+    const open = !credit.classList.contains('is-open');
+    credits.forEach(closeCredit);
+    credit.classList.toggle('is-open', open);
+    mark.setAttribute('aria-expanded', String(open));
+  });
+}
+document.addEventListener('click', event => {
+  credits.forEach(credit => { if (!credit.contains(event.target)) closeCredit(credit); });
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') credits.forEach(closeCredit);
+});
