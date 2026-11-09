@@ -1086,7 +1086,15 @@ body[data-page='home'] :is(#scene-reconstruction, #gallery) > .gallery-tabs { al
 }
 
 /* ---- Asset credits ---------------------------------------------------------------
-   Licensed scene assets (CC BY-NC-SA) are credited from the footer rather than
-   under a gallery card. */
-.footer-brand .footer-credits { margin-left: 4px; color: var(--muted); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; }
-.footer-brand .footer-credits:hover { color: var(--ink); text-decoration-color: currentColor; }
+   A card built on licensed scene assets marks its title with an asterisk that
+   leads to a footnote under its gallery panel; the footnote names the source and
+   licence and links the full credit. */
+.gallery-card h4 .credit-mark { margin-left: 2px; color: var(--muted); font-size: .8em; text-decoration: none; vertical-align: super; line-height: 0; }
+.gallery-card h4 .credit-mark:hover { color: var(--ink); }
+.gallery-footnote { margin: 28px 0 0; padding: 4px 0; color: var(--muted); font-size: var(--t-small); line-height: 1.6; text-wrap: pretty; scroll-margin-top: 120px; }
+.gallery-footnote a { color: inherit; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+.gallery-footnote a:hover { color: var(--ink); text-decoration-color: currentColor; }
+/* Arriving from the asterisk, the footnote flashes once so the eye finds it. */
+.gallery-footnote:target { animation: footnote-found 1.6s ease-out; }
+@keyframes footnote-found { from { background: var(--ui-track, #d0d5d3); } to { background: transparent; } }
+@media (prefers-reduced-motion: reduce) { .gallery-footnote:target { animation: none; } }

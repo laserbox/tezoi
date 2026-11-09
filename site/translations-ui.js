@@ -461,6 +461,18 @@ export default {
     "zh": "页脚导航",
     "en": "Footer navigation"
   },
+  "素材来源：AGIBOT GenieSimAssets（CC BY-NC-SA 4.0）": {
+    "zh": "素材来源：AGIBOT GenieSimAssets（CC BY-NC-SA 4.0）",
+    "en": "Asset source: AGIBOT GenieSimAssets (CC BY-NC-SA 4.0)"
+  },
+  "* 实验室液体操作：实验室环境素材来自 AGIBOT GenieSimAssets，按 CC BY-NC-SA 4.0 授权使用，已重新布景、打光和渲染。": {
+    "zh": "* 实验室液体操作：实验室环境素材来自 AGIBOT GenieSimAssets，按 CC BY-NC-SA 4.0 授权使用，已重新布景、打光和渲染。",
+    "en": "* Laboratory liquid handling: the lab environment comes from AGIBOT GenieSimAssets, used under CC BY-NC-SA 4.0, and has been re-staged, relit and re-rendered."
+  },
+  "完整署名": {
+    "zh": "完整署名",
+    "en": "Full credit"
+  },
   "素材来源": {
     "zh": "素材来源",
     "en": "Asset credits"
