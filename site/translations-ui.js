@@ -461,6 +461,10 @@ export default {
     "zh": "页脚导航",
     "en": "Footer navigation"
   },
+  "素材来源": {
+    "zh": "素材来源",
+    "en": "Asset credits"
+  },
   "© 2026 TEZOI": {
     "zh": "© 2026 TEZOI",
     "en": "© 2026 TEZOI"

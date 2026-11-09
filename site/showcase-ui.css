@@ -1084,3 +1084,9 @@ body[data-page='home'] :is(#scene-reconstruction, #gallery) > .gallery-tabs { al
   body[data-page='home'] :is(#scene-reconstruction, #gallery, #ts#ts) { row-gap: 20px; }
   body[data-page='home'] :is(#scene-reconstruction, #gallery, #ts#ts) > .gallery-tabs { margin-bottom: 4px; }
 }
+
+/* ---- Asset credits ---------------------------------------------------------------
+   Licensed scene assets (CC BY-NC-SA) are credited from the footer rather than
+   under a gallery card. */
+.footer-brand .footer-credits { margin-left: 4px; color: var(--muted); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; }
+.footer-brand .footer-credits:hover { color: var(--ink); text-decoration-color: currentColor; }
