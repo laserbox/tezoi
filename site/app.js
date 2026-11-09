@@ -70,7 +70,7 @@ const videos = {
   "gallery-pigment-dilution": {"src":"assets/gallery-pigment-dilution.mp4?v=fixed-beakers-20261109","title":"色素稀释"},
   "gallery-go2-walk": {"src":"assets/gallery-go2-walk.mp4","title":"Go2 行走"},
   "gallery-g1-dance": {"src":"assets/gallery-g1-dance.mp4","title":"G1 舞蹈"},
-  "gallery-labimus-medicine-weighing": {"src":"assets/gallery-labimus-medicine-weighing.mp4?v=laboratory-unified-20261101","title":"双臂取药与称量"},
+  "gallery-labimus-medicine-weighing": {"src":"assets/gallery-labimus-medicine-weighing.mp4?v=calm-grains-20261109","title":"双臂取药与称量"},
   "gallery-flexible-rj45": {"src":"assets/gallery-flexible-rj45.mp4?v=rj45-c32bcdf1fb34","title":"柔性网线插拔"},
   "gallery-rubber-ring": {"src":"assets/gallery-rubber-ring.mp4?v=no-ui-792aa48f","title":"双臂橡胶圈装配"},
   "gallery-ram-insertion": {"src":"assets/gallery-ram-insertion-hd.mp4?v=faststart-20261108","title":"双臂内存条插装"},
