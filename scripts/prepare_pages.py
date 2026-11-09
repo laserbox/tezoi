@@ -69,6 +69,9 @@ archived = {
     "assets/school-reconstruction-render.png",
     "assets/visual-usedv6-real.png",
     "assets/visual-usedv6-render.png",
+    # The hero now loops the v35 demo; the earlier hero film and its still.
+    "assets/homepage-hero.mp4",
+    "assets/homepage-hero.jpg",
 }
 
 
