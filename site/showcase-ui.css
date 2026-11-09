@@ -963,3 +963,124 @@ body[data-page='home'] #playground :is(.workflow-pane-heading, .compare-heading)
    The demo figure is gone, so the story is one column instead of text beside an
    empty half. */
 .company-story { grid-template-columns: minmax(0, 1fr); }
+
+/* ---- Option tracks read against the cloth ---------------------------------------
+   The background cloth shades the page with the same light grey the tab tracks
+   used (#e5e8e6), so the tracks sank into it. The track behind the unchosen
+   options is one step darker; layout and the chosen ink option are unchanged. */
+:root { --ui-track: #d0d5d3; --ui-track-hover: #c2c9c6; --control-edge: color-mix(in srgb, var(--ink) 24%, var(--paper)); }
+:is(.gallery-tabs, #ts#ts#ts), :is(#playground, #ts#ts#ts) .workflow-main .simulation-view-tabs { background: var(--ui-track); }
+:is(.gallery-tabs, #ts#ts#ts) button:not([aria-selected='true']):hover,
+:is(#playground, #ts#ts#ts) .workflow-main .simulation-view-tabs button:not([aria-selected='true']):hover { background: var(--ui-track-hover); }
+
+/* On phones the film's own caption sits at its lower left; the full-video
+   button becomes a square enlarge control beside the pause button instead of
+   covering it. */
+.hero-watch-expand { display: none; }
+@media (max-width: 600px) {
+  [data-hero-media] .hero-bottom { grid-template-columns: minmax(0, 1fr) auto auto; }
+  :is(.hero-watch, #ts#ts) { grid-column: 2; width: 44px; min-height: 44px; padding: 0; gap: 0; }
+  .hero-watch > svg:not(.hero-watch-expand) { display: none; }
+  .hero-watch > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .hero-watch > .hero-watch-expand { display: block; }
+}
+
+/* ---- Company page: the statement leads ------------------------------------------
+   The page name is set like the home page's section names, so the statement is the
+   largest line. Each focus area says what it is in one sentence and links to the
+   home page section that shows it. */
+body[data-page='company'] .page-intro { padding-bottom: 0; }
+body[data-page='company'] :is(.page-intro, #ts#ts) h1 { font-size: var(--t-section-name); font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; }
+body[data-page='company'] .company-story { padding-block: 40px 72px; }
+body[data-page='company'] :is(.page-copy, #ts#ts) h2 { font-size: clamp(40px, 5.2vw, 76px); font-weight: 600; line-height: 1.12; letter-spacing: -0.03em; }
+body[data-page='company'] :is(.page-copy, #ts#ts) p { margin-top: 24px; color: var(--muted); font-size: clamp(17px, 1.5vw, 21px); }
+body[data-page='company'] .page-topics { gap: 40px; padding-top: 32px; border-top: 1px solid var(--control-edge); }
+body[data-page='company'] .page-topics p { max-width: 30em; margin-top: 12px; color: var(--muted); font-size: var(--t-body); line-height: 1.65; }
+body[data-page='company'] .page-link { margin-top: 12px; text-decoration: underline; text-decoration-color: var(--control-edge); text-underline-offset: 6px; }
+body[data-page='company'] .page-link:hover { text-decoration-color: currentColor; }
+@media (max-width: 600px) {
+  body[data-page='company'] .company-story { padding-block: 28px 48px; }
+  body[data-page='company'] .page-topics { gap: 32px; }
+}
+
+/* ---- Home page refinements ------------------------------------------------------
+   Hero: the film's own caption owns the lower left; the full-video button and the
+   pause button sit together at the lower right at one height. */
+.hero-bottom, [data-hero-media] .hero-bottom { grid-template-columns: minmax(0, 1fr) auto auto; }
+@media (min-width: 601px) {
+  :is(.hero-watch, #ts#ts) { min-height: 48px; padding: 12px 22px; }
+  .hero-toggle { width: 48px; height: 48px; }
+}
+
+/* ---- Section descriptions ------------------------------------------------------
+   One muted line under a section name says what the section shows. */
+.section-lede { max-width: 36em; margin: 10px 0 0; color: var(--muted); font-size: var(--t-body); font-weight: 400; line-height: 1.6; letter-spacing: 0; text-wrap: pretty; }
+.section-lead > .section-lede { max-width: min(100%, 40em); margin: -6px 0 0; }
+
+/* ---- Gallery hover preview (gallery-preview.js) ---------------------------------- */
+.gallery-image .gallery-preview { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 220ms ease; pointer-events: none; }
+.gallery-image.is-previewing .gallery-preview { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .gallery-image .gallery-preview { display: none; } }
+
+/* ---- Physics film progress (physics-carousel.js) --------------------------------
+   A thin line under the large film, outside the picture: a light track that fills
+   in ink as the film plays. It hides while the films change places. */
+[data-physics-carousel] .film-progress { position: absolute; left: 0; right: 0; top: calc(100% + 10px); z-index: 1; display: none; height: 2px; background: var(--ui-track, #d0d5d3); pointer-events: none; transition: opacity 200ms ease; }
+[data-physics-carousel] .film-progress > span { display: block; height: 100%; background: var(--ink); transform: scaleX(0); transform-origin: 0 50%; }
+:is([data-physics-carousel], #ts#ts) .embodied-card:first-child .film-progress { display: block; }
+[data-physics-carousel].is-moving .film-progress { opacity: 0; transition: none; }
+@media (max-width: 600px) { [data-physics-carousel] .film-progress { top: calc(100% + 8px); } }
+
+/* ---- Comparison labels match the physics captions --------------------------------
+   Square labels set flush into the picture's top corners: the real side in paper
+   and ink, the simulated side in simulation teal. */
+:is(#scene-reconstruction, #ts#ts) :is(.school-image-label, .scene-comparison-label, .school-screen-label) {
+  top: 0; height: 32px; margin: 0; padding: 0 12px; border: 0; border-radius: 0; box-shadow: none;
+  font-size: var(--t-small); font-weight: 500; line-height: 32px; letter-spacing: .01em; white-space: nowrap;
+  backdrop-filter: none;
+}
+:is(#scene-reconstruction, #ts#ts) :is(.school-image-label-left, .scene-comparison-label-real, .school-screen-label) { left: 0; right: auto; color: var(--ink); background: var(--paper); }
+:is(#scene-reconstruction, #ts#ts) :is(.school-image-label-right, .scene-comparison-label-sim) { right: 0; left: auto; color: var(--paper); background: var(--sim); }
+@media (max-width: 600px) {
+  :is(#scene-reconstruction, #ts#ts) :is(.school-image-label, .scene-comparison-label, .school-screen-label) { height: 24px; padding: 0 8px; line-height: 24px; }
+}
+
+/* ---- Pipeline steps read as one sequence ----------------------------------------
+   A hairline joins the step numbers, through the gaps between steps: down the rail
+   on wide screens, across the row on narrow ones. Each step draws the half before
+   and after its own number, so unequal column widths still meet. */
+:is(#playground, #ts#ts) .workflow-step:not(:first-child)::before,
+:is(#playground, #ts#ts) .workflow-step:not(:last-child)::after { content: ""; position: absolute; background: color-mix(in srgb, var(--ink) 24%, var(--paper)); pointer-events: none; }
+@media (min-width: 851px) {
+  :is(#playground, #ts#ts) .workflow-step:not(:first-child)::before { left: 27.5px; top: -6px; width: 1px; height: calc(50% - 16px); }
+  :is(#playground, #ts#ts) .workflow-step:not(:last-child)::after { left: 27.5px; top: calc(50% + 22px); bottom: -6px; width: 1px; }
+}
+@media (min-width: 851px) and (max-width: 1050px) {
+  :is(#playground, #ts#ts) .workflow-step:not(:first-child)::before,
+  :is(#playground, #ts#ts) .workflow-step:not(:last-child)::after { left: 23.5px; }
+}
+@media (max-width: 850px) {
+  :is(#playground, #ts#ts) .workflow-step:not(:first-child)::before { top: 26px; left: -4px; width: calc(50% - 18px); height: 1px; }
+  :is(#playground, #ts#ts) .workflow-step:not(:last-child)::after { top: 26px; left: calc(50% + 22px); right: -4px; height: 1px; }
+}
+@media (max-width: 600px) {
+  :is(#playground, #ts#ts) .workflow-step:not(:first-child)::before { top: 25px; width: calc(50% - 17px); }
+  :is(#playground, #ts#ts) .workflow-step:not(:last-child)::after { top: 25px; left: calc(50% + 21px); }
+}
+
+/* ---- Section headings: name, description, then content ---------------------------
+   The name and its description sit 10px apart; the content starts 32px below the
+   description (24px on narrow screens). Where a section has options beside its
+   name, their bottom edge lines up with the description's. */
+body[data-page='home'] :is(#physical-contact, #scene-reconstruction) > .subchapter-heading.section-lead { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+body[data-page='home'] .section-lead > .section-lede { margin: 0; }
+body[data-page='home'] #gallery .chapter-heading > .section-lede { margin: 10px 0 0; }
+body[data-page='home'] #physical-contact > .subchapter-heading { margin-bottom: 32px; }
+body[data-page='home'] #physical-contact #embodied-contact { margin-top: 0; }
+body[data-page='home'] #scene-reconstruction { row-gap: 32px; }
+body[data-page='home'] :is(#scene-reconstruction, #gallery) > .gallery-tabs { align-self: end; margin: 0; }
+@media (max-width: 850px) {
+  body[data-page='home'] #physical-contact > .subchapter-heading { margin-bottom: 24px; }
+  body[data-page='home'] :is(#scene-reconstruction, #gallery, #ts#ts) { row-gap: 20px; }
+  body[data-page='home'] :is(#scene-reconstruction, #gallery, #ts#ts) > .gallery-tabs { margin-bottom: 4px; }
+}

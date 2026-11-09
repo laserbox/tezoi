@@ -25,6 +25,7 @@ export function mountPhysicsCarousel(root) {
     motions.forEach(animation => animation.cancel());
     motions = [];
     cards.forEach(card => { card.node.style.zIndex = ''; });
+    root.classList.remove('is-moving');
   }
   function positions() {
     if (preference.matches || page.hidden || suspended || !cards[0].button.animate) return null;
@@ -33,6 +34,7 @@ export function mountPhysicsCarousel(root) {
   function moveFrom(before) {
     if (!before) return;
     const token = ++motionRevision;
+    root.classList.add('is-moving');
     const timing = { duration: 520, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'both' };
     cards.forEach((card, i) => {
       const film = card.button.getBoundingClientRect();
@@ -57,6 +59,7 @@ export function mountPhysicsCarousel(root) {
   const eligible = () => wanted && !suspended && !page.hidden && !root.closest('[hidden]') && visible.has(cards[active].button);
   function sync() {
     root.dataset.activeStudy = cards[active].title.id;
+    if (cards[0].progress) scheduleProgress();
     cards.forEach((card, i) => {
       const playing = i === active && !card.video.paused;
       card.button.setAttribute('aria-current', String(i === active));
@@ -154,6 +157,29 @@ export function mountPhysicsCarousel(root) {
     });
     card.video.addEventListener('pause', sync);
     card.video.addEventListener('error', sync);
+  });
+  // A thin line under the large film shows how far it has played; when it
+  // reaches the end the next demo takes its place.
+  let frame = 0;
+  function paintProgress() {
+    frame = 0;
+    cards.forEach((card, i) => {
+      const { duration, currentTime } = card.video;
+      const share = i === active && duration > 0 ? Math.min(1, currentTime / duration) : 0;
+      card.progress.style.transform = `scaleX(${share})`;
+    });
+    const video = cards[active].video;
+    if (!video.paused && !video.ended) frame = requestAnimationFrame(paintProgress);
+  }
+  const scheduleProgress = () => { if (!frame) frame = requestAnimationFrame(paintProgress); };
+  cards.forEach(card => {
+    const track = page.createElement('span');
+    track.className = 'film-progress';
+    track.setAttribute('aria-hidden', 'true');
+    card.progress = page.createElement('span');
+    track.append(card.progress);
+    card.node.append(track);
+    ['play', 'seeked', 'loadedmetadata', 'emptied', 'ended'].forEach(type => card.video.addEventListener(type, scheduleProgress));
   });
   const observer = new IntersectionObserver(entries => {
     for (const entry of entries) {

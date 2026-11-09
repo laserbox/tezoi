@@ -441,6 +441,22 @@ export default {
     "zh": "从观察走向验证",
     "en": "From observation to validation"
   },
+  "用照片或扫描重建真实空间，得到可供机器人操作的仿真场景。": {
+    "zh": "用照片或扫描重建真实空间，得到可供机器人操作的仿真场景。",
+    "en": "Real spaces rebuilt from photos or scans into simulated scenes robots can work in."
+  },
+  "在仿真中计算机器人接触物体时产生的受力、形变与流动。": {
+    "zh": "在仿真中计算机器人接触物体时产生的受力、形变与流动。",
+    "en": "Forces, deformation and flow that arise when a robot touches an object, computed in simulation."
+  },
+  "机器人在仿真的工厂和实验室中完成的完整任务。": {
+    "zh": "机器人在仿真的工厂和实验室中完成的完整任务。",
+    "en": "Complete tasks carried out by robots in simulated factories and labs."
+  },
+  "以人的第一视角示范为起点，在仿真中学习机器人轨迹，再在真机上验证。": {
+    "zh": "以人的第一视角示范为起点，在仿真中学习机器人轨迹，再在真机上验证。",
+    "en": "We start from a person's first-person demonstration, learn robot trajectories in simulation, then validate them on a real robot."
+  },
   "页脚导航": {
     "zh": "页脚导航",
     "en": "Footer navigation"

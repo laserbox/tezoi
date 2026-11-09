@@ -4,7 +4,16 @@ body { isolation: isolate; }
 .page-atmosphere.is-ready { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .page-atmosphere { transition: none; } }
 /* On wide screens the cloth recedes behind the left text column. */
-@media (min-width: 900px) { .page-atmosphere { -webkit-mask-image: linear-gradient(90deg, rgb(0 0 0 / .4), #000 62%); mask-image: linear-gradient(90deg, rgb(0 0 0 / .4), #000 62%); } }
+/* The cloth fades in below the header instead of being cut by its edge. */
+.page-atmosphere { -webkit-mask-image: linear-gradient(180deg, transparent 60px, #000 156px); mask-image: linear-gradient(180deg, transparent 60px, #000 156px); }
+@media (min-width: 900px) {
+  .page-atmosphere {
+    -webkit-mask-image: linear-gradient(90deg, rgb(0 0 0 / .4), #000 62%), linear-gradient(180deg, transparent 68px, #000 168px);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(90deg, rgb(0 0 0 / .4), #000 62%), linear-gradient(180deg, transparent 68px, #000 168px);
+    mask-composite: intersect;
+  }
+}
 
 body[data-page='home'] :is(#playground,#showcase,#gallery,.site-footer) { background: transparent; }
 body[data-page='home'] :is(#playground,#showcase,#gallery) { --chapter-space: 64px; }
