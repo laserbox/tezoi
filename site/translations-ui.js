@@ -246,9 +246,9 @@ export default {
     "en": "Task stage navigation"
   },
   "Coding Agent": {
-    "zh": "编程智能体",
-    "en": "Coding Agent"
-  },
+  "zh": "Coding Agent",
+  "en": "Coding Agent"
+},
   "本次生成记录": {
     "zh": "本次生成记录",
     "en": "Generation log for this run"
@@ -538,17 +538,17 @@ export default {
     "en": "From Ego to real-world validation"
   },
   "Ego": {
-    "zh": "第一视角",
-    "en": "Egocentric"
-  },
+  "zh": "Ego 视角",
+  "en": "Ego view"
+},
   "真实示范": {
     "zh": "真实示范",
     "en": "Real Demo"
   },
   "Agent": {
-    "zh": "智能体",
-    "en": "Agent"
-  },
+  "zh": "Coding Agent",
+  "en": "Coding Agent"
+},
   "场景与动作": {
     "zh": "场景与动作",
     "en": "Scene & motion"
@@ -1532,5 +1532,17 @@ export default {
   "机器人双臂在实验台上展开透明软袋、持杯加液并夹封": {
     "zh": "机器人双臂在实验台上展开透明软袋、持杯加液并夹封",
     "en": "Two robot arms open a transparent pouch, pour liquid from a cup, and clamp it shut on a laboratory bench"
+  },
+  "Ego 视角": {
+    "zh": "Ego 视角",
+    "en": "Ego view"
+  },
+  "Ego 视角 · 真实示范": {
+    "zh": "Ego 视角 · 真实示范",
+    "en": "Ego view · Real demo"
+  },
+  "Ego 视角真实示范，与 Coding Agent 的任务理解使用同一段连续视频": {
+    "zh": "Ego 视角真实示范，与 Coding Agent 的任务理解使用同一段连续视频",
+    "en": "Ego-view demonstration using the same continuous video as Coding Agent task understanding"
   }
 };
